@@ -1,4 +1,4 @@
-# Conference GO!
+# Group 6: Library Management Software
 
 * Joyce Lum
 * Austin Miller
@@ -11,18 +11,16 @@ The premiere library website management application.
 
 ## Intended market
 
-The people that we expect to use this are those who work at public
-libraries, and the proprieters of those establishments.
+The intended market of our software is any establishment that needs
+a way to manage their library system (education systems,
+public libraries, etc).
 
-* Librarians
-* People who go to the library
 
 ## Functionality
 
-* Reserve/Checkout items in inventory (books, etc)
 * Inventory managment
-* User/Member portal and signup
-* Events/Programs
-* Calender
-* Visual online Art Gallery
-* 
+* Reservation management
+* Member portal to view/search inventory, register for events and reserve inventory
+* Registration and login/logout for members
+* Events/Programs (Calendar?)
+* Visual online art gallery
