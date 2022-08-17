@@ -1,4 +1,11 @@
-# Group 6: Library Management Software
+# Group 6: The Fireplace App
+
+## Design
+
+* [API design](docs/apis.md)
+* [Data model](docs/data-model.md)
+* [GHI](docs/ghi.md)
+* [Integrations](docs/integrations.md)
 
 * Joyce Lum
 * Austin Miller
@@ -6,21 +13,20 @@
 * Timothy Lotz
 * James Egan
 
-The premiere library website management application.
-
 
 ## Intended market
 
-The intended market of our software is any establishment that needs
-a way to manage their library system (education systems,
-public libraries, etc).
+The intended market for this app are people who enjoy outdoor recreational activities
+and are looking to meet similar minded people.
 
 
 ## Functionality
 
-* Inventory managment
-* Reservation management
-* Member portal to view/search inventory, register for events and reserve inventory
-* Registration and login/logout for members
-* Events/Programs (Calendar?)
-* Visual online art gallery
+* Registration / login / logout
+* Matching / recommendations based on similar interests
+* Favorite activities preferences page (to see recommendations)
+* User profile with about me, interests, recent activities, favorite activities, etc
+* "Tribe" group page (create form + home page)
+* Events page (upcoming events)
+* Home / landing page
+* Messenger (between users)
