@@ -1,42 +1,84 @@
-In the apis.md file, you will list each of the RESTful endpoints that you think you'll need to power your application.
-
-
 # APIs
 
-# 
-Then, for each human-readable interaction type, you'll make that a second-level heading. You'll include the HTTP method, the path, the expected parameters, and the return values. Then, you will give an explanation of what the API function should do.
+## Get users
 
-From the Conference GO application, you might see something like this.
+* **Method**: `GET`
+* **Path**: /api/users
 
-## Create a new location
+
+Output:
+
+```json
+{
+  "name": string,
+  "age": integer,
+  "email": email,
+  "picture_url": url,
+  "location": object
+}
+```
+
+
+## Create user
 
 * **Method**: `POST`
-* **Path**: /api/locations
+* **Path**: /api/users
 
 Input:
 
 ```json
 {
   "name": string,
-  "city": string,
-  "state": string
+  "age": integer,
+  "email": email,
+  "picture_url": url,
+  "location": object
 }
 ```
+
+## Get groups
+
+* **Method**: `GET`
+* **Path**: /api/groups
+
 
 Output:
 
 ```json
 {
-  "id": int,
   "name": string,
-  "city": string,
-  "state": string,
-  "picture_url": string
+  "activity": object,
+  "event": object
 }
 ```
 
-Creating a new location uses the incoming city and state
-data to query an image API to get a URL for an image for
-the location. Then, it saves the name, city, state, and
-image URL to the database. It returns all of the data
-with the new database id.
+
+## Create group
+
+* **Method**: `POST`
+* **Path**: /api/groups
+
+Input:
+
+```json
+{
+  "name": string,
+  "activity": object,
+  "event": object
+}
+```
+
+
+Output:
+
+```json
+{
+  "name": string,
+  "activity": object,
+  "event": object
+}
+```
+
+* We'll also be doing this same format for all the models along with
+the detail views, updating or deleting them but for the sake of time
+we are skipping the rest
