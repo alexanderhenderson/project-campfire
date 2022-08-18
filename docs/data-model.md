@@ -23,7 +23,8 @@
 |-|-|-|-|
 | name | string | no | no |
 | activity | instance | no | yes | foreign key to activity
-| event | instance | no | yes
+| event | instance | no | yes |
+| owner | instance | yes | no |
 
 
 ## Activity
@@ -31,6 +32,7 @@
 | Name | Type | Unique | Optional |
 |-|-|-|-|
 | name | string | yes | no |
+| location | instance | no | no |
 | user | instance | no | yes |
 
 
