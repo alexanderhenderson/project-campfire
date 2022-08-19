@@ -33,7 +33,7 @@ services:
     ports:
         - "8090:8000"
     volumes:
-        - ./backend:/app
+        - ./backend/events:/app
     environment:
         DATABASE_URL: postgresql://events:password@postgres/events
         WAIT_HOSTS: postgres:5432
@@ -44,7 +44,7 @@ services:
     ports:
         - "8080:8000"
     volumes:
-        - ./backend:/app
+        - ./backend/users:/app
     environment:
         DATABASE_URL: postgresql://users:password@postgres/users
         WAIT_HOSTS: postgres:5432
