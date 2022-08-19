@@ -1,7 +1,10 @@
 ## Friday, August 19, 2022
 I created the react app and django project/app along with the docker
 compose file so we could get the basic architecture of the project
-set up.
+set up. We also created the events, messenger and users projects/apps.
+We spent a lot of time getting everything set up and the containers to
+work properly. It was satisfying to be able get everything fully 
+functioning before heading into the weekend.
 
 
 ## Wednesday, August 17, 2022
