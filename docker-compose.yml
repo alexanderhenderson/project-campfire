@@ -48,3 +48,15 @@ services:
     environment:
         DATABASE_URL: postgresql://users:password@postgres/users
         WAIT_HOSTS: postgres:5432
+    react:
+        build:
+            context: ./frontend-app
+            dockerfile: ./Dockerfile.dev
+        volumes:
+            - ./frontend-app:/app
+        ports:
+            - "3000:3000"
+        environment:
+            HOST_OS: ${OS}
+            NODE_ENV: development
+            HOST: "0.0.0.0"
