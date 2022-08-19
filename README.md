@@ -30,3 +30,5 @@ and are looking to meet similar minded people.
 * Events page (upcoming events)
 * Home / landing page
 * Messenger (between users)
+
+## Installation Instructions
