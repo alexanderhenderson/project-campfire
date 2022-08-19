@@ -42,12 +42,12 @@ services:
             WAIT_HOSTS: postgres:5432
     users:
         build:
-            context: ./backend/users/api
+            context: ./backend/users
             dockerfile: ./Dockerfile.dev
         ports:
             - "8080:8000"
         volumes:
-            - ./backend/users/api:/app
+            - ./backend/users:/app
         environment:
             DATABASE_URL: postgresql://users:password@postgres/users
             WAIT_HOSTS: postgres:5432
