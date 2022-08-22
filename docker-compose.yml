@@ -1,7 +1,6 @@
 volumes:
     postgres-data:
         external: true
-
 services:
     react:
         build:
@@ -16,14 +15,16 @@ services:
             NODE_ENV: development
             HOST: "0.0.0.0"
     postgres:
-        build:
-            context: ./relational-data
-            dockerfile: ./Dockerfile.dev
+        image: postgres:14.2-bullseye    
+        # build:
+        #     context: ./relational-data
+        #     dockerfile: ./Dockerfile.dev
         volumes:
             - postgres-data:/var/lib/postgresql/data
+            - ./relational-data:/docker-entrypoint-initdb.d
         environment:
-            - POSTGRES_MULTIPLE_DATABASES=events, users, messenger
-            - POSTGRES_PASSWORD=test-databases
+            - POSTGRES_MULTIPLE_DATABASES=events,users,messenger
+            - POSTGRES_PASSWORD=password
         ports:
             - 15432:5432
     events:
@@ -59,6 +60,6 @@ services:
         volumes:
             - ./backend/messenger:/app
         environment:
-            DATABASE_URL: postgresql://messenger:password@postgres/messenger
+            DATABASE_URL: postgresql://messenger:password@postgres:5432/messenger
             WAIT_HOSTS: postgres:5432
             DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
