@@ -5,35 +5,35 @@ from django.http import JsonResponse
 import json
 from common.json import ModelEncoder
 
-class EventEncoder(ModelEncoder):
-    model = Event
-    properties = [
-        "name",
-        "activity",
-        "latitude",
-        "longitude",
-        "start_date",
-        "end_date",
-        "description",
-        "owner",
-        "attendees",
-    ]
-    # encoders = {
-    #     "activity": ActivityEncoder(),
-    #     "owner": LocationEncoder()
-    #     }
+# class EventEncoder(ModelEncoder):
+#     model = Event
+#     properties = [
+#         "name",
+#         "activity",
+#         "latitude",
+#         "longitude",
+#         "start_date",
+#         "end_date",
+#         "description",
+#         "owner",
+#         "attendees",
+#     ]
+#     # encoders = {
+#     #     "activity": ActivityEncoder(),
+#     #     "owner": LocationEncoder()
+#     #     }
 
 
-# Create your views here.
-@require_http_methods(["GET", "POST"])
-def list_all_events(request):
-    if request.method == "GET":
-        events = Event.objects.all()
-        return JsonResponse(
-            {"events": events},
-            encoder=EventEncoder,
-            safe=False,
-        )
+# # Create your views here.
+# @require_http_methods(["GET", "POST"])
+# def list_all_events(request):
+#     if request.method == "GET":
+#         events = Event.objects.all()
+#         return JsonResponse(
+#             {"events": events},
+#             encoder=EventEncoder,
+#             safe=False,
+#         )
     #POST        
     # else:
     #     content = json.loads(request.body) 

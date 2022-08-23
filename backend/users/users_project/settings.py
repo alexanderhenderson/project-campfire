@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users_app.apps.UsersAppConfig',
-    
+    'djwto',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,11 +43,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+DJWTO_MODE = "TWO-COOKIES"
+DJWTO_CSRF = False
+DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=1)
+
+# Your DEBUG value MUST be False in production
+DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -75,12 +84,8 @@ WSGI_APPLICATION = 'users_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = {}
+DATABASES["default"] = dj_database_url.config()
 
 
 # Password validation
