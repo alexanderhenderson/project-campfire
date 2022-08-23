@@ -57,6 +57,6 @@ services:
         volumes:
             - ./backend/messenger:/app
         environment:
-            DATABASE_URL: postgresql://messenger:password@postgres:5432/messenger
+            DATABASE_URL: postgresql://messenger:password@postgres/messenger
             WAIT_HOSTS: postgres:5432
             DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
