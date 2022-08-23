@@ -1,7 +1,6 @@
 volumes:
     postgres-data:
         external: true
-
 services:
     react:
         build:
