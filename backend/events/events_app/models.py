@@ -18,7 +18,7 @@ class Activity(models.Model):
 
 
 class Event(models.Model):
-    name = models.Charfield(max_length=100)
+    name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     start = models.DateTimeField()
     end = models.DateTimeField()
