@@ -1,19 +1,21 @@
-from multiprocessing import Event
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-from .models import Events
+from .models import Event
 from django.http import JsonResponse
 import json
 from common.json import ModelEncoder
 
 class EventEncoder(ModelEncoder):
-    model = Events
+    model = Event
     properties = [
         "name",
-        "location",
+        "activity",
+        "latitude",
+        "longitude",
         "start_date",
         "end_date",
         "description",
+        "owner",
         "attendees",
     ]
     # encoders = {
@@ -26,7 +28,7 @@ class EventEncoder(ModelEncoder):
 @require_http_methods(["GET", "POST"])
 def list_all_events(request):
     if request.method == "GET":
-        events = Events.objects.all()
+        events = Event.objects.all()
         return JsonResponse(
             {"events": events},
             encoder=EventEncoder,
