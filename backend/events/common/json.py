@@ -1,9 +1,15 @@
 from json import JSONEncoder
 from django.urls import NoReverseMatch
-from django.db.models import QuerySet
+from django.db.models import QuerySet, ManyToManyField
 from datetime import datetime, time
+import decimal
+import json
 
-
+class DecimalEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, decimal.Decimal):
+            return str(o)
+        return super(DecimalEncoder, self).default(o)
 
 class DateEncoder(JSONEncoder):
     def default(self, o):
@@ -20,8 +26,14 @@ class QuerySetEncoder(JSONEncoder):
         else:
             return super().default(o)
 
+# class PostSerializer(serializers.ModelSerializer):
+#     tag = TagSerializer(read_only=True, many=True)
 
-class ModelEncoder(DateEncoder, QuerySetEncoder, JSONEncoder):
+#     class Meta:
+#         model = Post
+#         fields = ('tag', 'text',)
+
+class ModelEncoder(DateEncoder, DecimalEncoder, QuerySetEncoder, JSONEncoder):
     encoders = {}
 
     def default(self, o):
