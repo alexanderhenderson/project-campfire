@@ -1,7 +1,7 @@
 from django.db import models
 
-
 # Create your models here.
+
 class UserVO(models.Model):
     id = models.PositiveBigIntegerField(primary_key=True)
     name = models.CharField(max_length=100)
@@ -20,6 +20,7 @@ class Activity(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
+    activity = models.ForeignKey(Activity, related_name='activities', on_delete=models.PROTECT)
     start = models.DateTimeField()
     end = models.DateTimeField()
     owner = models.ForeignKey("User", blank=False, null=False)
