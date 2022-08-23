@@ -1,2 +1,1 @@
 RUN chmod a+r /docker-entrypoint-initdb.d/*
-RUN echo 'hello world'
