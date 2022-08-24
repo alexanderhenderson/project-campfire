@@ -1,9 +1,21 @@
-from json import JSONEncoder
-from django.urls import NoReverseMatch
-from django.db.models import QuerySet, ManyToManyField
-from datetime import datetime, time
 import decimal
 import json
+from datetime import datetime, time
+from json import JSONEncoder
+
+from django.db.models import ManyToManyField, QuerySet
+from django.urls import NoReverseMatch
+
+import django
+import os
+import sys
+
+sys.path.append("")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "events_project.settings")
+django.setup()
+
+from events_app.models import Event
+
 
 class DecimalEncoder(json.JSONEncoder):
     def default(self, o):
@@ -25,7 +37,14 @@ class QuerySetEncoder(JSONEncoder):
         else:
             return super().default(o)
 
-class ModelEncoder(DateEncoder, DecimalEncoder, QuerySetEncoder, JSONEncoder):
+class ManyRelatedEncoder(JSONEncoder):
+    def default(self, o):
+        if o == Event.attendees:
+            return o.all()
+        else:
+            return super().default(o)
+
+class ModelEncoder(DateEncoder, DecimalEncoder, ManyRelatedEncoder, QuerySetEncoder, JSONEncoder):
     encoders = {}
 
     def default(self, o):

@@ -1,10 +1,18 @@
+import json
+
+from common.json import ModelEncoder
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-from .models import Event, UserVO, Activity
-from django.http import JsonResponse
-import json
-from common.json import ModelEncoder
-# from django.core import serializers
+
+from .models import Activity, Event, UserVO
+
+# from rest_framework import serializers
+
+# class AttendeesSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = UserVO
+#         fields = ['id', 'name']
 
 class UserVOEncoder(ModelEncoder):
     model = UserVO
@@ -18,13 +26,6 @@ class ActivityEncoder(ModelEncoder):
     properties = [
         "name"
     ]
-
-# class AttendeesSerializer(serializers.ModelSerializer):
-
-#     class Meta:
-#         model = UserVO
-#         fields = ('name', 'id',)
-
 
 class EventEncoder(ModelEncoder):
     model = Event
@@ -46,51 +47,25 @@ class EventEncoder(ModelEncoder):
         "attendees": UserVOEncoder()
     }
 
-    # def get_extra_data(self, o):
-    #     return {"Attendees": o.attendees.all()}
-
-
-# # Create your views here.
 @require_http_methods(["GET", "POST"])
 def list_all_events(request):
     if request.method == "GET":
         events = Event.objects.all()
-        print('!!!!!!!!!!!!!!!!!!!!:', events)
+        dict_events = events.defer("attendees").values()
+        result = []
+        for i in range(len(dict_events)):
+            event_hold = dict_events[i]
+            dict_hold = []
+            for dic in events[i].attendees.all().values():
+                dict_hold.append(dic)
+            event_hold["attendees"] = dict_hold
+            result.append(event_hold)
         return JsonResponse(
-            {"Events": events},
+            {"Events": result},
             encoder=EventEncoder,
             safe=False,
         )
 
-def list_users_events(request, pk):
-    if request.method == "GET":
-        user = UserVO.objects.get(id=pk)
-        users_events = Event.objects.filter(attendees=user)
-        return JsonResponse(
-            {"Attendee's Events": users_events},
-            encoder=EventEncoder,
-            safe=False
-        )
-
-
-
-    #POST        
-    # else:
-    #     content = json.loads(request.body) 
-    #     try:
-    #         employee_number = content["technician"]
-    #         technician = Technician.objects.get(employee_number=employee_number)
-    #         content["technician"] = technician
-    #     except Technician.DoesNotExist:
-    #         return JsonResponse(
-    #             {"message": "Not a Valid Employee Number"},
-    #             status=400,
-    #         )
-
-    #     event = Events.objects.create(**content)
-
-    #     return JsonResponse(
-    #         event,
-    #         encoder=EventEncoder,
-    #         safe=False,
-    #     )
+@require_http_methods(["GET", "POST"])
+def list_users_events(request):
+    pass

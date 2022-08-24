@@ -1,5 +1,5 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
 
 
 # Create your models here.
@@ -19,13 +19,13 @@ class Activity(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=100)
-    activity = models.ForeignKey(Activity, related_name="activities", on_delete=models.PROTECT)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
-    start = models.DateTimeField()
-    end = models.DateTimeField()
     description= models.TextField(null=False, blank=False)
     owner = models.ForeignKey(UserVO, blank=False, null=False, related_name="owners", on_delete=models.PROTECT)
+    activity = models.ForeignKey(Activity, related_name="activities", on_delete=models.PROTECT)
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
     attendees=models.ManyToManyField(UserVO, blank=True, related_name="users")
 
     def __str__(self):
