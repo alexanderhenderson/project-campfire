@@ -4,6 +4,7 @@ from .models import Event, UserVO, Activity
 from django.http import JsonResponse
 import json
 from common.json import ModelEncoder
+# from django.core import serializers
 
 class UserVOEncoder(ModelEncoder):
     model = UserVO
@@ -17,6 +18,12 @@ class ActivityEncoder(ModelEncoder):
     properties = [
         "name"
     ]
+
+# class AttendeesSerializer(serializers.ModelSerializer):
+
+#     class Meta:
+#         model = UserVO
+#         fields = ('name', 'id',)
 
 
 class EventEncoder(ModelEncoder):
@@ -39,12 +46,16 @@ class EventEncoder(ModelEncoder):
         "attendees": UserVOEncoder()
     }
 
+    # def get_extra_data(self, o):
+    #     return {"Attendees": o.attendees.all()}
+
 
 # # Create your views here.
 @require_http_methods(["GET", "POST"])
 def list_all_events(request):
     if request.method == "GET":
         events = Event.objects.all()
+        print('!!!!!!!!!!!!!!!!!!!!:', events)
         return JsonResponse(
             {"Events": events},
             encoder=EventEncoder,

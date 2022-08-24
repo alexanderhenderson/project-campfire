@@ -8,13 +8,13 @@ class UserVO(models.Model):
     id = models.PositiveIntegerField(primary_key=True)
 
     def __str__(self):
-        return f"Username: {self.name}"
+        return f"{self.name}"
 
 class Activity(models.Model):
     name = models.CharField(max_length=300)
 
     def __str__(self):
-        return f"Activity: {self.name}"
+        return f"{self.name}"
 
 
 class Event(models.Model):
@@ -25,8 +25,8 @@ class Event(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     description= models.TextField(null=False, blank=False)
-    owner = models.ForeignKey(UserVO, blank=False, null=False, related_name="user", on_delete=models.PROTECT)
+    owner = models.ForeignKey(UserVO, blank=False, null=False, related_name="owners", on_delete=models.PROTECT)
     attendees=models.ManyToManyField(UserVO, blank=True, related_name="users")
 
     def __str__(self):
-        return f"Event name: {self.name}"
+        return f"{self.name}"

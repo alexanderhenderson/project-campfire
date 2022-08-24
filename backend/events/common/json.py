@@ -18,20 +18,12 @@ class DateEncoder(JSONEncoder):
         else:
             return super().default(o)
 
-
 class QuerySetEncoder(JSONEncoder):
     def default(self, o):
         if isinstance(o, QuerySet):
             return list(o)
         else:
             return super().default(o)
-
-# class PostSerializer(serializers.ModelSerializer):
-#     tag = TagSerializer(read_only=True, many=True)
-
-#     class Meta:
-#         model = Post
-#         fields = ('tag', 'text',)
 
 class ModelEncoder(DateEncoder, DecimalEncoder, QuerySetEncoder, JSONEncoder):
     encoders = {}
