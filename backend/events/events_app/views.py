@@ -48,7 +48,7 @@ from common.json import ModelEncoder
     #         )
 
     #     event = Events.objects.create(**content)
-       
+
     #     return JsonResponse(
     #         event,
     #         encoder=EventEncoder,
