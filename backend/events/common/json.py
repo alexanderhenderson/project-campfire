@@ -26,14 +26,23 @@ class QuerySetEncoder(JSONEncoder):
         else:
             return super().default(o)
 
-# class PostSerializer(serializers.ModelSerializer):
-#     tag = TagSerializer(read_only=True, many=True)
+# class ManyToManyEncoder(JSONEncoder):
+#     def default(self, o):
+#         if isinstance(o, ManyToManyField):
+#             print("TEST PASSED")
+#             return list(o)
+#         else:
+#             return super().default(o)
 
-#     class Meta:
-#         model = Post
-#         fields = ('tag', 'text',)
+class ManyRelatedManagerEncoder(JSONEncoder):
+    def default(self, o):
+        if type(o) == 'ManyRelatedManager':
+            print("test passes")
+            return list(o)
+        else:
+            return super().default(o)
 
-class ModelEncoder(DateEncoder, DecimalEncoder, QuerySetEncoder, JSONEncoder):
+class ModelEncoder(DateEncoder, DecimalEncoder, QuerySetEncoder, ManyRelatedManagerEncoder, JSONEncoder):
     encoders = {}
 
     def default(self, o):
