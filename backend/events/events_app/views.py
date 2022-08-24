@@ -18,10 +18,10 @@ from common.json import ModelEncoder
 #         "owner",
 #         "attendees",
 #     ]
-    # encoders = {
-    #     "activity": ActivityEncoder(),
-    #     "owner": LocationEncoder()
-    #     }
+#     # encoders = {
+#     #     "activity": ActivityEncoder(),
+#     #     "owner": LocationEncoder()
+#     #     }
 
 
 # # Create your views here.
