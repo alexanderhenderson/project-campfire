@@ -7,12 +7,6 @@ from django.views.decorators.http import require_http_methods
 
 from .models import Activity, Event, UserVO
 
-# from rest_framework import serializers
-
-# class AttendeesSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = UserVO
-#         fields = ['id', 'name']
 
 class UserVOEncoder(ModelEncoder):
     model = UserVO
@@ -66,6 +60,10 @@ def list_all_events(request):
             safe=False,
         )
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 def list_users_events(request):
+    pass
+
+@require_http_methods(["GET"])
+def list_event_detail(request):
     pass
