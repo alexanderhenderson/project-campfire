@@ -25,8 +25,8 @@ class Event(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     description= models.TextField(null=False, blank=False)
-    owner = models.ForeignKey(UserVO, blank=False, null=False)
-    attendees=models.ManyToManyField(UserVO,blank=True, null=True)
+    owner = models.ForeignKey(UserVO, blank=False, null=False, on_delete=models.PROTECT, related_name="owner")
+    attendees=models.ManyToManyField(UserVO,blank=True)
 
     def __str__(self):
         return f"Event name: {self.name}"
