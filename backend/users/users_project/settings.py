@@ -30,6 +30,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+AUTH_USER_MODEL = 'users_app.User'  #  where user is the app name and User is the model class name
+
+
 # Application definition
 
 INSTALLED_APPS = [
