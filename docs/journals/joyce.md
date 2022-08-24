@@ -1,3 +1,10 @@
+## Monday, August 22, 2022
+Our goals today as a team are to create the models, views and urls.
+We also want to look more into the Google map API we intend to use.
+We agreed that we could have our MVP within 2 weeks and save the 
+groups and messenger as the stretch goal. MVP at this time are the users,
+activities, location related items and all of front end.
+
 ## Friday, August 19, 2022
 I created the react app and django project/app along with the docker
 compose file so we could get the basic architecture of the project

@@ -33,7 +33,7 @@ services:
         volumes:
             - ./backend/events:/app
         environment:
-            DATABASE_URL: postgresql://events:password@postgres/events
+            DATABASE_URL: postgresql://events:password@postgres:5432/events
             WAIT_HOSTS: postgres:5432
             DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
     users:
@@ -45,7 +45,7 @@ services:
         volumes:
             - ./backend/users:/app
         environment:
-            DATABASE_URL: postgresql://users:password@postgres/users
+            DATABASE_URL: postgresql://users:password@postgres:5432/users
             WAIT_HOSTS: postgres:5432
             DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
     messenger:
@@ -57,6 +57,6 @@ services:
         volumes:
             - ./backend/messenger:/app
         environment:
-            DATABASE_URL: postgresql://messenger:password@postgres/messenger
+            DATABASE_URL: postgresql://messenger:password@postgres:5432/messenger
             WAIT_HOSTS: postgres:5432
             DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
