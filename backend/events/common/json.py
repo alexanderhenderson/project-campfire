@@ -27,7 +27,7 @@ class QuerySetEncoder(JSONEncoder):
         else:
             return super().default(o)
 
-class ModelEncoder(DateEncoder, DecimalEncoder, ManyRelatedEncoder, QuerySetEncoder, JSONEncoder):
+class ModelEncoder(DateEncoder, DecimalEncoder, QuerySetEncoder, JSONEncoder):
     encoders = {}
     def default(self, o):
         if isinstance(o, self.model):

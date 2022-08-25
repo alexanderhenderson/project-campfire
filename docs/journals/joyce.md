@@ -38,7 +38,6 @@ functioning before heading into the weekend.
 
 
 ## Wednesday, August 17, 2022
-
 We decided to change our project to a new idea that we were excited about.
 We felt it was important to work on something we actually liked. Since we
 pivoted, I had to rewrite the readmes' and used excalidraw to remap
