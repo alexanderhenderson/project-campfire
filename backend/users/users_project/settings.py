@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-from pathlib import Path
-import dj_database_url
+import os
 from datetime import timedelta
+from pathlib import Path
+
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +29,13 @@ SECRET_KEY = 'django-insecure-wjyq3ncl&i@x2ln8=mwab$*21w)nxadc_c=by%ysnn=-383f=m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "0.0.0.0",
+    ".localhost",
+    "127.0.0.1",
+    "[::1]",
+    os.environ.get("DEPLOYED_HOST", "localhost"),
+]
 
 
 # Application definition
@@ -49,6 +57,13 @@ DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=1)
 
 # Your DEBUG value MUST be False in production
 DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    os.environ.get("CORS_HOST", "http://localhost:3001"),
+]
+CORS_ALLOW_CREDENTIALS = True
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
