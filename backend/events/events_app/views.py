@@ -1,5 +1,3 @@
-import json
-
 from common.json import ModelEncoder
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -15,6 +13,13 @@ class UserVOEncoder(ModelEncoder):
         "name",
     ]
 
+    def default(self, o):
+
+        print("UserVO Default called", type(o))
+        a = super().default(o)
+        print("End user default call: ", a)
+        return a
+
 class ActivityEncoder(ModelEncoder):
     model = Activity
     properties = [
@@ -26,13 +31,13 @@ class EventEncoder(ModelEncoder):
     properties = [
         "id",
         "name",
-        "activity",
         "latitude",
         "longitude",
         "start",
         "end",
         "description",
         "owner",
+        "activity",
         "attendees",
     ]
     encoders = {
@@ -41,10 +46,13 @@ class EventEncoder(ModelEncoder):
         "attendees": UserVOEncoder()
     }
 
+
 @require_http_methods(["GET", "POST"])
 def list_all_events(request):
     if request.method == "GET":
+        
         events = Event.objects.all()
+
         return JsonResponse(
             {"Events": events},
             encoder=EventEncoder,
