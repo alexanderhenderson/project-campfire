@@ -60,48 +60,7 @@ class EventEncoder(ModelEncoder):
 def list_all_events(request):
     if request.method == "GET":
         
-        # complete queryset including manyrelationmanager 
         events = Event.objects.all()
-
-        # # "dictionary" queryset ignoring the attendees / manyrelationmanager
-        # #dict_events = Event.objects.all().defer("attendees").values()
-        # dict_events = Event.objects.all().values()
-        
-
-
-        # dict_events = Event.objects.all().values()
-
-        # print("query: ", events)
-        # print("attendees query: ", events[0].attendees().all())
-        # print("attendees query type: ", type(events[0].attendees))
-        # print("dict query: ", dict_events)
-        # print("dict query: ", type(dict_events))
-
-        # result = []
-        
-        # iterating trough a .values() queryset returns plain dictionary
-        # objects
-        # for i in range(len(dict_events)):
-
-        #     # the plain dictionary returned from dict_events[i]
-        #     # is stored in a holding variable
-        #     event_hold = dict_events[i]
-        #     dict_hold = []
-
-        #     # looping through attendees dictionary values and
-        #     # adding them to a holding value
-        #     for dic in events[i].attendees.all().values():
-        #         dict_hold.append(dic)
-        #         print("dictionary: ", dic)
-
-        #     print("Attendees object dict: ", events[0].attendees.all().values())
-
-        #     # adding "attendees" key and setting value equal to
-        #     # list of attendees dictionary key-value pairs
-        #     event_hold["attendees"] = dict_hold
-            
-        #     # adding current event dictionary to result list
-        #     result.append(event_hold)
 
         return JsonResponse(
             {"Events": events},
