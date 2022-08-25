@@ -3,12 +3,12 @@ volumes:
         external: true
 services:
     react:
-        # build:
-        #     context: ./frontend-app
-        #     dockerfile: ./Dockerfile.dev
-        image: node:lts-bullseye
-        command: /bin/bash run.sh
-        working_dir: /app
+        build:
+            context: ./frontend-app
+            dockerfile: ./Dockerfile.dev
+        # image: node:lts-bullseye
+        # command: /bin/bash run.sh
+        # working_dir: /app
         volumes:
             - ./frontend-app:/app
         ports:
