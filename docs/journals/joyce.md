@@ -1,3 +1,15 @@
+## Tuesday, August 23, 2022
+Today we finished up the models for the events_app but we might alter
+them again to add a members model which would have a foreign key to
+events, groups and user. We looked through how to implement the Google
+Map API since it's so rich with information. We decided what we wanted
+out of the API then split off into two groups to work on that, the views
+and the urls. For the urls, we wrote a view all events function and
+everything shows except for the attendees manytomany field. We have worked
+at it for a couple of hours with no luck so will try again tomorrow. We
+were able to successfully find a decimal encoder for our long and lat
+properties to our models which we implemented so that was a win.
+
 ## Monday, August 22, 2022
 Our goals today as a team are to create the models, views and urls.
 We also want to look more into the Google map API we intend to use.
