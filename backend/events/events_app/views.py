@@ -45,17 +45,8 @@ class EventEncoder(ModelEncoder):
 def list_all_events(request):
     if request.method == "GET":
         events = Event.objects.all()
-        dict_events = events.defer("attendees").values()
-        result = []
-        for i in range(len(dict_events)):
-            event_hold = dict_events[i]
-            dict_hold = []
-            for dic in events[i].attendees.all().values():
-                dict_hold.append(dic)
-            event_hold["attendees"] = dict_hold
-            result.append(event_hold)
         return JsonResponse(
-            {"Events": result},
+            {"Events": events},
             encoder=EventEncoder,
             safe=False,
         )
