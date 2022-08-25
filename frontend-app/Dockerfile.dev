@@ -7,13 +7,9 @@ WORKDIR /app
 # COPY package.json ./
 # COPY package-lock.json ./
 
-<<<<<<< HEAD
-RUN npm install -g
-RUN npm install react-scripts@5.0.1 -g 
-=======
 # RUN npm install
 # RUN npm install react-scripts@5.0.1 -g 
->>>>>>> main
+
 
 
 # start app
