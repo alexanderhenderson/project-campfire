@@ -11,8 +11,8 @@ from .models import Activity, Event, UserVO
 class UserVOEncoder(ModelEncoder):
     model = UserVO
     properties = [
+        "id",
         "name",
-        "id"
     ]
 
 class ActivityEncoder(ModelEncoder):
@@ -52,9 +52,25 @@ def list_all_events(request):
         )
 
 @require_http_methods(["GET"])
-def list_users_events(request):
-    pass
+def show_event(request, pk):
+    try:
+        event = Event.objects.get(id=pk)
+        return JsonResponse(
+            {"Event": event},
+            encoder=EventEncoder,
+            safe=False,
+        )
+    except Event.DoesNotExist:
+        print("Event does not exist.")
+
 
 @require_http_methods(["GET"])
-def list_event_detail(request):
-    pass
+def list_users_events(request,pk):
+    if request.method == "GET":
+        users_events = Event.objects.all().filter(pk=UserVO.id)
+        return JsonResponse(
+            {"User's Events": users_events},
+            encoder=EventEncoder,
+            safe=False,
+        )
+
