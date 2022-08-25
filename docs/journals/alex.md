@@ -25,3 +25,8 @@ Added weekly notes to excalidraw
 Need to research:
     Material UI CSS Framework
     Queires
+
+Tuesday 8/23
+    Looking into abstractuser model for user model
+
+    look up "verbose name"
