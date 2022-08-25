@@ -1,5 +1,3 @@
-import json
-
 from common.json import ModelEncoder
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -20,9 +18,6 @@ class UserVOEncoder(ModelEncoder):
         a = super().default(o)
         print("End user default call: ", a)
         return a
-
-
-
 
 class ActivityEncoder(ModelEncoder):
     model = Activity
