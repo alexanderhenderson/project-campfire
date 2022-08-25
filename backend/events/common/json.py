@@ -3,18 +3,8 @@ import json
 from datetime import datetime, time
 from json import JSONEncoder
 
-from django.db.models import ManyToManyField, QuerySet
+from django.db.models import QuerySet
 from django.urls import NoReverseMatch
-
-import django
-import os
-import sys
-
-sys.path.append("")
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "events_project.settings")
-django.setup()
-
-from events_app.models import Event
 
 
 class DecimalEncoder(JSONEncoder):
@@ -34,13 +24,6 @@ class QuerySetEncoder(JSONEncoder):
     def default(self, o):
         if isinstance(o, QuerySet):
             return list(o)
-        else:
-            return super().default(o)
-
-class ManyRelatedEncoder(JSONEncoder):
-    def default(self, o):
-        if o == Event.attendees:
-            return o.all()
         else:
             return super().default(o)
 
