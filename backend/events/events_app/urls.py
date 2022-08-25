@@ -1,5 +1,8 @@
 from django.urls import path, include
 from .views import list_all_events, list_users_events
+from django.urls import path
+
+# from .views import 
 
 
 urlpatterns = [
