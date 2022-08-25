@@ -1,3 +1,14 @@
+## Wednesday, August 23, 2022
+We spent a couple hours today debugging the model encoder that was
+written for us awhile ago. We tried to do a manual makeshift way but
+ultimately we wanted to fix it and get the elegant solution we were
+looking for but wasn't able to figure out on our own. We spent a few
+hours with Daniel and then Curtis jumped in. Today we learned about
+the ManyRelatedManager object, the duck test and that functions can
+actually call classes. Curtis helped us add a few lines to make our
+encoder work. We then had to spend some time getting the main branch
+current then called it a night.
+
 ## Tuesday, August 23, 2022
 Today we finished up the models for the events_app but we might alter
 them again to add a members model which would have a foreign key to
