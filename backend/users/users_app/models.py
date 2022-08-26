@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-from django.db import models
-=======
 from typing_extensions import Required
 from django.db import models
 
@@ -32,4 +29,3 @@ class User(AbstractUser):
 
 class ActivityVO(models.Model):
     name = models.CharField(max_length=300)
->>>>>>> main
