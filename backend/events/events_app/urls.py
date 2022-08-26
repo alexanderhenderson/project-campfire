@@ -1,9 +1,11 @@
 from django.urls import path, include
-from .views import list_all_events, list_users_events, show_event
+from .views import list_all_events, list_users_events, show_event, list_all_activities, show_activity
 
 
 urlpatterns = [
     path('', list_all_events, name='list_events'),
-    path('user/<int:pk>/', list_users_events, name='list_users_events'),
     path('<int:pk>/', show_event, name='event_details'),
+    path('user/<int:pk>/', list_users_events, name='list_users_events'),
+    path('activities/', list_all_activities, name='list_activities'),
+    path('activity/<int:pk>/', show_activity, name='activity_details'),
 ]
