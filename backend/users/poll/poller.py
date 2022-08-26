@@ -18,7 +18,7 @@ from users_app.models import ActivityVO
 def get_activities():
 
     # print("We are in the polling function")
-    response = requests.get("http://localhost:8090/events/activities/")
+    response = requests.get("http://events:8000/events/activities/")
 
     content = json.loads(response.content)
     # print("Polled and received content: ", content)
