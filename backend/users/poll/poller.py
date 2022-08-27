@@ -21,10 +21,11 @@ def get_activities():
     response = requests.get("http://events:8000/events/activities/")
 
     content = json.loads(response.content)
+
     print("Polled and received content: ", content)
 
 
-    for activity in content["activities"]:
+    for activity in content["Activities"]:
         print("activity: ", activity)
         ActivityVO.objects.update_or_create(
             name = activity['name']
