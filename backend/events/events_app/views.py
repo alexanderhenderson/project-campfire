@@ -112,7 +112,11 @@ def show_event(request, pk):
 def list_users_events(request,pk):
     if request.method == "GET":
         logged_in_user = UserVO.objects.filter(id=pk)
-        users_events = Event.objects.all().filter(attendees=logged_in_user)
+        events = Event.objects.all()
+        users_events = []
+        for event in events:
+            if logged_in_user in event.attendees.objects.all():
+                users_events.append(event)
         return JsonResponse(
             {"User's Events": users_events},
             encoder=EventEncoder,
