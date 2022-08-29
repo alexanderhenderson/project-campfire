@@ -1,3 +1,6 @@
+import sys
+sys.setrecursionlimit(1500)
+
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from .models import User, ActivityVO
@@ -11,13 +14,21 @@ class UserListEncoder(ModelEncoder):
     model = User
     properties = ["id", "username", "first_name", "last_name", "email"]
 
-class UserDetailEncoder(ModelEncoder):
-    model = User
-    properties = ["id", "username", "first_name", "last_name", "email", "profile_description", "profile_photo", "city", "state"]
-
 class ActivityVOEncoder(ModelEncoder):
     model = ActivityVO
     properties = ["id", "name"]
+
+class FriendsEncoder(ModelEncoder):
+    model = User
+    properties = ["id", "username", "email", "profile_photo"]
+
+class UserDetailEncoder(ModelEncoder):
+    model = User
+    properties = ["id", "username", "first_name", "last_name", "email", "profile_description", "profile_photo", "city", "state", "favorite_activities", "friends"]
+    encoders = {
+        "favorite_activities": ActivityVOEncoder(),
+        "friends": FriendsEncoder(),
+    }
 
 # @auth.jwt_login_required
 # def get_some_data(request):
@@ -79,7 +90,16 @@ def user_detail(request, pk):
         try:
             content = json.loads(request.body)
             user = User.objects.get(id=pk)
-
+            if "favorite_activities" in content:
+                activity_id_list = content["favorite_activities"]
+                for id in activity_id_list:
+                    activity = ActivityVO.objects.get(id=id)
+                    user.favorite_activities.add(activity)
+            if "friends" in content:
+                friends_id_list = content["friends"]
+                for id in friends_id_list:
+                    friend = User.objects.get(id=id)
+                    user.friends.add(friend)
             props = ["username", "first_name", "last_name", "email", "profile_description", "profile_photo", "city", "state"]
             for prop in props:
                 if prop in content:
