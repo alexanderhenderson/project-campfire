@@ -28,9 +28,8 @@ def get_activities():
     for activity in content["Activities"]:
         # print("activity: ", activity)
         ActivityVO.objects.update_or_create(
-            name = activity['name'],
-            id = activity['id']
-            
+            id = activity['id'],
+            defaults = { "name" : activity['name'] }
         )
 
 
