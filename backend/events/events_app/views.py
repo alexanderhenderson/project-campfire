@@ -48,7 +48,14 @@ class EventEncoder(ModelEncoder):
         "attendees": UserVOEncoder()
     }
 
+    # def get_extra_data(self, o):
+    #     return {
+    #         "attendees": o.attendees_set.all(),
+    #         }
 
+
+
+# # Create your views here.
 @require_http_methods(["GET", "POST"])
 def list_all_events(request):
     if request.method == "GET":

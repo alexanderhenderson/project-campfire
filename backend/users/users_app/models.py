@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
     
 # way to get user  
-# User = settings.AUTH_USER_MODEL
+#User = settings.AUTH_USER_MODEL
 
 class User(AbstractUser):
     # name = models.CharField(max_length=100)
@@ -32,3 +32,7 @@ class User(AbstractUser):
 
 class ActivityVO(models.Model):
     name = models.CharField(max_length=300)
+    id = models.IntegerField(primary_key=True)
+
+    def __str__(self):
+        return self.name

@@ -11,6 +11,7 @@ class UserVO(models.Model):
         return f"{self.username}"
 
 class Activity(models.Model):
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=300)
 
     def __str__(self):
