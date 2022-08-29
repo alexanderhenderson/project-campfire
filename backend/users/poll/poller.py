@@ -22,20 +22,21 @@ def get_activities():
 
     content = json.loads(response.content)
 
-    print("Polled and received content: ", content)
+    # print("Polled and received content: ", content)
 
 
     for activity in content["Activities"]:
-        print("activity: ", activity)
+        # print("activity: ", activity)
         ActivityVO.objects.update_or_create(
-            name = activity['name']
+            name = activity['name'],
+            id = activity['id']
             
         )
 
 
 def poll():
     while True:
-        print('User poller polling for data')
+        print('User poller active - polling')
         try:
             # Write your polling logic, here
             get_activities()
