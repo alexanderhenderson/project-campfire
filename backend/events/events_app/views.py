@@ -11,7 +11,7 @@ class UserVOEncoder(ModelEncoder):
     model = UserVO
     properties = [
         "id",
-        "name",
+        "username",
     ]
 
     def default(self, o):
