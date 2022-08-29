@@ -39,7 +39,9 @@ class UserDetailEncoder(ModelEncoder):
 @require_http_methods(["GET", "POST"])
 def list_users(request):
     if request.method == "GET":
+        print("Printstop 1")
         users = User.objects.all()
+        print("Printstop 2")
         return JsonResponse(
             {"users": users},
             encoder=UserListEncoder
