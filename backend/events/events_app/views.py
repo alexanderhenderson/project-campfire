@@ -11,7 +11,7 @@ class UserVOEncoder(ModelEncoder):
     model = UserVO
     properties = [
         "id",
-        "name",
+        "username",
     ]
 
     def default(self, o):
@@ -117,7 +117,6 @@ def list_users_events(request,pk):
         for event in events:
             if logged_in_user in event.attendees.all():
                 users_events.append(event)
-
         return JsonResponse(
             {"User's Events": users_events},
             encoder=EventEncoder,
