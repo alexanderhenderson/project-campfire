@@ -115,7 +115,7 @@ def list_users_events(request,pk):
         events = Event.objects.all()
         users_events = []
         for event in events:
-            if logged_in_user in event.attendees.all():
+            if logged_in_user in event.attendees.objects.all():
                 users_events.append(event)
         return JsonResponse(
             {"User's Events": users_events},
