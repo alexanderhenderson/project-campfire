@@ -3,12 +3,14 @@ import './App.css';
 import TESTMAP from './Map.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-function App() {
-return(
-  <BrowserRouter>
-  <TESTMAP />
-  </BrowserRouter>
-)
-}
 
-export default App;
+function App() {
+  return(
+    <BrowserRouter>
+    <TESTMAP />
+    </BrowserRouter>
+  )
+  }
+  
+  export default App;
+  

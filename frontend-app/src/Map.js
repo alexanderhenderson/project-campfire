@@ -40,10 +40,10 @@ import "@reach/combobox/styles.css" ;
 
 const libraries = ["places"];
 
-export default function Places() {
+export default function TESTMAP() {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
-    // googleMapsApiKey: "AIzaSyD4Q4PCT3p96MNZkKiWkzikGfQYioFeDek" ,
+    // googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
+    googleMapsApiKey: "AIzaSyD4Q4PCT3p96MNZkKiWkzikGfQYioFeDek" ,
     libraries,
   });
 
