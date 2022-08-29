@@ -6,7 +6,7 @@ import json
 import requests
 
 sys.path.append("")
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "users_project.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "events_project.settings")
 django.setup()
 
 # Import models from service_rest, here.
@@ -17,18 +17,15 @@ from events_app.models import UserVO
 
 def get_users():
 
-    # print("We are in the polling function")
+    print("We are in the polling function")
     response = requests.get("http://users:8000/users/")
-
     content = json.loads(response.content)
-
-    # print("Polled and received content: ", content)
-
+    print("Polled and received content: ", content)
 
     for user in content["Users"]:
         print("user: ", user)
         UserVO.objects.update_or_create(
-            id = user['id']
+            id = user['id'],
             username = user['username'],
             email = user['email'],
             first_name = user['first_name'],
