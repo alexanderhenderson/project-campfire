@@ -13,23 +13,26 @@ django.setup()
 # from service_rest.models import Something
 
 # the below import works once the program is running
-from users_app.models import ActivityVO
+from events_app.models import UserVO
 
-def get_activities():
+def get_users():
 
     # print("We are in the polling function")
-    response = requests.get("http://events:8000/events/activities/")
+    response = requests.get("http://users:8000/users/")
 
     content = json.loads(response.content)
 
     # print("Polled and received content: ", content)
 
 
-    for activity in content["Activities"]:
-        print("activity: ", activity)
-        ActivityVO.objects.update_or_create(
-            name = activity['name'],
-            id = activity['id']
+    for user in content["Users"]:
+        print("user: ", user)
+        UserVO.objects.update_or_create(
+            id = user['id']
+            username = user['username'],
+            email = user['email'],
+            first_name = user['first_name'],
+            last_name = user['last_name']
             
         )
 
@@ -38,7 +41,7 @@ def poll():
     while True:
         print('User poller active - polling')
         try:
-            get_activities()
+            get_users()
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(10)

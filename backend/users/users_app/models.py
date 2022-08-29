@@ -5,13 +5,13 @@ from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
-    
-# way to get user  
-#User = settings.AUTH_USER_MODEL
+class ActivityVO(models.Model):
+    name = models.CharField(max_length=300)
+    id = models.IntegerField(primary_key=True)
 
 class User(AbstractUser):
     # name = models.CharField(max_length=100)
-    #friend = models.ManyToManyField("user", blank=True)
+    friends = models.ManyToManyField("self", blank=True)
     profile_description = models.TextField(null=True, blank=True)
     
     # stretch goal - store in mongo
@@ -21,7 +21,7 @@ class User(AbstractUser):
     # front end may end up filtering this
     city = models.CharField(max_length=150)
     state = models.CharField(max_length=2)
-    #favorite_activities = models.ManyToManyField("ActivityVO")
+    favorite_activities = models.ManyToManyField(ActivityVO, blank=True, related_name="activities")
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -29,10 +29,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
-
-class ActivityVO(models.Model):
-    name = models.CharField(max_length=300)
-    id = models.IntegerField(primary_key=True)
-
-    def __str__(self):
-        return self.name
