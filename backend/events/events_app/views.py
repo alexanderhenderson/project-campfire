@@ -12,6 +12,9 @@ class UserVOEncoder(ModelEncoder):
     properties = [
         "id",
         "username",
+        "first_name",
+        "last_name",
+        "email"
     ]
 
     def default(self, o):
@@ -25,7 +28,7 @@ class ActivityEncoder(ModelEncoder):
     model = Activity
     properties = [
         "id",
-        "username"
+        "name"
     ]
 
 class EventEncoder(ModelEncoder):
