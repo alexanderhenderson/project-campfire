@@ -22,7 +22,7 @@ def get_users():
     content = json.loads(response.content)
     print("Polled and received content: ", content)
 
-    for user in content["Users"]:
+    for user in content["users"]:
         print("user: ", user)
         UserVO.objects.update_or_create(
             id = user['id'],
@@ -39,8 +39,10 @@ def poll():
         print('User poller active - polling')
         try:
             get_users()
+            print('get user function used')
         except Exception as e:
             print(e, file=sys.stderr)
+            print('FAILED')
         time.sleep(10)
 
 
