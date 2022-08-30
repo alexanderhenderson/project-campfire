@@ -12,14 +12,10 @@ class UserVOEncoder(ModelEncoder):
     properties = [
         "id",
         "username",
+        "first_name",
+        "last_name",
+        "email"
     ]
-
-    def default(self, o):
-
-        print("UserVO Default called", type(o))
-        a = super().default(o)
-        print("End user default call: ", a)
-        return a
 
 class ActivityEncoder(ModelEncoder):
     model = Activity
@@ -48,6 +44,19 @@ class EventEncoder(ModelEncoder):
         "attendees": UserVOEncoder()
     }
 
+# # Create your views here.
+@require_http_methods(["GET"])
+def list_all_uservos(request):
+    if request.method == "GET":
+        uservos = UserVO.objects.all()
+        for user in uservos:
+            print(user)
+
+        return JsonResponse(
+            {"UserVOs": uservos},
+            encoder=UserVOEncoder,
+            safe=False,
+        )
 
 @require_http_methods(["GET", "POST"])
 def list_all_events(request):

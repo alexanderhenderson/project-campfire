@@ -4,11 +4,16 @@ from django.db import models
 
 # Create your models here.
 class UserVO(models.Model):
-    username = models.CharField(max_length=300)
     id = models.PositiveIntegerField(primary_key=True)
+    username = models.CharField(max_length=150)
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=150, blank=True)
+    email = models.EmailField(blank=True)
+
+    EMAIL_FIELD: str = ...
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.username} "
 
 class Activity(models.Model):
     name = models.CharField(max_length=300)
