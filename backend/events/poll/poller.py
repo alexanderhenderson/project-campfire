@@ -26,10 +26,12 @@ def get_users():
         print("user: ", user)
         UserVO.objects.update_or_create(
             id = user['id'],
-            username = user['username'],
-            email = user['email'],
-            first_name = user['first_name'],
-            last_name = user['last_name']
+            defaults = {
+            "username": user['username'],
+            "email": user['email'],
+            "first_name": user['first_name'],
+            "last_name": user['last_name']
+            }
             
         )
 
