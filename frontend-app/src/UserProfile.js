@@ -4,10 +4,11 @@ import { useEffect, useState } from "react"
 function UserProfile() {
     const [userData, setUserData] = useState({});
     const [error, setError] = useState('');
+    const [userId, setUserId] = useState(1)
   
     useEffect(() => {
         const getUserData = async () => {
-            const url = `${process.env.REACT_APP_USERS}/users/1/`;
+            const url = `${process.env.REACT_APP_USERS}/users/${userId}/`;
             const response = await fetch(url);
             if (response.ok) {
                 // console.log("response: ", response)
