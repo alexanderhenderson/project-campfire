@@ -1,3 +1,9 @@
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import FormView
+from django.contrib.auth import login
+from django.http.response import HttpResponseRedirect
+
+
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from .models import User, ActivityVO
@@ -7,6 +13,36 @@ from common.json import ModelEncoder
 # import djwto.authentication as auth
 
 # Create your views here.
+
+
+@require_http_methods(["GET"])
+def api_user_token(request):
+    if "jwt_access_token" in request.COOKIES:
+        token = request.COOKIES["jwt_access_token"]
+        if token:
+            return JsonResponse({"token": token})
+    response = JsonResponse({"token": None})
+    return response
+
+
+class SignInView(FormView):
+    form_class = UserCreationForm
+    template_name = "registration/signup.html"
+
+    def form_valid(self, form):
+
+        form.save()
+        user = form.save()
+        login(
+            self.request,
+            user,
+            backend=User
+        )
+
+        #return HttpResponseRedirect("http://localhost:3000")
+
+    
+
 class UserListEncoder(ModelEncoder):
     model = User
     properties = ["id", "username", "first_name", "last_name", "email"]
