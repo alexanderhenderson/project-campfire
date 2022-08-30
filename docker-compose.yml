@@ -17,6 +17,9 @@ services:
             HOST_OS: ${OS}
             NODE_ENV: development
             HOST: "0.0.0.0"
+            REACT_APP_EVENTS: http://localhost:8090
+            REACT_APP_USERS: http://localhost:8080
+            REACT_APP_MESSENGER: http://localhost:8070
     postgres:
         image: postgres:14.2-bullseye
         volumes:
