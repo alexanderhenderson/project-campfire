@@ -12,10 +12,7 @@ from .views import (
 
 
 urlpatterns = [
-    #login/logout/web token paths
-    path("signup/", SignInView.as_view(), name="signup"),
-    path("login/", LoginView.as_view(), name="login"),
-    path("logout/", LogoutView.as_view(), name="logout"),
+    # JWT web token paths
     path("api/tokens/mine/", api_user_token, name="user_token"),
     
     # other request endpoints
