@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 
 export default function EventCard(props) {
   const [events, setEvents] = useState([])
+  const [limitEvents, setLimitEvents] = useState([])
   useEffect(() => {
     const requestEvents = async () => {
       const url = `${process.env.REACT_APP_EVENTS}/events/`;
@@ -12,6 +13,9 @@ export default function EventCard(props) {
         const data = await response.json()
         // console.log('Data pulled from json response: ', data)
         setEvents(data.Events)
+        const sliced = (data.Events.slice(0, 3))
+        setLimitEvents(sliced)
+        console.log('Sliced events: ', sliced)
         console.log('Events after setEvents is called: ', data.Events)
       } else {
         console.log("Could not load the events, try again")
@@ -20,30 +24,30 @@ export default function EventCard(props) {
     requestEvents()
   }, [setEvents])
   return (
-    <div class="row">
-      {events.map(event => {
-          return (
-              <div class="col-sm-3">
-              <div className="card mb-3 shadow" key={event.id}>
-                <img src={event.picture_url} className="card-img-top" />
-                <div className="card-body">
-                  <h5 className="card-title">{event.name}</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">
+    <div className="row">
+      {limitEvents.map(event => {
+        return (
+          <div className="col-sm-4" key={event.id}>
+            <div className="card mb-3 shadow">
+              <img src={event.picture_url} className="card-img-top" />
+              <div className="card-body">
+                <h5 className="card-title">{event.name}</h5>
+                <h6 className="card-subtitle mb-2 text-muted">
                   {event.activity.name}
-              </h6>
-              <p className="card-text">
-                {event.description}
-              </p>
+                </h6>
+                <p className="card-text">
+                  {event.description}
+                </p>
+              </div>
+              <div className="card-footer">
+                {new Date(event.start).toLocaleDateString()}
+                -
+                {new Date(event.end).toLocaleDateString()}
+              </div>
             </div>
-            <div className="card-footer">
-              {new Date(event.start).toLocaleDateString()}
-              -
-              {new Date(event.end).toLocaleDateString()}
-            </div>
-          </div>
           </div>
         );
       })}
     </div>
   )
-  }
+}
