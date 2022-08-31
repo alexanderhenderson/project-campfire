@@ -54,11 +54,6 @@ def api_user_token(request):
     # print("Request payload: ", token_data)
     # print("Decoded Token: ", tokens.decode_token(request.token))
 
-
-
-
-
-
     if "jwt_access_token" in request.COOKIES:
         token = request.COOKIES["jwt_access_token"]
         #print("Backend - Token: ", token)

@@ -17,6 +17,7 @@ class UserVO(models.Model):
 
 class Activity(models.Model):
     name = models.CharField(max_length=300)
+    picture_url = models.URLField(null=True)
 
     def __str__(self):
         return f"{self.name}"
