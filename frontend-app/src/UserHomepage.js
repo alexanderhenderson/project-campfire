@@ -19,8 +19,8 @@ class UserHomepage extends React.Component {
     render () {
 
         return (
-            <>
-                <body>
+            
+                <div>
                     <div className="px-4 py-3 my-10 text-center">
                     <h1 className="display-2 fw-bold">Welcome to the Campfire</h1>
                         
@@ -54,8 +54,8 @@ class UserHomepage extends React.Component {
                             <img className='picture-card' src={people1} alt="climbing" />
                             <img className='picture-card' src={peoplehands} alt="camping"/>
                         </div>
-                </body>
-            </>
+                </div>
+           
                     
     
         )        
