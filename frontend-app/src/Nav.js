@@ -32,10 +32,10 @@ function Nav() {
                 </a>
                 <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                  <li className="nav-item">
-                     <NavLink className="navbar-brand"  to="/Users/login">Login </NavLink>
+                     <NavLink className="navbar-brand"  to="/User/Login">Login </NavLink>
                  </li>
                  <li className="nav-item">
-                     <NavLink className="navbar-brand"  to="/Users/logout">Logout </NavLink>
+                     <NavLink className="navbar-brand"  to="/User/Logout">Logout </NavLink>
                  </li>
                  
                 </ul>
