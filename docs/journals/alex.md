@@ -24,7 +24,7 @@ Decided groups and messenger service are both stretch goals
 Added weekly notes to excalidraw
 Need to research:
     Material UI CSS Framework
-    Queires
+    Queries
 
 Tuesday 8/23
     Looking into abstractuser model for user model
