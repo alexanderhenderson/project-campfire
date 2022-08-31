@@ -1,3 +1,6 @@
+## Wednesday, August 31, 2022
+I was able to 
+
 ## Tuesday, August 30, 2022
 Today we started divvying up the to do list a little more. James
 and I figured out how we wanted to differ the home pages we were

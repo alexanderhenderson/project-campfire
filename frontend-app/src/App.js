@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
 import UserHomepage from "./UserHomepage";
 import MainPage from "./MainHomepage";
 import Events from "./Components/EventCard";
