@@ -19,7 +19,7 @@ class UserHomepage extends React.Component {
     render () {
 
         return (
-            
+            <>
                 <body>
                     <div className="px-4 py-3 my-10 text-center">
                     <h1 className="display-2 fw-bold">Welcome to the Campfire</h1>
@@ -28,7 +28,7 @@ class UserHomepage extends React.Component {
                             Check out current Events!
                             <p></p>
                             <Link to="/Activities/list">
-                            <button type="button" class="btn btn-outline-warning button-font">To Events List Page</button>
+                            <button type="button" className="btn btn-outline-warning button-font">To Events List Page</button>
                             </Link>
                         </div>
                     </div>
@@ -55,6 +55,7 @@ class UserHomepage extends React.Component {
                             <img className='picture-card' src={peoplehands} alt="camping"/>
                         </div>
                 </body>
+            </>
                     
     
         )        

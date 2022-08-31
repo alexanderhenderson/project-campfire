@@ -2,11 +2,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UserHomepage from './UserHomepage';
 import ActivitiesList from './ActivitiesList';
 import EventDetail from './EventDetail';
+import Nav from './Nav';
 
 function App() {
   return (
     <BrowserRouter>
-      {/* <Nav /> */}
+      <Nav />
       <div className="container">
         <Routes>
           {/* <Route path="/" element={<Mainpage/>} /> */}

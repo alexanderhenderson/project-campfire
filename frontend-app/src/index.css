@@ -54,4 +54,23 @@ code {
 
 }
 
+picture {
+  display: grid; 
+  place-items: center;
+  vertical-align: middle;    
+}
+
+nav {
+  border-radius: 20px 20px 20px 20px ;   
+  margin-top: 3px;
+  margin-left: 7px;
+  margin-right: 7px;
+  box-shadow: 0 .2rem .5rem rgba(0,1,0,.5); 
+ 
+}
+
+.special {
+  padding-top: 5rem;
+}
+
 

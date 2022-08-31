@@ -22,26 +22,54 @@ function FetchActivities(){
     }, [setActivitiesData,setError])
 
     return (
-        <>
-        <h1 className = "special" >Activities List</h1>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
+        <main>
+            <div className="row">
             {activities.map(activity => {
-                return ( 
-                    <tr key={activity.id}>
-                    <td>{ activity.name }</td>
-                    </tr>
+                return (
+                    <div className="col-sm-3">
+                    <div className="card mb-3 shadow" key={activity.id}>
+                        {/* <img src={event.picture_url} className="card-img-top" /> */}
+                        <div className="card-body">
+                            <h5 className="card-title">{activity.name}</h5>
+                            <h6 className="card-subtitle mb-2 text-muted">
+                            {activity.name}
+                            </h6>
+                            <p className="card-text">
+                                Activity Name 
+                            </p>
+                        </div>
+                    
+                        </div>
+                        </div>
                 );
             })}
-          </tbody>
-        </table>
-        </>
-    )        
+            </div>
+        </main>
+      )
+      
+    
+
+    // return (
+    //     <>
+    //     <h1 className = "special" >Activities List</h1>
+    //     <table className="table table-striped">
+    //       <thead>
+    //         <tr>
+    //           <th>Name</th>
+    //         </tr>
+    //       </thead>
+    //       <tbody>
+    //         {activities.map(activity => {
+    //             return ( 
+    //                 <tr key={activity.id}>
+    //                 <td>{ activity.name }</td>
+    //                 </tr>
+    //             );
+    //         })}
+    //       </tbody>
+    //     </table>
+    //     </>
+    // )        
 }
 
 export default FetchActivities
