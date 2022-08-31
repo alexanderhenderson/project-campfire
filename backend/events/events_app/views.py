@@ -37,6 +37,7 @@ class EventEncoder(ModelEncoder):
         "owner",
         "activity",
         "attendees",
+        "picture_url",
     ]
     encoders = {
         "activity": ActivityEncoder(),

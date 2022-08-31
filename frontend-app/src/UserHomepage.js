@@ -15,7 +15,7 @@ class UserHomepage extends React.Component {
     //     if (response.ok) {
     //       const data = await response.json()
     //       this.setState({ appointments: data.appointments })
-           
+
     //     }
     //   }  
 

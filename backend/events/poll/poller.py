@@ -17,13 +17,13 @@ from events_app.models import UserVO
 
 def get_users():
 
-    print("We are in the polling function")
+    # print("We are in the polling function")
     response = requests.get("http://users:8000/users/")
     content = json.loads(response.content)
-    print("Polled and received content: ", content)
+    # print("Polled and received content: ", content)
 
     for user in content["users"]:
-        print("user: ", user)
+        # print("user: ", user)
         UserVO.objects.update_or_create(
             id = user['id'],
             defaults = {
@@ -38,14 +38,14 @@ def get_users():
 
 def poll():
     while True:
-        print('User poller active - polling')
+        # print('User poller active - polling')
         try:
             get_users()
-            print('get user function used')
+            # print('get user function used')
         except Exception as e:
             print(e, file=sys.stderr)
-            print('FAILED')
-        time.sleep(10)
+            print('get user function failed')
+        time.sleep(60)
 
 
 if __name__ == "__main__":

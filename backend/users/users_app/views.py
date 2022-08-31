@@ -36,19 +36,19 @@ class UserDetailEncoder(ModelEncoder):
 @require_http_methods(["GET", "POST"])
 def list_users(request):
     if request.method == "GET":
-        print("Printstop 1")
+        # print("Printstop 1")
         users = User.objects.all()
-        print("Printstop 2")
+        # print("Printstop 2")
         return JsonResponse(
             {"users": users},
             encoder=UserListEncoder
         )
     else: # POST
         try:
-            print("request: ", request.body)
+            # print("request: ", request.body)
             content = json.loads(request.body)
             user = User.objects.create(**content)
-            print("user: ", user)
+            # print("user: ", user)
             return JsonResponse(
                 {"user": user},
                 encoder=UserDetailEncoder
@@ -124,10 +124,10 @@ def list_activities(request):
         )
     else:
         try:
-            print(request.body)
+            # print(request.body)
             content = json.loads(request.body)
             activityVO = ActivityVO.objects.create(**content)
-            print(activityVO)
+            # print(activityVO)
             return JsonResponse(
                 {"activityVO": activityVO},
                 encoder=ActivityVOEncoder

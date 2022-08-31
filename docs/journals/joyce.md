@@ -1,3 +1,21 @@
+## Tuesday, August 30, 2022
+Today we started divvying up the to do list a little more. James
+and I figured out how we wanted to differ the home pages we were
+building since I was doing the public facing one and he was doing
+the internal users/members facing one. We were stuck on authorization
+related things for awhile and are trying to see how we can connect
+Django's login functionality with the react front end since there's
+a bit of rerouting that needs to be done.
+
+
+## Monday, August 29, 2022
+Spent a lot of time debugging and trying to figure out why when we
+merge we seem to always have problems like a container coming down.
+Spent a lot of time fixing these errors and said we wouldn't delete
+anymore migration files. Since there were missing files, it was
+causing the containers to not run because one migration file depended
+on another missing one.
+
 ## Wednesday, August 23, 2022
 We spent a couple hours today debugging the model encoder that was
 written for us awhile ago. We tried to do a manual makeshift way but
