@@ -17,7 +17,7 @@ services:
             HOST_OS: ${OS}
             NODE_ENV: development
             HOST: "0.0.0.0"
-            GOOGLE_MAPS_API_KEY: "AIzaSyD4Q4PCT3p96MNZkKiWkzikGfQYioFeDek"
+            REACT_APP_GOOGLE_API_KEY: ${GOOGLE_API_KEY}
     postgres:
         image: postgres:14.2-bullseye
         volumes:
