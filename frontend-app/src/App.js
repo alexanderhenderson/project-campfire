@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
 import UserHomepage from './UserHomepage';
+import ActivitiesList from './ActivitiesList';
+import EventDetail from './EventDetail';
 
 function App() {
   return (
@@ -16,6 +17,11 @@ function App() {
           <Route path="Events">
             {/* <Route path="create" element={<CreateEvent/>} /> */}
             {/* <Route path="list" element={<EventsList/>} /> */}
+            <Route path="detail" element={<EventDetail/>} />
+          </Route>
+          <Route path="Activities">
+            <Route path="list" element={<ActivitiesList/>} />
+            {/* <Route path="create" element={<CreateActivity/>} /> */}
           </Route>
         </Routes>
       </div>
