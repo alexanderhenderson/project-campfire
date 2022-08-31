@@ -34,6 +34,9 @@ ALLOWED_HOSTS = [
     "users",
     "0.0.0.0",
     ".localhost",
+    "localhost",
+    "http://localhost:3000",
+    "http://localhost:8080",
     "127.0.0.1",
     "[::1]",
     os.environ.get("DEPLOYED_HOST", "localhost"),
@@ -65,13 +68,18 @@ DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://localhost:8080",
     os.environ.get("CORS_HOST", "http://localhost:3001"),
 ]
 CORS_ALLOW_CREDENTIALS = True
 
 
 MIDDLEWARE = [
+<<<<<<< HEAD
     'corsheaders.middleware.CorsMiddleware',
+=======
+    "corsheaders.middleware.CorsMiddleware",
+>>>>>>> main
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
