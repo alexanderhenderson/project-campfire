@@ -28,7 +28,7 @@ export default function EventCard(props) {
       {limitEvents.map(event => {
         return (
           <div className="col-sm-4" key={event.id}>
-            <div className="card mb-3 shadow">
+            <div className="card mb-3 shadow h-100">
               <img src={event.picture_url} className="card-img-top" />
               <div className="card-body">
                 <h5 className="card-title">{event.name}</h5>
@@ -41,8 +41,8 @@ export default function EventCard(props) {
               </div>
               <div className="card-footer">
                 {new Date(event.start).toLocaleDateString()}
-                -
-                {new Date(event.end).toLocaleDateString()}
+                {/* -
+                {new Date(event.end).toLocaleDateString()} */}
               </div>
             </div>
           </div>
