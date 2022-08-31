@@ -25,7 +25,12 @@ function UserProfile() {
 
     return (
         <div>
-            Hello World
+        <div className="px-5 py-4">
+            <h1>{userData.username}<small></small></h1>
+        </div>
+        <div className="px-5">
+            <h3>{userData.first_name} {userData.last_name}</h3>
+        </div>
         </div>
     )
 }
