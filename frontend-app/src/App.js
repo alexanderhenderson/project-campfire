@@ -4,7 +4,6 @@ import MainPage from "./MainHomepage";
 import Events from "./Components/EventCard";
 // import { AuthProvider } from "./Auth";
 import UserProfile from './UserProfile';
-import UserHomepage from './UserHomepage';
 import LogIn from './login';
 import LogOut from './logout';
 import { AuthProvider } from "./Authorization";
