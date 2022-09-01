@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserHomepage from "./UserHomepage";
 import Events from "./Components/EventCard";
-// import { AuthProvider } from "./Auth";
 import UserProfile from './UserProfile';
 import LogIn from './login';
 import LogOut from './logout';
@@ -10,6 +9,7 @@ import ActivitiesList from './ActivitiesList';
 import EventDetail from './EventDetail';
 import Nav from './Nav';
 import MainHomePage from './MainHomepage';
+import Signup from "./SignUp";
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
               <Route path="profile" element={<UserProfile />} />
               <Route path="login" element={< LogIn />} />
               <Route path="logout" element={< LogOut />} />
+              <Route path="signup" element={< Signup />} />
               {/* <Route path="new" element={<CreateAuto/>} /> */}
             </Route>
             <Route path="Events">
