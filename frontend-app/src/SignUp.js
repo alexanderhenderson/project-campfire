@@ -38,8 +38,8 @@ function Signup() {
         userData.city[0],
         userData.state[0],
         )
-        navigate("/User/homepage")
-        // navigate('profile')
+        
+        
     }
 
     console.log(userData);

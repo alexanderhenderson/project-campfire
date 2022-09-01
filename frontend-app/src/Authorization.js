@@ -122,6 +122,7 @@ export function useToken() {
     });
     if (response.ok) {
       await login(username, password);
+      navigate("/User/homepage");
     }
     return false;
   }
@@ -143,6 +144,7 @@ export function useToken() {
     });
     if (response.ok) {
       await login(username, password);
+      
     }
     return false;
   }
