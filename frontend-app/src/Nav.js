@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import "./index.css";
+import friends from './Assets/friends.webp';
 
 function Nav() {
 
-  return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container-fluid d-flex justify-content-start">
-        <NavLink className="navbar-brand" to="/"><h1>Campfire</h1></NavLink>
+          {/* Navbar parent */}
+          <div className="collapse navbar-collapse special_nav" id="navbarNavDarkDropdown">
+            <ul className="navbar-nav">
 
         {/* Navbar parent */}
         <div className="collapse navbar-collapse" id="navbarNavDarkDropdown">
@@ -50,6 +50,7 @@ function Nav() {
                 {/* <li className="nav-item">
                      <NavLink className="navbar-brand"  to="/sales">Sales List</NavLink>
                  </li> */}
+<<<<<<< HEAD
                 <li className="nav-item">
                   <NavLink className="navbar-brand" to="/salesrecord/list">Your Profile</NavLink>
                 </li>
@@ -58,6 +59,16 @@ function Nav() {
                 </li>
               </ul>
             </li>
+=======
+                 <li className="nav-item">
+                     <NavLink className="navbar-brand"  to="/salesrecord/list">Your Profile</NavLink>
+                 </li>
+                 <li className="nav-item">
+                     <NavLink className="navbar-brand"  to="/User/Homepage">User Homepage</NavLink>
+                 </li>
+                </ul>
+              </li>
+>>>>>>> main
 
             {/* dropdown 4 */}
             <li className="nav-item dropdown">
@@ -68,6 +79,7 @@ function Nav() {
                 {/* <li className="nav-item">
                      <NavLink className="navbar-brand"  to="/sales">Sales List</NavLink>
                  </li> */}
+<<<<<<< HEAD
                 <li className="nav-item">
                   <NavLink className="navbar-brand" to="/employees/list">Current Events</NavLink>
                 </li>
@@ -86,6 +98,26 @@ function Nav() {
 
 
           </ul>
+=======
+                 <li className="nav-item">
+                     <NavLink className="navbar-brand"  to="/employees/list">Current Events</NavLink>
+                 </li>
+                 <li className="nav-item">
+                     <NavLink className="navbar-brand"  to="/employees/list">Add an Events</NavLink>
+                 </li>
+                 <li className="nav-item">
+                     <NavLink className="navbar-brand"  to="/Activities/list">Add an Activity </NavLink>
+                 </li>
+                 <li className="nav-item">
+                     <NavLink className="navbar-brand"  to="/employees/new">Partner Finder </NavLink>
+                 </li>
+                
+                </ul>
+              </li>
+             <img className='pull-right profile_circle ' src={friends}  alt="friends"/>
+            </ul>
+          </div>
+>>>>>>> main
         </div>
       </div>
     </nav>

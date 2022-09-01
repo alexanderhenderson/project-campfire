@@ -26,7 +26,9 @@ class UserHomepage extends React.Component {
                     <h1 className="display-2 fw-bold">Welcome to the Campfire</h1>
 
                     <div className="px-9 text-center display-6 fw-bold " >
+
                         Check out current Events!
+
                         <p></p>
                         <Link to="/Activities/list">
                             <button type="button" className="btn btn-outline-warning button-font">To Events List Page</button>
@@ -47,18 +49,10 @@ class UserHomepage extends React.Component {
                     Find like minded adventurers with our Partner-Finder
                     <p></p>
                     <Link to="/Activities/list">
-                        <button type="button" className="btn btn-outline-warning button-font">To Partner Finder Page</button>
+                        <button type="button" className="btn btn-outline-warning button-font">To Events List Page</button>
                     </Link>
                 </div>
-                <div className='picture-grid'>
-                    <img className='picture-card' src={climbingfriends} alt="hiking" />
-                    <img className='picture-card' src={people1} alt="climbing" />
-                    <img className='picture-card' src={peoplehands} alt="camping" />
-                </div>
             </div>
-
-
-
         )
     }
 }

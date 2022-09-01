@@ -22,8 +22,8 @@ function App() {
             <Route path="User">
               <Route path="homepage" element={<UserHomepage />} />
               <Route path="profile" element={<UserProfile />} />
-              <Route path="Login" element={< LogIn />} />
-              <Route path="Logout" element={< LogOut />} />
+              <Route path="login" element={< LogIn />} />
+              <Route path="logout" element={< LogOut />} />
               {/* <Route path="new" element={<CreateAuto/>} /> */}
             </Route>
             <Route path="Events">

@@ -9,7 +9,7 @@ function FetchActivities(){
 
     useEffect(()=> {
         const getActivityData = async () => {
-            const url = `${process.env.REACT_APP_EVENTS}/events/activities/`;
+            const url = `${process.env.REACT_APP_EVENTS}/events/list/`;
             const response = await fetch(url);
             if(response.ok){
                 const data = await response.json()
@@ -35,6 +35,7 @@ function FetchActivities(){
                 return ( 
                     <tr key={activity.id}>
                     <td>{ activity.name }</td>
+                    <td>{ activity.description }</td>
                     </tr>
                 );
             })}

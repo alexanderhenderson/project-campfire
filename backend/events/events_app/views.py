@@ -21,7 +21,8 @@ class ActivityEncoder(ModelEncoder):
     model = Activity
     properties = [
         "id",
-        "name"
+        "name",
+        "picture_url"
     ]
 
 class EventEncoder(ModelEncoder):
