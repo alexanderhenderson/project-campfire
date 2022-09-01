@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useToken } from './Authorization';
 // import { useParams } from 'react-router-dom';
 
@@ -13,6 +14,8 @@ function Signup() {
     city:"",
     state:""
     })
+
+    const navigate = useNavigate()
 
     const {username, password, first_name, last_name, email, city, state} = userData;
 
@@ -35,6 +38,8 @@ function Signup() {
         userData.city[0],
         userData.state[0],
         )
+        navigate("/User/homepage")
+        // navigate('profile')
     }
 
     console.log(userData);
