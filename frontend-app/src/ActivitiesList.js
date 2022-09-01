@@ -22,6 +22,9 @@ function FetchActivities(){
     const userid = 3 
     return (
         <main>
+            <div className="px-9 text-center display-6 fw-bold " >
+                    <h1 className="display-5 fw-bold light_padding">Click to add your favorite Activities!</h1>
+            </div>
             <div className="row">
             
             {activities.map(activity => {
