@@ -67,25 +67,6 @@ def api_user_token(request):
     response = JsonResponse({"token": None})
     return response
 
-
-class SignInView(FormView):
-    form_class = UserCreationForm
-    template_name = "registration/signup.html"
-
-    def form_valid(self, form):
-
-        form.save()
-        user = form.save()
-        login(
-            self.request,
-            user,
-            backend=User
-        )
-
-        #return HttpResponseRedirect("http://localhost:3000")
-
-    
-
 class UserListEncoder(ModelEncoder):
     model = User
     properties = ["id", "username", "first_name", "last_name", "email"]
