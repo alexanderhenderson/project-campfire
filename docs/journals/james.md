@@ -1,3 +1,17 @@
+## Wednesday, August 31, 2022
+Alex pretty much fixed up the Auth stuff today, 
+I got a nav bar hooked up in react so we could link all of our pages up, kept building on front end implementations and components. 
+
+## Tuesday, August 30, 2022
+Started working on frontend stuff, while Alex figures out Auth stuff. 
+Joyce and I got a few front pages working with react hooks.
+
+## Monday, August 29, 2022
+Finished backend last week so started to work on Front end stuff, had some hangups with Auth stuff and needed to get help from Andrew, finally worked it out, auth is almost finished.
+
+## Friday, August 26, 2022
+Pair programmed with Tim to get the Users backend completely up to snuff, got the insomnia responding for each request we wanted to create views for. Joyce and Alex worked on getting the Events backend finished.
+
 ## Thursday, August 25, 2022
 Had our first stand up, continued to work on views on users and events, Austin continued to work on google API stuff.
 ## Wednesday, August 24, 2022

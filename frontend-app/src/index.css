@@ -51,6 +51,7 @@ code {
   font-weight: bold;
   color: rgba(0, 0, 0, 0.793);
   background-color: rgb(255, 207, 104);
+  border: 3px solid #bc9100;
 
 }
 
@@ -73,4 +74,17 @@ nav {
   padding-top: 5rem;
 }
 
+.profile_circle {
+  border-radius: 100ch;
+  height: 4rem;
+  width:4rem ;
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  
+  border: 3px solid #ffc507e0;
+  }
 
+.special_nav {
+  flex-direction: row-reverse
+}

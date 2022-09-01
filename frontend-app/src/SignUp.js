@@ -1,11 +1,10 @@
-import './App.css';
-import React,{useState} from 'react';
-import { useToken } from './auth';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useToken } from './Authorization';
+// import { useParams } from 'react-router-dom';
 
 
 function Signup() {
-    const [data, setData] = useState({
+    const [userData, setUserData] = useState({
     username:"",
     password:"",
     first_name:"",
@@ -15,31 +14,30 @@ function Signup() {
     state:""
     })
 
-    const {username, password, first_name, last_name, email, city, state} = data;
+    const {username, password, first_name, last_name, email, city, state} = userData;
 
     const [token, login, logout, signup] = useToken();
 
     const changeHandler = e => {
-    setData({...data, [e.target.name]:[e.target.value]});
+    setUserData({...userData, [e.target.name]:[e.target.value]});
     }
-    console.log(data)
+    console.log(userData)
 
     const submitHandler = e => {
     e.preventDefault();
 
     signup(
-        data.username[0], 
-        data.password[0],
-        data.email[0],
-        data.first_name[0],
-        data.last_name[0],
-        data.address[0],
-        data.city[0],
-        data.state[0],
+        userData.username[0], 
+        userData.password[0],
+        userData.email[0],
+        userData.first_name[0],
+        userData.last_name[0],
+        userData.city[0],
+        userData.state[0],
         )
     }
 
-    console.log(data);
+    console.log(userData);
         return (
                 <div className="container">
                 <form onSubmit={submitHandler}>
@@ -106,7 +104,7 @@ function Signup() {
                             placeholder="Enter City"
                             required />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group pb-2">
                         <label>State</label>
                         <input className="form-control" 
                             type="text" 
@@ -116,11 +114,13 @@ function Signup() {
                             placeholder="Enter State"
                             required />
                     </div>
+                    <div>
 
+                    </div>
 
                     <button type="submit" className="btn btn-dark btn-lg btn-block">Sign Up</button>
                     <p className="forgot-password text-right">
-                        Already registered <a href={`User/Login`}>Log In?</a>
+                        Already Signed Up? <a href={`Login`}>Log In</a>
                     </p>
                 </form>
                 </div>

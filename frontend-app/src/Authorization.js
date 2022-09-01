@@ -104,7 +104,7 @@ export function useToken() {
   }
 
   async function signup(username, password, email, first_name, last_name, city, state) {
-    const url = `${process.env.REACT_APP_USERS}/api/accounts/`;
+    const url = `${process.env.REACT_APP_USERS}/users/`;
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
