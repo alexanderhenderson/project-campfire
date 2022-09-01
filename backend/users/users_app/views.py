@@ -78,7 +78,7 @@ class FriendsEncoder(ModelEncoder):
 
 class UserDetailEncoder(ModelEncoder):
     model = User
-    properties = ["id", "username", "first_name", "last_name", "email", "profile_description", "profile_photo", "city", "state", "favorite_activities", "friends", "password"]
+    properties = ["id", "username", "first_name", "last_name", "email", "profile_description", "profile_photo", "city", "state", "favorite_activities", "friends"]
     encoders = {
         "favorite_activities": ActivityVOEncoder(),
         "friends": FriendsEncoder(),
