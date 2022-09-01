@@ -29,7 +29,6 @@ class ModelEncoder(DateEncoder, DecimalEncoder, QuerySetEncoder, JSONEncoder):
     encoders = {}
     def default(self, o):
         if isinstance(o, self.model):
-            print("ModelEncoder")
             d = {}
             if hasattr(o, "get_api_url"):
                 try:

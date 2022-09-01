@@ -24,7 +24,7 @@ Decided groups and messenger service are both stretch goals
 Added weekly notes to excalidraw
 Need to research:
     Material UI CSS Framework
-    Queires
+    Queries
 
 Tuesday 8/23
     Looking into abstractuser model for user model
@@ -68,3 +68,26 @@ Friday 8/26 - Had 1 hr meeting outside of regular class hours
     - Tim has merged the User Models and Views into main, everything looks good
         - Events microservice UserVO model needs to be updated to reflect what is in the User Models
     - Tim also created an insomnia json file you can import to have all of the insomnia requests for testing/whatever
+
+Monday 8/29
+    Solved a lot of merge issues today, fixed the pollers so that the data in our VO objects uses the same ID assigned
+    to it's origin in the database. Pollers are essentially finished, aside from any future data that we want to poll
+    that can be fairly easily added to the polling call.
+
+Tuesday 8/30
+    Morning:
+        Setting up login/logout functionality to the Django users Microservice. I've added templates and want to also add
+    Bootstrap to them, but that might have to wait as it is not a core functionality. Currently I have the login/out
+    working, and it redirects to our React main page after login. Next is working on the authentication tokens so
+    that other django apps and React know if a user is logged in/out. 
+    Afternoon:
+        Looks like we can do this through the react front end. We are working on the JWT and authorization and having issues
+
+Wednesday 8/31
+        It's been a long day, I got the Jason Web Tokens working with the authorization functions they give us. The backend is also
+    working, validating and sending the token back to the frontend. I made a login form, got it working and then have a simple
+    logout form with a single button. Next I want to make a sign up form to test functionality. Once everyone gets a chance to
+    integrate the authorization in their front end pages we will begin to get the back end completely protected with the
+    jwt_login_required decorators. 
+
+

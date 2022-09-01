@@ -26,7 +26,7 @@ def get_activities():
 
 
     for activity in content["Activities"]:
-        print("activity: ", activity)
+        # print("activity: ", activity)
         ActivityVO.objects.update_or_create(
             id = activity['id'],
             defaults = { "name" : activity['name'] }
@@ -35,7 +35,7 @@ def get_activities():
 
 def poll():
     while True:
-        print('User poller active - polling')
+        # print('User poller active - polling')
         try:
             get_activities()
         except Exception as e:

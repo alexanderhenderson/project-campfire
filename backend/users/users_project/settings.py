@@ -29,6 +29,8 @@ SECRET_KEY = 'django-insecure-wjyq3ncl&i@x2ln8=mwab$*21w)nxadc_c=by%ysnn=-383f=m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+LOGIN_REDIRECT_URL = "http://localhost:3000"
+
 ALLOWED_HOSTS = [
     "events",
     "users",
@@ -75,7 +77,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

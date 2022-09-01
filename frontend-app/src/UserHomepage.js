@@ -9,6 +9,7 @@ import climbingfriends from './Assets/climbingfriends.jpeg';
 import people1 from './Assets/people1.jpeg';
 
 class UserHomepage extends React.Component {
+  
     constructor(props) {
         super(props)
         this.state = {
