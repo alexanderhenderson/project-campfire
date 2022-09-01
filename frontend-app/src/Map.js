@@ -1,118 +1,3 @@
-// import { useMemo } from "react";
-// import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api" ;
-
-// const libraries = ["places"];
-
-// export default function TESTMAP() {
-//   const { isLoaded } = useJsApiLoader({
-//     // googleMapsApiKey: process.env.GOOGLE_API_KEY ,
-//     googleMapsApiKey: "AIzaSyD4Q4PCT3p96MNZkKiWkzikGfQYioFeDek",
-//     libraries,
-//   });
-
-//   if (!isLoaded) return <div>Loading...</div>;
-//   return <Map />;
-// }
-
-// function Map() {
-//   const center = useMemo(() => ({ lat: 69, lng: -69 }), []);
-
-//   return (
-//     <GoogleMap zoom={10} center={center} mapContainerClassName ="map-container">
-//       <Marker position={center} />
-//     </GoogleMap>
-//   );
-// }
-
-// import { useState, useMemo } from "react";
-// import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api" ;
-// import usePlacesAutocomplete , {
-//   getGeocode,
-//   getLatLng,
-// } from "use-places-autocomplete" ;
-// import {
-//   Combobox,
-//   ComboboxInput,
-//   ComboboxPopover,
-//   ComboboxList,
-//   ComboboxOption,
-// } from "@reach/combobox";
-// import "@reach/combobox/styles.css" ;
-
-// const libraries = ["places"];
-
-// export default function TESTMAP() {
-//   const { isLoaded } = useJsApiLoader({
-//     // googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
-//     googleMapsApiKey: "AIzaSyD4Q4PCT3p96MNZkKiWkzikGfQYioFeDek" ,
-//     libraries,
-//   });
-
-
-//   if (!isLoaded) return <div>Loading...</div>;
-//   return <Map />;
-// }
-
-// function Map() {
-//   const center = useMemo(() => ({ lat: 43.45, lng: -80.49 }), []);
-//   const [selected, setSelected] = useState(null);
-
-//   return (
-//     <>
-//       <div className="places-container">
-//         <PlacesAutocomplete setSelected={setSelected} />
-//       </div>
-
-//       <GoogleMap
-//         zoom={10}
-//         center={center}
-//         mapContainerClassName ="map-container"
-//       >
-//         {selected && <Marker position={selected} />}
-//       </GoogleMap>
-//     </>
-//   );
-// }
-
-// const PlacesAutocomplete = ({ setSelected }) => {
-//   const {
-//     ready,
-//     value,
-//     setValue,
-//     suggestions: { status, data },
-//     clearSuggestions,
-//   } = usePlacesAutocomplete ();
-
-//   const handleSelect = async (address) => {
-//     setValue(address, false);
-//     clearSuggestions();
-
-//     const results = await getGeocode({ address });
-//     const { lat, lng } = await getLatLng(results[0]);
-//     setSelected({ lat, lng });
-//   };
-
-//   return (
-//     <Combobox onSelect={handleSelect}>
-//       <ComboboxInput
-//         value={value}
-//         onChange={(e) => setValue(e.target.value)}
-//         disabled={!ready}
-//         className="combobox-input"
-//         placeholder="Search an address"
-//       />
-//       <ComboboxPopover>
-//         <ComboboxList>
-//           {status === "OK" &&
-//             data.map(({ place_id, description }) => (
-//               <ComboboxOption key={place_id} value={description} />
-//             ))}
-//         </ComboboxList>
-//       </ComboboxPopover>
-//     </Combobox>
-//   );
-// };
-
 import {
   Box,
   Button,
@@ -121,7 +6,7 @@ import {
   HStack,
   IconButton,
   Input,
-  SkeletonText,
+  ChakraProvider,
   Text,
 } from '@chakra-ui/react'
 import { FaLocationArrow, FaTimes } from 'react-icons/fa'
@@ -133,17 +18,21 @@ import {
   Autocomplete,
   DirectionsRenderer,
 } from '@react-google-maps/api'
-import { useRef, useState } from 'react'
+import { useRef, useState, useMemo } from 'react'
+import usePlacesAutocomplete , {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete" ;
+
+// const center = useMemo(() => ({ lat: 69, lng: 69 }), [])
 
 const center = { lat: 69, lng: 69 }
 
 const libraries = ['places']
 
 function TESTMAP() {
-  console.log(process.env.REACT_APP_GOOGLE_API_KEY)
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
-    // googleMapsApiKey: "AIzaSyD4Q4PCT3p96MNZkKiWkzikGfQYioFeDek",
     libraries
   })
 
@@ -151,17 +40,33 @@ function TESTMAP() {
   const [directionsResponse, setDirectionsResponse] = useState(null)
   const [distance, setDistance] = useState('')
   const [duration, setDuration] = useState('')
+  const [selected, setSelected] = useState(null);
 
   /** @type React.MutableRefObject<HTMLInputElement> */
   const originRef = useRef()
   /** @type React.MutableRefObject<HTMLInputElement> */
   const destiantionRef = useRef()
+  /** @type React.MutableRefObject<HTMLInputElement> */
+  const markerRef = useRef()
 
   if (!isLoaded) {
     return <div>Loading...</div>
   }
 
-  
+  async function Geocode() {
+    if (markerRef.current.value === '') {
+      return
+    }
+    console.log(markerRef.current.value)
+    const address = markerRef.current.value
+    const results = await getGeocode({ address });
+    const { lat, lng } = await getLatLng(results[0]);
+    setSelected({ lat, lng });
+  }
+
+  function clearGeocode() {
+    markerRef.current.value = ''
+  }
 
   async function calculateRoute() {
     if (originRef.current.value === '' || destiantionRef.current.value === '') {
@@ -189,6 +94,7 @@ function TESTMAP() {
   }
 
   return (
+    <ChakraProvider>
     <Flex
       position='relative'
       flexDirection='column'
@@ -204,6 +110,7 @@ function TESTMAP() {
           mapContainerClassName ="map-container"
           onLoad={map => setMap(map)}
         >
+          {selected && <Marker position={selected} draggable={true}  />}
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}
@@ -235,7 +142,7 @@ function TESTMAP() {
           </Box>
 
           <ButtonGroup>
-            <Button colorScheme='pink' type='submit' onClick={calculateRoute}>
+            <Button colorScheme='green' type='submit' onClick={calculateRoute}>
               Calculate Route
             </Button>
             <IconButton
@@ -259,7 +166,40 @@ function TESTMAP() {
           />
         </HStack>
       </Box>
+      <Box
+        p={4}
+        borderRadius='lg'
+        m={4}
+        bgColor='white'
+        shadow='base'
+        minW='container.md'
+        zIndex='1'
+      >
+        <HStack spacing={2} justifyContent='space-between'>
+            <Autocomplete>
+              <Input type='text' placeholder='Origin' ref={markerRef} />
+            </Autocomplete>
+            <Button colorScheme='green' type='submit' onClick={Geocode} >
+            Geocode
+            </Button>
+            <IconButton
+              aria-label='center back'
+              icon={<FaTimes />}
+              onClick={clearGeocode}
+            />
+            <IconButton
+            aria-label='center back'
+            icon={<FaLocationArrow />}
+            isRound
+            onClick={() => {
+              map.panTo(selected)
+              map.setZoom(15)
+            }}
+          />
+        </HStack>
+      </Box>
     </Flex>
+    </ChakraProvider>
   )
 }
 
