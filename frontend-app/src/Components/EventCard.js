@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
-// import { Alert } from 'react-bootstrap'
 
 export default function EventCard(props) {
   const [events, setEvents] = useState([])

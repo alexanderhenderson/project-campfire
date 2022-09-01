@@ -1,13 +1,14 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import UserHomepage from "./UserHomepage";
-import MainPage from "./MainHomepage";
-import UserProfile from './UserProfile';
-import LogIn from './login';
-import LogOut from './logout';
-import { AuthProvider } from "./Authorization";
-import ActivitiesList from './ActivitiesList';
-import EventDetail from './EventDetail';
-import Nav from './Nav';
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import UserHomepage from "./UserHomepage"
+import MainPage from "./MainHomepage"
+import UserProfile from './UserProfile'
+import LogIn from './login'
+import LogOut from './logout'
+import { AuthProvider } from "./Authorization"
+import ActivitiesList from './ActivitiesList'
+import EventDetail from './EventDetail'
+import Nav from './Nav'
+import EventList from './EventPage'
 // import { AuthProvider } from "./Auth";
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
             </Route>
             <Route path="Events">
               {/* <Route path="create" element={<CreateEvent/>} /> */}
-              {/* <Route path="list" element={<EventsList/>} /> */}
+              <Route path="list" element={<EventList />} />
               <Route path="detail" element={<EventDetail />} />
             </Route>
             <Route path="Activities">
