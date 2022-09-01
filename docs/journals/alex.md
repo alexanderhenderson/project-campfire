@@ -90,4 +90,12 @@ Wednesday 8/31
     integrate the authorization in their front end pages we will begin to get the back end completely protected with the
     jwt_login_required decorators. 
 
+Thursday 9/1
+    We had some issues with the logout functionality, which comes down to our browsers storing expired tokens. We need to figure out
+    how to refresh tokens. 
+
+    I added a getUserInfo() function to the authorization file that can be imported from anywhere, and will let us get the username
+    and id with a simple function call. It returns a dictionary like so {"username": -username-, "id": -id-}. The key to this is a 
+    jwt decoder I found online that I'd like to explore, it is also in the authorization.js file, right above the getUserInfo function.
+
 

@@ -29,12 +29,13 @@ class UserHomepage extends React.Component {
   //   console.log("logstop 1")
   //   const token = this.context.token;
 
-  //   const tokenRequest = await fetch(`${process.env.REACT_APP_USERS}/users/api/tokens/mine/`, {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //     // Other fetch options, like method and body, if applicable
-  //   });
-  //   console.log(await tokenRequest);
-  // }
+    const tokenRequest = await fetch(`${process.env.REACT_APP_USERS}/users/api/tokens/mine/`, {
+      headers: { Authorization: `Bearer ${token}` },
+      credentials: "include",
+      // Other fetch options, like method and body, if applicable
+    });
+    console.log(await tokenRequest);
+  }
 
     async componentDidMount() {
 
