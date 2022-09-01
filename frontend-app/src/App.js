@@ -4,7 +4,7 @@ import MainPage from "./MainHomepage";
 import Events from "./Components/EventCard";
 // import { AuthProvider } from "./Auth";
 import UserProfile from './UserProfile';
-import UserHomepage from './UserHomepage';
+// import UserHomepage from './UserHomepage';
 import LogIn from './login';
 import LogOut from './logout';
 import { AuthProvider } from "./Authorization";
@@ -19,7 +19,7 @@ function App() {
         <Nav />
         <div className="container">
           <Routes>
-            <Route path="/" element={<Mainpage/>} />
+            <Route path="/" element={<MainPage/>} />
             <Route path="User">
               <Route path="homepage" element={<UserHomepage/>} />
               <Route path="profile" element={<UserProfile />} />
