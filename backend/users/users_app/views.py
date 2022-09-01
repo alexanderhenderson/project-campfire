@@ -3,6 +3,8 @@ from django.views.generic import FormView
 from django.contrib.auth import login
 from django.http.response import HttpResponseRedirect
 
+from django.contrib.auth.forms import UserCreationForm
+
 
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
@@ -67,7 +69,11 @@ def list_users(request):
         try:
             # print("request: ", request.body)
             content = json.loads(request.body)
+            raw_password = content["password"]
+            del content["password"]
             user = User.objects.create(**content)
+            user.set_password(raw_password)
+            user.save()
             # print("user: ", user)
             return JsonResponse(
                 {"user": user},
