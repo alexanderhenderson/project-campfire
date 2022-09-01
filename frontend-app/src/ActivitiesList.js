@@ -1,11 +1,10 @@
-import { useEffect } from "react"
-import { useState } from "react"
-
+import { useEffect } from "react";
+import { useState } from "react";
+import {AddActivities} from "./Components/AddActivityToList";
 
 function FetchActivities(){
     const [activities, setActivitiesData] = useState([])
     const [error, setError] = useState("")
-
 
     useEffect(()=> {
         const getActivityData = async () => {
@@ -20,32 +19,30 @@ function FetchActivities(){
         }
         getActivityData()
     }, [setActivitiesData,setError])
-
+    const userid = 3 
     return (
         <main>
             <div className="row">
+            
             {activities.map(activity => {
                 return (
                     <div className="col-sm-3">
-                    <div className="card mb-3 shadow" key={activity.id}>
-                        <img src={activity.picture_url} className="card-img-top" />
-                        <div className="card-body">
-                            <h5 className="card-title">{activity.name}</h5>
-                            <h6 className="card-subtitle mb-2 text-muted">
-                            {activity.name}
-                            </h6>
-                            {/* <p className="card-text">
-                                Activity Name 
-                            </p> */}
-                        </div>
+                        <div className="card mb-3 shadow" key={activity.id}>
+                            {/* <div onClick={() => alert("Added to your activities list")}> */}
+                            <div onClick={ () => AddActivities(userid, activity)}>
+                                
+                                <img src={activity.picture_url} className="card-img-top" />
+                                    <div className="card-body">
+                                        <h5 className="card-title">{activity.name}</h5>
+                                    </div>
                     
+                            </div>
                         </div>
-                        </div>
+                    </div>
                 );
             })}
             </div>
         </main>
       )      
 }
-
 export default FetchActivities

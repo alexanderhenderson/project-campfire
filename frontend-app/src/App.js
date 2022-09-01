@@ -7,7 +7,7 @@ import LogIn from './login';
 import LogOut from './logout';
 import { AuthProvider } from "./Authorization";
 import ActivitiesList from './ActivitiesList';
-import EventDetail from './EventDetail';
+// import EventDetail from './EventDetail';
 import Nav from './Nav';
 import MainHomePage from './MainHomepage';
 
@@ -29,7 +29,7 @@ function App() {
             <Route path="Events">
               {/* <Route path="create" element={<CreateEvent/>} /> */}
               {/* <Route path="list" element={<EventsList/>} /> */}
-              <Route path="detail" element={<EventDetail/>} />
+              {/* <Route path="detail" element={<EventDetail/>} /> */}
             </Route>
             <Route path="Activities">
               <Route path="list" element={<ActivitiesList/>} />
