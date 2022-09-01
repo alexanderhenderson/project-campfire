@@ -21,7 +21,7 @@ function Nav() {
                 {/* {theList} */}
                 <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                   <li className="nav-item">
-                     <NavLink className="navbar-brand"  to="Users/signup">Signup</NavLink>
+                     <NavLink className="navbar-brand"  to="User/signup">Signup</NavLink>
                  </li>
                 </ul>
               </li>
