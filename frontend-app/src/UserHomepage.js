@@ -26,13 +26,9 @@ class UserHomepage extends React.Component {
                     <h1 className="display-2 fw-bold">Welcome to the Campfire</h1>
                         
                         <div className="px-9 text-center display-6 fw-bold " >
-<<<<<<< HEAD
-                            Check out current Events!
-=======
                         
                          Check out current Events!
 
->>>>>>> main
                             <p></p>
                             <Link to="/Activities/list">
                             <button type="button" className="btn btn-outline-warning button-font">To Events List Page</button>
@@ -62,12 +58,6 @@ class UserHomepage extends React.Component {
                             <img className='picture-card' src={peoplehands} alt="camping"/>
                         </div>
                 </div>
-<<<<<<< HEAD
-           
-                    
-    
-=======
->>>>>>> main
         )        
     }
 }
