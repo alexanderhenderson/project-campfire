@@ -28,15 +28,25 @@ function FetchActivities(){
                 return (
                     <div className="col-sm-3">
                     <div className="card mb-3 shadow" key={activity.id}>
+<<<<<<< HEAD
                         {/* <img src={event.picture_url} className="card-img-top" /> */}
+=======
+                        <img src={activity.picture_url} className="card-img-top" />
+>>>>>>> main
                         <div className="card-body">
                             <h5 className="card-title">{activity.name}</h5>
                             <h6 className="card-subtitle mb-2 text-muted">
                             {activity.name}
                             </h6>
+<<<<<<< HEAD
                             <p className="card-text">
                                 Activity Name 
                             </p>
+=======
+                            {/* <p className="card-text">
+                                Activity Name 
+                            </p> */}
+>>>>>>> main
                         </div>
                     
                         </div>
@@ -45,6 +55,7 @@ function FetchActivities(){
             })}
             </div>
         </main>
+<<<<<<< HEAD
       )
       
     
@@ -70,6 +81,9 @@ function FetchActivities(){
     //     </table>
     //     </>
     // )        
+=======
+      )      
+>>>>>>> main
 }
 
 export default FetchActivities

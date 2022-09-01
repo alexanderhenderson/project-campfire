@@ -6,7 +6,6 @@ from .views import (
     user_detail,
     list_activities,
     activity_detail,
-    SignInView,
     api_user_token
 )
 

@@ -21,7 +21,8 @@ class ActivityEncoder(ModelEncoder):
     model = Activity
     properties = [
         "id",
-        "name"
+        "name",
+        "picture_url"
     ]
 
 class EventEncoder(ModelEncoder):
@@ -37,6 +38,7 @@ class EventEncoder(ModelEncoder):
         "owner",
         "activity",
         "attendees",
+        "picture_url",
     ]
     encoders = {
         "activity": ActivityEncoder(),
