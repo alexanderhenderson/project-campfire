@@ -80,7 +80,7 @@ export function useToken() {
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
-      //navigate("/");
+      navigate("/");
     }
   }
 
@@ -97,6 +97,7 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
+      navigate("/User/homepage");
       return;
     }
     let error = await response.json();
