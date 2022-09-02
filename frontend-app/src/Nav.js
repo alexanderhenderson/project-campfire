@@ -51,10 +51,10 @@ function Nav() {
                   <NavLink className="navbar-brand"  to="/sales">Sales List</NavLink>
                </li> */}
                 <li className="nav-item">
-                  <NavLink className="navbar-brand" to="/salesrecord/list">Your Profile</NavLink>
+                  <NavLink className="navbar-brand" to="/profile/">Your Profile</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="navbar-brand" to="/User/Homepage">User Homepage</NavLink>
+                  <NavLink className="navbar-brand" to="/home">User Home</NavLink>
                 </li>
               </ul>
             </li>
@@ -69,21 +69,21 @@ function Nav() {
                   NavLink className="navbar-brand"  to="/sales">Sales List</NavLink>
                 </li> */}
                 <li className="nav-item">
-                  <NavLink className="navbar-brand" to="/employees/list">Current Events</NavLink>
+                  <NavLink className="navbar-brand" to="/events/list">Events</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="navbar-brand" to="/employees/list">Add an Events</NavLink>
+                  <NavLink className="navbar-brand" to="/events/new">Create Event</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="navbar-brand" to="/Activities/list">Add an Activity </NavLink>
+                  <NavLink className="navbar-brand" to="/activities/list">Activities </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="navbar-brand" to="/employees/new">Partner Finder </NavLink>
+                  <NavLink className="navbar-brand" to="/partnerfinder/">Partner Finder </NavLink>
                 </li>
 
               </ul>
             </li>
-            <img className='pull-right profile_circle ' src={friends} alt="friends" />
+            <img className='pull-right profile_circle' height='50' src={friends} alt="friends" />
           </ul>
         </div>
       </div>

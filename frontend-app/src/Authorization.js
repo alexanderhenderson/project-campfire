@@ -97,7 +97,7 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
-      navigate("/User/homepage");
+      navigate("/home");
       return;
     }
     let error = await response.json();
@@ -123,7 +123,7 @@ export function useToken() {
     });
     if (response.ok) {
       await login(username, password);
-      navigate("/User/homepage");
+      navigate("/home");
     }
     return false;
   }

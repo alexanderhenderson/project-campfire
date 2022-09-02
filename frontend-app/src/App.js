@@ -19,21 +19,18 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<MainPage />} />
-            <Route path="User">
-              <Route path="homepage" element={<UserHomepage />} />
-              <Route path="profile" element={<UserProfile />} />
-              <Route path="login" element={< LogIn />} />
-              <Route path="logout" element={< LogOut />} />
-              <Route path="signup" element={< Signup />} />
-              {/* <Route path="new" element={<CreateAuto/>} /> */}
-            </Route>
+            <Route path="home" element={<UserHomepage />} />
+            <Route path="profile" element={<UserProfile />} />
+            <Route path="login" element={<LogIn />} />
+            <Route path="logout" element={<LogOut />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="events" element={<EventList />} />
             <Route path="Events">
-              {/* <Route path="create" element={<CreateEvent/>} /> */}
-              <Route path="list" element={<EventList />} />
               <Route path="detail" element={<EventDetail />} />
+              {/* <Route path="create" element={<CreateEvent />} /> */}
             </Route>
+            <Route path="activities" element={<ActivitiesList />} />
             <Route path="Activities">
-              <Route path="list" element={<ActivitiesList />} />
               {/* <Route path="create" element={<CreateActivity/>} /> */}
             </Route>
           </Routes>
