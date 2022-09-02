@@ -3,12 +3,16 @@ import { useState } from 'react';
 import { useToken } from './Authorization';
 
 
+import { getUserInfo } from './Authorization'; // testing don't leave in imports
+
 export default function LogIn() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [token, login] = useToken();
     const [loginResponse, setLoginResponse] = useState();
+
+
 
     async function onSubmit(){
 
@@ -18,6 +22,15 @@ export default function LogIn() {
       
       const result = await login(username, password);
       setLoginResponse(result);
+
+      // ---- Testing -- don't leave stuff below here
+      
+      console.log("User array: ", getUserInfo())
+      console.log("Username: ", getUserInfo().username)
+      console.log("User ID: ", getUserInfo().id)
+
+      // ---- don't leave stuff above here
+
 
       if (result == null) {
         setUsername("");

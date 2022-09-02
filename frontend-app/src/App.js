@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import UserHomepage from "./UserHomepage"
+import { AuthProvider } from "./Authorization"
 import MainPage from "./MainHomepage"
+import UserHomepage from "./UserHomepage"
+import Nav from './Nav'
 import UserProfile from './UserProfile'
 import LogIn from './login'
 import LogOut from './logout'
-import { AuthProvider } from "./Authorization"
+import Signup from "./SignUp"
+import EventList from './EventPage'
 import ActivitiesList from './ActivitiesList'
 import EventDetail from './EventDetail'
-import Nav from './Nav'
-import EventList from './EventPage'
-// import { AuthProvider } from "./Auth";
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
               <Route path="profile" element={<UserProfile />} />
               <Route path="login" element={< LogIn />} />
               <Route path="logout" element={< LogOut />} />
+              <Route path="signup" element={< Signup />} />
               {/* <Route path="new" element={<CreateAuto/>} /> */}
             </Route>
             <Route path="Events">

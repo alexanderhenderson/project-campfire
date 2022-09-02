@@ -80,7 +80,7 @@ export function useToken() {
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
-      //navigate("/");
+      navigate("/");
     }
   }
 
@@ -97,22 +97,25 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
+      navigate("/User/homepage");
       return;
     }
     let error = await response.json();
     return handleErrorMessage(error);
   }
 
-  async function signup(username, password, email, firstName, lastName) {
-    const url = `${process.env.REACT_APP_USERS}/api/accounts/`;
+  async function signup(username, password, email, first_name, last_name, city, state) {
+    const url = `${process.env.REACT_APP_USERS}/users/`;
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
         username,
         password,
         email,
-        first_name: firstName,
-        last_name: lastName,
+        first_name,
+        last_name,
+        city,
+        state,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -120,6 +123,7 @@ export function useToken() {
     });
     if (response.ok) {
       await login(username, password);
+      navigate("/User/homepage");
     }
     return false;
   }
@@ -141,9 +145,27 @@ export function useToken() {
     });
     if (response.ok) {
       await login(username, password);
+      
     }
     return false;
   }
 
   return [token, login, logout, signup, update];
 }
+
+
+function parseJwt(token) {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
+  }
+};
+
+export function getUserInfo() {
+  const parsedToken = parseJwt(getToken())
+  return {
+   "username": parsedToken.user.username,
+   "id": parsedToken.user.id
+  }
+};
