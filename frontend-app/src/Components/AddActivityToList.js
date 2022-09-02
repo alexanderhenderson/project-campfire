@@ -1,6 +1,8 @@
-import {useEffect } from 'react'
+import {useEffect, useState } from 'react'
 
 export async function AddActivities(userid, activity) {
+
+        // const [isVisible, setIsVisible] = useState(true)
     
         const url = `${process.env.REACT_APP_USERS}/users/${userid}/`
         const data = {favorite_activities : [activity.id]};
@@ -13,8 +15,14 @@ export async function AddActivities(userid, activity) {
         }
         const response = await fetch(url, fetchConfig);
         console.log(data)
+        
+        // const handleClick = event => {
+            //  toggle visibility
+            // setIsVisible(current => !current);
+        //   };
     }
   
+    
   
 //     const getActivityData = async () => {
 //         const url = `${process.env.REACT_APP_EVENTS}/events/activities/`;
