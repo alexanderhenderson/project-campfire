@@ -152,3 +152,20 @@ export function useToken() {
 
   return [token, login, logout, signup, update];
 }
+
+
+function parseJwt(token) {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
+  }
+};
+
+export function getUserInfo() {
+  const parsedToken = parseJwt(getToken())
+  return {
+   "username": parsedToken.user.username,
+   "id": parsedToken.user.id
+  }
+};
