@@ -20,7 +20,7 @@ function Nav() {
               {/* {theList} */}
               <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                 <li className="nav-item">
-                  <NavLink className="navbar-brand" to="User/signup">Signup</NavLink>
+                  <NavLink className="navbar-brand" to="/signup">Signup</NavLink>
                 </li>
               </ul>
             </li>
@@ -32,10 +32,10 @@ function Nav() {
               </a>
               <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                 <li className="nav-item">
-                  <NavLink className="navbar-brand" to="/User/Login">Login </NavLink>
+                  <NavLink className="navbar-brand" to="/login">Login </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="navbar-brand" to="/User/Logout">Logout </NavLink>
+                  <NavLink className="navbar-brand" to="/logout">Logout </NavLink>
                 </li>
 
               </ul>
@@ -69,13 +69,13 @@ function Nav() {
                   NavLink className="navbar-brand"  to="/sales">Sales List</NavLink>
                 </li> */}
                 <li className="nav-item">
-                  <NavLink className="navbar-brand" to="/events/list">Events</NavLink>
+                  <NavLink className="navbar-brand" to="/events">Events</NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink className="navbar-brand" to="/events/new">Create Event</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="navbar-brand" to="/activities/list">Activities </NavLink>
+                  <NavLink className="navbar-brand" to="/activities">Activities </NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink className="navbar-brand" to="/partnerfinder/">Partner Finder </NavLink>
