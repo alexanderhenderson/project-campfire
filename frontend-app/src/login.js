@@ -6,11 +6,12 @@ import { useToken } from './Authorization';
 import { getUserInfo } from './Authorization'; // testing don't leave in imports
 
 export default function LogIn() {
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [token, login] = useToken();
-    const [loginResponse, setLoginResponse] = useState();
+  
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [token, login] = useToken();
+  const [loginResponse, setLoginResponse] = useState();
+  
 
 
 
@@ -55,9 +56,11 @@ export default function LogIn() {
                   <input type="password" value={password} onChange={e => setPassword(e.target.value)} id="password" className="form-control"/>
                   <label htmlFor="password"> Password </label>
                 </div>
+                <p className="fs-5" hidden={ (loginResponse !== undefined) ? false : true }> 
+                  Incorrect Username or Password
+                </p> 
                 <button type="button" className="btn btn-success" onClick={onSubmit}>Log in</button>
-              </form>
-              <p className="fs-5" hidden={ (loginResponse !== undefined) ? false : true }> {loginResponse} </p>              
+              </form>         
               </div>
           </div>
         </div>

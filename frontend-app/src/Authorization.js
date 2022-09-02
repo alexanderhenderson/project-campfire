@@ -15,7 +15,7 @@ export async function getTokenInternal() {
     });
     if (response.ok) {
       const data = await response.json();
-      internalToken = data.token;
+      internalToken = await data.token;
       return internalToken;
     }
   } catch (e) {}
@@ -48,8 +48,32 @@ export const AuthContext = createContext({
   setToken: () => null,
 });
 
+
+// async function validateToken(){
+  
+//   const url = `${process.env.REACT_APP_USERS}https://localhost:8001/validate_access/`;
+    
+//   const response = await fetch(url, {
+//     credentials: "include",
+//   });
+//   if (response.ok) {
+//     return response;
+//   };
+
+// };
+
+
 export const AuthProvider = ( props ) => {
   const [token, setToken] = useState(null);
+
+  if (token){
+  //   const validation = validateToken()
+  //   console.log(validation.json())
+    console.log("--Logged In--")
+  } else {
+    console.log("-- Logged Out --")
+  }
+  
 
   return (
     <AuthContext.Provider value={{ token, setToken }}>
