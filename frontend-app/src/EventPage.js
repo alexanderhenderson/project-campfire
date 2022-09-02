@@ -1,36 +1,56 @@
 import { Link } from 'react-router-dom'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 export default function EventList(props) {
-  const [events, setEvents] = useState([])
-  // const [limitEvents, setLimitEvents] = useState([])
+  const events = useRef([])
+  const [filteredEvents, setFilteredEvents] = useState([])
+  const [search, setSearch] = useState('')
+
   useEffect(() => {
     const requestEvents = async () => {
       const url = `${process.env.REACT_APP_EVENTS}/events/`;
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json()
-        // console.log('Data pulled from json response: ', data)
-        setEvents(data.Events)
-        // const sliced = (data.Events.slice(0, 3))
-        // setLimitEvents(sliced)
-        // console.log('Sliced events: ', sliced)
+        events.current = data.Events
+        setFilteredEvents(events.current)
         console.log('Events after setEvents is called: ', data.Events)
       } else {
         console.log("Could not load the events, try again")
       }
     }
     requestEvents()
-  }, [setEvents])
+  }, [])
+
+  function searchFilter() {
+    const searchedEvents = events.current.filter(event => event.name.toLowerCase().includes(search.toLowerCase()))
+    setFilteredEvents(searchedEvents)
+  }
+  useEffect(() => { searchFilter() }, [search])
+
+  function handleChange(event) {
+    setSearch(event.target.value)
+  }
+
   return (
     <>
-      <div class="page-header">
+      <div className="page-header mt-3 mb-3">
         <h1>Events</h1>
       </div>
+        <div>
+          <input
+            type="search"
+            id="search"
+            className="form-control"
+            placeholder="Search for events"
+            onChange={handleChange}
+            aria-label="Search"
+          />
+        </div>
       <div className="row">
-        {events.map(event => {
+        {filteredEvents.map(event => {
           return (
-            <div className="col-sm-4" key={event.id}>
+            <div className="col-sm-4 mt-3 mb-3" key={event.id}>
               <div className="card mb-3 shadow h-100">
                 <img src={event.picture_url} className="card-img-top" />
                 <div className="card-body">
