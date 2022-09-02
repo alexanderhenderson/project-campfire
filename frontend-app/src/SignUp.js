@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useToken } from './Authorization';
-// import { useParams } from 'react-router-dom';
 
 
 function Signup() {
@@ -24,7 +22,6 @@ function Signup() {
         setUserData({...userData, [e.target.name]:[e.target.value]});
     }
     console.log(userData)
-
 
     
     const submitHandler = e => {
@@ -57,8 +54,6 @@ function Signup() {
             </div>
         )
     }
-
-    console.log(signupTest)
     if (signupTest === false) {
         SignupFailed = function Failed() {
             return (
@@ -67,107 +62,94 @@ function Signup() {
                 </div>
             )
         }
-    } else {
-        SignupFailed = function Passed() {
-            return (
-                <div>
-                </div>
-            )
-        }
     }
 
 
-    console.log(userData);
-        return (
-                <div className="container">   
-                <form onSubmit={submitHandler}>
-                    <h3>Sign Up</h3>
-                    <div>
-                        <SignupFailed />   
-                    </div>
-                    <div className="form-group">
-                        <label>Username</label>
-                        <input className="form-control" 
-                            type="text" 
-                            value={username}
-                            name="username"
-                            onChange={changeHandler}
-                            placeholder="Enter Username"
-                            required />
-                    </div>
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input className="form-control" 
-                            type="password"
-                            value={password}
-                            name="password"
-                            onChange={changeHandler}
-                            placeholder="Enter Password"
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Email</label>
-                        <input className="form-control" 
-                            type="email" 
-                            name="email"
-                            value={email}
-                            onChange={changeHandler}
-                            placeholder="Enter Email"
-                            required />
-                    </div>
-                    <div className="form-group">
-                        <label>First Name</label>
-                        <input className="form-control" 
-                            type="text"
-                            name="first_name" 
-                            value={first_name}
-                            onChange={changeHandler}
-                            placeholder="Enter First Name"
-                            required />
-                    </div>
-                    <div className="form-group">
-                        <label>Last Name</label>
-                        <input className="form-control" 
-                            type="text"
-                            name="last_name" 
-                            value={last_name}
-                            onChange={changeHandler}
-                            placeholder="Enter Last Name"
-                            required />
-                    </div>
-                    <div className="form-group">
-                        <label>City</label>
-                        <input className="form-control" 
-                            type="text" 
-                            name="city"
-                            value={city}
-                            onChange={changeHandler}
-                            placeholder="Enter City"
-                            required />
-                    </div>
-                    <div className="form-group pb-2">
-                        <label>State</label>
-                        <input className="form-control" 
-                            type="text" 
-                            name="state"
-                            value={state}
-                            onChange={changeHandler}
-                            placeholder="Enter State"
-                            required />
-                    </div>
-                    <div>
-
-                    </div>
-
-                    <button type="submit" className="btn btn-dark btn-lg btn-block">Sign Up</button>
-                    <p className="forgot-password text-right">
-                        Already Signed Up? <a href={`Login`}>Log In</a>
-                    </p>
-                </form>
+    return (
+        <div className="container">   
+            <form onSubmit={submitHandler}>
+                <h3>Sign Up</h3>
+                <div>
+                    <SignupFailed />   
                 </div>
-            );
+                <div className="form-group">
+                    <label>Username</label>
+                    <input className="form-control" 
+                        type="text" 
+                        value={username}
+                        name="username"
+                        onChange={changeHandler}
+                        placeholder="Enter Username"
+                        required />
+                </div>
+                <div className="form-group">
+                    <label>Password</label>
+                    <input className="form-control" 
+                        type="password"
+                        value={password}
+                        name="password"
+                        onChange={changeHandler}
+                        placeholder="Enter Password"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Email</label>
+                    <input className="form-control" 
+                        type="email" 
+                        name="email"
+                        value={email}
+                        onChange={changeHandler}
+                        placeholder="Enter Email"
+                        required />
+                </div>
+                <div className="form-group">
+                    <label>First Name</label>
+                    <input className="form-control" 
+                        type="text"
+                        name="first_name" 
+                        value={first_name}
+                        onChange={changeHandler}
+                        placeholder="Enter First Name"
+                        required />
+                </div>
+                <div className="form-group">
+                    <label>Last Name</label>
+                    <input className="form-control" 
+                        type="text"
+                        name="last_name" 
+                        value={last_name}
+                        onChange={changeHandler}
+                        placeholder="Enter Last Name"
+                        required />
+                </div>
+                <div className="form-group">
+                    <label>City</label>
+                    <input className="form-control" 
+                        type="text" 
+                        name="city"
+                        value={city}
+                        onChange={changeHandler}
+                        placeholder="Enter City"
+                        required />
+                </div>
+                <div className="form-group pb-2">
+                    <label>State</label>
+                    <input className="form-control" 
+                        type="text" 
+                        name="state"
+                        value={state}
+                        onChange={changeHandler}
+                        placeholder="Enter State"
+                        required />
+                </div>
+                <button type="submit" className="btn btn-dark btn-lg btn-block">Sign Up</button>
+                <p className="forgot-password text-right">
+                    Already Signed Up? <a href={`Login`}>Log In</a>
+                </p>
+            </form>
+        </div>
+    );
 }
-
 
 export default Signup
