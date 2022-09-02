@@ -15,39 +15,76 @@ function Signup() {
     state:""
     })
 
-    const navigate = useNavigate()
-
+    const [signupTest, setSignupTest] = useState(true)
     const {username, password, first_name, last_name, email, city, state} = userData;
-
     const [token, login, logout, signup] = useToken();
 
+    
     const changeHandler = e => {
-    setUserData({...userData, [e.target.name]:[e.target.value]});
+        setUserData({...userData, [e.target.name]:[e.target.value]});
     }
     console.log(userData)
 
-    const submitHandler = e => {
-    e.preventDefault();
 
-    signup(
-        userData.username[0], 
-        userData.password[0],
-        userData.email[0],
-        userData.first_name[0],
-        userData.last_name[0],
-        userData.city[0],
-        userData.state[0],
+    
+    const submitHandler = e => {
+        e.preventDefault();
+        
+        async function signupWithTest() {
+            let test = await signup(
+                userData.username[0], 
+                userData.password[0],
+                userData.email[0],
+                userData.first_name[0],
+                userData.last_name[0],
+                userData.city[0],
+                userData.state[0],
+                )
+                
+            if (test === false) {
+                setSignupTest(false)
+            } else {
+                setSignupTest(true)
+            }
+        }
+        signupWithTest()
+    }  
+    
+    
+    let SignupFailed = function Waiting() {
+        return (
+            <div>
+            </div>
         )
-        
-        
     }
+
+    console.log(signupTest)
+    if (signupTest === false) {
+        SignupFailed = function Failed() {
+            return (
+                <div class="alert alert-danger" role="alert">
+                   <h4>Username Is Taken. Please Try Again.</h4>
+                </div>
+            )
+        }
+    } else {
+        SignupFailed = function Passed() {
+            return (
+                <div>
+                </div>
+            )
+        }
+    }
+
 
     console.log(userData);
         return (
-                <div className="container">
+                <div className="container">   
                 <form onSubmit={submitHandler}>
                     <h3>Sign Up</h3>
-
+                    <div>
+                        <SignupFailed />   
+                    </div>
                     <div className="form-group">
                         <label>Username</label>
                         <input className="form-control" 
