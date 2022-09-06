@@ -33,6 +33,8 @@ class UserListEncoder(ModelEncoder):
     model = User
     properties = ["id", "username", "first_name", "last_name", "email"]
 
+
+# path: http://localhost:8080/users/api/tokens/user/
 @auth.jwt_login_required
 @require_http_methods(["GET"])
 def api_user_info(request):

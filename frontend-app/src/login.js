@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useToken } from './Authorization';
 
 
-import { getUserInfo } from './Authorization'; // testing don't leave in imports
+// import { getUserInfo } from './Authorization'; // testing don't leave in imports
 
 export default function LogIn() {
   
@@ -24,18 +24,17 @@ export default function LogIn() {
       const result = await login(username, password);
       setLoginResponse(result);
 
-      // ---- Testing -- don't leave stuff below here
+      // ---- Testing -- don't leave stuff below here for final production
       
-      const tokenRequest = await fetch(`http://localhost:8080/users/api/tokens/user/`, {
+      const UserInfoRequest = await fetch(`${process.env.REACT_APP_USERS}/users/api/tokens/user/`, {
         credentials: "include",
       });
-      console.log(await tokenRequest);
-      const data = await tokenRequest.json()
+      console.log(await UserInfoRequest);
+      const data = await UserInfoRequest.json()
       console.log("User Data: ", await data);
       console.log("User: ", await data.username);
       console.log("User ID: ", await data.id);
     
-
 
       // console.log("User array: ", getUserInfo())
       // console.log("Username: ", getUserInfo().username)
@@ -70,7 +69,7 @@ export default function LogIn() {
                 <p className="fs-5" hidden={ (loginResponse !== undefined) ? false : true }> 
                   Incorrect Username or Password
                 </p> 
-                <button type="button" className="btn btn-success" onClick={onSubmit}>Log in</button>
+                <button type="button" className="btn btn-success" onClick={onSubmit}>Test User Info Fetch + Log in</button>
               </form>         
               </div>
           </div>
