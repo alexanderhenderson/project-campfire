@@ -13,18 +13,18 @@ import Signup from "./SignUp";
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
+  <AuthProvider>
+    <BrowserRouter>
         <Nav />
         <div className="container">
           <Routes>
             <Route path="/" element={<MainHomePage/>} />
             <Route path="User">
-              <Route path="homepage" element={<UserHomepage/>} />
-              <Route path="profile" element={<UserProfile />} />
-              <Route path="login" element={< LogIn />} />
-              <Route path="logout" element={< LogOut />} />
-              <Route path="signup" element={< Signup />} />
+                <Route path="homepage" element={<UserHomepage/>} />
+                <Route path="profile" element={<UserProfile />} />
+                <Route path="login" element={< LogIn />} />
+                <Route path="logout" element={< LogOut />} />
+                <Route path="signup" element={< Signup />} />
               {/* <Route path="new" element={<CreateAuto/>} /> */}
             </Route>
             <Route path="Events">

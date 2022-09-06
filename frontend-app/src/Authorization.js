@@ -51,8 +51,32 @@ export const AuthContext = createContext({
   setToken: () => null,
 });
 
+
+// async function validateToken(){
+  
+//   const url = `${process.env.REACT_APP_USERS}https://localhost:8001/validate_access/`;
+    
+//   const response = await fetch(url, {
+//     credentials: "include",
+//   });
+//   if (response.ok) {
+//     return response;
+//   };
+
+// };
+
+
 export const AuthProvider = ( props ) => {
   const [token, setToken] = useState(null);
+
+  if (token){
+  //   const validation = validateToken()
+  //   console.log(validation.json())
+    console.log("--Logged In--")
+  } else {
+    console.log("-- Logged Out --")
+  }
+  
 
   return (
     <AuthContext.Provider value={{ token, setToken }}>
@@ -83,7 +107,7 @@ export function useToken() {
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
-      //navigate("/");
+      navigate("/");
     }
   }
 
@@ -100,6 +124,7 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
+      navigate("/User/homepage");
       return;
     }
     let error = await response.json();
@@ -125,6 +150,7 @@ export function useToken() {
     });
     if (response.ok) {
       await login(username, password);
+      navigate("/User/homepage");
     }
     return false;
   }
@@ -146,6 +172,7 @@ export function useToken() {
     });
     if (response.ok) {
       await login(username, password);
+      
     }
     return false;
   }
