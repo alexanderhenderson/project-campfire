@@ -26,9 +26,20 @@ export default function LogIn() {
 
       // ---- Testing -- don't leave stuff below here
       
-      console.log("User array: ", getUserInfo())
-      console.log("Username: ", getUserInfo().username)
-      console.log("User ID: ", getUserInfo().id)
+      const tokenRequest = await fetch(`http://localhost:8080/users/api/tokens/user/`, {
+        credentials: "include",
+      });
+      console.log(await tokenRequest);
+      const data = await tokenRequest.json()
+      console.log("User Data: ", await data);
+      console.log("User: ", await data.username);
+      console.log("User ID: ", await data.id);
+    
+
+
+      // console.log("User array: ", getUserInfo())
+      // console.log("Username: ", getUserInfo().username)
+      // console.log("User ID: ", getUserInfo().id)
 
       // ---- don't leave stuff above here
 
