@@ -14,7 +14,7 @@ function MainPage() {
       <div className="px-4 py-5 my-5 text-center mb-3">
         <h2>Gather around the campfire with new friends</h2>
         <div className='m-3'>
-        <Link to="/User/signup">
+        <Link to="signup">
           <button type="button" className="btn btn-primary btn-lg btn-block">Register</button>
         </Link>
         </div>
