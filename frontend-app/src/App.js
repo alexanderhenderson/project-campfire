@@ -13,8 +13,8 @@ import EventDetail from './EventDetail'
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
+  <AuthProvider>
+    <BrowserRouter>
         <Nav />
         <div className="container">
           <Routes>
