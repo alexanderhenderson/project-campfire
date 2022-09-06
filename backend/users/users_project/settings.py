@@ -29,13 +29,23 @@ SECRET_KEY = 'django-insecure-wjyq3ncl&i@x2ln8=mwab$*21w)nxadc_c=by%ysnn=-383f=m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+LOGIN_REDIRECT_URL = "http://localhost:3000"
+
 ALLOWED_HOSTS = [
+    "events",
+    "users",
     "0.0.0.0",
     ".localhost",
+    "localhost",
+    "http://localhost:3000",
+    "http://localhost:8080",
     "127.0.0.1",
     "[::1]",
     os.environ.get("DEPLOYED_HOST", "localhost"),
 ]
+
+
+AUTH_USER_MODEL = 'users_app.User'  #  where user is the app name and User is the model class name
 
 
 # Application definition
@@ -60,12 +70,14 @@ DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://localhost:8080",
     os.environ.get("CORS_HOST", "http://localhost:3001"),
 ]
 CORS_ALLOW_CREDENTIALS = True
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

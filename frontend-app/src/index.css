@@ -11,3 +11,80 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.picture-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em;
+  padding-bottom: 1em;
+}
+
+.picture-card {
+  background-color: rgba(240, 195, 140, 0.7);
+  border-radius: 4ch;
+  display: flex;
+  align-content: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  height: 20rem;
+  width:26rem ;
+  box-shadow: 0 .2rem 1rem rgba(0,1,0,1);
+   
+}
+
+.small-card {
+  background-color: rgba(255, 182, 93, 0.864);
+  border-radius: 4ch;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  height: 4rem;
+  
+}
+
+.button-font {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.793);
+  background-color: rgb(255, 207, 104);
+  border: 3px solid #bc9100;
+
+}
+
+picture {
+  display: grid; 
+  place-items: center;
+  vertical-align: middle;    
+}
+
+nav {
+  border-radius: 20px 20px 20px 20px ;   
+  margin-top: 3px;
+  margin-left: 7px;
+  margin-right: 7px;
+  box-shadow: 0 .2rem .5rem rgba(0,1,0,.5); 
+ 
+}
+
+.special {
+  padding-top: 5rem;
+}
+
+.profile_circle {
+  border-radius: 100ch;
+  height: 4rem;
+  width:4rem ;
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  
+  border: 3px solid #ffc507e0;
+  }
+
+.special_nav {
+  flex-direction: row-reverse
+}

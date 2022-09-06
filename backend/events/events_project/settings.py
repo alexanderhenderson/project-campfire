@@ -30,6 +30,9 @@ SECRET_KEY = 'django-insecure-ojkhvqy0j4+@q(jh8(m-a7x3(b3&=k9g+-2!&m(4n8rmw52tle
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "events",
+    "users",
+    "react",
     "0.0.0.0",
     ".localhost",
     "127.0.0.1",
@@ -58,8 +61,11 @@ DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=1)
 # Your DEBUG value MUST be False in production
 DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
 
+# CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "events",
     os.environ.get("CORS_HOST", "http://localhost:3001"),
 ]
 CORS_ALLOW_CREDENTIALS = True
@@ -67,9 +73,11 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
