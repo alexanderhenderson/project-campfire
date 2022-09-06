@@ -10,16 +10,15 @@ export async function getTokenInternal() {
   const url = `${process.env.REACT_APP_USERS}/users/api/tokens/mine/`;
   //const url = `${process.env.REACT_APP_USERS}/api/accounts/me/token/`;
   try {
-    console.log("printstop1")
+    
     const response = await fetch(url, {
       credentials: "include",
     });
-    console.log("printstop2")
+    
     if (response.ok) {
-      console.log("printstop3")
+      
       const data = await response.json();
       internalToken = await data.token;
-      console.log("printstop4")
       return internalToken;
     }
   } catch (e) {}
@@ -156,7 +155,7 @@ export function useToken() {
 
 
 function parseJwt(token) {
-  console.log("THIS IS THE TOKEN", token)
+  // console.log("THIS IS THE TOKEN", token)
   try {
     return JSON.parse(atob(token.split('.')[1]));
   } catch (e) {
@@ -164,12 +163,14 @@ function parseJwt(token) {
   }
 };
 
-export async function getUserInfo() {
+// export async function getUserInfo() {
   
-  const parsedToken = await parseJwt( await getTokenInternal())
-  console.log("parsed token", parsedToken)
-  return {
-   "username": parsedToken.user.username,
-   "id": parsedToken.user.id
-  }
-};
+//   const parsedToken = await parseJwt( await getTokenInternal())
+//   // console.log("parsed token", parsedToken)
+//   return {
+//    "username": parsedToken.user.username,
+//    "id": parsedToken.user.id
+//   }
+// };
+
+
