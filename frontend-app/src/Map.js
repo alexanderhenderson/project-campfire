@@ -9,7 +9,7 @@ import {
   ChakraProvider,
   Text,
 } from '@chakra-ui/react'
-import { FaLocationArrow, FaTimes } from 'react-icons/fa'
+import { FaAccessibleIcon, FaAddressCard, FaLocationArrow, FaTimes } from 'react-icons/fa'
 
 import {
   useJsApiLoader,
@@ -40,7 +40,9 @@ function TESTMAP() {
   const [directionsResponse, setDirectionsResponse] = useState(null)
   const [distance, setDistance] = useState('')
   const [duration, setDuration] = useState('')
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState(null)
+  const [markerlatLng, setMarker] = useState({})
+  const [setlat, setLat] = useState('')
 
   /** @type React.MutableRefObject<HTMLInputElement> */
   const originRef = useRef()
@@ -51,6 +53,11 @@ function TESTMAP() {
 
   if (!isLoaded) {
     return <div>Loading...</div>
+  }
+
+  function locationSelect() {
+    // console.log(markerlatLng)
+    console.log(markerlatLng)
   }
 
   async function Geocode() {
@@ -93,6 +100,10 @@ function TESTMAP() {
     destiantionRef.current.value = ''
   }
 
+  function onMarkerDragEnd(coord, index) {
+
+  }
+
   return (
     <ChakraProvider>
     <Flex
@@ -110,7 +121,7 @@ function TESTMAP() {
           mapContainerClassName ="map-container"
           onLoad={map => setMap(map)}
         >
-          {selected && <Marker position={selected} draggable={true}  />}
+          {selected && <Marker position={selected} draggable={true} onDrag={(event) => {setMarker({lat: event.latLng.lat(), lng: event.latLng.lng()})}}/>}
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}
@@ -180,12 +191,19 @@ function TESTMAP() {
               <Input type='text' placeholder='Origin' ref={markerRef} />
             </Autocomplete>
             <Button colorScheme='green' type='submit' onClick={Geocode} >
-            Geocode
+            Search
             </Button>
+            <Text>Lat: {markerlatLng.lat}</Text>
+            <Text>Lat: {markerlatLng.lng}</Text>
             <IconButton
               aria-label='center back'
               icon={<FaTimes />}
               onClick={clearGeocode}
+            />
+            <IconButton
+              aria-label='center back'
+              icon={<FaAccessibleIcon />}
+              onClick={locationSelect}
             />
             <IconButton
             aria-label='center back'
