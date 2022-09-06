@@ -104,7 +104,7 @@ export function useToken() {
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
-      //navigate("/");
+      navigate("/");
     }
   }
 
@@ -121,6 +121,7 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
+      navigate("/User/homepage");
       return;
     }
     let error = await response.json();
@@ -146,6 +147,7 @@ export function useToken() {
     });
     if (response.ok) {
       await login(username, password);
+      navigate("/User/homepage");
     }
     return false;
   }
@@ -167,6 +169,7 @@ export function useToken() {
     });
     if (response.ok) {
       await login(username, password);
+      
     }
     return false;
   }
