@@ -5,7 +5,7 @@ function UserProfile() {
     const [userData, setUserData] = useState({});
     const [error, setError] = useState('');
     const [userId, setUserId] = useState(1)
-  
+
     useEffect(() => {
         const getUserData = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/${userId}/`;
@@ -25,12 +25,12 @@ function UserProfile() {
 
     return (
         <div>
-        <div className="px-5 py-4">
-            <h1>{userData.username}<small></small></h1>
-        </div>
-        <div className="px-5">
-            <h3>{userData.first_name} {userData.last_name}</h3>
-        </div>
+            <div className="px-5 py-4">
+                <h1>{userData.username}<small></small></h1>
+            </div>
+            <div className="px-5">
+                <h3>{userData.first_name} {userData.last_name}</h3>
+            </div>
         </div>
     )
 }

@@ -25,12 +25,12 @@ function App() {
             <Route path="logout" element={<LogOut />} />
             <Route path="signup" element={<Signup />} />
             <Route path="events" element={<EventList />} />
-            <Route path="Events">
+            <Route path="events">
               <Route path="detail" element={<EventDetail />} />
               {/* <Route path="create" element={<CreateEvent />} /> */}
             </Route>
             <Route path="activities" element={<ActivitiesList />} />
-            <Route path="Activities">
+            <Route path="activities">
               {/* <Route path="create" element={<CreateActivity/>} /> */}
             </Route>
           </Routes>
