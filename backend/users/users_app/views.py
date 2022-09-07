@@ -17,7 +17,7 @@ import djwto.authentication as auth
 # Create your views here.
 
 
-# @auth.jwt_login_required
+@auth.jwt_login_required
 @require_http_methods(["GET"])
 def api_user_token(request):
 
@@ -32,6 +32,37 @@ def api_user_token(request):
 class UserListEncoder(ModelEncoder):
     model = User
     properties = ["id", "username", "first_name", "last_name", "email"]
+
+
+# path: http://localhost:8080/users/api/tokens/user/
+@auth.jwt_login_required
+@require_http_methods(["GET"])
+def api_user_info(request):
+
+    # most of the error handling is in the @auth header, an invalid
+    # or manipulated token will be rejected by djwto, so we
+    # just need to worry about returning the correct information,
+
+    if "jwt_access_token" in request.COOKIES:
+
+        # storing payload decoded by DJWTO
+        token_data = request.payload
+
+        # getting user instance stored in token
+        user_id =  token_data['user']['id']
+        user = User.objects.get(id=user_id)
+
+        # JSON Response        
+        if token_data:
+            return JsonResponse(
+                user,
+                encoder=UserDetailEncoder,
+                safe=False
+            )
+            
+    response = JsonResponse({"token": None})
+    return response
+
 
 class ActivityVOEncoder(ModelEncoder):
     model = ActivityVO

@@ -3,14 +3,15 @@ import { useState } from 'react';
 import { useToken } from './Authorization';
 
 
-import { getUserInfo } from './Authorization'; // testing don't leave in imports
+// import { getUserInfo } from './Authorization'; // testing don't leave in imports
 
 export default function LogIn() {
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [token, login] = useToken();
-    const [loginResponse, setLoginResponse] = useState();
+  
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [token, login] = useToken();
+  const [loginResponse, setLoginResponse] = useState();
+  
 
 
 
@@ -23,11 +24,21 @@ export default function LogIn() {
       const result = await login(username, password);
       setLoginResponse(result);
 
-      // ---- Testing -- don't leave stuff below here
+      // ---- Testing -- don't leave stuff below here for final production
       
-      console.log("User array: ", getUserInfo())
-      console.log("Username: ", getUserInfo().username)
-      console.log("User ID: ", getUserInfo().id)
+      const UserInfoRequest = await fetch(`${process.env.REACT_APP_USERS}/users/api/tokens/user/`, {
+        credentials: "include",
+      });
+      console.log(await UserInfoRequest);
+      const data = await UserInfoRequest.json()
+      console.log("User Data: ", await data);
+      console.log("User: ", await data.username);
+      console.log("User ID: ", await data.id);
+     
+
+      // console.log("User array: ", getUserInfo())
+      // console.log("Username: ", getUserInfo().username)
+      // console.log("User ID: ", getUserInfo().id)
 
       // ---- don't leave stuff above here
 
@@ -47,17 +58,25 @@ export default function LogIn() {
             <div className = "card body px-4 py-4">
               <form>
                 <h1> Log in </h1>
-                <div className="form-floating mb-3">
-                  <input type="text" value={username} onChange={e => setUsername(e.target.value)} id="username" className="form-control"/>
+                <div className="form-floating mb-2">
+                  <input type="text"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                  id="username" className="form-control"/>
                   <label htmlFor="username"> Username </label>
                 </div>
-                <div className="form-floating mb-3">
-                  <input type="password" value={password} onChange={e => setPassword(e.target.value)} id="password" className="form-control"/>
+                <div className="form-floating mb-2">
+                  <input type="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  id="password" className="form-control"/>
                   <label htmlFor="password"> Password </label>
                 </div>
-                <button type="button" className="btn btn-success" onClick={onSubmit}>Log in</button>
-              </form>
-              <p className="fs-5" hidden={ (loginResponse !== undefined) ? false : true }> {loginResponse} </p>              
+                <p className="fs-5" hidden={ (loginResponse !== undefined) ? false : true }> 
+                  Incorrect Username or Password
+                </p> 
+                <button type="button" className="btn btn-primary" onClick={onSubmit}>Test User Info Fetch + Log in</button>
+              </form>         
               </div>
           </div>
         </div>

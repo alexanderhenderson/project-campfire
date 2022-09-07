@@ -101,6 +101,8 @@ Thursday 9/1
     getUserInfo function. This might be best to store in a prop but for now we will just use the
     function to call for the user id and name when we need it. 
 
+    Store username and id in auth context
+
     
 
 

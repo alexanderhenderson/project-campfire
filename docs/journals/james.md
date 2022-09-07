@@ -1,3 +1,11 @@
+
+## Friday, Sept 2, 2022
+Didn't have much time to work today, we got held up trying to extract the info from the token and then the mandatory fun event got in the way of really trying to work on our projects.
+
+
+## Thursday, Sept 1, 2022
+Kept on adding front-end components almost finished up the activities selection page.
+
 ## Wednesday, August 31, 2022
 Alex pretty much fixed up the Auth stuff today, 
 I got a nav bar hooked up in react so we could link all of our pages up, kept building on front end implementations and components. 
