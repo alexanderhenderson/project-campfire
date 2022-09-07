@@ -1,7 +1,7 @@
 import {useEffect, useState } from 'react'
 
+
 export async function AddActivities(userid, activity) {
-    
         const url = `${process.env.REACT_APP_USERS}/users/${userid}/`
         const data = {favorite_activities : [activity.id]};
         const fetchConfig = {
@@ -15,8 +15,8 @@ export async function AddActivities(userid, activity) {
         console.log(data)
         
     }
-  
-    
+
+
   
 //     const getActivityData = async () => {
 //         const url = `${process.env.REACT_APP_EVENTS}/events/activities/`;
