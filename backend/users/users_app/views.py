@@ -66,7 +66,7 @@ def list_users(request):
             encoder=UserListEncoder
         )
     else: # POST
-        try:
+        # try:
             # print("request: ", request.body)
             content = json.loads(request.body)
             raw_password = content["password"]
@@ -79,12 +79,12 @@ def list_users(request):
                 {"user": user},
                 encoder=UserDetailEncoder
             )
-        except:
-            response = JsonResponse(
-                {"message": "something went wrong"}
-            )
-            response.status_code = 400
-            return response       
+        # except:
+        #     response = JsonResponse(
+        #         {"message": "something went wrong"}
+        #     )
+        #     response.status_code = 400
+        #     return response       
 
 @require_http_methods(["GET", "PUT", "DELETE"])
 def user_detail(request, pk):
