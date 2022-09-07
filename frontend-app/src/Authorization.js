@@ -10,10 +10,13 @@ export async function getTokenInternal() {
   const url = `${process.env.REACT_APP_USERS}/users/api/tokens/mine/`;
   //const url = `${process.env.REACT_APP_USERS}/api/accounts/me/token/`;
   try {
+    
     const response = await fetch(url, {
       credentials: "include",
     });
+    
     if (response.ok) {
+      
       const data = await response.json();
       internalToken = await data.token;
       return internalToken;
@@ -179,6 +182,7 @@ export function useToken() {
 
 
 function parseJwt(token) {
+  // console.log("THIS IS THE TOKEN", token)
   try {
     return JSON.parse(atob(token.split('.')[1]));
   } catch (e) {

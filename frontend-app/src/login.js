@@ -34,7 +34,7 @@ export default function LogIn() {
       console.log("User Data: ", await data);
       console.log("User: ", await data.username);
       console.log("User ID: ", await data.id);
-    
+     
 
       // console.log("User array: ", getUserInfo())
       // console.log("Username: ", getUserInfo().username)
