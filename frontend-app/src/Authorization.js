@@ -21,7 +21,7 @@ export async function getTokenInternal() {
       internalToken = await data.token;
       return internalToken;
     }
-  } catch (e) {}
+  } catch (e) { }
   return false;
 }
 
@@ -33,7 +33,7 @@ function handleErrorMessage(error) {
       if ("__all__" in error) {
         error = error.__all__;
       }
-    } catch {}
+    } catch { }
   }
   if (Array.isArray(error)) {
     error = error.join("<br>");
@@ -53,9 +53,9 @@ export const AuthContext = createContext({
 
 
 // async function validateToken(){
-  
+
 //   const url = `${process.env.REACT_APP_USERS}https://localhost:8001/validate_access/`;
-    
+
 //   const response = await fetch(url, {
 //     credentials: "include",
 //   });
@@ -66,17 +66,17 @@ export const AuthContext = createContext({
 // };
 
 
-export const AuthProvider = ( props ) => {
+export const AuthProvider = (props) => {
   const [token, setToken] = useState(null);
 
-  if (token){
-  //   const validation = validateToken()
-  //   console.log(validation.json())
+  if (token) {
+    //   const validation = validateToken()
+    //   console.log(validation.json())
     console.log("--Logged In--")
   } else {
     console.log("-- Logged Out --")
   }
-  
+
 
   return (
     <AuthContext.Provider value={{ token, setToken }}>
@@ -91,7 +91,7 @@ export function useToken() {
   const { token, setToken } = useAuthContext();
   const navigate = useNavigate();
 
-  useEffect(() => {    
+  useEffect(() => {
     async function fetchToken() {
       const token = await getTokenInternal();
       setToken(token);
@@ -124,7 +124,7 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
-      navigate("/User/homepage");
+      navigate("/home");
       return;
     }
     let error = await response.json();
@@ -150,7 +150,7 @@ export function useToken() {
     });
     if (response.ok) {
       await login(username, password);
-      navigate("/User/homepage");
+      navigate("/home");
     }
     return false;
   }
@@ -172,7 +172,7 @@ export function useToken() {
     });
     if (response.ok) {
       await login(username, password);
-      
+
     }
     return false;
   }
@@ -190,14 +190,10 @@ function parseJwt(token) {
   }
 };
 
-// export async function getUserInfo() {
-  
-//   const parsedToken = await parseJwt( await getTokenInternal())
-//   // console.log("parsed token", parsedToken)
-//   return {
-//    "username": parsedToken.user.username,
-//    "id": parsedToken.user.id
-//   }
-// };
-
-
+export function getUserInfo() {
+  const parsedToken = parseJwt(getToken())
+  return {
+    "username": parsedToken.user.username,
+    "id": parsedToken.user.id
+  }
+};

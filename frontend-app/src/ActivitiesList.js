@@ -62,6 +62,6 @@ function FetchActivities(){
                 })}
             </div>
         </main>
-      )      
+    );
 }
 export default FetchActivities;
