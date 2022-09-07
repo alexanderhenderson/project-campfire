@@ -92,3 +92,11 @@ nav {
 .special_nav {
   flex-direction: row-reverse
 }
+
+.pointer {
+  cursor: pointer;
+}
+
+.center_card_text{
+  text-align: center;
+}

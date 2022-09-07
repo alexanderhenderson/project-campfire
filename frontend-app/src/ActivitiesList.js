@@ -44,16 +44,16 @@ function FetchActivities(){
             <div className="px-9 text-center display-6 fw-bold " >
                 <h1 className="display-5 fw-bold light_padding">Click to add your favorite Activities!</h1>
             </div>
-            <div className="row">
+            <div className="row ">
                 {activities.filter(act => !userFavesIds.includes(act.id))
                 .map(activity => {
                     return (
                         <div className="col-sm-3" key={activity.id} >
-                            <div  className="card mb-3 shadow"  >
+                            <div  className="card mb-3 shadow pointer"  >
                                 <div onClick={ () => {AddActivities(userData.id, activity)}}>
                                     <img src={activity.picture_url} className="card-img-top" />
                                         <div className="card-body">
-                                            <h5 className="card-title">{activity.name}</h5>
+                                            <h5 className="card-title center_card_text">{activity.name}</h5>
                                         </div>
                                 </div>
                             </div>
