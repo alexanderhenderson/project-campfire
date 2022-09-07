@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react"
 
-function FetchActivities() {
+export default function FetchActivities() {
     const [activities, setActivitiesData] = useState([]);
     const [error, setError] = useState("");
 
@@ -38,5 +37,3 @@ function FetchActivities() {
         </div>
     );
 }
-
-export default FetchActivities;
