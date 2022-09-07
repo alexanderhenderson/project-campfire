@@ -27,7 +27,7 @@ export default function EventCard(props) {
       {limitEvents.map(event => {
         return (
           <div className="col-sm-4" key={event.id}>
-            <div className="card mb-3 shadow h-100">
+            <div className="card mb-3 shadow h-200">
               <img src={event.picture_url} className="card-img-top" />
               <div className="card-body">
                 <h5 className="card-title">{event.name}</h5>

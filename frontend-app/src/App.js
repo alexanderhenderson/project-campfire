@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AuthProvider } from "./Authorization"
 import MainPage from "./MainHomepage"
 import UserHomepage from "./UserHomepage"
-import Nav from './Nav'
+import NavBar from './Nav'
 import UserProfile from './UserProfile'
 import LogIn from './login'
 import LogOut from './logout'
@@ -15,7 +15,7 @@ function App() {
   return (
   <AuthProvider>
     <BrowserRouter>
-        <Nav />
+        <NavBar />
         <div className="container">
           <Routes>
             <Route path="/" element={<MainPage />} />
@@ -25,13 +25,10 @@ function App() {
             <Route path="logout" element={<LogOut />} />
             <Route path="signup" element={<Signup />} />
             <Route path="events" element={<EventList />} />
+            <Route path="activities" element={<ActivitiesList />} />
             <Route path="events">
               <Route path="detail" element={<EventDetail />} />
-              {/* <Route path="create" element={<CreateEvent />} /> */}
-            </Route>
-            <Route path="activities" element={<ActivitiesList />} />
-            <Route path="activities">
-              {/* <Route path="create" element={<CreateActivity/>} /> */}
+              {/* <Route path="new" element={<CreateEvent />} /> */}
             </Route>
           </Routes>
         </div>

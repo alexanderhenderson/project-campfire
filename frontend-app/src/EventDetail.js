@@ -1,59 +1,37 @@
 import { useEffect, useState } from "react"
 
 
-function FetchEvents(){
+function FetchEvent() {
     const [Events, setEventsData] = useState([])
     const [error, setError] = useState("")
 
 
-    useEffect(()=> {
+    useEffect(() => {
         const getEventData = async () => {
-            const url = `${process.env.REACT_APP_EVENTS}/events/`;
-            const response = await fetch(url);
-            if(response.ok){
+            const url = `${process.env.REACT_APP_EVENTS}/events/` // Will need to update this to dynamic url (.../events/1/)
+            const response = await fetch(url)
+            if (response.ok) {
                 const data = await response.json()
-                console.log(data)
+                // console.log(data)
                 setEventsData(data["Events"])
             } else {
                 setError("Could not load the events, try again")
             }
         }
         getEventData()
-    }, [setEventsData,setError])
+    }, [setEventsData, setError])
 
     return (
         <>
-        <h1> { Events[0]?.name || '' }</h1>
-        {<img src={Events[0]?.picture_url} width='400'/>}
-        <p>{ Events[0]?.description || '' }</p>
-        <p>{ Events[0]?.activity.name || ''}</p>
-        <p>{ Events[0]?.start || '' }</p>
-        <p>{ Events[0]?.end || '' }</p>
-        {/* <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-            </tr>
-          </thead> */}
-          {/* <p>
-            {Events.map(Event => {
-                return ( 
-                  <div key={Event.id}>
-                      <img src={Event.picture_url} width='400'/>
-                      <h1>{ Event.name }</h1>
-                      <p>{ Event.description }</p>
-                      <p>{ Event.activity.name }</p>
-                      <p>{ Event.start }</p>
-                      <p>{ Event.end }</p>
-                      {/* <p>{ Event.attendees[0]}</p> */}
-                  {/* </div>
-                );
-            })} */}
-          {/* // </p> */}
-        {/* </table> */}
-
+            <div className='m-3'>
+                <h1 className='display-4'> {Events[0]?.name || ''}</h1>
+                {<img src={Events[0]?.picture_url} className='img-fluid max-width: 100%' />}
+                <p className='lead'> Description: {Events[0]?.description || ''}</p>
+                <p className='lead'> Activity: {Events[0]?.activity.name || ''}</p>
+                <p className='lead'>Date: {new Date(Events[0]?.start).toLocaleString()} - {new Date(Events[0]?.end).toLocaleString()}</p>
+            </div>
         </>
-    )        
+    )
 }
 
-export default FetchEvents
+export default FetchEvent

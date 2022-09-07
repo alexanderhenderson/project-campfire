@@ -1,51 +1,42 @@
-import { useEffect } from "react"
-import { useState } from "react"
+import { useEffect } from "react";
+import { useState } from "react";
 
+function FetchActivities() {
+    const [activities, setActivitiesData] = useState([]);
+    const [error, setError] = useState("");
 
-function FetchActivities(){
-    const [activities, setActivitiesData] = useState([])
-    const [error, setError] = useState("")
-
-
-    useEffect(()=> {
+    useEffect(() => {
         const getActivityData = async () => {
             const url = `${process.env.REACT_APP_EVENTS}/events/activities/`;
             const response = await fetch(url);
-            if(response.ok){
-                const data = await response.json()
-                setActivitiesData(data["Activities"])
+            if (response.ok) {
+                const data = await response.json();
+                setActivitiesData(data["Activities"]);
             } else {
-                setError("Could not load the activities, try again")
+                setError("Could not load the activities, try again");
             }
-        }
-        getActivityData()
-    }, [setActivitiesData,setError])
+        };
+        getActivityData();
+    }, [setActivitiesData, setError]);
 
     return (
-        <main>
+        <div className="m-3">
             <div className="row">
-            {activities.map(activity => {
-                return (
-                    <div className="col-sm-3">
-                    <div className="card mb-3 shadow" key={activity.id}>
-                        <img src={activity.picture_url} className="card-img-top" />
-                        <div className="card-body">
-                            <h5 className="card-title">{activity.name}</h5>
-                            <h6 className="card-subtitle mb-2 text-muted">
-                            {activity.name}
-                            </h6>
-                            {/* <p className="card-text">
-                                Activity Name 
-                            </p> */}
+                {activities.map((activity) => {
+                    return (
+                        <div className="col-sm-3">
+                            <div className="card mb-3 shadow h-100" key={activity.id}>
+                                <img src={activity.picture_url} className="card-img-top" />
+                                <div className="card-body">
+                                    <h5 className="card-title">{activity.name}</h5>
+                                </div>
+                            </div>
                         </div>
-                    
-                        </div>
-                        </div>
-                );
-            })}
+                    );
+                })}
             </div>
-        </main>
-      )      
+        </div>
+    );
 }
 
-export default FetchActivities
+export default FetchActivities;
