@@ -37,16 +37,16 @@ export default function EventList(props) {
       <div className="page-header mt-3 mb-3">
         <h1>Events</h1>
       </div>
-        <div>
-          <input
-            type="search"
-            id="search"
-            className="form-control"
-            placeholder="Search for events"
-            onChange={handleChange}
-            aria-label="Search"
-          />
-        </div>
+      <div>
+        <input
+          type="search"
+          id="search"
+          className="form-control"
+          placeholder="Search for events"
+          onChange={handleChange}
+          aria-label="Search"
+        />
+      </div>
       <div className="row">
         {filteredEvents.map(event => {
           return (
@@ -65,7 +65,7 @@ export default function EventList(props) {
                 <div className="card-footer">
                   {new Date(event.start).toLocaleDateString()}
                   {/* -
-                    {new Date(event.end).toLocaleDateString()} */}
+                        {new Date(event.end).toLocaleDateString()} */}
                 </div>
               </div>
             </div>
