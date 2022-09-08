@@ -12,7 +12,6 @@ export default function FetchActivities() {
   
     useEffect(() => {
         //promise Chain cool!
-
         // const userFetch = fetch (`${process.env.REACT_APP_USERS}/users/api/tokens/user/`, {
         //     credentials: "include",
         //   }).then(response => response.json()).then(data => setUserId(data.id))
