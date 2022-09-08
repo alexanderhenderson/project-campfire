@@ -10,6 +10,7 @@ import EventDetail from './EventDetail';
 import Nav from './Nav';
 import MainHomePage from './MainHomepage';
 import Signup from "./SignUp";
+import MemberMatcher from "./MemberMatcher";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
                 <Route path="signup" element={< Signup />} />
               {/* <Route path="new" element={<CreateAuto/>} /> */}
             </Route>
+            <Route path="matcher" element ={<MemberMatcher/>} />
             <Route path="Events">
               {/* <Route path="create" element={<CreateEvent/>} /> */}
               {/* <Route path="list" element={<EventsList/>} /> */}

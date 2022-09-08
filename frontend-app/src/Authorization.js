@@ -66,14 +66,18 @@ export const AuthContext = createContext({
 export const AuthProvider = ( props ) => {
   const [token, setToken] = useState(null);
 
-  if (token){
-  //   const validation = validateToken()
-  //   console.log(validation.json())
+  // console.log("props: ", props)
+  
+  if (getTokenInternal()){
+    //   const validation = validateToken()
+    //   console.log(validation.json())
     console.log("--Logged In--")
   } else {
     console.log("-- Logged Out --")
   }
   
+  console.log("Token from AuthProvider: ", token)
+  console.log("AuthProvider props.children: ", props)
 
   return (
     <AuthContext.Provider value={{ token, setToken }}>
