@@ -7,6 +7,7 @@ function FetchEvent() {
     const [error, setError] = useState("")
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
+    const [clicked, setClicked] = useState(false)
 
     useEffect(() => {
 
@@ -36,7 +37,7 @@ function FetchEvent() {
        
         getEventData()
         getUserdata()
-    }, [attendeesList])
+    }, [clicked])
 
     return (
         <>
@@ -48,7 +49,10 @@ function FetchEvent() {
                                 <h1 className='display-4 text-center'> {Events?.name || ''} </h1>
                                 {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
                                 <p>
-                                <button onClick={() => { addAttendee(userData.id, Events.id) }} type="button" className="btn btn-outline-warning button-font">Click to Attend</button>
+                                <button onClick={() => { 
+                                    addAttendee(userData.id, Events.id)
+                                    setClicked(!clicked)
+                                 }} type="button" className="btn btn-outline-warning button-font">Click to Attend</button>
                                 </p>
                                 <span className='mt-3'>
                                     <h2 className='display-6'>Description</h2>
