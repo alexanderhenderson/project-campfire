@@ -1,0 +1,29 @@
+stages:
+  - test
+  # - build
+
+services:
+  - postgres:14-bullseye
+
+variables:
+  POSTGRES_PASSWORD: test
+  DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
+
+# events-api-test-job:
+#   image: python:3-bullseye
+#   stage: test
+
+users-api-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd ./backend/users
+    - pip install -r requirements.txt
+    - python manage.py test
+
+lint-python-projects-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 backend

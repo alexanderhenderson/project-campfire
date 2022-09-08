@@ -3,7 +3,7 @@ import json
 from .models import ActivityVO, User
 
 # Create your tests here.
-class UsersAoiTest(TestCase):
+class UsersApiTest(TestCase):
     def setUp(self):
         self.activity = ActivityVO.objects.create(
             name="Test Activity",
