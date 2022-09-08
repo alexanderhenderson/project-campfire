@@ -67,6 +67,7 @@ console.log("user ID" , userData)
                                         {Events?.attendees?.map(attendee => (
                                             <tr key={attendee.id}>
                                                 <td>{attendee.first_name} {attendee.last_name}</td>
+                                                <td>Attendees go here eventually </td>
                                             </tr>
                                         ))}
                                     </tbody>

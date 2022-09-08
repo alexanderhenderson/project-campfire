@@ -97,29 +97,46 @@ def show_event(request, pk):
             )
     elif request.method == "PUT":
         content = json.loads(request.body)
+        event = Event.objects.get(id=pk)
         try:
-            # if content['owner']:
-            #     content['owner'] = UserVO.objects.get(id=content['owner'])
-            # if content['activity']:
-            #     content['activity'] = Activity.objects.get(id=content['activity'])
-            # if content['attendees']:
-            #     content['attendees'] = UserVO.objects.get(id=content['attendees'])
-            Event.objects.filter(id=pk).update(**content)
-            event = Event.objects.get(id=pk)
-        except Event.DoesNotExist:
+            if "activities" in content:
+                activity_id_list = content["activities"]
+                for id in activity_id_list:
+                    activity = Activity.objects.get(id=id)
+                    event.activity.add(activity)
+            if "owners" in content:
+                owner_id_list = content["owners"]
+                for id in owner_id_list:
+                    owner = UserVO.objects.get(id=id)
+                    event.owner.add(owner)
+            if "attendees" in content:
+                attendees_id_list = content["attendees"]
+                for id in attendees_id_list:
+                    attendees = UserVO.objects.get(id=id)
+                    event.attendees.add(attendees)
+            props = ["name", "description", "start", "end", "latitude", "longitude", "picture_url"]
+            for prop in props:
+                if prop in content:
+                    setattr(event, prop, content[prop])
+            event.save()
             return JsonResponse(
-                "Event does not exist",
-                status=400
+                event,
+                encoder=EventEncoder,
+                safe=False,
             )
-        return JsonResponse(
-            {"Event": event},
-            encoder=EventEncoder,
-            safe=False,
-        )
+        
+        except Event.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+            
     elif request.method == "DELETE":
         Event.objects.get(id=pk).delete()
         count, _ = Event.objects.filter(id=pk).delete()
         return JsonResponse({"Deleted": count == 0})
+
+
+    return render(request, 'thispage.html')
 
 @require_http_methods(["GET"])
 def list_users_events(request,pk):
