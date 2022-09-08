@@ -27,6 +27,6 @@ lint-python-projects-job:
   stage: test
   script:
     - pip install flake8
-    - flake8 backend
+    - flake8 ./backend/users
 
   
