@@ -8,6 +8,7 @@ services:
 variables:
   POSTGRES_PASSWORD: test
   DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
+  DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
 
 # events-api-test-job:
 #   image: python:3-bullseye
