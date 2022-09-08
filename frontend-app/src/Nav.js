@@ -49,6 +49,9 @@ function NavBar() {
               <NavDropdown.Item href="/events/">
                 Events
               </NavDropdown.Item>
+              <NavDropdown.Item href="/events/detail">
+                Event Detail 🚧
+              </NavDropdown.Item>
               <NavDropdown.Item href="/activities/">
                 Activities
               </NavDropdown.Item>
@@ -56,14 +59,11 @@ function NavBar() {
                 Groups
               </NavDropdown.Item> */}
               <NavDropdown.Item href="/partnerfinder/">
-                Partner Finder
+                Partner Finder 🚧
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/events/new/">
-                Add Event
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/activities/new/">
-                Add Activity
+                Add Event 🚧
               </NavDropdown.Item>
               {/* <NavDropdown.Item href="/groups/new/">
                 Add Group
