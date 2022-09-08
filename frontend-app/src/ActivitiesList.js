@@ -40,16 +40,16 @@ export default function FetchActivities() {
 
     return (
         <main>
-            <div className="m-3 text-center">
-                <h1 className="lead">Activities List</h1>
-                <h4 className="lead">Click to add to your favorite activities!</h4>
+            <div className="m-3">
+                <h1>Activities</h1>
+                <h4>Click to add to your favorite activities!</h4>
             </div>
             <div className="m-3">
                 <div className="row ">
                     {activities.filter(act => !userFavesIds.includes(act.id))
                         .map(activity => {
                             return (
-                                <div className="col-sm-3" key={activity.id}>
+                                <div className="col-sm-4" key={activity.id}>
                                     <div className="card mb-3 shadow h-100 pointer">
                                         <div onClick={() => { addActivities(userData.id, activity) }}>
                                             <img src={activity.picture_url} className="card-img-top" />
