@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 
 
 export async function addActivities(userid, activity) {
@@ -17,16 +16,3 @@ export async function addActivities(userid, activity) {
 }
 
 
-
-//     const getActivityData = async () => {
-//         const url = `${process.env.REACT_APP_EVENTS}/events/activities/`;
-//         const response = await fetch(url);
-//         if(response.ok){
-//             const data = await response.json()
-//             setActivitiesData(data["Activities"])
-//         } else {
-//             setError("Could not load the activities, try again")
-//         }
-//     }
-//     getActivityData()
-// }, [setActivitiesData,setError])

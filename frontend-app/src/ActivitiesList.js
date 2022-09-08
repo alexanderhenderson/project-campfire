@@ -30,14 +30,13 @@ export default function FetchActivities() {
                 setActivityList(userData.favorite_activities)
             }
         }
-
+        
         getActivityData()
         getUserdata()
 
     }, [activityList])
 
     const userFavesIds = activityList.map(act => act.id)
-
     return (
         <main>
             <div className="m-3">
