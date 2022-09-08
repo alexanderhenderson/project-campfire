@@ -31,14 +31,14 @@ function FetchActivities(){
                 setActivityList(userData.favorite_activities)
             }
         }
-
+        
         getActivityData()
         getUserdata()
         
     }, [activityList])
     
     const userFavesIds = activityList.map(act => act.id)
-   
+  
     return (
         <main>
             <div className="px-9 text-center display-6 fw-bold " >
