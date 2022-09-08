@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react"
 import { addAttendee } from "./Components/AddAttendee"
 
-
-
 function FetchEvent() {
     const [Events, setEventsData] = useState([])
     const [eventId, setEventId] = useState(3)
     const [error, setError] = useState("")
     const [userData, setUserId] = useState("")
-
+    const [attendeesList, setAttendeesList] = useState([])
 
     useEffect(() => {
 
@@ -17,9 +15,10 @@ function FetchEvent() {
             const response = await fetch(url)
             if (response.ok) {
                 const eventData = await response.json()
-                // console.log("events data:", data)
+            
                 setEventsData(eventData["Event"])
-                // console.log(Events)
+                setAttendeesList(eventData.Event.attendees)
+               
             } else {
                 setError("Could not load the events, try again")
             }
@@ -34,13 +33,11 @@ function FetchEvent() {
                 
             }
         }
-
+       
         getEventData()
         getUserdata()
-    }, [])
-console.log("event id", eventId)
-console.log(Events)
-console.log("user ID" , userData)
+    }, [attendeesList])
+
     return (
         <>
             <div className="container px-4 py-4">
@@ -64,12 +61,14 @@ console.log("user ID" , userData)
                                 </span>
                                 <table className="table">
                                     <tbody>
-                                        {Events?.attendees?.map(attendee => (
+                                        {attendeesList.map(attendee => {
+                                            return (
                                             <tr key={attendee.id}>
                                                 <td>{attendee.first_name} {attendee.last_name}</td>
-                                                <td>Attendees go here eventually </td>
                                             </tr>
-                                        ))}
+                                            )
+                                            
+                                        })}
                                     </tbody>
                                 </table>
                             </div>
