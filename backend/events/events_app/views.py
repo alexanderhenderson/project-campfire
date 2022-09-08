@@ -98,10 +98,12 @@ def show_event(request, pk):
     elif request.method == "PUT":
         content = json.loads(request.body)
         try:
-            if content['owner']:
-                content['owner'] = UserVO.objects.get(id=content['owner'])
-            if content['activity']:
-                content['activity'] = Activity.objects.get(id=content['activity'])
+            # if content['owner']:
+            #     content['owner'] = UserVO.objects.get(id=content['owner'])
+            # if content['activity']:
+            #     content['activity'] = Activity.objects.get(id=content['activity'])
+            # if content['attendees']:
+            #     content['attendees'] = UserVO.objects.get(id=content['attendees'])
             Event.objects.filter(id=pk).update(**content)
             event = Event.objects.get(id=pk)
         except Event.DoesNotExist:
