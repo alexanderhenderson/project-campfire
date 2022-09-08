@@ -1,6 +1,6 @@
 stages:
   - test
-  # - build
+  - build
 
 services:
   - postgres:14-bullseye
@@ -29,4 +29,11 @@ lint-python-projects-job:
     - pip install flake8
     - flake8 ./backend/users
 
-  
+# front-end-build-job:
+#   image: node:lts-bullseye
+#   stage: build
+#   needs:
+#     - users-api-test-job
+#     - lint-python-projects-job
+#   script:
+#     - cd front
