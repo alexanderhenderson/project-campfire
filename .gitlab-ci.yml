@@ -1,0 +1,39 @@
+stages:
+  - test
+  - build
+
+services:
+  - postgres:14-bullseye
+
+variables:
+  POSTGRES_PASSWORD: test
+  DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
+  DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
+
+# events-api-test-job:
+#   image: python:3-bullseye
+#   stage: test
+
+users-api-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd ./backend/users
+    - pip install -r requirements.txt
+    - python manage.py test
+
+lint-python-projects-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 ./backend/users
+
+# front-end-build-job:
+#   image: node:lts-bullseye
+#   stage: build
+#   needs:
+#     - users-api-test-job
+#     - lint-python-projects-job
+#   script:
+#     - cd front
