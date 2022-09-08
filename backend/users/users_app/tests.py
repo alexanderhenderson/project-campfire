@@ -2,8 +2,9 @@ from django.test import TestCase
 import json
 from .models import ActivityVO, User
 
+
 # Create your tests here.
-class UsersAoiTest(TestCase):
+class UsersApiTest(TestCase):
     def setUp(self):
         self.activity = ActivityVO.objects.create(
             name="Test Activity",
@@ -15,8 +16,8 @@ class UsersAoiTest(TestCase):
             first_name="Test",
             last_name="friend",
             email="testfriendemail@gmail.com",
-            profile_description="This is a description for the Test Friend mock data",
-            profile_photo="https://woodfibreinsulation.co.uk/wp-content/uploads/2017/04/blank-profile-picture-973460-1-1-300x300.png",
+            profile_description="This is a description",
+            profile_photo="",
             city="Kalamazoo",
             state="MI",
         )
@@ -26,8 +27,8 @@ class UsersAoiTest(TestCase):
             first_name="Test",
             last_name="User",
             email="testemail@gmail.com",
-            profile_description="This is a description for the Test User mock data",
-            profile_photo="https://woodfibreinsulation.co.uk/wp-content/uploads/2017/04/blank-profile-picture-973460-1-1-300x300.png",
+            profile_description="This is a description",
+            profile_photo="",
             city="Kalamazoo",
             state="MI",
         )
@@ -41,7 +42,7 @@ class UsersAoiTest(TestCase):
                 self.assertEqual(user["id"], self.user.id)
             elif user["username"] == self.friend.username:
                 self.assertEqual(user["id"], self.friend.id)
-    
+
     def test_create_user(self):
         data = json.dumps(
             {
@@ -65,7 +66,7 @@ class UsersAoiTest(TestCase):
         data = response.json()
         self.assertEqual(response.status_code, 200)
         self.assertTrue(data["user"]["id"])
-    
+
     def test_get_user_details(self):
         response = self.client.get("/users/2/")
         content = response.json()
@@ -90,11 +91,10 @@ class UsersAoiTest(TestCase):
             if activity["name"] == self.activity.name:
                 self.assertEqual(activity["name"], self.activity.name)
         for friend in data["friends"]:
-                self.assertEqual(friend["username"], self.friend.username)
+            self.assertEqual(friend["username"], self.friend.username)
 
     def test_list_ActivityVO(self):
         response = self.client.get("/users/activities/")
         content = response.json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(content["ActivityVOs"][0]["id"], self.activity.id)
-        
