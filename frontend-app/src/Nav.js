@@ -42,7 +42,7 @@ function NavBar() {
                 <Nav.Link href="/logout">
                   Logout
                 </Nav.Link>
-                <Nav.Link href="/header">
+                <Nav.Link href="/hero">
                   New Home(Test) 🚧
                 </Nav.Link>
                 <NavDropdown

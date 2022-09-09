@@ -1,4 +1,4 @@
-export default function Header() {
+export default function Hero() {
   return (
     <div style={{
       // backgroundImage: `url()`,

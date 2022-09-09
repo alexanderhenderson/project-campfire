@@ -10,7 +10,7 @@ import Signup from "./SignUp"
 import EventList from './EventPage'
 import ActivitiesList from './ActivitiesList'
 import EventDetail from './EventDetail'
-import Headers from "./Components/Header"
+import Hero from "./Components/Hero"
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
             <Route path="signup" element={<Signup />} />
             <Route path="events" element={<EventList />} />
             <Route path="activities" element={<ActivitiesList />} />
-            <Route path="header" element={<Headers />} />
+            <Route path="hero" element={<Hero />} />
             <Route path="events">
               <Route path=":id/" element={<EventDetail />}/>
               <Route path="detail" element={<EventDetail />} />
