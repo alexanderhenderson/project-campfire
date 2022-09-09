@@ -10,6 +10,7 @@ class ActivityVO(models.Model):
     def __str__(self):
         return self.name
 
+
 class User(AbstractUser):
     friends = models.ManyToManyField("self", blank=True)
     profile_description = models.TextField(null=True, blank=True)
