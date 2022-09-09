@@ -8,7 +8,7 @@ export default function EventList(props) {
 
   useEffect(() => {
     const requestEvents = async () => {
-      const url = `${process.env.REACT_APP_EVENTS}/events/`;
+      const url = `${process.env.REACT_APP_EVENTS}/events/`
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json()
@@ -52,7 +52,7 @@ export default function EventList(props) {
           return (
             <div className="col-sm-4 mt-3 mb-3" key={event.id}>
               <div className="card mb-3 shadow h-100">
-                <img src={event.picture_url} className="card-img-top" />
+                <a href={`${process.env.REACT_APP_EVENTS}/events/${event.id}`}><img src={event.picture_url} className="card-img-top" /></a>
                 <div className="card-body">
                   <h5 className="card-title">{event.name}</h5>
                   <h6 className="card-subtitle mb-2 text-muted">

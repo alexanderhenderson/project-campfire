@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react"
 import { addAttendee } from "./Components/AddAttendee"
+import { useParams } from 'react-router-dom'
 
 function FetchEvent() {
     const [Events, setEventsData] = useState([])
-    const [eventId, setEventId] = useState(1)
+    const [eventId, setEventId] = useState(2)
     const [error, setError] = useState("")
+
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
     const [clicked, setClicked] = useState(false)
+
+    const {handle} = useParams()
 
     useEffect(() => {
 
@@ -38,6 +42,7 @@ function FetchEvent() {
         getEventData()
         getUserdata()
     }, [clicked])
+    console.log(handle)
 
     return (
         <>
@@ -48,12 +53,12 @@ function FetchEvent() {
                         <div className="card shadow">
                             <div className="card body px-4 py-4">
                                 <h1 className='display-4 text-center'> {Events?.name || ''} </h1>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="col">
                                             {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
                                         </div>
-                                        <div class="col">
+                                        <div className="col">
                                             <span className='mt-3'>
                                                 <h2 className='display-6'>Description</h2>
                                                 <p className='lead text-left'>{Events?.description || ''}</p>

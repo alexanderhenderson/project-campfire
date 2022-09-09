@@ -3,7 +3,7 @@ import EventCard from "./Components/EventCard"
 import { useNavigate, Link } from "react-router-dom"
 
 
-function MainPage() {
+export default function MainPage() {
   const nagivate = useNavigate()
 
   return (
@@ -14,11 +14,10 @@ function MainPage() {
       <div className="px-4 py-5 my-5 text-center mb-3">
         <h2>Gather around the campfire with new friends</h2>
         <div className='m-3'>
-        <Link to="signup">
-          <button type="button" className="btn btn-primary btn-lg btn-block">Register</button>
-        </Link>
+          <Link to="signup">
+            <button type="button" className="btn btn-primary btn-lg btn-block">Register</button>
+          </Link>
         </div>
-        
         <div className="d-flex justify-content-center">
           <img src="/cf4.jpeg" height='280' className="rounded" />
           <p>&nbsp;&nbsp;&nbsp;</p>
@@ -32,7 +31,5 @@ function MainPage() {
         <EventCard />
       </div>
     </>
-  );
+  )
 }
-
-export default MainPage;

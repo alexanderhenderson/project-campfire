@@ -1,5 +1,3 @@
-
-
 export async function addAttendee(userData, eventid) {
         const url = `${process.env.REACT_APP_EVENTS}/events/${eventid}/`
         const data = { attendees: [userData] };
