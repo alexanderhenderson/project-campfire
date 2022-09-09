@@ -6,31 +6,34 @@ from .models import Event, Activity, UserVO
 
 class EventsApiTest(TestCase):
     def setUp(self):
-      self.Event = Event.objects.create(
-        id = 1
-        name = 'Party'
-        profile_description = 'profile description',
-        city = 'san francisco'
-        state = 'CA'
-        date_joined =
-      )
 
-      self.friend = UserVO.object.create(
+      self.owner = UserVO.objects.create(
         id=2,
         username="TestUser",
         first_name="Test",
         last_name="User",
         email="testemail@gmail.com",
-        profile_description="This is a description for the Test User mock data",
-        profile_photo="https://woodfibreinsulation.co.uk/wp-content/uploads/2017/04/blank-profile-picture-973460-1-1-300x300.png",
-        city="Kalamazoo",
-        state="MI",
       )
+
+      self.activity = Event.objects.create(
+        id = 1,
+        name = 'hiking',
+      )
+
+      self.Event = Event.objects.create(
+        id = 1,
+        name = 'Party',
+        description = 'Party all day',
+        activity = self.activity,
+        start = '2022-12-25T23:51:41+00:00',
+        end = '2022-12-25T23:51:41+00:00',
+        latitude = 1,
+        longitude = 1,
+        picture_url = 'https://media.cntraveler.com/photos/5bbba8ee8955df3d4555222b/master/pass/Alpine-Lakes-Wilderness-Area_Snow-Lake-Washington_GettyImages-556448227.jpg',
+        owner = self.owner,
+      )
+
     
-      self.favorite_activities = Event.object.create(
-        id = 1
-        name = 'hiking'
-      )
       
     
     def test_events_list(self):

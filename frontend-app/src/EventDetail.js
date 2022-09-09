@@ -47,12 +47,11 @@ function FetchEvent() {
                         <div className="card shadow">
                             <div className="card body px-4 py-4">
                                 <h1 className='display-4 text-center'> {Events?.name || ''} </h1>
-                                {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
                                 <p>
                                     <button onClick={() => {
                                         addAttendee(userData.id, Events.id)
                                         setClicked(!clicked)
-                                    }} type="button" className="btn btn-outline-warning button-font">Click to Attend</button>
+                                    }} type="button" className="btn btn-primary">Click to Attend</button>
                                 </p>
                                 {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
                                 <span className='mt-3'>
