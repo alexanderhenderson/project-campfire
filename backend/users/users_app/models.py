@@ -9,6 +9,9 @@ class ActivityVO(models.Model):
     name = models.CharField(max_length=300)
     id = models.IntegerField(primary_key=True)
 
+    def __str__(self):
+        return self.name
+
 class User(AbstractUser):
     # name = models.CharField(max_length=100)
     friends = models.ManyToManyField("self", blank=True)
