@@ -3,7 +3,7 @@ import { addAttendee } from "./Components/AddAttendee"
 
 function FetchEvent() {
     const [Events, setEventsData] = useState([])
-    const [eventId, setEventId] = useState(0)
+    const [eventId, setEventId] = useState(1)
     const [error, setError] = useState("")
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
@@ -19,10 +19,10 @@ function FetchEvent() {
             const response = await fetch(url)
             if (response.ok) {
                 const eventData = await response.json()
-            
+
                 setEventsData(eventData["Event"])
                 setAttendeesList(eventData.Event.attendees)
-               
+
             } else {
                 setError("Could not load the events, try again")
                 console.log(error)
@@ -35,10 +35,10 @@ function FetchEvent() {
             if (response.ok) {
                 const userData = await response.json()
                 setUserId(userData)
-                
+
             }
         }
-       
+
         getEventData()
         getUserdata()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,13 +52,13 @@ function FetchEvent() {
                         <div className="card shadow">
                             <div className="card body px-4 py-4">
                                 <h1 className='display-4 text-center'> {Events?.name || ''} </h1>
-                                {<img src={Events?.picture_url} className='img-fluid max-width: 100%' alt="" />}
                                 <p>
-                                <button onClick={() => { 
-                                    addAttendee(userData.id, Events.id)
-                                    setClicked(!clicked)
-                                 }} type="button" className="btn btn-outline-warning button-font">Click to Attend</button>
+                                    <button onClick={() => {
+                                        addAttendee(userData.id, Events.id)
+                                        setClicked(!clicked)
+                                    }} type="button" className="btn btn-primary">Click to Attend</button>
                                 </p>
+                                {<img src={Events?.picture_url} className='img-fluid max-width: 100%' alt="" />}
                                 <span className='mt-3'>
                                     <h2 className='display-6'>Description</h2>
                                     <p className='lead text-left'>{Events?.description || ''}</p>
@@ -72,11 +72,11 @@ function FetchEvent() {
                                     <tbody>
                                         {attendeesList.map(attendee => {
                                             return (
-                                            <tr key={attendee.id}>
-                                                <td>{attendee.first_name} {attendee.last_name}</td>
-                                            </tr>
+                                                <tr key={attendee.id}>
+                                                    <td>{attendee.first_name} {attendee.last_name}</td>
+                                                </tr>
                                             )
-                                            
+
                                         })}
                                     </tbody>
                                 </table>
