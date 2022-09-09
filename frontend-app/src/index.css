@@ -100,3 +100,7 @@ nav {
 .center_card_text{
   text-align: center;
 }
+
+.padding_bottom{
+padding-bottom: 1rem;
+}

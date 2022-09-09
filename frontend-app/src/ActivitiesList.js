@@ -8,9 +8,6 @@ export default function FetchActivities() {
     const [activityList, setActivityList] = useState([])
     const [search, setSearch] = useState('')
     const [filteredActivities, setFilteredActivities] = useState([])
-    const [clicked, setClicked] = useState(false)
-
-    
 
     useEffect(() => {
         //promise Chain cool!
@@ -27,7 +24,6 @@ export default function FetchActivities() {
                 
             }
         }
-        
         const getUserdata = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
             const response = await fetch(url, { credentials: "include" });
@@ -37,11 +33,15 @@ export default function FetchActivities() {
                 setActivityList(userData.favorite_activities)
             }
         }
-        
-        getActivityData()
         getUserdata()
+        getActivityData()
         
-    },[clicked] )
+    },[])
+    
+    function clickHandler(event, activity){
+        addActivities(userData.id, activity)
+        setActivityList([...activityList, activity])
+    }
 
     function searchFilter() {
         const searchedActivities = activities.filter(activity => activity.name.toLowerCase().includes(search.toLowerCase()))
@@ -79,12 +79,10 @@ export default function FetchActivities() {
                     {activityState.filter(act => !userFavesIds.includes(act.id))
                         .map(activity => {
                             return (
-                                <div className="col-sm-4" key={activity.id}>
-                                    <div className="card mb-3 shadow h-100 pointer">
-                                        <div onClick={() => {
-                                            setClicked(!clicked)
-                                            addActivities(userData.id, activity)
-                                            
+                                <div className="col-sm-4 padding_bottom" key={activity.id}>
+                                    <div className="card mb-3 shadow h-100 pointer ">
+                                        <div onClick={ (e) => {
+                                            clickHandler(e,activity)
                                              }}>
                                             <img src={activity.picture_url} className="card-img-top" />
                                             <div className="card-body">
