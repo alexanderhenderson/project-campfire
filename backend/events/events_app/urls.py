@@ -1,5 +1,12 @@
-from django.urls import path, include
-from .views import list_all_events, list_users_events, show_event, list_all_activities, show_activity, list_all_uservos
+from django.urls import path
+from .views import (
+    list_all_events,
+    list_users_events,
+    show_event,
+    list_all_activities,
+    show_activity,
+    list_all_uservos,
+)
 
 
 urlpatterns = [

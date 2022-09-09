@@ -17,6 +17,7 @@ class UserVOEncoder(ModelEncoder):
         "email"
     ]
 
+
 class ActivityEncoder(ModelEncoder):
     model = Activity
     properties = [
@@ -24,6 +25,7 @@ class ActivityEncoder(ModelEncoder):
         "name",
         "picture_url"
     ]
+
 
 class EventEncoder(ModelEncoder):
     model = Event
@@ -46,6 +48,7 @@ class EventEncoder(ModelEncoder):
         "attendees": UserVOEncoder()
     }
 
+
 # # Create your views here.
 @require_http_methods(["GET"])
 def list_all_uservos(request):
@@ -59,6 +62,7 @@ def list_all_uservos(request):
             encoder=UserVOEncoder,
             safe=False,
         )
+
 
 @require_http_methods(["GET", "POST"])
 def list_all_events(request):
@@ -80,6 +84,7 @@ def list_all_events(request):
             safe=False,
         )
 
+
 @require_http_methods(["GET", "PUT", "DELETE"])
 def show_event(request, pk):
     if request.method == "GET":
@@ -92,8 +97,8 @@ def show_event(request, pk):
             )
         except Event.DoesNotExist:
             return JsonResponse(
-            "Event does not exist.",
-            status=400
+                "Event does not exist.",
+                status=400
             )
     elif request.method == "PUT":
         content = json.loads(request.body)
@@ -114,7 +119,15 @@ def show_event(request, pk):
                 for id in attendees_id_list:
                     attendees = UserVO.objects.get(id=id)
                     event.attendees.add(attendees)
-            props = ["name", "description", "start", "end", "latitude", "longitude", "picture_url"]
+            props = [
+                "name",
+                "description",
+                "start",
+                "end",
+                "latitude",
+                "longitude",
+                "picture_url"
+            ]
             for prop in props:
                 if prop in content:
                     setattr(event, prop, content[prop])
@@ -124,22 +137,22 @@ def show_event(request, pk):
                 encoder=EventEncoder,
                 safe=False,
             )
-        
+
         except Event.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response
-            
+
     elif request.method == "DELETE":
         Event.objects.get(id=pk).delete()
         count, _ = Event.objects.filter(id=pk).delete()
         return JsonResponse({"Deleted": count == 0})
 
-
     return render(request, 'thispage.html')
 
+
 @require_http_methods(["GET"])
-def list_users_events(request,pk):
+def list_users_events(request, pk):
     if request.method == "GET":
         logged_in_user = UserVO.objects.filter(id=pk)
         events = Event.objects.all()
@@ -152,6 +165,7 @@ def list_users_events(request,pk):
             encoder=EventEncoder,
             safe=False,
         )
+
 
 @require_http_methods(["GET", "POST"])
 def list_all_activities(request):
@@ -171,6 +185,7 @@ def list_all_activities(request):
             safe=False,
         )
 
+
 @require_http_methods(["GET", "PUT", "DELETE"])
 def show_activity(request, pk):
     if request.method == "GET":
@@ -185,7 +200,7 @@ def show_activity(request, pk):
             return JsonResponse(
                 "Activity does not exist.",
                 status=400
-                )
+            )
     elif request.method == "PUT":
         content = json.loads(request.body)
         try:
@@ -205,4 +220,3 @@ def show_activity(request, pk):
         Activity.objects.get(id=pk).delete()
         count, _ = Activity.objects.filter(id=pk).delete()
         return JsonResponse({"Deleted": count == 0})
-

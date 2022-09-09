@@ -3,11 +3,14 @@ import { addAttendee } from "./Components/AddAttendee"
 
 function FetchEvent() {
     const [Events, setEventsData] = useState([])
-    const [eventId, setEventId] = useState(3)
+    const [eventId, setEventId] = useState(0)
     const [error, setError] = useState("")
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
     const [clicked, setClicked] = useState(false)
+
+    // need to do this automatically somehow 
+    setEventId(3)
 
     useEffect(() => {
 
@@ -22,6 +25,7 @@ function FetchEvent() {
                
             } else {
                 setError("Could not load the events, try again")
+                console.log(error)
             }
         }
 
@@ -37,6 +41,7 @@ function FetchEvent() {
        
         getEventData()
         getUserdata()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [clicked])
 
     return (
@@ -47,7 +52,7 @@ function FetchEvent() {
                         <div className="card shadow">
                             <div className="card body px-4 py-4">
                                 <h1 className='display-4 text-center'> {Events?.name || ''} </h1>
-                                {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
+                                {<img src={Events?.picture_url} className='img-fluid max-width: 100%' alt="" />}
                                 <p>
                                 <button onClick={() => { 
                                     addAttendee(userData.id, Events.id)

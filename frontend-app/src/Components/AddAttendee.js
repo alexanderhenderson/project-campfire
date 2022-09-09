@@ -12,4 +12,5 @@ export async function addAttendee(userData, eventid) {
             },
     }
     const response = await fetch(url, fetchConfig);
+    console.log(response)
 }

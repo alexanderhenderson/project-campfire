@@ -15,6 +15,7 @@ django.setup()
 # the below import works once the program is running
 from events_app.models import UserVO
 
+
 def get_users():
 
     # print("We are in the polling function")
@@ -25,14 +26,13 @@ def get_users():
     for user in content["users"]:
         # print("user: ", user)
         UserVO.objects.update_or_create(
-            id = user['id'],
-            defaults = {
-            "username": user['username'],
-            "email": user['email'],
-            "first_name": user['first_name'],
-            "last_name": user['last_name']
+            id=user['id'],
+            defaults={
+                "username": user['username'],
+                "email": user['email'],
+                "first_name": user['first_name'],
+                "last_name": user['last_name']
             }
-            
         )
 
 

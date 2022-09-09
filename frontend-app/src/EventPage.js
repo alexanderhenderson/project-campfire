@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import React, { useState, useEffect, useRef } from 'react'
 
 export default function EventList(props) {
@@ -21,13 +20,14 @@ export default function EventList(props) {
     }
     requestEvents()
   }, [])
-
+  
   function searchFilter() {
     const searchedEvents = events.current.filter(event => event.name.toLowerCase().includes(search.toLowerCase()))
     setFilteredEvents(searchedEvents)
   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { searchFilter() }, [search])
-
+  
   function handleChange(event) {
     setSearch(event.target.value)
   }
@@ -52,7 +52,7 @@ export default function EventList(props) {
           return (
             <div className="col-sm-4 mt-3 mb-3" key={event.id}>
               <div className="card mb-3 shadow h-100">
-                <img src={event.picture_url} className="card-img-top" />
+                <img src={event.picture_url} className="card-img-top" alt=""/>
                 <div className="card-body">
                   <h5 className="card-title">{event.name}</h5>
                   <h6 className="card-subtitle mb-2 text-muted">

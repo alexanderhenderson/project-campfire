@@ -4,7 +4,10 @@ import { useEffect, useState } from "react"
 function UserProfile() {
     const [userData, setUserData] = useState({})
     const [error, setError] = useState('')
-    const [userId, setUserId] = useState(6)
+    const [userId, setUserId] = useState(0)
+
+    // have to do this automatically somehow
+    setUserId(6)
 
     useEffect(() => {
         const getUserData = async () => {
@@ -17,9 +20,11 @@ function UserProfile() {
                 setUserData(data);
             } else {
                 setError('Could not load users');
+                console.log(error)
             }
         }
         getUserData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setUserData, setError])
     console.log(userData)
 
@@ -30,7 +35,6 @@ function UserProfile() {
                     <div className="col">
                         <div className="card shadow">
                             <div className="card body px-4 py-4">
-                                <h1 className='display-4 text-center'></h1>
                                 <h1>{userData.username}<small></small></h1>
                             </div>
                             <div className="px-5">
