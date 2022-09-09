@@ -1,10 +1,9 @@
 import React from "react"
 import EventCard from "./Components/EventCard"
-import { useNavigate, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 function MainPage() {
-  const nagivate = useNavigate()
 
   return (
     <>
@@ -20,11 +19,11 @@ function MainPage() {
         </div>
         
         <div className="d-flex justify-content-center">
-          <img src="/cf4.jpeg" height='280' className="rounded" />
+          <img src="/cf4.jpeg" height='280' className="rounded" alt="" />
           <p>&nbsp;&nbsp;&nbsp;</p>
-          <img src="/cf3.jpeg" height='280' className="rounded" />
+          <img src="/cf3.jpeg" height='280' className="rounded" alt="" />
           <p>&nbsp;&nbsp;&nbsp;</p>
-          <img src="/cf5.jpeg" height='280' className="rounded" />
+          <img src="/cf5.jpeg" height='280' className="rounded" alt="" />
         </div>
       </div>
       <div className="px-4 py-5 my-5 text-center mb-3">

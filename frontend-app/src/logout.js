@@ -4,8 +4,9 @@ import { useToken } from './Authorization';
 
 
 export default function LogOut() {
-
+    // eslint-disable-next-line no-unused-vars
     const [token, login, logout] = useToken();
+    // eslint-disable-next-line no-unused-vars
     const [logoutResponse, setLogoutResponse] = useState();
 
     async function onSubmit(){
