@@ -27,7 +27,7 @@ function App() {
             <Route path="events" element={<EventList />} />
             <Route path="activities" element={<ActivitiesList />} />
             <Route path="events">
-              <Route path="detail" element={<EventDetail />} />
+              <Route path=":dynamicId" element={<EventDetail />} />
               {/* <Route path="new" element={<CreateEvent />} /> */}
             </Route>
           </Routes>

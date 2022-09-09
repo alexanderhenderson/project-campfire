@@ -1,10 +1,12 @@
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import React, { useState, useEffect, useRef } from 'react'
 
 export default function EventList(props) {
   const events = useRef([])
   const [filteredEvents, setFilteredEvents] = useState([])
   const [search, setSearch] = useState('')
+  const navigate = useNavigate();
+  
 
   useEffect(() => {
     const requestEvents = async () => {
@@ -14,7 +16,7 @@ export default function EventList(props) {
         const data = await response.json()
         events.current = data.Events
         setFilteredEvents(events.current)
-        console.log('Events after setEvents is called: ', data.Events)
+        
       } else {
         console.log("Could not load the events, try again")
       }
@@ -51,7 +53,10 @@ export default function EventList(props) {
         {filteredEvents.map(event => {
           return (
             <div className="col-sm-4 mt-3 mb-3" key={event.id}>
-              <div className="card mb-3 shadow h-100">
+              <div className="card mb-3 shadow h-100"
+              onClick={() => {
+                navigate(`/events/${event.id}/`)
+                 }}>
                 <img src={event.picture_url} className="card-img-top" />
                 <div className="card-body">
                   <h5 className="card-title">{event.name}</h5>
@@ -62,6 +67,7 @@ export default function EventList(props) {
                     {event.description}
                   </p>
                 </div>
+              
                 <div className="card-footer">
                   {new Date(event.start).toLocaleDateString()}
                   {/* -

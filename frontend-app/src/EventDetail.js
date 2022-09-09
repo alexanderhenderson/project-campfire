@@ -1,24 +1,28 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import { addAttendee } from "./Components/AddAttendee"
 
 function FetchEvent() {
     const [Events, setEventsData] = useState([])
-    const [eventId, setEventId] = useState(3)
     const [error, setError] = useState("")
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
     const [clicked, setClicked] = useState(false)
+    const {dynamicId} = useParams()
+
 
     useEffect(() => {
 
         const getEventData = async () => {
-            const url = `${process.env.REACT_APP_EVENTS}/events/${eventId}`
+            const url = `${process.env.REACT_APP_EVENTS}/events/${dynamicId}`
             const response = await fetch(url)
             if (response.ok) {
                 const eventData = await response.json()
             
                 setEventsData(eventData["Event"])
                 setAttendeesList(eventData.Event.attendees)
+                
+                console.log(eventData)
                
             } else {
                 setError("Could not load the events, try again")
@@ -34,7 +38,7 @@ function FetchEvent() {
                 
             }
         }
-       
+
         getEventData()
         getUserdata()
     }, [clicked])
@@ -50,8 +54,9 @@ function FetchEvent() {
                                 {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
                                 <p>
                                 <button onClick={() => { 
-                                    addAttendee(userData.id, Events.id)
                                     setClicked(!clicked)
+                                    addAttendee(userData.id, dynamicId)
+                                    
                                  }} type="button" className="btn btn-outline-warning button-font">Click to Attend</button>
                                 </p>
                                 <span className='mt-3'>

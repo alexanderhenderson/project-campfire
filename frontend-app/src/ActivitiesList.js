@@ -9,7 +9,9 @@ export default function FetchActivities() {
     const [search, setSearch] = useState('')
     const [filteredActivities, setFilteredActivities] = useState([])
     const [clicked, setClicked] = useState(false)
-  
+
+    
+
     useEffect(() => {
         //promise Chain cool!
         // const userFetch = fetch (`${process.env.REACT_APP_USERS}/users/api/tokens/user/`, {
@@ -80,8 +82,9 @@ export default function FetchActivities() {
                                 <div className="col-sm-4" key={activity.id}>
                                     <div className="card mb-3 shadow h-100 pointer">
                                         <div onClick={() => {
-                                            addActivities(userData.id, activity)
                                             setClicked(!clicked)
+                                            addActivities(userData.id, activity)
+                                            
                                              }}>
                                             <img src={activity.picture_url} className="card-img-top" />
                                             <div className="card-body">
