@@ -53,7 +53,7 @@ export default function EventList(props) {
         {filteredEvents.map(event => {
           return (
             <div className="col-sm-4 mt-3 mb-3" key={event.id}>
-              <div className="card mb-3 shadow h-100"
+              <div className="card mb-3 shadow h-100 pointer"
               onClick={() => {
                 navigate(`/events/${event.id}/`)
                  }}>
