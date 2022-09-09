@@ -22,7 +22,7 @@ export default function UserProfile() {
     return (
         <>
 
-            <div className="container px-4 py-4">
+            <div className="container p-4">
                 <div className="col">
                     <div className="card shadow">
                         <div className="container m-3">
