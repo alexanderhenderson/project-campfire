@@ -1,33 +1,36 @@
 import { useEffect, useState } from "react"
 import { addAttendee } from "./Components/AddAttendee"
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
+
 
 function FetchEvent() {
     const [Events, setEventsData] = useState([])
-    const [eventId, setEventId] = useState(2)
+    const [eventId, setEventId] = useState(null)
     const [error, setError] = useState("")
 
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
     const [clicked, setClicked] = useState(false)
 
-    const {handle} = useParams()
-
+    const { state } = useLocation()
+    
     useEffect(() => {
-
         const getEventData = async () => {
+
+            setEventId(state)
             const url = `${process.env.REACT_APP_EVENTS}/events/${eventId}`
+            if (eventId !== null) {
             const response = await fetch(url)
             if (response.ok) {
                 const eventData = await response.json()
-
+                
                 setEventsData(eventData["Event"])
                 setAttendeesList(eventData.Event.attendees)
 
             } else {
                 setError("Could not load the events, try again")
             }
-        }
+        }}
 
         const getUserdata = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
@@ -41,8 +44,8 @@ function FetchEvent() {
 
         getEventData()
         getUserdata()
-    }, [clicked])
-    console.log(handle)
+    }, [clicked, state, eventId])
+    // console.log(handle)
 
     return (
         <>

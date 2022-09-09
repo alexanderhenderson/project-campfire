@@ -29,7 +29,7 @@ function App() {
             <Route path="activities" element={<ActivitiesList />} />
             <Route path="hero" element={<Hero />} />
             <Route path="events">
-              <Route path=":id/" element={<EventDetail />}/>
+              <Route path=":id" element={<EventDetail />}/>
               <Route path="detail" element={<EventDetail />} />
               {/* <Route path="new" element={<CreateEvent />} /> */}
             </Route>
