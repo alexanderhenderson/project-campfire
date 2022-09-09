@@ -27,7 +27,7 @@ export default function UserProfile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setUserData, setError])
     console.log(userData)
-    
+
     return (
         <>
 
@@ -42,7 +42,7 @@ export default function UserProfile() {
                                     </div>
                                     <div className="col">
                                         <div className='mb-5'>
-                                            <img src={userData.profile_photo} height='200' />
+                                            <img src={userData.profile_photo} height='200' alt="" />
                                         </div>
                                         <div className='m-2'>
                                             <h4>Name: </h4>
