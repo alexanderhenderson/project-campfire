@@ -7,9 +7,7 @@ function FetchEvent() {
     const [error, setError] = useState("")
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
-    const [clicked, setClicked] = useState(false)
     const {dynamicId} = useParams()
-
 
     useEffect(() => {
 
@@ -38,11 +36,14 @@ function FetchEvent() {
                 
             }
         }
-
         getEventData()
         getUserdata()
-    }, [clicked])
-
+    }, [])
+    
+    function clickHandler(){
+        addAttendee(userData.id, dynamicId)
+        setAttendeesList([...attendeesList, userData])
+    }
     return (
         <>
             <div className="container px-4 py-4">
@@ -54,9 +55,7 @@ function FetchEvent() {
                                 {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
                                 <p>
                                 <button onClick={() => { 
-                                    setClicked(!clicked)
-                                    addAttendee(userData.id, dynamicId)
-                                    
+                                    clickHandler()    
                                  }} type="button" className="btn btn-outline-warning button-font">Click to Attend</button>
                                 </p>
                                 <span className='mt-3'>
