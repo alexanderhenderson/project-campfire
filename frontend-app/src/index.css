@@ -100,3 +100,20 @@ nav {
 .center_card_text{
   text-align: center;
 }
+
+.hero_container {
+  z-index: -1;
+}
+
+.hero {
+  background-image: url("../public/dock.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
