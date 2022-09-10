@@ -12,6 +12,4 @@ export async function addAttendee(userData, dynamicId) {
             },
     }
     const response = await fetch(url, fetchConfig);
-    
-
 }
