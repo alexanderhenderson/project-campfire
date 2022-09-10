@@ -99,22 +99,18 @@ def show_event(request, pk):
         content = json.loads(request.body)
         event = Event.objects.get(id=pk)
         try:
-            if "activities" in content:
-                activity_id_list = content["activities"]
-                for id in activity_id_list:
-                    activity = Activity.objects.get(id=id)
-                    event.activity.add(activity)
-            if "owners" in content:
-                owner_id_list = content["owners"]
-                for id in owner_id_list:
-                    owner = UserVO.objects.get(id=id)
-                    event.owner.add(owner)
+            if "activity" in content:
+                activity = Activity.objects.get(id=content['activity'])
+                content['activity'] = activity
+            if "owner" in content:
+                owner = UserVO.objects.get(id=content['owner'])
+                content['owner'] = owner
             if "attendees" in content:
                 attendees_id_list = content["attendees"]
                 for id in attendees_id_list:
                     attendees = UserVO.objects.get(id=id)
                     event.attendees.add(attendees)
-            props = ["name", "description", "start", "end", "latitude", "longitude", "picture_url"]
+            props = ["name", "activity","owner", "description", "start", "end", "latitude", "longitude", "picture_url"]
             for prop in props:
                 if prop in content:
                     setattr(event, prop, content[prop])

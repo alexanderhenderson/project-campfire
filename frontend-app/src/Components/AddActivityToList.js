@@ -11,8 +11,7 @@ export async function addActivities(userid, activity) {
                 },
         }
         const response = await fetch(url, fetchConfig);
-        console.log(data)
-
+        
 }
 
 
