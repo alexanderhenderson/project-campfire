@@ -8,15 +8,14 @@ function FetchEvent() {
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
     const {dynamicId} = useParams()
-
+    
     useEffect(() => {
-
         const getEventData = async () => {
             const url = `${process.env.REACT_APP_EVENTS}/events/${dynamicId}`
             const response = await fetch(url)
             if (response.ok) {
                 const eventData = await response.json()
-            
+                
                 setEventsData(eventData["Event"])
                 setAttendeesList(eventData.Event.attendees)
                 
@@ -26,6 +25,7 @@ function FetchEvent() {
                 setError("Could not load the events, try again")
             }
         }
+    
 
         const getUserdata = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
@@ -33,7 +33,7 @@ function FetchEvent() {
             if (response.ok) {
                 const userData = await response.json()
                 setUserId(userData)
-                
+
             }
         }
         getEventData()
@@ -46,8 +46,9 @@ function FetchEvent() {
     }
     return (
         <>
+
             <div className="container px-4 py-4">
-                <div className="row gx-5">
+                <div className="row">
                     <div className="col">
                         <div className="card shadow">
                             <div className="card body px-4 py-4">

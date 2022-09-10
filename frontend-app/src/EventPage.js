@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import React, { useState, useEffect, useRef } from 'react'
 
+
 export default function EventList(props) {
   const events = useRef([])
   const [filteredEvents, setFilteredEvents] = useState([])
@@ -10,7 +11,7 @@ export default function EventList(props) {
 
   useEffect(() => {
     const requestEvents = async () => {
-      const url = `${process.env.REACT_APP_EVENTS}/events/`;
+      const url = `${process.env.REACT_APP_EVENTS}/events/`
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json()

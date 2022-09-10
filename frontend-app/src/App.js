@@ -10,6 +10,7 @@ import Signup from "./SignUp"
 import EventList from './EventPage'
 import ActivitiesList from './ActivitiesList'
 import EventDetail from './EventDetail'
+import Hero from "./Components/Hero"
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="signup" element={<Signup />} />
             <Route path="events" element={<EventList />} />
             <Route path="activities" element={<ActivitiesList />} />
+            <Route path="hero" element={<Hero />} />
             <Route path="events">
               <Route path=":dynamicId" element={<EventDetail />} />
               {/* <Route path="new" element={<CreateEvent />} /> */}
@@ -34,6 +36,6 @@ function App() {
         </div>
       </BrowserRouter>
     </AuthProvider>
-  );
+  )
 }
 export default App;
