@@ -107,7 +107,7 @@ nav {
 }
 
 .hero {
-  background-image: url("https://images.unsplash.com/photo-1527489377706-5bf97e608852?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1918&q=80");
+  background-image: url("../public/mountain.avif");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -140,4 +140,12 @@ nav {
 
 .hero-sub-text {
   font-size: 50px;
+}
+
+.hero-bottom {
+  position: fixed;
+  left: 50%;
+  bottom: -12px;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
 }
