@@ -29,9 +29,9 @@ code {
   flex-direction: column;
   align-items: center;
   height: 20rem;
-  width:26rem ;
-  box-shadow: 0 .2rem 1rem rgba(0,1,0,1);
-   
+  width: 26rem;
+  box-shadow: 0 .2rem 1rem rgba(0, 1, 0, 1);
+
 }
 
 .small-card {
@@ -44,7 +44,7 @@ code {
   flex-direction: column;
   align-items: center;
   height: 4rem;
-  
+
 }
 
 .button-font {
@@ -56,18 +56,18 @@ code {
 }
 
 picture {
-  display: grid; 
+  display: grid;
   place-items: center;
-  vertical-align: middle;    
+  vertical-align: middle;
 }
 
 nav {
-  border-radius: 20px 20px 20px 20px ;   
+  border-radius: 20px 20px 20px 20px;
   margin-top: 3px;
   margin-left: 7px;
   margin-right: 7px;
-  box-shadow: 0 .2rem .5rem rgba(0,1,0,.5); 
- 
+  box-shadow: 0 .2rem .5rem rgba(0, 1, 0, .5);
+
 }
 
 .special {
@@ -78,16 +78,17 @@ nav {
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
+
 .profile_circle {
   border-radius: 100ch;
   height: 4rem;
-  width:4rem ;
+  width: 4rem;
   display: flex;
   justify-content: right;
   align-items: right;
-  
+
   border: 3px solid #ffc507e0;
-  }
+}
 
 .special_nav {
   flex-direction: row-reverse
@@ -97,7 +98,7 @@ nav {
   cursor: pointer;
 }
 
-.center_card_text{
+.center_card_text {
   text-align: center;
 }
 
@@ -106,7 +107,7 @@ nav {
 }
 
 .hero {
-  background-image: url("../public/dock.jpeg");
+  background-image: url("https://images.unsplash.com/photo-1527489377706-5bf97e608852?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1918&q=80");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -116,8 +117,27 @@ nav {
   top: 0;
   left: 0;
   z-index: -1;
+  /* opacity: 0.8; */
+
 }
 
 .padding_bottom {
   padding-bottom: 1rem;
+}
+
+.home-div {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  z-index: 1;
+}
+
+.hero-text {
+  font-size: 80px;
+}
+
+.hero-sub-text {
+  font-size: 50px;
 }

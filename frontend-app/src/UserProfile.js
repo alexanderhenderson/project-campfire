@@ -3,17 +3,18 @@ import { useEffect, useState } from "react"
 
 export default function UserProfile() {
     const [userData, setUserData] = useState({})
-    const [userId, setUserId] = useState(6)
+    const [userId, setUserId] = useState(1)
 
     useEffect(() => {
         const getUserData = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/${userId}/`
             const response = await fetch(url)
             if (response.ok) {
-                // console.log("response: ", response)
                 const data = await response.json()
-                // console.log("data: ", data)
                 setUserData(data)
+                setUserId(data.id)
+                console.log('user data: ', userData)
+                console.log("user id: ", userId)
             }
         }
         getUserData()

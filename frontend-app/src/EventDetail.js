@@ -71,7 +71,7 @@ function FetchEvent() {
                                                 <p>
                                                     <button onClick={() => {
                                                         clickHandler()
-                                                    }} type="button" className="btn btn-primary">RSVP</button>
+                                                    }} type="button" className="btn btn-primary btn-lg rounded-pill">RSVP</button>
                                                 </p>
                                             </div>
                                         </div>
