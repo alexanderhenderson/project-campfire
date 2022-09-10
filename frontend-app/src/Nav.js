@@ -27,11 +27,23 @@ function NavBar() {
                 <Nav.Link href="/">
                   Home
                 </Nav.Link>
+                <Nav.Link href="/hero">
+                  New Home(Test) 🚧
+                </Nav.Link>
                 <Nav.Link href="/home">
                   User Home
                 </Nav.Link>
                 <Nav.Link href="/profile">
                   Profile 🚧
+                </Nav.Link>
+                <Nav.Link href="/events/">
+                  Events
+                </Nav.Link>
+                <Nav.Link href="/activities/">
+                  Activities
+                </Nav.Link>
+                <Nav.Link href="/partnerfinder/">
+                  Kindler
                 </Nav.Link>
                 <Nav.Link href="/signup">
                   Sign Up
@@ -42,36 +54,16 @@ function NavBar() {
                 <Nav.Link href="/logout">
                   Logout
                 </Nav.Link>
-                <Nav.Link href="/hero">
-                  New Home(Test) 🚧
-                </Nav.Link>
+
                 <NavDropdown
                   id="nav-dropdown-dark-example"
                   title="Social"
                   menuVariant="dark"
                 >
-                  <NavDropdown.Item href="/events/">
-                    Events
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/events/detail">
-                    Event Detail 🚧
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/activities/">
-                    Activities
-                  </NavDropdown.Item>
-                  {/* <NavDropdown.Item href="/groups/">
-                    Groups
-                  </NavDropdown.Item> */}
-                  <NavDropdown.Item href="/partnerfinder/">
-                    Partner Finder 🚧
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
                   <NavDropdown.Item href="/events/new/">
                     Add Event 🚧
                   </NavDropdown.Item>
-                  {/* <NavDropdown.Item href="/groups/new/">
-                    Add Group
-                  </NavDropdown.Item> */}
+                  <NavDropdown.Divider />
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>

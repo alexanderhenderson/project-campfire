@@ -9,11 +9,8 @@ export default function EventCard(props) {
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json()
-        // console.log('Data pulled from json response: ', data)
-        const sliced = (data.Events.slice(0, 3))
+        const sliced = (data.Events.slice(1, 4))
         setLimitEvents(sliced)
-        console.log('Sliced events: ', sliced)
-        console.log('Events after setEvents is called: ', data.Events)
       } else {
         console.log("Could not load the events, try again")
       }

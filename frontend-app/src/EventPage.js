@@ -7,7 +7,7 @@ export default function EventList(props) {
   const [filteredEvents, setFilteredEvents] = useState([])
   const [search, setSearch] = useState('')
   const navigate = useNavigate();
-  
+
 
   useEffect(() => {
     const requestEvents = async () => {
@@ -17,7 +17,7 @@ export default function EventList(props) {
         const data = await response.json()
         events.current = data.Events
         setFilteredEvents(events.current)
-        
+
       } else {
         console.log("Could not load the events, try again")
       }
@@ -55,9 +55,9 @@ export default function EventList(props) {
           return (
             <div className="col-sm-4 mt-3 mb-3" key={event.id}>
               <div className="card mb-3 shadow h-100 pointer"
-              onClick={() => {
-                navigate(`/events/${event.id}/`)
-                 }}>
+                onClick={() => {
+                  navigate(`/events/${event.id}/`)
+                }}>
                 <img src={event.picture_url} className="card-img-top" />
                 <div className="card-body">
                   <h5 className="card-title">{event.name}</h5>
@@ -68,7 +68,7 @@ export default function EventList(props) {
                     {event.description}
                   </p>
                 </div>
-              
+
                 <div className="card-footer">
                   {new Date(event.start).toLocaleDateString()}
                   {/* -
