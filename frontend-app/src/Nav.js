@@ -27,10 +27,10 @@ function NavBar() {
               <Nav.Link href="/">
                 Home
               </Nav.Link>
-              <Nav.Link href="/intro">
+              <Nav.Link href="/intro/">
                 New Here?
               </Nav.Link>
-              <Nav.Link href="/profile">
+              <Nav.Link href="/profile/">
                 Profile 🚧
               </Nav.Link>
               <Nav.Link href="/events/">
