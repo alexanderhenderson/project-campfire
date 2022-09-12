@@ -176,7 +176,7 @@ export default function MemberMatcher() {
                 </p>
 
 
-                <button type="button"  className={ (KindlerList?.[0]?.friend) ? "btn btn-warning d-none" : "btn btn-warning" } onClick={ () => {console.log('arrow function working');onClick(KindlerList?.[0]?.id, 0)} }> Add to Friend's List </button>
+                <button type="button"  className={ (KindlerList?.[0]?.friend) ? "btn btn-warning d-none" : "btn btn-warning" } onClick={ () => { onClick(KindlerList?.[0]?.id, 0) } }> Add to Friend's List </button>
                 {/* <button type="button" hidden={ (KindlerList?.[0]?.friend) ? true : false } className="btn btn-warning" onClick={ () => {console.log('arrow function working');onSubmit(KindlerList?.[0]?.id, 0)} }> Add to Friend's List </button> */}
                 
                 <p> testing {KindlerList?.[0]?.friend.toString()} </p>                

@@ -74,9 +74,9 @@ export const AuthProvider = (props) => {
   if (getTokenInternal()){
     //   const validation = validateToken()
     //   console.log(validation.json())
-    console.log("--Logged In--")
+    // console.log("--Logged In--")
   } else {
-    console.log("-- Logged Out --")
+    // console.log("-- Logged Out --")
   }
 
   return (
