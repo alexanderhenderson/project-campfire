@@ -9,6 +9,7 @@ export default function LogIn() {
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [token, login] = useToken();
   const [loginResponse, setLoginResponse] = useState();
   

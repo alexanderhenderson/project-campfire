@@ -23,6 +23,7 @@ function FetchEvent() {
 
             } else {
                 setError("Could not load the events, try again")
+                console.log(error)
             }
         }
 
@@ -38,10 +39,11 @@ function FetchEvent() {
         }
         getEventData()
         getUserdata()
+    // eslint-disable-next-line react-hooks/exhaustive-deps    
     }, [])
 
-    const eventAttendees = Events.attendees
-    const currentUser = userData.id
+    // const eventAttendees = Events.attendees
+    // const currentUser = userData.id
 
     function clickHandler() {
         addAttendee(userData.id, dynamicId)
@@ -65,7 +67,7 @@ function FetchEvent() {
                                 <div className="container">
                                     <div className="row">
                                         <div className="col">
-                                            {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
+                                            {<img src={Events?.picture_url} className='img-fluid max-width: 100%' alt="" />}
                                         </div>
                                         <div className="col">
                                             <span className='mt-3'>

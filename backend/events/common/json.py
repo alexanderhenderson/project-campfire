@@ -11,12 +11,14 @@ class DecimalEncoder(JSONEncoder):
             return str(o)
         return super().default(o)
 
+
 class DateEncoder(JSONEncoder):
     def default(self, o):
         if isinstance(o, datetime) or isinstance(o, time):
             return o.isoformat()
         else:
             return super().default(o)
+
 
 class QuerySetEncoder(JSONEncoder):
     def default(self, o):
@@ -25,8 +27,10 @@ class QuerySetEncoder(JSONEncoder):
         else:
             return super().default(o)
 
+
 class ModelEncoder(DateEncoder, DecimalEncoder, QuerySetEncoder, JSONEncoder):
     encoders = {}
+
     def default(self, o):
         if isinstance(o, self.model):
             d = {}
@@ -51,5 +55,6 @@ class ModelEncoder(DateEncoder, DecimalEncoder, QuerySetEncoder, JSONEncoder):
             return d
         else:
             return super().default(o)
+
     def get_extra_data(self, o):
         return {}

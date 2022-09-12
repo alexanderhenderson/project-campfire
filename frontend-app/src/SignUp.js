@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { useToken } from './Authorization'
 
 
@@ -14,7 +14,8 @@ export default function Signup() {
     })
 
     const [signupTest, setSignupTest] = useState(true)
-    const { username, password, first_name, last_name, email, city, state } = userData
+    const { username, password, first_name, last_name, email, city } = userData
+    // eslint-disable-next-line no-unused-vars
     const [token, login, logout, signup] = useToken()
 
     // List of US states for sign up form

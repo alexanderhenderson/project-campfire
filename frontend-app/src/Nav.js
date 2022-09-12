@@ -1,9 +1,8 @@
-import { NavLink } from 'react-router-dom'
 import "./index.css";
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import NavDropdown from 'react-bootstrap/NavDropdown'
+// import NavDropdown from 'react-bootstrap/NavDropdown'
 
 
 function NavBar() {
@@ -39,7 +38,7 @@ function NavBar() {
               <Nav.Link href="/activities/">
                 Activities
               </Nav.Link>
-              <Nav.Link href="/partnerfinder/">
+              <Nav.Link href="/kindler/">
                 Kindler
               </Nav.Link>
 

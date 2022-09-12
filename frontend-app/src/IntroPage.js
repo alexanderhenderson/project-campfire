@@ -1,6 +1,4 @@
 import React from "react"
-import EventCard from "./Components/EventCard"
-import { Link } from "react-router-dom"
 
 
 export default function IntroPage() {
