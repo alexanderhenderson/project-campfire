@@ -27,8 +27,8 @@ function NavBar() {
                 <Nav.Link href="/">
                   Home
                 </Nav.Link>
-                <Nav.Link href="/hero">
-                  New Home(Test) 🚧
+                <Nav.Link href="/intro">
+                  New Here?
                 </Nav.Link>
                 <Nav.Link href="/home">
                   User Home
