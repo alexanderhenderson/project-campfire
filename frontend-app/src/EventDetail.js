@@ -42,8 +42,8 @@ function FetchEvent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps    
     }, [])
 
-    // const eventAttendees = Events.attendees
-    // const currentUser = userData.id
+    
+    const currentUser = userData.id
 
     function clickHandler() {
         addAttendee(userData.id, dynamicId)
