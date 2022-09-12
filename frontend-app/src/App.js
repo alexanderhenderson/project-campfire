@@ -10,10 +10,10 @@ import Signup from "./SignUp"
 import EventList from './EventPage'
 import ActivitiesList from './ActivitiesList'
 import EventDetail from './EventDetail'
-import MainPage from "./Components/MainPage"
+import MainPage from "./MainPage"
 // import Kinder from 
 
-function App() {
+export default function App() {
   return (
   <AuthProvider>
     <BrowserRouter>
@@ -40,4 +40,3 @@ function App() {
     </AuthProvider>
   )
 }
-export default App;
