@@ -21,7 +21,6 @@ export default function App() {
         <NavBar />
         <div className="container">
           <Routes>
-            <Route path="/" element={<MainHomePage/>} />
             <Route path="matcher" element ={<MemberMatcher/>} />
             <Route path="/" element={<MainPage />} />
             <Route path="intro" element={<IntroPage />} />
