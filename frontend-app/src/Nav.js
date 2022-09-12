@@ -39,7 +39,7 @@ function NavBar() {
               <Nav.Link href="/activities/">
                 Activities
               </Nav.Link>
-              <Nav.Link href="/partnerfinder/">
+              <Nav.Link href="/kindler/">
                 Kindler
               </Nav.Link>
 
