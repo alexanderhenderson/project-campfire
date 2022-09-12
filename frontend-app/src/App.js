@@ -4,8 +4,8 @@ import IntroPage from "./IntroPage"
 import UserHomepage from "./UserHomepage"
 import NavBar from './Nav'
 import UserProfile from './UserProfile'
-import LogIn from './login'
-import LogOut from './logout'
+import LogIn from './login1'
+import LogOut from './logout1'
 import Signup from "./SignUp"
 import EventList from './EventPage'
 import ActivitiesList from './ActivitiesList'
