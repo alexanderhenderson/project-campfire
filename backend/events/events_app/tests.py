@@ -1,5 +1,4 @@
 from django.test import TestCase
-import json
 from .models import Event, Activity, UserVO
 
 # Create your tests here.
@@ -30,7 +29,7 @@ class EventsApiTest(TestCase):
             end="2022-12-25T23:51:41+00:00",
             latitude=1,
             longitude=1,
-            picture_url="https://media.cntraveler.com/photos/5bbba8ee8955df3d4555222b/master/pass/Alpine-Lakes-Wilderness-Area_Snow-Lake-Washington_GettyImages-556448227.jpg",
+            picture_url="",
             owner=self.owner,
         )
 
