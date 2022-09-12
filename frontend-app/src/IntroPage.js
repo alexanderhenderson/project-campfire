@@ -19,7 +19,7 @@ export default function IntroPage() {
 
         <div className="mb-3">
           <h2>2. Kindle A Fire</h2>
-          <a className="btn btn-outline-light btn-lg rounded-pill mb-3" href="/partnerfinder/" role="button">Kinder: Meet Your Match 🔥</a>
+          <a className="btn btn-outline-light btn-lg rounded-pill mb-3" href="/partnerfinder/" role="button">Kindler: Meet Your Match 🔥</a>
         </div>
 
         <div className="mb-3">

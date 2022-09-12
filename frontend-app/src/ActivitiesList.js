@@ -35,10 +35,10 @@ export default function FetchActivities() {
         }
         getUserdata()
         getActivityData()
-        
-    },[])
-    
-    function clickHandler(event, activity){
+
+    }, [])
+
+    function clickHandler(event, activity) {
         addActivities(userData.id, activity)
         setActivityList([...activityList, activity])
     }
@@ -81,10 +81,10 @@ export default function FetchActivities() {
                             return (
                                 <div className="col-sm-4 padding_bottom" key={activity.id}>
                                     <div className="card mb-3 shadow h-100 pointer ">
-                                        <div onClick={ (e) => {
-                                            clickHandler(e,activity)
-                                             }}>
-                                            <img src={activity.picture_url} className="card-img-top" />
+                                        <div onClick={(e) => {
+                                            clickHandler(e, activity)
+                                        }}>
+                                            <img src={activity.picture_url} className="card-img-top crop-image" />
                                             <div className="card-body">
                                                 <h5 className="card-title center_card_text">{activity.name}</h5>
                                             </div>
