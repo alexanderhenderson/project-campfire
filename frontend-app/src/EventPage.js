@@ -37,10 +37,11 @@ export default function EventList(props) {
 
   return (
     <>
+      <div className='event-bg'></div>
       <div className="mt-3 mb-3">
         <div className='container'>
           <div className="row">
-            <div className="col">
+            <div className="col text-white">
               <h1>Events</h1>
             </div>
             <div className="col">
