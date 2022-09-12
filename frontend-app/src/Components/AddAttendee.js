@@ -10,5 +10,5 @@ export async function addAttendee(userData, dynamicId) {
                         'Content-Type': 'application/json',
                 },
         }
-        const response = await fetch(url, fetchConfig);
+        await fetch(url, fetchConfig);
 }
