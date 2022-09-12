@@ -47,11 +47,10 @@ function FetchEvent() {
         addAttendee(userData.id, dynamicId)
         setButton('btn btn-outline-warning button-font d-none')
         setAttendeesList([...attendeesList, userData])
+        
     }  
-
     return (
         <>
-
             <div className="container px-4 py-4">
                 <div className="row">
                     <div className="col">
@@ -59,12 +58,12 @@ function FetchEvent() {
                             <div className="card body px-4 py-4">
                                 <h1 className='display-4 text-center'> {Events?.name || ''} </h1>
                                 {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
-                                {<p>
-                                <button onClick={() => { 
+                                <p> 
+                                    <button onClick={() => { 
                                     clickHandler()
                                  }}
                                  type="button" className={button}>Click to Attend</button>
-                                </p>}
+                                </p>
                                 <span className='mt-3'>
                                     <h2 className='display-6'>Description</h2>
                                     <p className='lead text-left'>{Events?.description || ''}</p>
