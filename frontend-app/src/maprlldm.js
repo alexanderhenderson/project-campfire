@@ -61,7 +61,7 @@ class Maps extends Component {
 
      render() {
         return (
-
+        <form>
             <div>
                 <Map
                      google={this.props.google}
@@ -84,6 +84,7 @@ class Maps extends Component {
                  </Map>
                 <button type="submit" onClick={this.handleSubmit} >submit</button>
             </div>
+        </form>
         );
     }
 }

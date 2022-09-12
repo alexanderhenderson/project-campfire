@@ -10,6 +10,8 @@ import EventDetail from './EventDetail';
 import Nav from './Nav';
 import MainHomePage from './MainHomepage';
 import Signup from "./SignUp";
+import CreateEvent from'./CreateEvent';
+import TESTMAP from "./CreateEventMap";
 
 function App() {
   return (
@@ -28,7 +30,8 @@ function App() {
               {/* <Route path="new" element={<CreateAuto/>} /> */}
             </Route>
             <Route path="Events">
-              {/* <Route path="create" element={<CreateEvent/>} /> */}
+              <Route path="create" element={<CreateEvent/>} />
+              <Route path="map" element={TESTMAP} />
               {/* <Route path="list" element={<EventsList/>} /> */}
               <Route path="detail" element={<EventDetail/>} />
             </Route>

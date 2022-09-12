@@ -46,3 +46,9 @@ and lat and have a working desplayabul searchbarwith feeding back long and lat
 down side is i can only get the lat ang lmng to show up after draging the marker 
 wish it would show up whn  just searching may be able to grab lat qandlng on 
 search make in a strech goal
+
+## sep 6
+spent time geting caught up with main and all of my insomnia working.
+
+## sep 8 
+built out form for react having issue with react roughter dom had some models issues now just need to build map feature

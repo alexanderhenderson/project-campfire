@@ -32,7 +32,7 @@ const libraries = ['places']
 
 function TESTMAP() {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+    googleMapsApiKey:' process.env.REACT_APP_GOOGLE_API_KEY',
     libraries
   })
 
@@ -43,6 +43,7 @@ function TESTMAP() {
   const [selected, setSelected] = useState(null)
   const [markerlatLng, setMarker] = useState({})
   const [setlat, setLat] = useState('')
+  const lat = slected.lat
 
   /** @type React.MutableRefObject<HTMLInputElement> */
   const originRef = useRef()
@@ -117,7 +118,7 @@ function TESTMAP() {
         {/* Google Map Box */}
         <GoogleMap
           center={center}
-          zoom={10}
+          zoom={25}
           mapContainerClassName ="map-container"
           onLoad={map => setMap(map)}
         >
