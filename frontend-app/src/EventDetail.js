@@ -8,7 +8,9 @@ function FetchEvent() {
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
     const {dynamicId} = useParams()
-    
+    const [button, setButton] = useState('btn btn-outline-warning button-font')
+   
+   
     useEffect(() => {
         const getEventData = async () => {
             const url = `${process.env.REACT_APP_EVENTS}/events/${dynamicId}`
@@ -19,8 +21,6 @@ function FetchEvent() {
                 setEventsData(eventData["Event"])
                 setAttendeesList(eventData.Event.attendees)
                 
-                console.log(eventData)
-               
             } else {
                 setError("Could not load the events, try again")
             }
@@ -40,10 +40,15 @@ function FetchEvent() {
         getUserdata()
     }, [])
     
-    function clickHandler(){
+    const eventAttendees = Events.attendees
+    const currentUser = userData.id
+    
+    function clickHandler(){     
         addAttendee(userData.id, dynamicId)
+        setButton('btn btn-outline-warning button-font d-none')
         setAttendeesList([...attendeesList, userData])
-    }
+    }  
+
     return (
         <>
 
@@ -54,11 +59,12 @@ function FetchEvent() {
                             <div className="card body px-4 py-4">
                                 <h1 className='display-4 text-center'> {Events?.name || ''} </h1>
                                 {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
-                                <p>
+                                {<p>
                                 <button onClick={() => { 
-                                    clickHandler()    
-                                 }} type="button" className="btn btn-outline-warning button-font">Click to Attend</button>
-                                </p>
+                                    clickHandler()
+                                 }}
+                                 type="button" className={button}>Click to Attend</button>
+                                </p>}
                                 <span className='mt-3'>
                                     <h2 className='display-6'>Description</h2>
                                     <p className='lead text-left'>{Events?.description || ''}</p>
