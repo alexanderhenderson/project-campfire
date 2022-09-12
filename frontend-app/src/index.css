@@ -133,6 +133,22 @@ nav {
   top: 0;
   left: 0;
   z-index: -10;
+  /* opacity: 0.8; */
+  filter: blur(1px);
+}
+
+.event-bg {
+  /* Sizing */
+  background-image: url("https://images.pexels.com/photos/624015/pexels-photo-624015.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  width: 100vw;
+  height: 100vh;
+  background-position: top center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -10;
   opacity: 0.8;
   /* filter: blur(1px); */
 }

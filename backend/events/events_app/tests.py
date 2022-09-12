@@ -15,7 +15,7 @@ class EventsApiTest(TestCase):
         email="testemail@gmail.com",
       )
 
-      self.activity = Event.objects.create(
+      self.activity = Activity.objects.create(
         id = 1,
         name = 'hiking',
       )
@@ -37,12 +37,13 @@ class EventsApiTest(TestCase):
       
     
     def test_events_list(self):
-      response = self.client.get('/events')
+      response = self.client.get('/events/')
       content = response.json()
       self.assertEqual(response.status_code, 200)
-      for event in content['events']:
-          if event['name'] == self.event.name:
-              self.assertEqual(event['id'], self.event.id)
+      print(content)
+      for event in content['Events']:
+          if event['name'] == self.Event.name:
+              self.assertEqual(event['id'], self.Event.id)
     
     def test_uservos_list(self):
         pass
