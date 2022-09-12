@@ -47,6 +47,7 @@ export default function FetchActivities() {
         const searchedActivities = activities.filter(activity => activity.name.toLowerCase().includes(search.toLowerCase()))
         setFilteredActivities(searchedActivities)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => { searchFilter() }, [search])
 
     function handleChange(event) {
@@ -84,7 +85,7 @@ export default function FetchActivities() {
                                         <div onClick={(e) => {
                                             clickHandler(e, activity)
                                         }}>
-                                            <img src={activity.picture_url} className="card-img-top crop-image" />
+                                            <img src={activity.picture_url} className="card-img-top crop-image" alt="" />
                                             <div className="card-body">
                                                 <h5 className="card-title center_card_text">{activity.name}</h5>
                                             </div>

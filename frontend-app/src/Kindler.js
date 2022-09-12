@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useToken } from "./Authorization";
+// import { useToken } from "./Authorization";
 import { useEffect } from "react";
 
 // import { getUserInfo } from './Authorization'; // testing don't leave in imports
@@ -9,7 +9,7 @@ import { useEffect } from "react";
 
 export default function Kindler() {
 	const [username, setUsername] = useState("");
-	const [userList, setUserList] = useState([]);
+	// const [userList, setUserList] = useState([]);
 	const [KindlerList, SetKindlerData] = useState([]);
 
 	useEffect(() => {
@@ -63,6 +63,7 @@ export default function Kindler() {
 		UserInfoRequest();
 		KindlerData();
 		//UserListRequest()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	// <h1> { username || "loading" } is logged in </h1>
@@ -132,7 +133,7 @@ export default function Kindler() {
 				{/* Main Card - 1st of kindler mates*/}
 				<div hidden={KindlerList.length > 0 ? false : true}>
 					<div className="card mb-3 shadow h-100">
-						<img className="kindle-card" src={KindlerList?.[0]?.profile_photo || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPJFBrPoazCA8scTIXSLI6fwQHWFI-VhSkQ&usqp=CAU"} />
+						<img className="kindle-card" src={KindlerList?.[0]?.profile_photo || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPJFBrPoazCA8scTIXSLI6fwQHWFI-VhSkQ&usqp=CAU"} alt="" />
 						<div className="top-left">
 							<h2 className="display-5 fw-bold"> Your Top Match! </h2>
 							{/* <img src="/match.gif"  /> */}
@@ -174,7 +175,7 @@ export default function Kindler() {
 							return (
 								<div className="col-sm-4" key={KindlerUser.id}>
 									<div className="card mb-3 shadow h-100">
-										<img className="kindle-card" src={KindlerUser?.profile_photo || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPJFBrPoazCA8scTIXSLI6fwQHWFI-VhSkQ&usqp=CAU"} />
+										<img className="kindle-card" src={KindlerUser?.profile_photo || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPJFBrPoazCA8scTIXSLI6fwQHWFI-VhSkQ&usqp=CAU"} alt="" />
 										{/* className="card-img-top" */}
 										<div className="card-body">
 											<h5 className="card-title">{KindlerUser.username}</h5>
