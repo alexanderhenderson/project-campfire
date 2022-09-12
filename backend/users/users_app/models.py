@@ -10,6 +10,7 @@ class ActivityVO(models.Model):
     def __str__(self):
         return self.name
 
+
 class User(AbstractUser):
     friends = models.ManyToManyField("self", blank=True)
     profile_description = models.TextField(null=True, blank=True)
@@ -17,9 +18,7 @@ class User(AbstractUser):
     city = models.CharField(max_length=150)
     state = models.CharField(max_length=2)
     favorite_activities = models.ManyToManyField(
-        ActivityVO,
-        blank=True,
-        related_name="activities"
+        ActivityVO, blank=True, related_name="activities"
     )
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)

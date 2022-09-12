@@ -44,16 +44,12 @@ def api_user_info(request):
         token_data = request.payload
 
         # getting user instance stored in token
-        user_id = token_data['user']['id']
+        user_id = token_data["user"]["id"]
         user = User.objects.get(id=user_id)
 
         # JSON Response
         if token_data:
-            return JsonResponse(
-                user,
-                encoder=UserDetailEncoder,
-                safe=False
-            )
+            return JsonResponse(user, encoder=UserDetailEncoder, safe=False)
 
     response = JsonResponse({"token": None})
     return response
@@ -70,13 +66,13 @@ def api_friend_kindler(request):
         token_data = request.payload
 
         # our goal is to return a list of users. To do this we will compare the
-        # activities of user from the frontend with the activities of all the 
+        # activities of user from the frontend with the activities of all the
         # other users. The 10 users with the most similar activities (checked
         # by comparing sets of activity ids) will be returned to be listed in
         # the front end kindle page. Currently, this response includes users
         # that are already frineds of the client user - which ideally would not
         # be the case
-        user_id =  token_data['user']['id']
+        user_id = token_data["user"]["id"]
         user = User.objects.get(id=user_id)
 
         # getting user's favorite activitys and storing their
@@ -87,16 +83,16 @@ def api_friend_kindler(request):
             user_activity_setlist.add(activity.id)
 
         # getting all of the users excluding the client
-        users = User.objects.exclude(id = user_id)
+        users = User.objects.exclude(id=user_id)
 
         # setting initial empty dict
-        resultsV2={}
+        resultsV2 = {}
 
         # going through all users. Our goal is to get a dataset containing
         # all of our users and the number of activities they have in common
         # with the client user
         for compared_user in users:
-            
+
             # creating activity set to compare with client user's set
             compare_set = set()
             for activity in compared_user.favorite_activities.all():
@@ -104,12 +100,12 @@ def api_friend_kindler(request):
 
             # comparing the sets of activity ids, and counting the number of
             # common activity (ids)
-            common_activities = user_activity_setlist.intersection(compare_set)          
+            common_activities = user_activity_setlist.intersection(compare_set)
             number_common_activities = len(common_activities)
 
             # checking if they have at least 1 activity in common
             if number_common_activities > 0:
-                
+
                 # the dictionary key is the number of activities in common,
                 # the value is a list of user ids of users with that number
                 # of activities in common with the client. If a key doesn't
@@ -118,7 +114,7 @@ def api_friend_kindler(request):
                 if number_common_activities in resultsV2:
                     resultsV2[number_common_activities].append(compared_user.id)
                 else:
-                    resultsV2[number_common_activities] = [compared_user.id] 
+                    resultsV2[number_common_activities] = [compared_user.id]
 
         # to begin accessing the results dictionary, we need to know where to
         # start. The maximum number of matched activities is the total number
@@ -129,7 +125,7 @@ def api_friend_kindler(request):
         # we go from the starting key down to zero and stop there. We are looking
         # for 10 user IDs, less than that is fine if the database only has 10 users
         # with an activity selected. The results list will be a list of 10 or fewer
-        # user IDs which are who we have matched with the client user.  
+        # user IDs which are who we have matched with the client user.
         results_list = []
         done = False
         for i in range(num_activities, 0, -1):
@@ -152,15 +148,10 @@ def api_friend_kindler(request):
         for usr in results_list:
             user_list.append(User.objects.get(id=usr))
 
-
-        # JSON Response        
+        # JSON Response
         if token_data:
-            return JsonResponse(
-                user_list,
-                encoder=UserDetailEncoder,
-                safe=False
-            )
-            
+            return JsonResponse(user_list, encoder=UserDetailEncoder, safe=False)
+
     response = JsonResponse({"token": None})
     return response
 
@@ -188,12 +179,13 @@ class UserDetailEncoder(ModelEncoder):
         "city",
         "state",
         "favorite_activities",
-        "friends"
+        "friends",
     ]
     encoders = {
         "favorite_activities": ActivityVOEncoder(),
         "friends": FriendsEncoder(),
     }
+
 
 # @auth.jwt_login_required
 # def get_some_data(request):
@@ -208,10 +200,7 @@ def list_users(request):
         # print("Printstop 1")
         users = User.objects.all()
         # print("Printstop 2")
-        return JsonResponse(
-            {"users": users},
-            encoder=UserListEncoder
-        )
+        return JsonResponse({"users": users}, encoder=UserListEncoder)
     else:  # POST
         try:
             content = json.loads(request.body)
@@ -220,14 +209,9 @@ def list_users(request):
             user = User.objects.create(**content)
             user.set_password(raw_password)
             user.save()
-            return JsonResponse(
-                {"user": user},
-                encoder=UserDetailEncoder
-            )
+            return JsonResponse({"user": user}, encoder=UserDetailEncoder)
         except User.DoesNotExist:
-            response = JsonResponse(
-                {"message": "something went wrong"}
-            )
+            response = JsonResponse({"message": "something went wrong"})
             response.status_code = 400
             return response
 
@@ -237,11 +221,7 @@ def user_detail(request, pk):
     if request.method == "GET":
         try:
             user = User.objects.get(id=pk)
-            return JsonResponse(
-                user,
-                encoder=UserDetailEncoder,
-                safe=False
-            )
+            return JsonResponse(user, encoder=UserDetailEncoder, safe=False)
         except User.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
@@ -279,7 +259,7 @@ def user_detail(request, pk):
                 "profile_description",
                 "profile_photo",
                 "city",
-                "state"
+                "state",
             ]
             for prop in props:
                 if prop in content:
@@ -300,24 +280,16 @@ def user_detail(request, pk):
 def list_activities(request):
     if request.method == "GET":
         activityVO = ActivityVO.objects.all()
-        return JsonResponse(
-            {"ActivityVOs": activityVO},
-            encoder=ActivityVOEncoder
-        )
+        return JsonResponse({"ActivityVOs": activityVO}, encoder=ActivityVOEncoder)
     else:
         try:
             # print(request.body)
             content = json.loads(request.body)
             activityVO = ActivityVO.objects.create(**content)
             # print(activityVO)
-            return JsonResponse(
-                {"activityVO": activityVO},
-                encoder=ActivityVOEncoder
-            )
+            return JsonResponse({"activityVO": activityVO}, encoder=ActivityVOEncoder)
         except ActivityVO.DoesNotExist:
-            response = JsonResponse(
-                {"message": "something went wrong"}
-            )
+            response = JsonResponse({"message": "something went wrong"})
             response.status_code = 400
             return response
 
@@ -327,11 +299,7 @@ def activity_detail(request, pk):
     if request.method == "GET":
         try:
             activityVO = ActivityVO.objects.get(id=pk)
-            return JsonResponse(
-                activityVO,
-                encoder=ActivityVOEncoder,
-                safe=False
-            )
+            return JsonResponse(activityVO, encoder=ActivityVOEncoder, safe=False)
         except ActivityVO.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
@@ -380,7 +348,7 @@ def api_friend_detail(request):
         if "jwt_access_token" in request.COOKIES:
 
             # get user id and friend id
-            user_id = request.payload['user']['id']
+            user_id = request.payload["user"]["id"]
             friend_id = json.loads(request.body)
 
             # get user and friend instances
@@ -394,7 +362,7 @@ def api_friend_detail(request):
             response = JsonResponse({"message": "friend added"})
             response.status_code = 200
             return response
-    except:
+    except User.DoesNotExist:
         response = JsonResponse({"message": "failed to add friend"})
         response.status_code = 200
         return response
