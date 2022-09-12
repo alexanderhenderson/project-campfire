@@ -117,6 +117,7 @@ nav {
   top: 0;
   left: 0;
   z-index: -1;
+  /* filter: blur(1px); */
   /* opacity: 0.8; */
 }
 
@@ -157,12 +158,17 @@ nav {
   z-index: 1;
 }
 
+.font {
+  font-family: 'Merriweather', serif;
+}
+
 .hero-text {
   font-size: 80px;
 }
 
 .hero-sub-text {
   font-size: 50px;
+
 }
 
 .hero-bottom {
@@ -178,4 +184,8 @@ nav {
   height:300px;
   object-fit:cover;
   object-position:50% 50%;
+}
+
+.align-right {
+  margin-right: auto;
 }

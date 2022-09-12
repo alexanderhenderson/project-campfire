@@ -30,9 +30,6 @@ function NavBar() {
               <Nav.Link href="/intro">
                 New Here?
               </Nav.Link>
-              <Nav.Link href="/home">
-                User Home
-              </Nav.Link>
               <Nav.Link href="/profile">
                 Profile 🚧
               </Nav.Link>
@@ -46,7 +43,7 @@ function NavBar() {
                 Kindler
               </Nav.Link>
 
-              <NavDropdown
+              {/* <NavDropdown
                 id="nav-dropdown-dark-example"
                 title="Social"
                 menuVariant="dark"
@@ -55,7 +52,7 @@ function NavBar() {
                   Add Event 🚧
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-              </NavDropdown>
+              </NavDropdown> */}
 
                 <Nav.Link href="/signup">
                   Sign Up
