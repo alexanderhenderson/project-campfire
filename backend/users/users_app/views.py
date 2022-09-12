@@ -1,4 +1,8 @@
 from django.views.decorators.http import require_http_methods
+
+# may not need the below
+from django.contrib.auth.models import AbstractUser
+
 from .models import User, ActivityVO
 from django.http import JsonResponse
 import json
@@ -51,6 +55,112 @@ def api_user_info(request):
                 safe=False
             )
 
+    response = JsonResponse({"token": None})
+    return response
+
+
+# path: http://localhost:8080/users/
+@auth.jwt_login_required
+@require_http_methods(["GET"])
+def api_friend_kindler(request):
+
+    if "jwt_access_token" in request.COOKIES:
+
+        # storing payload decoded by DJWTO
+        token_data = request.payload
+
+        # our goal is to return a list of users. To do this we will compare the
+        # activities of user from the frontend with the activities of all the 
+        # other users. The 10 users with the most similar activities (checked
+        # by comparing sets of activity ids) will be returned to be listed in
+        # the front end kindle page. Currently, this response includes users
+        # that are already frineds of the client user - which ideally would not
+        # be the case
+        user_id =  token_data['user']['id']
+        user = User.objects.get(id=user_id)
+
+        # getting user's favorite activitys and storing their
+        # ids in a set for comparison later
+        user_activities = user.favorite_activities.all()
+        user_activity_setlist = set()
+        for activity in user_activities:
+            user_activity_setlist.add(activity.id)
+
+        # getting all of the users excluding the client
+        users = User.objects.exclude(id = user_id)
+
+        # setting initial empty dict
+        resultsV2={}
+
+        # going through all users. Our goal is to get a dataset containing
+        # all of our users and the number of activities they have in common
+        # with the client user
+        for compared_user in users:
+            
+            # creating activity set to compare with client user's set
+            compare_set = set()
+            for activity in compared_user.favorite_activities.all():
+                compare_set.add(activity.id)
+
+            # comparing the sets of activity ids, and counting the number of
+            # common activity (ids)
+            common_activities = user_activity_setlist.intersection(compare_set)          
+            number_common_activities = len(common_activities)
+
+            # checking if they have at least 1 activity in common
+            if number_common_activities > 0:
+                
+                # the dictionary key is the number of activities in common,
+                # the value is a list of user ids of users with that number
+                # of activities in common with the client. If a key doesn't
+                # exist we create one, or we add the user id to the
+                # existing value if the key does exist.
+                if number_common_activities in resultsV2:
+                    resultsV2[number_common_activities].append(compared_user.id)
+                else:
+                    resultsV2[number_common_activities] = [compared_user.id] 
+
+        # to begin accessing the results dictionary, we need to know where to
+        # start. The maximum number of matched activities is the total number
+        # of activities in the database, so the key we will start with is
+        # equal to the number of activity entries in the database.
+        num_activities = len(ActivityVO.objects.all())
+
+        # we go from the starting key down to zero and stop there. We are looking
+        # for 10 user IDs, less than that is fine if the database only has 10 users
+        # with an activity selected. The results list will be a list of 10 or fewer
+        # user IDs which are who we have matched with the client user.  
+        results_list = []
+        done = False
+        for i in range(num_activities, 0, -1):
+            if done == True:
+                break
+            if i in resultsV2:
+                if done == True:
+                    break
+                if (len(results_list) + len(resultsV2[i])) <= 10:
+                    results_list = results_list + resultsV2[i]
+                else:
+                    for res in resultsV2[i]:
+                        if len(results_list) < 10:
+                            results_list.append(res)
+                        else:
+                            done = True
+                            break
+
+        user_list = []
+        for usr in results_list:
+            user_list.append(User.objects.get(id=usr))
+
+
+        # JSON Response        
+        if token_data:
+            return JsonResponse(
+                user_list,
+                encoder=UserDetailEncoder,
+                safe=False
+            )
+            
     response = JsonResponse({"token": None})
     return response
 
@@ -256,6 +366,39 @@ def activity_detail(request, pk):
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response
+
+
+# put request to add friend, at the moment this does not reject duplicate
+# requests
+@auth.jwt_login_required
+@require_http_methods(["PUT"])
+def api_friend_detail(request):
+
+    print("Made it into api friends list")
+
+    try:
+        if "jwt_access_token" in request.COOKIES:
+
+            # get user id and friend id
+            user_id = request.payload['user']['id']
+            friend_id = json.loads(request.body)
+
+            # get user and friend instances
+            user = User.objects.get(id=user_id)
+            friend = User.objects.get(id=friend_id)
+
+            # add freind instance to user friends field
+            user.friends.add(friend)
+
+            # return a response
+            response = JsonResponse({"message": "friend added"})
+            response.status_code = 200
+            return response
+    except:
+        response = JsonResponse({"message": "failed to add friend"})
+        response.status_code = 200
+        return response
+
 
 # stretch goal
 # @require_http_methods(["GET"])

@@ -8,6 +8,8 @@ function FetchEvent() {
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
     const { dynamicId } = useParams()
+    const [button, setButton] = useState('btn btn-primary btn-lg rounded-pill')
+
 
     useEffect(() => {
         const getEventData = async () => {
@@ -18,8 +20,6 @@ function FetchEvent() {
 
                 setEventsData(eventData["Event"])
                 setAttendeesList(eventData.Event.attendees)
-
-                console.log(eventData)
 
             } else {
                 setError("Could not load the events, try again")
@@ -40,13 +40,16 @@ function FetchEvent() {
         getUserdata()
     }, [])
 
+    const eventAttendees = Events.attendees
+    const currentUser = userData.id
+
     function clickHandler() {
         addAttendee(userData.id, dynamicId)
+        setButton('btn btn-primary btn-lg rounded-pill d-none')
         setAttendeesList([...attendeesList, userData])
     }
     return (
         <>
-
             <div className="container px-4 py-4">
                 <div className="row">
                     <div className="col">
@@ -71,7 +74,7 @@ function FetchEvent() {
                                                 <p>
                                                     <button onClick={() => {
                                                         clickHandler()
-                                                    }} type="button" className="btn btn-primary btn-lg rounded-pill">RSVP</button>
+                                                    }} type="button" className={button}>RSVP</button>
                                                 </p>
                                             </div>
                                         </div>
