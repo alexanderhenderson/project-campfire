@@ -1,48 +1,87 @@
-import { useEffect } from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { addAttendee } from "./Components/AddAttendee"
 
-
-function FetchActivities(){
-    const [activities, setActivitiesData] = useState([])
+function FetchEvent() {
+    const [Events, setEventsData] = useState([])
+    const [eventId, setEventId] = useState(1)
     const [error, setError] = useState("")
+    const [userData, setUserId] = useState("")
+    const [attendeesList, setAttendeesList] = useState([])
+    const [clicked, setClicked] = useState(false)
 
+    useEffect(() => {
 
-    useEffect(()=> {
-        const getActivityData = async () => {
-            const url = `${process.env.REACT_APP_EVENTS}/events/list/`;
-            const response = await fetch(url);
-            if(response.ok){
-                const data = await response.json()
-                setActivitiesData(data["Activities"])
+        const getEventData = async () => {
+            const url = `${process.env.REACT_APP_EVENTS}/events/${eventId}`
+            const response = await fetch(url)
+            if (response.ok) {
+                const eventData = await response.json()
+
+                setEventsData(eventData["Event"])
+                setAttendeesList(eventData.Event.attendees)
+
             } else {
-                setError("Could not load the activities, try again")
+                setError("Could not load the events, try again")
             }
         }
-        getActivityData()
-    }, [setActivitiesData,setError])
+
+        const getUserdata = async () => {
+            const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
+            const response = await fetch(url, { credentials: "include" });
+            if (response.ok) {
+                const userData = await response.json()
+                setUserId(userData)
+
+            }
+        }
+
+        getEventData()
+        getUserdata()
+    }, [clicked])
 
     return (
         <>
-        <h1 className = "special" >Activities List</h1>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {activities.map(activity => {
-                return ( 
-                    <tr key={activity.id}>
-                    <td>{ activity.name }</td>
-                    <td>{ activity.description }</td>
-                    </tr>
-                );
-            })}
-          </tbody>
-        </table>
+            <div className="container px-4 py-4">
+                <div className="row gx-5">
+                    <div className="col">
+                        <div className="card shadow">
+                            <div className="card body px-4 py-4">
+                                <h1 className='display-4 text-center'> {Events?.name || ''} </h1>
+                                <p>
+                                    <button onClick={() => {
+                                        addAttendee(userData.id, Events.id)
+                                        setClicked(!clicked)
+                                    }} type="button" className="btn btn-primary">Click to Attend</button>
+                                </p>
+                                {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
+                                <span className='mt-3'>
+                                    <h2 className='display-6'>Description</h2>
+                                    <p className='lead text-left'>{Events?.description || ''}</p>
+                                    <h3 className='display-6'>Activity</h3>
+                                    <p className='lead'>{Events?.activity?.name || ''}</p>
+                                    <h3 className='display-6'>Dates</h3>
+                                    <p className='lead'>{new Date(Events?.start).toLocaleString()} - {new Date(Events?.end).toLocaleString()}</p>
+                                    <h3 className='display-6'>Attendees</h3>
+                                </span>
+                                <table className="table">
+                                    <tbody>
+                                        {attendeesList.map(attendee => {
+                                            return (
+                                                <tr key={attendee.id}>
+                                                    <td>{attendee.first_name} {attendee.last_name}</td>
+                                                </tr>
+                                            )
+
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
-    )        
+    )
 }
 
-export default FetchActivities
+export default FetchEvent

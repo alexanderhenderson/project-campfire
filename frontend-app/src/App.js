@@ -7,41 +7,43 @@ import LogOut from './logout';
 import { AuthProvider } from "./Authorization";
 import ActivitiesList from './ActivitiesList';
 import EventDetail from './EventDetail';
+
 import Nav from './Nav';
+
 import MainHomePage from './MainHomepage';
 import Signup from "./SignUp";
 import MemberMatcher from "./MemberMatcher";
+import MainPage from "./MainHomepage"
+import EventList from './EventPage'
+
+import NavBar from './Nav'
+
+
 
 function App() {
   return (
   <AuthProvider>
     <BrowserRouter>
-        <Nav />
+        <NavBar />
         <div className="container">
           <Routes>
             <Route path="/" element={<MainHomePage/>} />
-            <Route path="User">
-                <Route path="homepage" element={<UserHomepage/>} />
-                <Route path="profile" element={<UserProfile />} />
-                <Route path="login" element={< LogIn />} />
-                <Route path="logout" element={< LogOut />} />
-                <Route path="signup" element={< Signup />} />
-              {/* <Route path="new" element={<CreateAuto/>} /> */}
-            </Route>
             <Route path="matcher" element ={<MemberMatcher/>} />
-            <Route path="Events">
-              {/* <Route path="create" element={<CreateEvent/>} /> */}
-              {/* <Route path="list" element={<EventsList/>} /> */}
-              <Route path="detail" element={<EventDetail/>} />
-            </Route>
-            <Route path="Activities">
-              <Route path="list" element={<ActivitiesList/>} />
-              {/* <Route path="create" element={<CreateActivity/>} /> */}
+            <Route path="/" element={<MainPage />} />
+            <Route path="home" element={<UserHomepage />} />
+            <Route path="profile" element={<UserProfile />} />
+            <Route path="login" element={<LogIn />} />
+            <Route path="logout" element={<LogOut />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="events" element={<EventList />} />
+            <Route path="activities" element={<ActivitiesList />} />
+            <Route path="events">
+              <Route path="detail" element={<EventDetail />} />
             </Route>
           </Routes>
         </div>
       </BrowserRouter>
     </AuthProvider>
-  );
+  )
 }
 export default App;

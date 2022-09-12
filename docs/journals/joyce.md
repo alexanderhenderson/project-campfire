@@ -1,4 +1,23 @@
+## Friday, September 2, 2022
+Continued to work on the home page. Added the name of
+our app into the header image. Working to add a call
+to action button that links to the registration today.
+Still trying to figure out what more to add to that
+home page because I'm not sure I like the original idea.
+
+## Thursday, September 1, 2022
+Created events list page reusing the card component
+that I used to create the main home page. Tweaked
+the components to make them all look even and implemented
+a search using stateful functions so that as you type, the
+event cards filter and updated home page css again.
+
 ## Wednesday, August 31, 2022
+Created card component for events. Was able to update 
+event card columns to be maxed out at 3 for homepage
+display using a slice function after playing around
+with it for awhile. Also updated title and the header
+photo was added to the main home page.
 
 ## Tuesday, August 30, 2022
 Today we started divvying up the to do list a little more. James

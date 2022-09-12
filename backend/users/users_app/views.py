@@ -1,12 +1,3 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import FormView
-from django.contrib.auth import login
-from django.http.response import HttpResponseRedirect
-
-from django.contrib.auth.forms import UserCreationForm
-
-
-from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
 # may not need the below
@@ -18,20 +9,20 @@ import json
 from common.json import ModelEncoder
 import djwto.authentication as auth
 
+
 # Create your views here.
-
-
 @auth.jwt_login_required
 @require_http_methods(["GET"])
 def api_user_token(request):
 
     if "jwt_access_token" in request.COOKIES:
         token = request.COOKIES["jwt_access_token"]
-        #print("Backend - Token: ", token)
+        # print("Backend - Token: ", token)
         if token:
             return JsonResponse({"token": token})
     response = JsonResponse({"token": None})
     return response
+
 
 class UserListEncoder(ModelEncoder):
     model = User
@@ -53,17 +44,17 @@ def api_user_info(request):
         token_data = request.payload
 
         # getting user instance stored in token
-        user_id =  token_data['user']['id']
+        user_id = token_data['user']['id']
         user = User.objects.get(id=user_id)
 
-        # JSON Response        
+        # JSON Response
         if token_data:
             return JsonResponse(
                 user,
                 encoder=UserDetailEncoder,
                 safe=False
             )
-            
+
     response = JsonResponse({"token": None})
     return response
 
@@ -82,7 +73,9 @@ def api_friend_kindler(request):
         # activities of user from the frontend with the activities of all the 
         # other users. The 10 users with the most similar activities (checked
         # by comparing sets of activity ids) will be returned to be listed in
-        # the front end kindle page 
+        # the front end kindle page. Currently, this response includes users
+        # that are already frineds of the client user - which ideally would not
+        # be the case
         user_id =  token_data['user']['id']
         user = User.objects.get(id=user_id)
 
@@ -176,13 +169,27 @@ class ActivityVOEncoder(ModelEncoder):
     model = ActivityVO
     properties = ["id", "name"]
 
+
 class FriendsEncoder(ModelEncoder):
     model = User
     properties = ["id", "username", "email", "profile_photo"]
 
+
 class UserDetailEncoder(ModelEncoder):
     model = User
-    properties = ["id", "username", "first_name", "last_name", "email", "profile_description", "profile_photo", "city", "state", "favorite_activities", "friends"]
+    properties = [
+        "id",
+        "username",
+        "first_name",
+        "last_name",
+        "email",
+        "profile_description",
+        "profile_photo",
+        "city",
+        "state",
+        "favorite_activities",
+        "friends"
+    ]
     encoders = {
         "favorite_activities": ActivityVOEncoder(),
         "friends": FriendsEncoder(),
@@ -194,6 +201,7 @@ class UserDetailEncoder(ModelEncoder):
 #     # do stuff
 #     return response
 
+
 @require_http_methods(["GET", "POST"])
 def list_users(request):
     if request.method == "GET":
@@ -204,26 +212,25 @@ def list_users(request):
             {"users": users},
             encoder=UserListEncoder
         )
-    else: # POST
+    else:  # POST
         try:
-            # print("request: ", request.body)
             content = json.loads(request.body)
             raw_password = content["password"]
             del content["password"]
             user = User.objects.create(**content)
             user.set_password(raw_password)
             user.save()
-            # print("user: ", user)
             return JsonResponse(
                 {"user": user},
                 encoder=UserDetailEncoder
             )
-        except:
+        except User.DoesNotExist:
             response = JsonResponse(
                 {"message": "something went wrong"}
             )
             response.status_code = 400
-            return response       
+            return response
+
 
 @require_http_methods(["GET", "PUT", "DELETE"])
 def user_detail(request, pk):
@@ -250,7 +257,7 @@ def user_detail(request, pk):
             )
         except User.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
-    else: # PUT
+    else:  # PUT
         try:
             content = json.loads(request.body)
             user = User.objects.get(id=pk)
@@ -264,7 +271,16 @@ def user_detail(request, pk):
                 for id in friends_id_list:
                     friend = User.objects.get(id=id)
                     user.friends.add(friend)
-            props = ["username", "first_name", "last_name", "email", "profile_description", "profile_photo", "city", "state"]
+            props = [
+                "username",
+                "first_name",
+                "last_name",
+                "email",
+                "profile_description",
+                "profile_photo",
+                "city",
+                "state"
+            ]
             for prop in props:
                 if prop in content:
                     setattr(user, prop, content[prop])
@@ -279,9 +295,10 @@ def user_detail(request, pk):
             response.status_code = 404
             return response
 
+
 @require_http_methods(["GET", "POST"])
 def list_activities(request):
-    if request.method == "GET":  
+    if request.method == "GET":
         activityVO = ActivityVO.objects.all()
         return JsonResponse(
             {"ActivityVOs": activityVO},
@@ -297,12 +314,13 @@ def list_activities(request):
                 {"activityVO": activityVO},
                 encoder=ActivityVOEncoder
             )
-        except:
+        except ActivityVO.DoesNotExist:
             response = JsonResponse(
                 {"message": "something went wrong"}
             )
             response.status_code = 400
             return response
+
 
 @require_http_methods(["GET", "PUT", "DELETE"])
 def activity_detail(request, pk):
@@ -329,7 +347,7 @@ def activity_detail(request, pk):
             )
         except ActivityVO.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
-    else: # PUT
+    else:  # PUT
         try:
             content = json.loads(request.body)
             activityVO = ActivityVO.objects.get(id=pk)
@@ -349,7 +367,40 @@ def activity_detail(request, pk):
             response.status_code = 404
             return response
 
-#stretch goal
+
+# put request to add friend, at the moment this does not reject duplicate
+# requests
+@auth.jwt_login_required
+@require_http_methods(["PUT"])
+def api_friend_detail(request):
+
+    print("Made it into api friends list")
+
+    try:
+        if "jwt_access_token" in request.COOKIES:
+
+            # get user id and friend id
+            user_id = request.payload['user']['id']
+            friend_id = json.loads(request.body)
+
+            # get user and friend instances
+            user = User.objects.get(id=user_id)
+            friend = User.objects.get(id=friend_id)
+
+            # add freind instance to user friends field
+            user.friends.add(friend)
+
+            # return a response
+            response = JsonResponse({"message": "friend added"})
+            response.status_code = 200
+            return response
+    except:
+        response = JsonResponse({"message": "failed to add friend"})
+        response.status_code = 200
+        return response
+
+
+# stretch goal
 # @require_http_methods(["GET"])
 # def list_users_groups(request):
 #     pass

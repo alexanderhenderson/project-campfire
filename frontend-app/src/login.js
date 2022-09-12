@@ -32,7 +32,7 @@ export default function LogIn() {
       console.log("User Data: ", await data);
       console.log("User: ", await data.username);
       console.log("User ID: ", await data.id);
-    
+     
 
       // console.log("User array: ", getUserInfo())
       // console.log("Username: ", getUserInfo().username)
@@ -56,18 +56,24 @@ export default function LogIn() {
             <div className = "card body px-4 py-4">
               <form>
                 <h1> Log in </h1>
-                <div className="form-floating mb-3">
-                  <input type="text" value={username} onChange={e => setUsername(e.target.value)} id="username" className="form-control"/>
+                <div className="form-floating mb-2">
+                  <input type="text"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                  id="username" className="form-control"/>
                   <label htmlFor="username"> Username </label>
                 </div>
-                <div className="form-floating mb-3">
-                  <input type="password" value={password} onChange={e => setPassword(e.target.value)} id="password" className="form-control"/>
+                <div className="form-floating mb-2">
+                  <input type="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  id="password" className="form-control"/>
                   <label htmlFor="password"> Password </label>
                 </div>
                 <p className="fs-5" hidden={ (loginResponse !== undefined) ? false : true }> 
                   Incorrect Username or Password
                 </p> 
-                <button type="button" className="btn btn-success" onClick={onSubmit}>Test User Info Fetch + Log in</button>
+                <button type="button" className="btn btn-primary" onClick={onSubmit}>Test User Info Fetch + Log in</button>
               </form>         
               </div>
           </div>

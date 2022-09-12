@@ -47,10 +47,24 @@ code {
   
 }
 
-.bottom-left {
+.top-left {
   position: absolute;
-  bottom: 8px;
+  top: 8px;
   left: 16px;
+  color: white;
+  text-shadow: 2px 2px black;
+  max-width: 100%;
+  max-width: 100%;
+}
+
+.test {
+  background-color: lightblue;
+}
+.test2 {
+  background-color: blue;
+}
+.test3 {
+  background-color: red;
 }
 
 .square {
@@ -93,6 +107,10 @@ nav {
   padding-top: 5rem;
 }
 
+.light_padding {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
 .profile_circle {
   border-radius: 100ch;
   height: 4rem;
@@ -106,4 +124,12 @@ nav {
 
 .special_nav {
   flex-direction: row-reverse
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.center_card_text{
+  text-align: center;
 }

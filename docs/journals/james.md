@@ -1,3 +1,17 @@
+
+## Thursday, Sept 8, 2022
+Helped alex with Matching algo?
+
+## Wednesday, Sept 7, 2022
+Added the add attendees component to the events detail page, had to rewrite the put request in the events.views in order to get it to accept the M2M relationship, referenced Tim's users views in order to do this but had to make some adjustments. Page also re-renders using the use-effect, based on attendeeslist changing. Upon click, Attendees list renders in the html underneath. 
+## Tuesday, Sept 6, 2022
+Finalized the add an activity page to have a working onClick on card, that sends the Activity to the particular users Favorite Activity List, had a great time figuring out how to get the activities to disapear on selection via some creative logic, added some css so that the mouse cursor changes on hover, also made it so that the page rerenders every time the activities list changes via the useEffect(listener?) proud of this implementation!
+## Friday, Sept 2, 2022
+Didn't have much time to work today, we got held up trying to extract the info from the token and then the mandatory fun event got in the way of really trying to work on our projects.
+
+## Thursday, Sept 1, 2022
+Kept on adding front-end components almost finished up the activities selection page.
+
 ## Wednesday, August 31, 2022
 Alex pretty much fixed up the Auth stuff today, 
 I got a nav bar hooked up in react so we could link all of our pages up, kept building on front end implementations and components. 

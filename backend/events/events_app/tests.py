@@ -1,3 +1,59 @@
 from django.test import TestCase
+import json
+from .models import Event, Activity, UserVO
 
 # Create your tests here.
+
+class EventsApiTest(TestCase):
+    def setUp(self):
+
+      self.owner = UserVO.objects.create(
+        id=2,
+        username="TestUser",
+        first_name="Test",
+        last_name="User",
+        email="testemail@gmail.com",
+      )
+
+      self.activity = Event.objects.create(
+        id = 1,
+        name = 'hiking',
+      )
+
+      self.Event = Event.objects.create(
+        id = 1,
+        name = 'Party',
+        description = 'Party all day',
+        activity = self.activity,
+        start = '2022-12-25T23:51:41+00:00',
+        end = '2022-12-25T23:51:41+00:00',
+        latitude = 1,
+        longitude = 1,
+        picture_url = 'https://media.cntraveler.com/photos/5bbba8ee8955df3d4555222b/master/pass/Alpine-Lakes-Wilderness-Area_Snow-Lake-Washington_GettyImages-556448227.jpg',
+        owner = self.owner,
+      )
+
+    
+      
+    
+    def test_events_list(self):
+      response = self.client.get('/events')
+      content = response.json()
+      self.assertEqual(response.status_code, 200)
+      for event in content['events']:
+          if event['name'] == self.event.name:
+              self.assertEqual(event['id'], self.event.id)
+    
+    def test_uservos_list(self):
+        pass
+    
+    def test_get_event(self):
+        pass
+
+    def test_show_event_details(self):
+        pass
+    
+    def test_activities_list(self):
+        pass
+
+    

@@ -10,15 +10,18 @@ export async function getTokenInternal() {
   const url = `${process.env.REACT_APP_USERS}/users/api/tokens/mine/`;
   //const url = `${process.env.REACT_APP_USERS}/api/accounts/me/token/`;
   try {
+    
     const response = await fetch(url, {
       credentials: "include",
     });
+    
     if (response.ok) {
+      
       const data = await response.json();
       internalToken = await data.token;
       return internalToken;
     }
-  } catch (e) {}
+  } catch (e) { }
   return false;
 }
 
@@ -30,7 +33,7 @@ function handleErrorMessage(error) {
       if ("__all__" in error) {
         error = error.__all__;
       }
-    } catch {}
+    } catch { }
   }
   if (Array.isArray(error)) {
     error = error.join("<br>");
@@ -50,9 +53,9 @@ export const AuthContext = createContext({
 
 
 // async function validateToken(){
-  
+
 //   const url = `${process.env.REACT_APP_USERS}https://localhost:8001/validate_access/`;
-    
+
 //   const response = await fetch(url, {
 //     credentials: "include",
 //   });
@@ -63,7 +66,7 @@ export const AuthContext = createContext({
 // };
 
 
-export const AuthProvider = ( props ) => {
+export const AuthProvider = (props) => {
   const [token, setToken] = useState(null);
 
   // console.log("props: ", props)
@@ -75,9 +78,6 @@ export const AuthProvider = ( props ) => {
   } else {
     console.log("-- Logged Out --")
   }
-  
-  console.log("Token from AuthProvider: ", token)
-  console.log("AuthProvider props.children: ", props)
 
   return (
     <AuthContext.Provider value={{ token, setToken }}>
@@ -92,7 +92,7 @@ export function useToken() {
   const { token, setToken } = useAuthContext();
   const navigate = useNavigate();
 
-  useEffect(() => {    
+  useEffect(() => {
     async function fetchToken() {
       const token = await getTokenInternal();
       setToken(token);
@@ -125,7 +125,7 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
-      navigate("/User/homepage");
+      navigate("/home");
       return;
     }
     let error = await response.json();
@@ -151,7 +151,7 @@ export function useToken() {
     });
     if (response.ok) {
       await login(username, password);
-      navigate("/User/homepage");
+      navigate("/home");
     }
     return false;
   }
@@ -173,7 +173,7 @@ export function useToken() {
     });
     if (response.ok) {
       await login(username, password);
-      
+
     }
     return false;
   }
@@ -183,6 +183,7 @@ export function useToken() {
 
 
 function parseJwt(token) {
+  // console.log("THIS IS THE TOKEN", token)
   try {
     return JSON.parse(atob(token.split('.')[1]));
   } catch (e) {
@@ -193,7 +194,7 @@ function parseJwt(token) {
 export function getUserInfo() {
   const parsedToken = parseJwt(getToken())
   return {
-   "username": parsedToken.user.username,
-   "id": parsedToken.user.id
+    "username": parsedToken.user.username,
+    "id": parsedToken.user.id
   }
 };
