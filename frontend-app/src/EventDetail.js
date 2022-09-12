@@ -8,7 +8,7 @@ function FetchEvent() {
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
     const { dynamicId } = useParams()
-    const [button, setButton] = useState('btn btn-outline-warning button-font')
+    const [button, setButton] = useState('btn btn-primary btn-lg rounded-pill')
 
 
     useEffect(() => {
@@ -45,9 +45,8 @@ function FetchEvent() {
 
     function clickHandler() {
         addAttendee(userData.id, dynamicId)
-        setButton('btn btn-outline-warning button-font d-none')
+        setButton('btn btn-primary btn-lg rounded-pill d-none')
         setAttendeesList([...attendeesList, userData])
-
     }
     return (
         <>
@@ -57,34 +56,45 @@ function FetchEvent() {
                         <div className="card shadow">
                             <div className="card body px-4 py-4">
                                 <h1 className='display-4 text-center'> {Events?.name || ''} </h1>
-                                {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
-                                <p>
-                                    <button onClick={() => {
-                                        clickHandler()
-                                    }}
-                                        type="button" className={button}>Click to Attend</button>
-                                </p>
-                                <span className='mt-3'>
-                                    <h2 className='display-6'>Description</h2>
-                                    <p className='lead text-left'>{Events?.description || ''}</p>
-                                    <h3 className='display-6'>Activity</h3>
-                                    <p className='lead'>{Events?.activity?.name || ''}</p>
-                                    <h3 className='display-6'>Dates</h3>
-                                    <p className='lead'>{new Date(Events?.start).toLocaleString()} - {new Date(Events?.end).toLocaleString()}</p>
-                                    <h3 className='display-6'>Attendees</h3>
-                                </span>
-                                <table className="table">
-                                    <tbody>
-                                        {attendeesList.map(attendee => {
-                                            return (
-                                                <tr key={attendee.id}>
-                                                    <td>{attendee.first_name} {attendee.last_name}</td>
-                                                </tr>
-                                            )
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="col">
+                                            {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
+                                        </div>
+                                        <div className="col">
+                                            <span className='mt-3'>
+                                                <h2 className='display-6'>Description</h2>
+                                                <p className='lead text-left'>{Events?.description || ''}</p>
+                                                <h3 className='display-6'>Activity</h3>
+                                                <p className='lead'>{Events?.activity?.name || ''}</p>
+                                                <h3 className='display-6'>Dates</h3>
+                                                <p className='lead'>{new Date(Events?.start).toLocaleString()} - {new Date(Events?.end).toLocaleString()}</p>
+                                            </span>
+                                            <div className='mt-5 text-center'>
+                                                <p>
+                                                    <button onClick={() => {
+                                                        clickHandler()
+                                                    }} type="button" className={button}>RSVP</button>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="container mt-3">
+                                            <h3 className='display-6'>Attendees</h3>
+                                            <table className="table">
+                                                <tbody>
+                                                    {attendeesList.map(attendee => {
+                                                        return (
+                                                            <tr key={attendee.id}>
+                                                                <td>{attendee.first_name} {attendee.last_name}</td>
+                                                            </tr>
+                                                        )
 
-                                        })}
-                                    </tbody>
-                                </table>
+                                                    })}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

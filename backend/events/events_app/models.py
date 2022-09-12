@@ -38,4 +38,4 @@ class Event(models.Model):
     picture_url = models.URLField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name} - {self.id}"
