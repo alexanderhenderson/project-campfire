@@ -48,6 +48,12 @@ function FetchEvent() {
         setButton('btn btn-primary btn-lg rounded-pill d-none')
         setAttendeesList([...attendeesList, userData])
     }
+
+    let container = []
+    for(let att of attendeesList){
+        container.push(att.id)
+    }
+    
     return (
         <>
             <div className="container px-4 py-4">
@@ -72,9 +78,9 @@ function FetchEvent() {
                                             </span>
                                             <div className='mt-5 text-center'>
                                                 <p>
-                                                    <button onClick={() => {
+                                                   {container.indexOf(currentUser) === -1 ? <button onClick={() => {
                                                         clickHandler()
-                                                    }} type="button" className={button}>RSVP</button>
+                                                    }} type="button" className='btn btn-primary btn-lg rounded-pill'>RSVP</button> : null } 
                                                 </p>
                                             </div>
                                         </div>

@@ -221,4 +221,7 @@ nav {
 
 .align-right {
   margin-right: auto;
+  display: flex;
+  justify-content: right;
 }
+
