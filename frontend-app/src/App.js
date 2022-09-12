@@ -1,3 +1,4 @@
+import MemberMatcher from "./MemberMatcher";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AuthProvider } from "./Authorization"
 import IntroPage from "./IntroPage"
@@ -20,6 +21,7 @@ export default function App() {
         <NavBar />
         <div className="container">
           <Routes>
+            <Route path="matcher" element ={<MemberMatcher/>} />
             <Route path="/" element={<MainPage />} />
             <Route path="intro" element={<IntroPage />} />
             <Route path="userhome" element={<UserHomepage />} />

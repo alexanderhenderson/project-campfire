@@ -13,8 +13,6 @@ export default function LogIn() {
   const [loginResponse, setLoginResponse] = useState();
   
 
-
-
     async function onSubmit(){
 
       //console.log("Submitted, token: ", token)
