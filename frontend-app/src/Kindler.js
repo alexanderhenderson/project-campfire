@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 // its a match!
 
 
-export default function MemberMatcher() {
+export default function Kindler() {
   
   const [username, setUsername] = useState('');
   const [userList, setUserList] = useState([]);

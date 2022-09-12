@@ -1,4 +1,3 @@
-import MemberMatcher from "./MemberMatcher";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AuthProvider } from "./Authorization"
 import IntroPage from "./IntroPage"
@@ -12,7 +11,7 @@ import EventList from './EventPage'
 import ActivitiesList from './ActivitiesList'
 import EventDetail from './EventDetail'
 import MainPage from "./MainPage"
-// import Kinder from 
+import Kindler from "./Kindler";
 
 export default function App() {
   return (
@@ -21,8 +20,7 @@ export default function App() {
         <NavBar />
         <div className="container">
           <Routes>
-            <Route path="/" element={<MainHomePage/>} />
-            <Route path="matcher" element ={<MemberMatcher/>} />
+            <Route path="kindler" element ={<Kindler/>} />
             <Route path="/" element={<MainPage />} />
             <Route path="intro" element={<IntroPage />} />
             <Route path="userhome" element={<UserHomepage />} />
