@@ -128,10 +128,10 @@ def api_friend_kindler(request):
         results_list = []
         done = False
         for i in range(num_activities, 0, -1):
-            if done == True:
+            if done is True:
                 break
             if i in resultsV2:
-                if done == True:
+                if done is True:
                     break
                 if (len(results_list) + len(resultsV2[i])) <= 10:
                     results_list = results_list + resultsV2[i]
