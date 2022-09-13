@@ -133,7 +133,7 @@ export default function Kindler() {
 				{/* Main Card - 1st of kindler mates*/}
 				<div hidden={KindlerList.length > 0 ? false : true}>
 					<div className="card mb-3 shadow h-100">
-						<img className="kindle-card" src={KindlerList?.[0]?.profile_photo || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPJFBrPoazCA8scTIXSLI6fwQHWFI-VhSkQ&usqp=CAU"} alt="" />
+						<img className="kindle-card" src={KindlerList?.[0]?.profile_photo} alt="" />
 						<div className="top-left">
 							<h2 className="display-5 fw-bold"> Your Top Match! </h2>
 							{/* <img src="/match.gif"  /> */}
@@ -173,9 +173,9 @@ export default function Kindler() {
 					<div className="row">
 						{KindlerList.slice(1, 10).map((KindlerUser) => {
 							return (
-								<div className="col-sm-4" key={KindlerUser.id}>
+								<div className="col-sm-4 padding-bottom" key={KindlerUser.id}>
 									<div className="card mb-3 shadow h-100">
-										<img className="kindle-card" src={KindlerUser?.profile_photo || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPJFBrPoazCA8scTIXSLI6fwQHWFI-VhSkQ&usqp=CAU"} alt="" />
+										<img className="kindle-card" src={KindlerUser?.profile_photo} alt="" />
 										{/* className="card-img-top" */}
 										<div className="card-body">
 											<h5 className="card-title">{KindlerUser.username}</h5>

@@ -1,6 +1,6 @@
-import React from 'react';
-import { useState } from 'react';
-import { useToken } from './Authorization';
+import React from 'react'
+import { useState } from 'react'
+import { useToken } from './Authorization'
 
 
 export default function LogOut() {

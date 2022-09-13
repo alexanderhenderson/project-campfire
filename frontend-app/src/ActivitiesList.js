@@ -61,6 +61,7 @@ export default function FetchActivities() {
 
     return (
         <main>
+            <div className='activity-bg'></div>
             <div className="m-3">
                 <h1>Activities</h1>
                 <h4>Click to add to your favorite activities!</h4>
