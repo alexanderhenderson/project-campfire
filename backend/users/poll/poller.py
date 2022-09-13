@@ -36,7 +36,7 @@ def poll():
             get_activities()
         except Exception as e:
             print(e, file=sys.stderr)
-        time.sleep(6)
+        time.sleep(60)
 
 
 if __name__ == "__main__":
