@@ -63,8 +63,29 @@ export default function FetchActivities() {
         <main>
             <div className="m-3">
                 <h1>Activities</h1>
-                <h4>Click to add to your favorite activities!</h4>
-            </div>
+                <h4>Click card to add to your favorite activities list!</h4>
+                    <button className="btn btn-primary rounded-pill" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Click to see activities list
+                    </button>
+                <div className="offcanvas offcanvas-bottom border" data-bs-scroll="true" tabindex="-1" id="offcanvasBottom"
+                    aria-labelledby="offcanvasBottomLabel">
+                        <div className="offcanvas-header box_bg center">
+                            <h5 className="offcanvas-title" id="offcanvasBottomLabel">Favorite Activities:</h5>
+                        </div>
+                        <div className="offcanvas-body large">
+                            <table>
+                                {activityList?.map(act => {
+                                return (
+                                    <ul className="activeList">
+                                    <li className="item" key={act.id}>
+                                            {act.name} 
+                                    </li>
+                                    </ul>
+                                )})}
+                            </table>
+                        </div>
+                    </div>
+                </div>
             <div>
                 <input
                     type="search"

@@ -241,3 +241,33 @@ nav {
   justify-content: right;
 }
 
+.right {
+  display:grid;
+  justify-content: right;
+  }
+  
+  .border {
+    border-radius: 2ch;
+  }
+  
+  .activeList{
+    display:inline-flex;
+    flex-direction:column;
+    height: 2rem;
+    flex-wrap:wrap;
+  }
+  
+  .item{
+      padding: 0 4px;
+  }
+  
+  .box_bg{
+    background-color: #0561f4bd;
+    border-radius: 1.9ch;
+  }
+  
+  .center{
+    display:grid;
+    justify-content: center;
+    color: white;
+  }
