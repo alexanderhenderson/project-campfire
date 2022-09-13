@@ -218,7 +218,7 @@ front-end-build-job:
   #   - users-api-test-job
   #   - lint-python-projects-job
   variables:
-    PUBLIC_URL: https://66617.gitlab.io
+    PUBLIC_URL: https://66617.gitlab.io/project-gamma
   script:
     - cd frontend-app
     - npm install
