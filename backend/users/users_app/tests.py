@@ -69,19 +69,19 @@ class UsersApiTest(TestCase):
         # response = json.loads(request)
         print("Access Token: ", request)#.COOKIES['jwt_access_token'])
 
-        test = Form()
-        test.append("username")
+        # test = Form()
+        # test.append("username")
 
     
 
-        const form = new FormData();
-        form.append("username", username);
-        form.append("password", password);
-        const response = await fetch(url, {
-        method: "post",
-        credentials: "include",
-        body: form,
-        });
+        # const form = new FormData();
+        # form.append("username", username);
+        # form.append("password", password);
+        # const response = await fetch(url, {
+        # method: "post",
+        # credentials: "include",
+        # body: form,
+        # });
 
 
 

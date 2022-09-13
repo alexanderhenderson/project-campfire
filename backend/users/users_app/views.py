@@ -78,18 +78,14 @@ def api_friend_kindler(request):
         for activity in user_activities:
             user_activity_setlist.add(activity.id)
 
-        
         # getting all existing friends
         friends = user.friends.all()
 
-
         # getting all of the users excluding the client
         # using the friend set, we will also exclude
-        # existing friends 
-        users = User.objects.exclude(id = user_id)
+        # existing friends
+        users = User.objects.exclude(id=user_id)
         users = set(users).difference(set(friends))
-
-
 
         # setting initial empty dict
         resultsV2 = {}
@@ -118,9 +114,7 @@ def api_friend_kindler(request):
                 # exist we create one, or we add the user id to the
                 # existing value if the key does exist.
                 if number_common_activities in resultsV2:
-                    resultsV2[number_common_activities].append(
-                        compared_user.id
-                    )
+                    resultsV2[number_common_activities].append(compared_user.id)
                 else:
                     resultsV2[number_common_activities] = [compared_user.id]
 
@@ -133,7 +127,7 @@ def api_friend_kindler(request):
         # we go from the starting key down to zero and stop there. We are looking
         # for 9 user IDs, less than that is fine if the database only has 9 users
         # with an activity selected. The results list will be a list of 9 or fewer
-        # user IDs which are who we have matched with the client user.  
+        # user IDs which are who we have matched with the client user.
         results_list = []
         done = False
         for i in range(num_activities, 0, -1):
@@ -158,11 +152,7 @@ def api_friend_kindler(request):
 
         # JSON Response
         if token_data:
-            return JsonResponse(
-                user_list,
-                encoder=UserDetailEncoder,
-                safe=False
-            )
+            return JsonResponse(user_list, encoder=UserDetailEncoder, safe=False)
 
     response = JsonResponse({"token": None})
     return response
@@ -292,20 +282,14 @@ def user_detail(request, pk):
 def list_activities(request):
     if request.method == "GET":
         activityVO = ActivityVO.objects.all()
-        return JsonResponse(
-            {"ActivityVOs": activityVO},
-            encoder=ActivityVOEncoder
-        )
+        return JsonResponse({"ActivityVOs": activityVO}, encoder=ActivityVOEncoder)
     else:
         try:
             # print(request.body)
             content = json.loads(request.body)
             activityVO = ActivityVO.objects.create(**content)
             # print(activityVO)
-            return JsonResponse(
-                {"activityVO": activityVO},
-                encoder=ActivityVOEncoder
-            )
+            return JsonResponse({"activityVO": activityVO}, encoder=ActivityVOEncoder)
         except ActivityVO.DoesNotExist:
             response = JsonResponse({"message": "something went wrong"})
             response.status_code = 400
@@ -317,11 +301,7 @@ def activity_detail(request, pk):
     if request.method == "GET":
         try:
             activityVO = ActivityVO.objects.get(id=pk)
-            return JsonResponse(
-                activityVO,
-                encoder=ActivityVOEncoder,
-                safe=False
-            )
+            return JsonResponse(activityVO, encoder=ActivityVOEncoder, safe=False)
         except ActivityVO.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
@@ -394,4 +374,3 @@ def api_friend_detail(request):
 # @require_http_methods(["GET"])
 # def list_users_groups(request):
 #     pass
-
