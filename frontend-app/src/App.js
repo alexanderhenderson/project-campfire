@@ -22,20 +22,22 @@ export default function App() {
         <NavBar />
         <div className="container">
           <Routes>
-            <Route path="kindler" element ={<Kindler/>} />
-            <Route path="/" element={<MainPage />} />
-            <Route path="intro" element={<IntroPage />} />
-            <Route path="userhome" element={<UserHomepage />} />
-            <Route path="profile" element={<UserProfile />} />
-            <Route path="login" element={<LogIn />} />
-            <Route path="logout" element={<LogOut />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="events" element={<EventList />} />
-            <Route path="activities" element={<ActivitiesList />} />
-            {/* <Route path="kinder" element={<Kinder />} /> */}
-            <Route path="events">
-              <Route path=":dynamicId" element={<EventDetail />} />
-              {/* <Route path="new" element={<CreateEvent />} /> */}
+            <Route path="project-gamma">
+              <Route path="kindler" element ={<Kindler/>} />
+              <Route path="/" element={<MainPage />} />
+              <Route path="intro" element={<IntroPage />} />
+              <Route path="userhome" element={<UserHomepage />} />
+              <Route path="profile" element={<UserProfile />} />
+              <Route path="login" element={<LogIn />} />
+              <Route path="logout" element={<LogOut />} />
+              <Route path="signup" element={<Signup />} />
+              <Route path="events" element={<EventList />} />
+              <Route path="activities" element={<ActivitiesList />} />
+              {/* <Route path="kinder" element={<Kinder />} /> */}
+              <Route path="events">
+                <Route path=":dynamicId" element={<EventDetail />} />
+                {/* <Route path="new" element={<CreateEvent />} /> */}
+              </Route>
             </Route>
           </Routes>
         </div>
