@@ -1,3 +1,6 @@
+## Tues, Sept 13, 2022
+Added an activities list pop up on the activities page, so current user could view the current favorite activites, updates automatically. Updated the User Profile to render dynamically with attached token to the current user, and also added a column for the current events that the user is attending using spicy(read "simple") logic. Added the pictures of the events onto the user profile and just generally spruced up the profile page.
+
 ## Mon, Sept 12, 2022
 added a test to the events microservice, testing for the activities list, added and worked on some css to make the activities page and events page more cohesive.
 

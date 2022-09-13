@@ -32,7 +32,7 @@ class Event(models.Model):
         blank=False,
         null=False,
         related_name="owners",
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
     )
     activity = models.ForeignKey(
         Activity,
@@ -46,9 +46,7 @@ class Event(models.Model):
     latitude = models.DecimalField(max_digits=19, decimal_places=16)
     longitude = models.DecimalField(max_digits=19, decimal_places=16)
     attendees = models.ManyToManyField(
-        UserVO,
-        blank=True,
-        related_name="users"
+        UserVO, blank=True, related_name="users"
     )
     picture_url = models.URLField(blank=True, null=True)
 

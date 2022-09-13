@@ -78,8 +78,14 @@ def api_friend_kindler(request):
         for activity in user_activities:
             user_activity_setlist.add(activity.id)
 
+        # getting all existing friends
+        friends = user.friends.all()
+
         # getting all of the users excluding the client
+        # using the friend set, we will also exclude
+        # existing friends
         users = User.objects.exclude(id=user_id)
+        users = set(users).difference(set(friends))
 
         # setting initial empty dict
         resultsV2 = {}
@@ -96,7 +102,9 @@ def api_friend_kindler(request):
 
             # comparing the sets of activity ids, and counting the number of
             # common activity (ids)
-            common_activities = user_activity_setlist.intersection(compare_set)
+            common_activities = user_activity_setlist.intersection(
+                compare_set
+            )
             number_common_activities = len(common_activities)
 
             # checking if they have at least 1 activity in common
@@ -121,10 +129,12 @@ def api_friend_kindler(request):
         num_activities = len(ActivityVO.objects.all())
 
         # we go from the starting key down to zero and stop there. We are
-        # looking for 10 user IDs, less than that is fine if the database only
-        # has 10 users with an activity selected. The results list will be
-        # a list of 10 or fewer user IDs which are who we have matched with
-        # the client user.
+        # looking
+        # for 9 user IDs, less than that is fine if the database only has
+        # 9 users
+        # with an activity selected. The results list will be a list of 9
+        # or fewer
+        # user IDs which are who we have matched with the client user.
         results_list = []
         done = False
         for i in range(num_activities, 0, -1):
@@ -133,11 +143,11 @@ def api_friend_kindler(request):
             if i in resultsV2:
                 if done is True:
                     break
-                if (len(results_list) + len(resultsV2[i])) <= 10:
+                if (len(results_list) + len(resultsV2[i])) <= 9:
                     results_list = results_list + resultsV2[i]
                 else:
                     for res in resultsV2[i]:
-                        if len(results_list) < 10:
+                        if len(results_list) < 9:
                             results_list.append(res)
                         else:
                             done = True
@@ -150,9 +160,7 @@ def api_friend_kindler(request):
         # JSON Response
         if token_data:
             return JsonResponse(
-                user_list,
-                encoder=UserDetailEncoder,
-                safe=False
+                user_list, encoder=UserDetailEncoder, safe=False
             )
 
     response = JsonResponse({"token": None})
@@ -196,7 +204,7 @@ class UserDetailEncoder(ModelEncoder):
 #     # do stuff
 #     return response
 
-
+# @auth.jwt_login_required
 @require_http_methods(["GET", "POST"])
 def list_users(request):
     if request.method == "GET":
@@ -284,8 +292,7 @@ def list_activities(request):
     if request.method == "GET":
         activityVO = ActivityVO.objects.all()
         return JsonResponse(
-            {"ActivityVOs": activityVO},
-            encoder=ActivityVOEncoder
+            {"ActivityVOs": activityVO}, encoder=ActivityVOEncoder
         )
     else:
         try:
@@ -294,8 +301,7 @@ def list_activities(request):
             activityVO = ActivityVO.objects.create(**content)
             # print(activityVO)
             return JsonResponse(
-                {"activityVO": activityVO},
-                encoder=ActivityVOEncoder
+                {"activityVO": activityVO}, encoder=ActivityVOEncoder
             )
         except ActivityVO.DoesNotExist:
             response = JsonResponse({"message": "something went wrong"})
@@ -309,9 +315,7 @@ def activity_detail(request, pk):
         try:
             activityVO = ActivityVO.objects.get(id=pk)
             return JsonResponse(
-                activityVO,
-                encoder=ActivityVOEncoder,
-                safe=False
+                activityVO, encoder=ActivityVOEncoder, safe=False
             )
         except ActivityVO.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})

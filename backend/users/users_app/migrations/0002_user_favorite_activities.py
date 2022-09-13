@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users_app', '0001_initial'),
+        ("users_app", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='favorite_activities',
-            field=models.ManyToManyField(blank=True, related_name='activities', to='users_app.activityvo'),
+            model_name="user",
+            name="favorite_activities",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="activities",
+                to="users_app.activityvo",
+            ),
         ),
     ]

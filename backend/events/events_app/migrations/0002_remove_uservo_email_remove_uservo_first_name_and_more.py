@@ -6,25 +6,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('events_app', '0001_initial'),
+        ("events_app", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='uservo',
-            name='email',
+            model_name="uservo",
+            name="email",
         ),
         migrations.RemoveField(
-            model_name='uservo',
-            name='first_name',
+            model_name="uservo",
+            name="first_name",
         ),
         migrations.RemoveField(
-            model_name='uservo',
-            name='last_name',
+            model_name="uservo",
+            name="last_name",
         ),
         migrations.AlterField(
-            model_name='uservo',
-            name='username',
+            model_name="uservo",
+            name="username",
             field=models.CharField(max_length=300),
         ),
     ]
