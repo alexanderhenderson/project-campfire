@@ -86,8 +86,18 @@ def api_friend_kindler(request):
         for activity in user_activities:
             user_activity_setlist.add(activity.id)
 
+        
+        # getting all existing friends
+        friends = user.friends.all()
+
+
         # getting all of the users excluding the client
+        # using the friend set, we will also exclude
+        # existing friends 
         users = User.objects.exclude(id = user_id)
+        users = set(users).difference(set(friends))
+
+
 
         # setting initial empty dict
         resultsV2={}
@@ -127,8 +137,8 @@ def api_friend_kindler(request):
         num_activities = len(ActivityVO.objects.all())
 
         # we go from the starting key down to zero and stop there. We are looking
-        # for 10 user IDs, less than that is fine if the database only has 10 users
-        # with an activity selected. The results list will be a list of 10 or fewer
+        # for 9 user IDs, less than that is fine if the database only has 9 users
+        # with an activity selected. The results list will be a list of 9 or fewer
         # user IDs which are who we have matched with the client user.  
         results_list = []
         done = False
@@ -138,11 +148,11 @@ def api_friend_kindler(request):
             if i in resultsV2:
                 if done == True:
                     break
-                if (len(results_list) + len(resultsV2[i])) <= 10:
+                if (len(results_list) + len(resultsV2[i])) <= 9:
                     results_list = results_list + resultsV2[i]
                 else:
                     for res in resultsV2[i]:
-                        if len(results_list) < 10:
+                        if len(results_list) < 9:
                             results_list.append(res)
                         else:
                             done = True

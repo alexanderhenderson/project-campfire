@@ -75,9 +75,9 @@ code {
 
 .kindle-card{  
   max-width: 100%;
-  max-height: 60%;
-  height: 100%;
-  object-fit: cover;
+  max-height: 50%;
+  height: 60%;
+  /* object-fit: cover; */
 }
 
 .button-font {
