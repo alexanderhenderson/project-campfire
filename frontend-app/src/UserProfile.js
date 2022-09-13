@@ -29,8 +29,8 @@ export default function UserProfile() {
         getUserdata()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
     let currentUser = userData.id
-    
     let attendedEvents = []
     for(let evt of events){
         let evtAtt = evt.attendees
@@ -72,7 +72,7 @@ export default function UserProfile() {
                                                 {attendedEvents.map(att => (
                                                     <tr key={att.id}>
                                                         <td>{att.name}</td>
-                                                        <td ><img className="tiny-card" src={att.picture_url}></img></td>  
+                                                        <td ><img className="tiny-card" src={att.picture_url} alt="" ></img></td>  
                                                     </tr>
                                                 ))}
                                             </tbody>
