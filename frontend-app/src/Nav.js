@@ -6,14 +6,16 @@ import Navbar from 'react-bootstrap/Navbar'
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useToken } from './Authorization'
-import { useAuthContext } from "./Authorization"
+
 
 
 export default function NavBar() {
+  // eslint-disable-next-line no-unused-vars
   const [token, login, logout] = useToken()
+  // eslint-disable-next-line no-unused-vars
   const [logoutResponse, setLogoutResponse] = useState()
   const [loggedIn, setLoggedIn]=useState(false)
-  // const { token } = useAuthContext()
+
 
   function checkLoggedIn(token){
     if (token){
