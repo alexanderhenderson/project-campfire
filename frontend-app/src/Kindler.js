@@ -1,31 +1,14 @@
 import React from "react";
 import { useState } from "react";
-// import { useToken } from "./Authorization";
 import { useEffect } from "react";
 
-// import { getUserInfo } from './Authorization'; // testing don't leave in imports
-
-// its a match!
-
 export default function Kindler() {
+	 // eslint-disable-next-line no-unused-vars
 	const [username, setUsername] = useState("");
 	// const [userList, setUserList] = useState([]);
 	const [KindlerList, SetKindlerData] = useState([]);
 
 	useEffect(() => {
-		// const url = `${process.env.REACT_APP_USERS}/users/`
-		// const userFetch = fetch (url, {
-		//   credentials: "include",
-		//   }).then(response => response.json()).then(data => {
-		//     console.log("Promise Chain Data loaded: ", data);
-		//     setUserList(data);
-		//     console.log("State userlist?: ", userList)
-		//     return null
-		//   })
-
-		// console.log("Userlist state: ", userList)
-		// console.log("Userfetch test: ", userFetch)
-
 		const UserInfoRequest = async () => {
 			const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
 			const response = await fetch(url, { credentials: "include" });
@@ -45,64 +28,37 @@ export default function Kindler() {
 				const data = await response.json();
 				console.log("kindler data: ", data);
 
-				// adding additional key-value pair so that when a
-				// a freind is added we can change the button to reflect
-				// that change
+				// adding additional key-value pair so that we can
+				// track who has been added to a clients friend list
 				for (let friend of data) {
 					friend.friend = false;
-					//console.log(friend)
 				}
 
 				SetKindlerData(data);
-				console.log("Userdata: ", username);
-				console.log("kindler data 0: ", data[0]);
-				console.log("kindler data 1-9: ", data.slice(1, 10));
 			}
 		};
 
 		UserInfoRequest();
 		KindlerData();
-		//UserListRequest()
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	// <h1> { username || "loading" } is logged in </h1>
-	// <h1> { userList?.users?.[0].id || " loading " } - </h1>
-
 	async function onClick(friendID, objectNum) {
-		console.log("Submitted:", friendID);
-
-		const data = friendID;
-
-		console.log("Freind id: ", data);
+		console.log("clicked obejctnum: ", objectNum);
 
 		const url = `${process.env.REACT_APP_USERS}/users/api/friend/`;
 		const params = {
 			method: "put",
-			body: data,
+			body: friendID,
 			credentials: "include",
 		};
-
 		const response = await fetch(url, params);
 
 		if (response.status === 200) {
-			console.log("1 Kindler friend: ", KindlerList?.[0]?.friend);
-
-			let kindlerState = KindlerList;
+			let kindlerState = [...KindlerList];
 			kindlerState[objectNum].friend = true;
 			SetKindlerData(kindlerState);
-
-			// KindlerList[objectNum].friend = true;
-
-			console.log("2 Response: ", response);
-			console.log("3 Modified KindlerList: ", KindlerList);
-			console.log("3 This this a Kindler friend?: ", KindlerList?.[0]?.friend);
 		}
 	}
-
-	const click = () => {
-		console.log("State test: ", KindlerList?.[0]?.friend);
-	};
 
 	return (
 		<div>
@@ -112,6 +68,7 @@ export default function Kindler() {
 				<div className="col-lg-6 mx-auto">
 					<div className="lead mb-4">Gather around the campfire with new friends!</div>
 				</div>
+<<<<<<< HEAD
 				<div>
 					<small>Build your tribe</small>
 				</div>
@@ -170,24 +127,46 @@ export default function Kindler() {
 						</div>
 					</div>
 					{/* 9 smaller match cards - kindler matches 2-10 */}
+=======
+				{KindlerList.length > 0 ? (
+>>>>>>> 9966feef0d7a85384cc7d543293c6fb9219766e5
 					<div className="row">
-						{KindlerList.slice(1, 10).map((KindlerUser) => {
+						{KindlerList.slice(0).map((KindlerUser, index) => {
 							return (
+<<<<<<< HEAD
 								<div className="col-sm-4 mb-3" key={KindlerUser.id}>
 									<div className="card mb-3 shadow h-100">
 										<img className="kindle-card" src={KindlerUser?.profile_photo} alt="" />
 										{/* className="card-img-top" */}
 										<div className="card-body">
+=======
+								<div className="col-sm-4" key={KindlerUser.id}>
+									<div className="card mb-3 shadow">
+										<img className="crop-image" src={KindlerUser?.profile_photo || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPJFBrPoazCA8scTIXSLI6fwQHWFI-VhSkQ&usqp=CAU"} alt=""/>
+										<div className="card-body ">
+>>>>>>> 9966feef0d7a85384cc7d543293c6fb9219766e5
 											<h5 className="card-title">{KindlerUser.username}</h5>
-											<h6 className="card-subtitle mb-2 text-muted">
-												{/* {KindlerUser?.favorite_activities?.[0]} */}
-												Test
-											</h6>
-											<p className="card-text">{KindlerUser.email}</p>
-											<button type="button" className="btn btn-warning">
-												{" "}
-												Add to Friend's List{" "}
-											</button>
+											{!KindlerUser?.friend ? (
+												<button
+													type="button"
+													className="btn btn-warning"
+													onClick={() => {
+														onClick(KindlerUser?.id, index);
+													}}
+												>
+													{" "}
+													Add to Friend's List{" "}
+												</button>
+											) : (
+												<div>
+													<h6 className="card-text">
+														How to contact {KindlerUser?.username}: {KindlerUser?.email}
+													</h6>
+													<div style={{ padding: 5 }}>
+														<h5 className="card-subtitle text-muted"> {KindlerUser?.username} added to friends list! </h5>
+													</div>
+												</div>
+											)}
 										</div>
 										<div className="card-footer">
 											{KindlerUser.city}-{KindlerUser.state}
@@ -197,7 +176,12 @@ export default function Kindler() {
 							);
 						})}
 					</div>
-				</div>
+				) : (
+					<div>
+						<img className="mw-100" src="/MuchWow.png" alt="Max-width 100%"></img>
+						<h2 className="card-text">Wow! You are already friends with everybody!</h2>
+					</div>
+				)}
 			</div>
 		</div>
 	);
