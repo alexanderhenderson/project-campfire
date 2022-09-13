@@ -70,8 +70,8 @@ release-users-api-job:
   image: node:10.17-alpine
   needs:
     - deploy-users-api-image-job
-  rules:
-    - if: $CI_COMMIT_BRANCH == heroku
+  # rules:
+  #   - if: $CI_COMMIT_BRANCH == heroku
   before_script:
     - apk add curl bash
     - curl https://cli-assets.heroku.com/install.sh | sh
