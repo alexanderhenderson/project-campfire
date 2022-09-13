@@ -9,8 +9,7 @@ COPY poller.py poller.py
 
 # Copy all of the subdirectories in your service's directory
 # Modify these instructions to do that
-COPY events_project events_project
-COPY events_app events_app
+
 
 RUN pip install -r requirements.txt
 CMD python poller.py
