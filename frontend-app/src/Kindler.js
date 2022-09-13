@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 export default function Kindler() {
 	const [username, setUsername] = useState("");
-	const [userList, setUserList] = useState([]);
+	// const [userList, setUserList] = useState([]);
 	const [KindlerList, SetKindlerData] = useState([]);
 
 	useEffect(() => {

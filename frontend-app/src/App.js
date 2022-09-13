@@ -11,7 +11,7 @@ import EventList from './EventPage'
 import ActivitiesList from './ActivitiesList'
 import EventDetail from './EventDetail'
 import MainPage from "./MainPage"
-import Kindler from "./Kindler";
+import Kindler from "./Kindler"
 
 export default function App() {
   return (
@@ -30,7 +30,7 @@ export default function App() {
             <Route path="signup" element={<Signup />} />
             <Route path="events" element={<EventList />} />
             <Route path="activities" element={<ActivitiesList />} />
-            {/* <Route path="kinder" element={<Kinder />} /> */}
+            <Route path="kinder" element={<Kindler />} />
             <Route path="events">
               <Route path=":dynamicId" element={<EventDetail />} />
               {/* <Route path="new" element={<CreateEvent />} /> */}

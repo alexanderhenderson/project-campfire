@@ -1,11 +1,9 @@
-import Button from 'react-bootstrap/Button'
-
 export default function MainPage() {
 
 
   return (
     <>
-      <div className='hero'></div>
+      <div className='main-bg'></div>
       <div className='home-div'>
         <div className="p-5 text-center">
           <div className="d-flex justify-content-center align-items-center h-500">

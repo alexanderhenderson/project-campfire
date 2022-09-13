@@ -10,7 +10,7 @@ export async function addActivities(userid, activity) {
                         'Content-Type': 'application/json',
                 },
         }
-        const response = await fetch(url, fetchConfig);
+        await fetch(url, fetchConfig);
         
 }
 

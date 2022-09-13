@@ -8,7 +8,7 @@ function FetchEvent() {
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
     const { dynamicId } = useParams()
-    const [button, setButton] = useState('btn btn-primary btn-lg rounded-pill')
+
 
 
     useEffect(() => {
@@ -23,6 +23,7 @@ function FetchEvent() {
 
             } else {
                 setError("Could not load the events, try again")
+                console.log(error)
             }
         }
 
@@ -38,16 +39,22 @@ function FetchEvent() {
         }
         getEventData()
         getUserdata()
+    // eslint-disable-next-line react-hooks/exhaustive-deps    
     }, [])
 
-    const eventAttendees = Events.attendees
+    
     const currentUser = userData.id
 
     function clickHandler() {
         addAttendee(userData.id, dynamicId)
-        setButton('btn btn-primary btn-lg rounded-pill d-none')
         setAttendeesList([...attendeesList, userData])
     }
+
+    let container = []
+    for(let att of attendeesList){
+        container.push(att.id)
+    }
+    
     return (
         <>
             <div className="container px-4 py-4">
@@ -59,7 +66,7 @@ function FetchEvent() {
                                 <div className="container">
                                     <div className="row">
                                         <div className="col">
-                                            {<img src={Events?.picture_url} className='img-fluid max-width: 100%' />}
+                                            {<img src={Events?.picture_url} className='img-fluid max-width: 100%' alt="" />}
                                         </div>
                                         <div className="col">
                                             <span className='mt-3'>
@@ -72,9 +79,9 @@ function FetchEvent() {
                                             </span>
                                             <div className='mt-5 text-center'>
                                                 <p>
-                                                    <button onClick={() => {
+                                                   {container.indexOf(currentUser) === -1 ? <button onClick={() => {
                                                         clickHandler()
-                                                    }} type="button" className={button}>RSVP</button>
+                                                    }} type="button" className='btn btn-primary btn-lg rounded-pill'>RSVP</button> : null } 
                                                 </p>
                                             </div>
                                         </div>

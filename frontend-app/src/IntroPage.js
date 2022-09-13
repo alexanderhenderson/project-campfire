@@ -1,13 +1,11 @@
 import React from "react"
-import EventCard from "./Components/EventCard"
-import { Link } from "react-router-dom"
 
 
 export default function IntroPage() {
 
   return (
     <>
-      <div className='user-hero'></div>
+      <div className='intro-bg'></div>
       <div className="px-4 text-center text-white over-bg padding-top">
         <div className="mb-3">
           <h1>New here? Let us show you around.</h1>

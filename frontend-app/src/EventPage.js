@@ -29,6 +29,7 @@ export default function EventList(props) {
     const searchedEvents = events.current.filter(event => event.name.toLowerCase().includes(search.toLowerCase()))
     setFilteredEvents(searchedEvents)
   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { searchFilter() }, [search])
 
   function handleChange(event) {
@@ -41,7 +42,7 @@ export default function EventList(props) {
       <div className="mt-3 mb-3">
         <div className='container'>
           <div className="row">
-            <div className="col text-white">
+            <div className="col">
               <h1>Events</h1>
             </div>
             <div className="col">
@@ -67,7 +68,7 @@ export default function EventList(props) {
                   onClick={() => {
                     navigate(`/events/${event.id}/`)
                   }}>
-                  <img src={event.picture_url} className="card-img-top crop-image" />
+                  <img src={event.picture_url} className="card-img-top crop-image" alt="" />
                   <div className="card-body">
                     <h5 className="card-title">{event.name}</h5>
                     <h6 className="card-subtitle mb-2 text-muted">
