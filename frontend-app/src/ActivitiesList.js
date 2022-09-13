@@ -74,7 +74,7 @@ export default function FetchActivities() {
                             <h5 className="offcanvas-title " id="offcanvasBottomLabel">Favorite Activities:</h5>
                         </div>
                         <div className="offcanvas-body large ">
-                            {activityList?.map(act => {
+                            {activityList?.slice(0).reverse().map(act => {
                                 return (
                                     <ul className="activeList" key={act.id}>
                                         <li className="item" >
