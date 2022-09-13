@@ -78,8 +78,18 @@ def api_friend_kindler(request):
         for activity in user_activities:
             user_activity_setlist.add(activity.id)
 
+        
+        # getting all existing friends
+        friends = user.friends.all()
+
+
         # getting all of the users excluding the client
-        users = User.objects.exclude(id=user_id)
+        # using the friend set, we will also exclude
+        # existing friends 
+        users = User.objects.exclude(id = user_id)
+        users = set(users).difference(set(friends))
+
+
 
         # setting initial empty dict
         resultsV2 = {}
@@ -120,11 +130,10 @@ def api_friend_kindler(request):
         # equal to the number of activity entries in the database.
         num_activities = len(ActivityVO.objects.all())
 
-        # we go from the starting key down to zero and stop there. We are
-        # looking for 10 user IDs, less than that is fine if the database only
-        # has 10 users with an activity selected. The results list will be
-        # a list of 10 or fewer user IDs which are who we have matched with
-        # the client user.
+        # we go from the starting key down to zero and stop there. We are looking
+        # for 9 user IDs, less than that is fine if the database only has 9 users
+        # with an activity selected. The results list will be a list of 9 or fewer
+        # user IDs which are who we have matched with the client user.  
         results_list = []
         done = False
         for i in range(num_activities, 0, -1):
@@ -133,11 +142,11 @@ def api_friend_kindler(request):
             if i in resultsV2:
                 if done is True:
                     break
-                if (len(results_list) + len(resultsV2[i])) <= 10:
+                if (len(results_list) + len(resultsV2[i])) <= 9:
                     results_list = results_list + resultsV2[i]
                 else:
                     for res in resultsV2[i]:
-                        if len(results_list) < 10:
+                        if len(results_list) < 9:
                             results_list.append(res)
                         else:
                             done = True
@@ -196,7 +205,7 @@ class UserDetailEncoder(ModelEncoder):
 #     # do stuff
 #     return response
 
-
+# @auth.jwt_login_required
 @require_http_methods(["GET", "POST"])
 def list_users(request):
     if request.method == "GET":
@@ -385,3 +394,4 @@ def api_friend_detail(request):
 # @require_http_methods(["GET"])
 # def list_users_groups(request):
 #     pass
+
