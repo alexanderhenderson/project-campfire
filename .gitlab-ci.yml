@@ -61,9 +61,9 @@ deploy-users-api-image-job:
     - docker:20.10.16-dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker pull ${CI_REGISTRY_IMAGE}/users-api:latest
+    - docker pull ${CI_REGISTRY_IMAGE}/users_api:latest
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-    - docker tag ${CI_REGISTRY_IMAGE}/users-api:latest registry.heroku.com/$HEROKU_ACCOUNT_USERS_API/web:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/users_api:latest registry.heroku.com/$HEROKU_ACCOUNT_USERS_API/web:latest
     - docker push registry.heroku.com/$HEROKU_ACCOUNT_USERS_API/web:latest
 
 release-users-api-job:
@@ -89,9 +89,9 @@ build-users-poller-job:
   script:
     - cd backend/users/poll
     - docker build -t ${CI_REGISTRY_IMAGE}/users_poller:latest .
-    - docker tag ${CI_REGISTRY_IMAGE}/users_poller:latest ${CI_REGISTRY_IMAGE}/users_poller:$CI_JOB_ID
+    - docker tag ${CI_REGISTRY_IMAGE}/users_poller:latest ${CI_REGISTRY_IMAGE}/users_poller_backups:$CI_PIPELINE_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker push ${CI_REGISTRY_IMAGE}/users_poller:$CI_JOB_ID
+    - docker push ${CI_REGISTRY_IMAGE}/users_poller_backups:$CI_PIPELINE_ID
     - docker push ${CI_REGISTRY_IMAGE}/users_poller:latest
 
 deploy-users-poller-image-job:
@@ -106,8 +106,8 @@ deploy-users-poller-image-job:
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-    - docker pull ${CI_REGISTRY_IMAGE}/users-poller:latest
-    - docker tag ${CI_REGISTRY_IMAGE}/users-poller:latest registry.heroku.com/$HEROKU_ACCOUNT_USERS_POLLER/worker:latest
+    - docker pull ${CI_REGISTRY_IMAGE}/users_poller:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/users_poller:latest registry.heroku.com/$HEROKU_ACCOUNT_USERS_POLLER/worker:latest
     - docker push registry.heroku.com/$HEROKU_ACCOUNT_USERS_POLLER/worker:latest
 
 release-users-poller-job:
@@ -133,9 +133,9 @@ build-events-api-job:
   script:
     - cd backend/events
     - docker build -t ${CI_REGISTRY_IMAGE}/events_api:latest .
-    - docker tag ${CI_REGISTRY_IMAGE}/events_api:latest ${CI_REGISTRY_IMAGE}/events_api:$CI_JOB_ID
+    - docker tag ${CI_REGISTRY_IMAGE}/events_api:latest ${CI_REGISTRY_IMAGE}/events_api_backups:$CI_PIPELINE_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker push ${CI_REGISTRY_IMAGE}/events_api:$CI_JOB_ID
+    - docker push ${CI_REGISTRY_IMAGE}/events_api_backups:$CI_PIPELINE_ID
     - docker push ${CI_REGISTRY_IMAGE}/events_api:latest
 
 deploy-events-api-image-job:
@@ -150,8 +150,8 @@ deploy-events-api-image-job:
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-    - docker pull ${CI_REGISTRY_IMAGE}/events-api:latest
-    - docker tag ${CI_REGISTRY_IMAGE}/events-api:latest registry.heroku.com/$HEROKU_ACCOUNT_EVENTS_API/web:latest
+    - docker pull ${CI_REGISTRY_IMAGE}/events_api:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/events_api:latest registry.heroku.com/$HEROKU_ACCOUNT_EVENTS_API/web:latest
     - docker push registry.heroku.com/$HEROKU_ACCOUNT_EVENTS_API/web:latest
 
 release-events-api-job:
@@ -177,9 +177,9 @@ build-events-poller-job:
   script:
     - cd backend/events/poll
     - docker build -t ${CI_REGISTRY_IMAGE}/events_poller:latest .
-    - docker tag ${CI_REGISTRY_IMAGE}/events_poller:latest ${CI_REGISTRY_IMAGE}/events_poller:$CI_JOB_ID
+    - docker tag ${CI_REGISTRY_IMAGE}/events_poller:latest ${CI_REGISTRY_IMAGE}/events_poller_backups:$CI_PIPELINE_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker push ${CI_REGISTRY_IMAGE}/events_poller:$CI_JOB_ID
+    - docker push ${CI_REGISTRY_IMAGE}/events_poller_backups:$CI_PIPELINE_ID
     - docker push ${CI_REGISTRY_IMAGE}/events_poller:latest
 
 deploy-events-poller-image-job:
@@ -194,8 +194,8 @@ deploy-events-poller-image-job:
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-    - docker pull ${CI_REGISTRY_IMAGE}/events-poller:latest
-    - docker tag ${CI_REGISTRY_IMAGE}/events-poller:latest registry.heroku.com/$HEROKU_ACCOUNT_EVENTS_POLLER/worker:latest
+    - docker pull ${CI_REGISTRY_IMAGE}/events_poller:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/events_poller:latest registry.heroku.com/$HEROKU_ACCOUNT_EVENTS_POLLER/worker:latest
     - docker push registry.heroku.com/$HEROKU_ACCOUNT_EVENTS_POLLER/worker:latest
 
 release-events-poller-job:
