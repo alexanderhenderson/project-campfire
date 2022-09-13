@@ -1,6 +1,11 @@
+## Mon, Sept 12, 2022
+added a test to the events microservice, testing for the activities list, added and worked on some css to make the activities page and events page more cohesive.
+
+## Friday Sept 9 2022
+added functionality to Events page, fixed the add attendees button to disapear when clicked and user is in the list.
 
 ## Thursday, Sept 8, 2022
-Helped alex with Matching algo?
+Helped alex with Matching algo, and added clickable events that lead to specific event detail.
 
 ## Wednesday, Sept 7, 2022
 Added the add attendees component to the events detail page, had to rewrite the put request in the events.views in order to get it to accept the M2M relationship, referenced Tim's users views in order to do this but had to make some adjustments. Page also re-renders using the use-effect, based on attendeeslist changing. Upon click, Attendees list renders in the html underneath. 
