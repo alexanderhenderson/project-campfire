@@ -68,83 +68,14 @@ export default function Kindler() {
 				<div className="col-lg-6 mx-auto">
 					<div className="lead mb-4">Gather around the campfire with new friends!</div>
 				</div>
-<<<<<<< HEAD
-				<div>
-					<small>Build your tribe</small>
-				</div>
-				{/* New Div */}
-				<div className="container">
-					<div class="row mb-2">
-						<div class="col">Column 1</div>
-
-						{/* New Div test */}
-						{/* New Div test */}
-
-						<div class="col test3">
-							Column
-							<div className="col test">Test</div>
-							<div className="col test2">Test</div>
-						</div>
-					</div>
-				</div>
-				{/* Main Card - 1st of kindler mates*/}
-				<div hidden={KindlerList.length > 0 ? false : true}>
-					<div className="card mb-3 shadow">
-						<img className="crop-image" src={KindlerList?.[0]?.profile_photo} alt="" />
-						<div className="top-left">
-							<h2 className="display-5 fw-bold"> Your Top Match! </h2>
-							{/* <img src="/match.gif"  /> */}
-						</div>
-						<div className="card-body m-2">
-							<h5 className="card-title">{KindlerList?.[0]?.username}</h5>
-							<h6 className="card-subtitle mb-2 text-muted">
-								{/* {KindlerUser?.favorite_activities?.[0]} */}
-								Is this a friend? {KindlerList?.[0]?.friend.toString()}
-							</h6>
-							<p className="card-text">Email: {KindlerList?.[0]?.email}</p>
-
-							<button
-								type="button"
-								className={KindlerList?.[0]?.friend ? "btn btn-warning d-none" : "btn btn-warning"}
-								onClick={() => {
-									onClick(KindlerList?.[0]?.id, 0);
-								}}
-							>
-								{" "}
-								Add to Friend's List{" "}
-							</button>
-							{/* <button type="button" hidden={ (KindlerList?.[0]?.friend) ? true : false } className="btn btn-warning" onClick={ () => {console.log('arrow function working');onSubmit(KindlerList?.[0]?.id, 0)} }> Add to Friend's List </button> */}
-
-							<p> testing {KindlerList?.[0]?.friend.toString()} </p>
-
-							<button className="btn btn-success" onClick={click}>
-								{" "}
-								Test friend[0] state{" "}
-							</button>
-						</div>
-						<div className="card-footer">
-							Location: {KindlerList?.[0]?.city} - {KindlerList?.[0]?.state}
-						</div>
-					</div>
-					{/* 9 smaller match cards - kindler matches 2-10 */}
-=======
 				{KindlerList.length > 0 ? (
->>>>>>> 9966feef0d7a85384cc7d543293c6fb9219766e5
 					<div className="row">
 						{KindlerList.slice(0).map((KindlerUser, index) => {
 							return (
-<<<<<<< HEAD
-								<div className="col-sm-4 mb-3" key={KindlerUser.id}>
-									<div className="card mb-3 shadow h-100">
-										<img className="kindle-card" src={KindlerUser?.profile_photo} alt="" />
-										{/* className="card-img-top" */}
-										<div className="card-body">
-=======
 								<div className="col-sm-4" key={KindlerUser.id}>
 									<div className="card mb-3 shadow">
 										<img className="crop-image" src={KindlerUser?.profile_photo || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPJFBrPoazCA8scTIXSLI6fwQHWFI-VhSkQ&usqp=CAU"} alt=""/>
 										<div className="card-body ">
->>>>>>> 9966feef0d7a85384cc7d543293c6fb9219766e5
 											<h5 className="card-title">{KindlerUser.username}</h5>
 											{!KindlerUser?.friend ? (
 												<button
