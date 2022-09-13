@@ -15,11 +15,13 @@ django.setup()
 # the below import works once the program is running
 from events_app.models import UserVO
 
+USERS_API = os.environ["USERS_API"]
+
 
 def get_users():
 
     # print("We are in the polling function")
-    response = requests.get("http://users:8000/users/")
+    response = requests.get(f"{USERS_API}/users/")
     content = json.loads(response.content)
     # print("Polled and received content: ", content)
 
@@ -45,7 +47,7 @@ def poll():
         except Exception as e:
             print(e, file=sys.stderr)
             print("get user function failed")
-        time.sleep(60)
+        time.sleep(6)
 
 
 if __name__ == "__main__":

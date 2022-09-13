@@ -55,18 +55,18 @@ services:
             DATABASE_URL: postgresql://users:password@postgres:5432/users
             WAIT_HOSTS: postgres:5432
             DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
-    messenger:
-        build:
-            context: ./backend/messenger
-            dockerfile: ./Dockerfile.dev
-        ports:
-            - "8070:8000"
-        volumes:
-            - ./backend/messenger:/app
-        environment:
-            DATABASE_URL: postgresql://messenger:password@postgres:5432/messenger
-            WAIT_HOSTS: postgres:5432
-            DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
+    # messenger:
+    #     build:
+    #         context: ./backend/messenger
+    #         dockerfile: ./Dockerfile.dev
+    #     ports:
+    #         - "8070:8000"
+    #     volumes:
+    #         - ./backend/messenger:/app
+    #     environment:
+    #         DATABASE_URL: postgresql://messenger:password@postgres:5432/messenger
+    #         WAIT_HOSTS: postgres:5432
+    #         DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
     users-poller:
         build:
             context: ./backend/users/poll
@@ -81,7 +81,8 @@ services:
         environment:
             DATABASE_URL: postgresql://users:password@postgres:5432/users
             WAIT_HOSTS: postgres:5432
-            WAIT_TIMEOUT: 300        
+            WAIT_TIMEOUT: 300
+            EVENTS_API: http://events:8000
     events-poller:
         build:
             context: ./backend/events/poll
@@ -96,4 +97,5 @@ services:
         environment:
             DATABASE_URL: postgresql://users:password@postgres:5432/events
             WAIT_HOSTS: postgres:5432
-            WAIT_TIMEOUT: 300      
+            WAIT_TIMEOUT: 300
+            USERS_API: http://users:8000

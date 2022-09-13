@@ -14,9 +14,11 @@ import MainPage from "./MainPage"
 import Kindler from "./Kindler";
 
 export default function App() {
+  const domain = /https:\/\/[^/]+/
+  const basename = process.env.PUBLIC_URL.replace(domain, '')
   return (
   <AuthProvider>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
         <NavBar />
         <div className="container">
           <Routes>
