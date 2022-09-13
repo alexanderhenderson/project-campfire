@@ -47,7 +47,6 @@ function FetchEvent() {
 
     function clickHandler() {
         addAttendee(userData.id, dynamicId)
-        setButton('btn btn-primary btn-lg rounded-pill d-none')
         setAttendeesList([...attendeesList, userData])
     }
 
