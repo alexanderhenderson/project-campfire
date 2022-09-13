@@ -82,7 +82,7 @@ class UsersApiTest(TestCase):
         # body: form,
         # });
 
-        # resp = self.client.post(url, {'username':'user@foo.com', 
+        # resp = self.client.post(url, {'username':'user@foo.com',
         # 'password':'pass'}, format='json')
         # self.assertEqual(resp.status_code, 200)
         # self.assertTrue('token' in resp.data)
