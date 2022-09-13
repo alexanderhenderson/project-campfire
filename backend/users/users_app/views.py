@@ -1,5 +1,5 @@
 from django.views.decorators.http import require_http_methods
-from .models import User, ActivityVO
+from .models import User, ActivityVO, Comment
 from django.http import JsonResponse
 import json
 from common.json import ModelEncoder
@@ -7,6 +7,8 @@ import djwto.authentication as auth
 
 
 # Create your views here.
+
+
 @auth.jwt_login_required
 @require_http_methods(["GET"])
 def api_user_token(request):
@@ -108,9 +110,7 @@ def api_friend_kindler(request):
                 # exist we create one, or we add the user id to the
                 # existing value if the key does exist.
                 if number_common_activities in resultsV2:
-                    resultsV2[number_common_activities].append(
-                        compared_user.id
-                    )
+                    resultsV2[number_common_activities].append(compared_user.id)
                 else:
                     resultsV2[number_common_activities] = [compared_user.id]
 
@@ -149,11 +149,7 @@ def api_friend_kindler(request):
 
         # JSON Response
         if token_data:
-            return JsonResponse(
-                user_list,
-                encoder=UserDetailEncoder,
-                safe=False
-            )
+            return JsonResponse(user_list, encoder=UserDetailEncoder, safe=False)
 
     response = JsonResponse({"token": None})
     return response
@@ -187,6 +183,19 @@ class UserDetailEncoder(ModelEncoder):
     encoders = {
         "favorite_activities": ActivityVOEncoder(),
         "friends": FriendsEncoder(),
+    }
+
+class CommentEncoder(ModelEncoder):
+    model = Comment
+    properties = [
+        "id",
+        "comment",
+        "commenter",
+        "user_profile",
+    ]
+    encoders = {
+        "commenter": UserDetailEncoder(),
+        "user_profile": UserDetailEncoder(),
     }
 
 
@@ -283,20 +292,14 @@ def user_detail(request, pk):
 def list_activities(request):
     if request.method == "GET":
         activityVO = ActivityVO.objects.all()
-        return JsonResponse(
-            {"ActivityVOs": activityVO},
-            encoder=ActivityVOEncoder
-        )
+        return JsonResponse({"ActivityVOs": activityVO}, encoder=ActivityVOEncoder)
     else:
         try:
             # print(request.body)
             content = json.loads(request.body)
             activityVO = ActivityVO.objects.create(**content)
             # print(activityVO)
-            return JsonResponse(
-                {"activityVO": activityVO},
-                encoder=ActivityVOEncoder
-            )
+            return JsonResponse({"activityVO": activityVO}, encoder=ActivityVOEncoder)
         except ActivityVO.DoesNotExist:
             response = JsonResponse({"message": "something went wrong"})
             response.status_code = 400
@@ -308,11 +311,7 @@ def activity_detail(request, pk):
     if request.method == "GET":
         try:
             activityVO = ActivityVO.objects.get(id=pk)
-            return JsonResponse(
-                activityVO,
-                encoder=ActivityVOEncoder,
-                safe=False
-            )
+            return JsonResponse(activityVO, encoder=ActivityVOEncoder, safe=False)
         except ActivityVO.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
@@ -332,7 +331,6 @@ def activity_detail(request, pk):
         try:
             content = json.loads(request.body)
             activityVO = ActivityVO.objects.get(id=pk)
-
             props = ["name"]
             for prop in props:
                 if prop in content:
@@ -381,7 +379,78 @@ def api_friend_detail(request):
         return response
 
 
+@auth.jwt_login_required
+@require_http_methods(['GET', 'POST'])
+def list_comments(request):
+    if request.method == 'GET':
+        comments = Comment.objects.all()
+        return JsonResponse({"comments": comments}, encoder=CommentEncoder)
+    if request.method == 'POST':
+        try:
+            token_data = request.payload
+            user_id = token_data["user"]["id"]
+            content = json.loads(request.body)
+            content['commenter'] = Comment.objects.get(id=content[user_id])
+            content['user_profile'] = Comment.objects.get(id=content['user_profile'])
+            comment = Comment.objects.create(**content)
+            comment.save()
+            return JsonResponse({"comment": comment}, encoder=CommentEncoder)
+        except User.DoesNotExist:
+            response = JsonResponse({"Error": "User does not exist"})
+            response.status_code = 400
+            return response
+
+@auth.jwt_login_required
+@require_http_methods(['GET', 'PUT', 'DELETE'])
+def comment_detail(request, pk):
+    if request.method == 'GET':
+        try:
+            comment = comment.objects.get(id=pk)
+            return JsonResponse(user, encoder=CommentEncoder, safe=False)
+        except Comment.DoesNotExist:
+            response = JsonResponse({"Error": "Comment does not exist"})
+            response.status_code = 404
+            return response
+    elif request.method == 'DELETE':
+        try:
+            comment = Comment.objects.get(id=pk)
+            comment.delete()
+            return JsonResponse(
+                comment,
+                encoder=CommentEncoder,
+                safe=False,
+            )
+        except Comment.DoesNotExist:
+            return JsonResponse({"Error": "Comment does not exist"})
+    elif request.method == 'PUT':
+        try:
+            content = json.loads(request.body)
+            comment = User.objects.get(id=pk)
+            if "comment" in content:
+                comment = content["comment"]
+                for id in comment:
+                    comment = Comment.objects.get(id=id)
+                    comment.comments.add(comment)
+            props = [
+                "id",
+                "comment",
+            ]
+            for prop in props:
+                if prop in content:
+                    setattr(Comment, prop, content[prop])
+            comment.save()
+            return JsonResponse(
+                Comment,
+                encoder=CommentEncoder,
+                safe=False,
+            )
+        except User.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+
+
 # stretch goal
 # @require_http_methods(["GET"])
 # def list_users_groups(request):
-#     pass
+#   pass

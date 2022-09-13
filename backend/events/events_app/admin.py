@@ -19,3 +19,4 @@ class EventAdmin(admin.ModelAdmin):
 admin.site.register(UserVO, UserVOAdmin)
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(Event, EventAdmin)
+

@@ -30,8 +30,6 @@ export default function NavBar() {
     console.log('LOGGED OUT SUCCESSFULLY')
   }
 
-  console.log('LOGGED')
-
   return (
     <div className='mb-3'>
       <Navbar sticky="top" variant="dark" bg="dark" expand="lg">

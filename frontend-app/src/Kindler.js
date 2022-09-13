@@ -117,7 +117,7 @@ export default function Kindler() {
 				</div>
 				{/* New Div */}
 				<div className="container">
-					<div class="row test">
+					<div class="row mb-2">
 						<div class="col">Column 1</div>
 
 						{/* New Div test */}
@@ -132,13 +132,13 @@ export default function Kindler() {
 				</div>
 				{/* Main Card - 1st of kindler mates*/}
 				<div hidden={KindlerList.length > 0 ? false : true}>
-					<div className="card mb-3 shadow h-100">
-						<img className="kindle-card" src={KindlerList?.[0]?.profile_photo} alt="" />
+					<div className="card mb-3 shadow">
+						<img className="crop-image" src={KindlerList?.[0]?.profile_photo} alt="" />
 						<div className="top-left">
 							<h2 className="display-5 fw-bold"> Your Top Match! </h2>
 							{/* <img src="/match.gif"  /> */}
 						</div>
-						<div className="card-body">
+						<div className="card-body m-2">
 							<h5 className="card-title">{KindlerList?.[0]?.username}</h5>
 							<h6 className="card-subtitle mb-2 text-muted">
 								{/* {KindlerUser?.favorite_activities?.[0]} */}
@@ -173,7 +173,7 @@ export default function Kindler() {
 					<div className="row">
 						{KindlerList.slice(1, 10).map((KindlerUser) => {
 							return (
-								<div className="col-sm-4 padding-bottom" key={KindlerUser.id}>
+								<div className="col-sm-4 mb-3" key={KindlerUser.id}>
 									<div className="card mb-3 shadow h-100">
 										<img className="kindle-card" src={KindlerUser?.profile_photo} alt="" />
 										{/* className="card-img-top" */}
