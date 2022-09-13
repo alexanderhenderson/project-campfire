@@ -61,28 +61,27 @@ export default function FetchActivities() {
 
     return (
         <main>
+            <div className='activities-bg'></div>
             <div className="m-3">
                 <h1>Activities</h1>
                 <h4>Click card to add to your favorite activities list!</h4>
                     <button className="btn btn-primary rounded-pill" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Click to see activities list
                     </button>
-                <div className="offcanvas offcanvas-bottom border" data-bs-scroll="true" tabindex="-1" id="offcanvasBottom"
+                <div className="offcanvas offcanvas-bottom border background-opacity" data-bs-scroll="true" tabIndex="-1" id="offcanvasBottom"
                     aria-labelledby="offcanvasBottomLabel">
                         <div className="offcanvas-header box_bg center">
-                            <h5 className="offcanvas-title" id="offcanvasBottomLabel">Favorite Activities:</h5>
+                            <h5 className="offcanvas-title " id="offcanvasBottomLabel">Favorite Activities:</h5>
                         </div>
-                        <div className="offcanvas-body large">
-                            <table>
-                                {activityList?.map(act => {
+                        <div className="offcanvas-body large ">
+                            {activityList?.map(act => {
                                 return (
-                                    <ul className="activeList">
-                                    <li className="item" key={act.id}>
+                                    <ul className="activeList" key={act.id}>
+                                        <li className="item" >
                                             {act.name} 
-                                    </li>
+                                        </li>
                                     </ul>
                                 )})}
-                            </table>
                         </div>
                     </div>
                 </div>
