@@ -8,7 +8,7 @@ function FetchEvent() {
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
     const { dynamicId } = useParams()
-    const [button, setButton] = useState('btn btn-primary btn-lg rounded-pill')
+
 
 
     useEffect(() => {

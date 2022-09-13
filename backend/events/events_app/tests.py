@@ -52,4 +52,10 @@ class EventsApiTest(TestCase):
         pass
 
     def test_activities_list(self):
-        pass
+        response = self.client.get("/events/activities/")
+        content = response.json()
+        self.assertEqual(response.status_code, 200)
+        print(content)
+        for activity in content["Activities"]:
+            if activity["name"] == self.activity.name:
+                self.assertEqual(activity["id"], self.activity.id)
