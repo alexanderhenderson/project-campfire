@@ -57,23 +57,13 @@ code {
   max-width: 100%;
 }
 
-.test {
-  background-color: lightblue;
-}
-.test2 {
-  background-color: blue;
-}
-.test3 {
-  background-color: red;
-}
-
 .square {
   width: 100%;
   height: 0;
   padding-top: 100%;
 }
 
-.kindle-card{  
+.kindle-card {  
   max-width: 100%;
   max-height: 60%;
   height: 100%;
@@ -135,11 +125,7 @@ nav {
   text-align: center;
 }
 
-.hero_container {
-  z-index: -1;
-}
-
-.hero {
+.main-bg {
   background-image: url("../public/mountain.avif");
   background-position: center;
   background-size: cover;
@@ -154,7 +140,7 @@ nav {
   /* opacity: 0.8; */
 }
 
-.user-hero {
+.intro-bg {
   /* Sizing */
   background-image: url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1774&q=80");
   width: 100vw;
@@ -172,7 +158,23 @@ nav {
 
 .event-bg {
   /* Sizing */
-  background-image: url("https://images.pexels.com/photos/624015/pexels-photo-624015.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  background-image: url("https://images.unsplash.com/photo-1518023176010-e14eb57eecf9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80");
+  width: 100vw;
+  height: 100vh;
+  background-position: top center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -10;
+  opacity: 0.8;
+  /* filter: blur(1px); */
+}
+
+.activity-bg {
+  /* Sizing */
+  background-image: url("https://images.pexels.com/photos/2397651/pexels-photo-2397651.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
   width: 100vw;
   height: 100vh;
   background-position: top center;

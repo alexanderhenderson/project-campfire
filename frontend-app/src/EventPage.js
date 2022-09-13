@@ -42,7 +42,7 @@ export default function EventList(props) {
       <div className="mt-3 mb-3">
         <div className='container'>
           <div className="row">
-            <div className="col text-white">
+            <div className="col">
               <h1>Events</h1>
             </div>
             <div className="col">
