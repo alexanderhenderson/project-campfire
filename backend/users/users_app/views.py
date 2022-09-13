@@ -205,7 +205,7 @@ class UserDetailEncoder(ModelEncoder):
 #     # do stuff
 #     return response
 
-
+# @auth.jwt_login_required
 @require_http_methods(["GET", "POST"])
 def list_users(request):
     if request.method == "GET":
@@ -394,3 +394,4 @@ def api_friend_detail(request):
 # @require_http_methods(["GET"])
 # def list_users_groups(request):
 #     pass
+
