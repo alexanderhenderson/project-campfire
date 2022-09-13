@@ -7,7 +7,7 @@ from .views import (
     api_user_token,
     api_user_info,
     api_friend_kindler,
-    api_friend_detail
+    api_friend_detail,
 )
 
 
@@ -20,6 +20,8 @@ urlpatterns = [
     path("", list_users, name="api_list_users"),
     path("<int:pk>/", user_detail, name="api_user_detail"),
     path("activities/", list_activities, name="api_list_activities"),
-    path("activities/<int:pk>/", activity_detail, name="api_activity_details"),
-    path("api/friend/", api_friend_detail, name="api_friend_detail")
+    path(
+        "activities/<int:pk>/", activity_detail, name="api_activity_details"
+    ),
+    path("api/friend/", api_friend_detail, name="api_friend_detail"),
 ]

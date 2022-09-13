@@ -6,9 +6,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('events_app', '0004_activity_picture_url'),
-        ('events_app', '0004_event_picture_url'),
+        ("events_app", "0004_activity_picture_url"),
+        ("events_app", "0004_event_picture_url"),
     ]
 
-    operations = [
-    ]
+    operations = []
