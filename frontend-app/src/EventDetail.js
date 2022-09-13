@@ -1,48 +1,114 @@
-import { useEffect } from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import { addAttendee } from "./Components/AddAttendee"
 
-
-function FetchActivities(){
-    const [activities, setActivitiesData] = useState([])
+function FetchEvent() {
+    const [Events, setEventsData] = useState([])
     const [error, setError] = useState("")
+    const [userData, setUserId] = useState("")
+    const [attendeesList, setAttendeesList] = useState([])
+    const { dynamicId } = useParams()
 
 
-    useEffect(()=> {
-        const getActivityData = async () => {
-            const url = `${process.env.REACT_APP_EVENTS}/events/list/`;
-            const response = await fetch(url);
-            if(response.ok){
-                const data = await response.json()
-                setActivitiesData(data["Activities"])
+
+    useEffect(() => {
+        const getEventData = async () => {
+            const url = `${process.env.REACT_APP_EVENTS}/events/${dynamicId}`
+            const response = await fetch(url)
+            if (response.ok) {
+                const eventData = await response.json()
+
+                setEventsData(eventData["Event"])
+                setAttendeesList(eventData.Event.attendees)
+
             } else {
-                setError("Could not load the activities, try again")
+                setError("Could not load the events, try again")
+                console.log(error)
             }
         }
-        getActivityData()
-    }, [setActivitiesData,setError])
 
+
+        const getUserdata = async () => {
+            const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
+            const response = await fetch(url, { credentials: "include" });
+            if (response.ok) {
+                const userData = await response.json()
+                setUserId(userData)
+
+            }
+        }
+        getEventData()
+        getUserdata()
+    // eslint-disable-next-line react-hooks/exhaustive-deps    
+    }, [])
+
+    
+    const currentUser = userData.id
+
+    function clickHandler() {
+        addAttendee(userData.id, dynamicId)
+        setAttendeesList([...attendeesList, userData])
+    }
+
+    let container = []
+    for(let att of attendeesList){
+        container.push(att.id)
+    }
+    
     return (
         <>
-        <h1 className = "special" >Activities List</h1>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {activities.map(activity => {
-                return ( 
-                    <tr key={activity.id}>
-                    <td>{ activity.name }</td>
-                    <td>{ activity.description }</td>
-                    </tr>
-                );
-            })}
-          </tbody>
-        </table>
+            <div className="container px-4 py-4">
+                <div className="row">
+                    <div className="col">
+                        <div className="card shadow">
+                            <div className="card body px-4 py-4">
+                                <h1 className='display-4 text-center'> {Events?.name || ''} </h1>
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="col">
+                                            {<img src={Events?.picture_url} className='img-fluid max-width: 100%' alt="" />}
+                                        </div>
+                                        <div className="col">
+                                            <span className='mt-3'>
+                                                <h2 className='display-6'>Description</h2>
+                                                <p className='lead text-left'>{Events?.description || ''}</p>
+                                                <h3 className='display-6'>Activity</h3>
+                                                <p className='lead'>{Events?.activity?.name || ''}</p>
+                                                <h3 className='display-6'>Dates</h3>
+                                                <p className='lead'>{new Date(Events?.start).toLocaleString()} - {new Date(Events?.end).toLocaleString()}</p>
+                                            </span>
+                                            <div className='mt-5 text-center'>
+                                                <p>
+                                                   {container.indexOf(currentUser) === -1 ? <button onClick={() => {
+                                                        clickHandler()
+                                                    }} type="button" className='btn btn-primary btn-lg rounded-pill'>RSVP</button> : null } 
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="container mt-3">
+                                            <h3 className='display-6'>Attendees</h3>
+                                            <table className="table">
+                                                <tbody>
+                                                    {attendeesList.map(attendee => {
+                                                        return (
+                                                            <tr key={attendee.id}>
+                                                                <td>{attendee.first_name} {attendee.last_name}</td>
+                                                            </tr>
+                                                        )
+
+                                                    })}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
-    )        
+    )
 }
 
-export default FetchActivities
+export default FetchEvent

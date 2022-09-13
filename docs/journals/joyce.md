@@ -1,4 +1,54 @@
+## Sunday, September 11, 2022
+Finished the new home page and created the intro page
+which is where newly registered users will be directed
+to teach them what to do to get the most of of the app.
+Updated more CSS and figured out how to crop images with
+out distorting them.
+
+## Friday, September 9, 2022
+Been building out the user profile page and got all the
+basic info in there. Started new home page to replace
+current one.
+
+## Thursday, September 8, 2022
+Was able to finally update the event detail page to show
+the list of attendees. Wrote the set up for the events
+unit test and the first unit test. Doesn't seem to pass
+at this time. Will keep working on it. James and I both
+figured out a way to navigate to the appropriate event
+detail page
+
+## Wednesday, September 7, 2022
+Got event details to show up correctly, updated all
+the css on the login, logout, signup, nav bar and updated
+the whole overall feel of the website to match the design
+of the main home page.
+
+## Tuesday, September 6, 2022
+Worked on the homepage and updated the register link.
+We were working on the authorization peice for awhile
+today and the token.
+
+## Friday, September 2, 2022
+Continued to work on the home page. Added the name of
+our app into the header image. Working to add a call
+to action button that links to the registration today.
+Still trying to figure out what more to add to that
+home page because I'm not sure I like the original idea.
+
+## Thursday, September 1, 2022
+Created events list page reusing the card component
+that I used to create the main home page. Tweaked
+the components to make them all look even and implemented
+a search using stateful functions so that as you type, the
+event cards filter and updated home page css again.
+
 ## Wednesday, August 31, 2022
+Created card component for events. Was able to update 
+event card columns to be maxed out at 3 for homepage
+display using a slice function after playing around
+with it for awhile. Also updated title and the header
+photo was added to the main home page.
 
 ## Tuesday, August 30, 2022
 Today we started divvying up the to do list a little more. James

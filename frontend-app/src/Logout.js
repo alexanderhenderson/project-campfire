@@ -1,11 +1,12 @@
-import React from 'react';
-import { useState } from 'react';
-import { useToken } from './Authorization';
+import React from 'react'
+import { useState } from 'react'
+import { useToken } from './Authorization'
 
 
 export default function LogOut() {
-
+    // eslint-disable-next-line no-unused-vars
     const [token, login, logout] = useToken();
+    // eslint-disable-next-line no-unused-vars
     const [logoutResponse, setLogoutResponse] = useState();
 
     async function onSubmit(){
@@ -27,8 +28,8 @@ export default function LogOut() {
           <div className="card shadow">
             <div className = "card body px-4 py-4">
               <form>
-                <h1> Log Out / Flee  </h1>
-                <button type="button" className="btn btn-success" onClick={onSubmit}>Log Out</button>
+                <h1> Log Out </h1>
+                <button type="button" className="btn btn-primary" onClick={onSubmit}>Log Out</button>
               </form>
               {/* <p className="fs-5" hidden={ (loginResponse !== undefined) ? false : true }> {loginResponse} </p>               */}
               </div>

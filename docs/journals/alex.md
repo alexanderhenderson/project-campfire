@@ -101,6 +101,28 @@ Thursday 9/1
     getUserInfo function. This might be best to store in a prop but for now we will just use the
     function to call for the user id and name when we need it. 
 
+    Store username and id in auth context
+
+Wednesday 9/8
+    It's been a long week.
+
+    Cookies expires at 24 hours, we spend a moment trying to decide when to refresh them with a test
+    in the authprovider declaration, but it wasn't working as expected (it only worked in a file
+    that authprovider was imported in). For the moment we sidestepped the issue by setting the tokens
+    to expire after 30 days. 
+
+    Issues with state values not getting set before the page loads continued to plague us for a while.
+    We abandoned the function I built and made an api endpoint in the users microservice that returns
+    the user details for a currently logged in user (the user in the active token). This still had
+    issues so James and I figured out how to use promise chains to set everything we need to set the
+    state following a fetch request.
+
+    I'm working on the friend finder / member matcher / kindler that helps users find other users in
+    their area with similar interests. Goal is to have an api endpoint in Django that returns a list 
+    of 10 users, sorted from best match to worst (with enough users, this would return a list of 10
+    users who are decent matches). Currently we have no messenger so a user will just be able to 
+    email another user to set something up - once our MVP is finished this will hopefully change. 
+
     
 
 

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://localhost:3000/Activities/list -->
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" href="{http://localhost:3000}/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="manifest" href="http://localhost:3000/manifest.json" />
+    <title>Campfire</title>
+    <link
+    rel="stylesheet"
+    href="./Campfire_files/bootstrap.min.css"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Questrial"
+    />
+    <script defer="" src="./Campfire_files/bundle.js"></script>
+    <style>
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+          "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      code {
+        font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+          monospace;
+      }
+
+      .picture-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2em;
+        padding-bottom: 1em;
+      }
+
+      .picture-card {
+        background-color: rgba(240, 195, 140, 0.7);
+        border-radius: 4ch;
+        display: flex;
+        align-content: stretch;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        height: 20rem;
+        width: 26rem;
+        box-shadow: 0 0.2rem 1rem rgba(0, 1, 0, 1);
+      }
+
+      .small-card {
+        background-color: rgba(255, 182, 93, 0.864);
+        border-radius: 4ch;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        height: 4rem;
+      }
+
+      .button-font {
+        font-weight: bold;
+        color: rgba(0, 0, 0, 0.793);
+        background-color: rgb(255, 207, 104);
+        border: 3px solid #bc9100;
+      }
+
+      picture {
+        display: grid;
+        place-items: center;
+        vertical-align: middle;
+      }
+
+      nav {
+        border-radius: 20px 20px 20px 20px;
+        margin-top: 3px;
+        margin-left: 7px;
+        margin-right: 7px;
+        box-shadow: 0 0.2rem 0.5rem rgba(0, 1, 0, 0.5);
+      }
+
+      .special {
+        padding-top: 5rem;
+      }
+
+      .light_padding {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
+      .profile_circle {
+        border-radius: 100ch;
+        height: 4rem;
+        width: 4rem;
+        display: flex;
+        justify-content: right;
+        align-items: right;
+
+        border: 3px solid #ffc507e0;
+      }
+
+      .special_nav {
+        flex-direction: row-reverse;
+      }
+
+      /*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9pbmRleC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxTQUFTO0VBQ1Q7O2NBRVk7RUFDWixtQ0FBbUM7RUFDbkMsa0NBQWtDO0FBQ3BDOztBQUVBO0VBQ0U7YUFDVztBQUNiOztBQUVBO0VBQ0UsYUFBYTtFQUNiLHFDQUFxQztFQUNyQyxRQUFRO0VBQ1IsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsMENBQTBDO0VBQzFDLGtCQUFrQjtFQUNsQixhQUFhO0VBQ2Isc0JBQXNCO0VBQ3RCLHVCQUF1QjtFQUN2QixlQUFlO0VBQ2Ysc0JBQXNCO0VBQ3RCLG1CQUFtQjtFQUNuQixhQUFhO0VBQ2IsWUFBWTtFQUNaLHNDQUFzQzs7QUFFeEM7O0FBRUE7RUFDRSwyQ0FBMkM7RUFDM0Msa0JBQWtCO0VBQ2xCLGFBQWE7RUFDYixxQkFBcUI7RUFDckIsdUJBQXVCO0VBQ3ZCLGVBQWU7RUFDZixzQkFBc0I7RUFDdEIsbUJBQW1CO0VBQ25CLFlBQVk7O0FBRWQ7O0FBRUE7RUFDRSxpQkFBaUI7RUFDakIsMkJBQTJCO0VBQzNCLG9DQUFvQztFQUNwQyx5QkFBeUI7O0FBRTNCOztBQUVBO0VBQ0UsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQixzQkFBc0I7QUFDeEI7O0FBRUE7RUFDRSxtQ0FBbUM7RUFDbkMsZUFBZTtFQUNmLGdCQUFnQjtFQUNoQixpQkFBaUI7RUFDakIsd0NBQXdDOztBQUUxQzs7QUFFQTtFQUNFLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGlCQUFpQjtFQUNqQixvQkFBb0I7QUFDdEI7QUFDQTtFQUNFLG9CQUFvQjtFQUNwQixZQUFZO0VBQ1osV0FBVztFQUNYLGFBQWE7RUFDYixzQkFBc0I7RUFDdEIsa0JBQWtCOztFQUVsQiwyQkFBMkI7RUFDM0I7O0FBRUY7RUFDRTtBQUNGIiwic291cmNlc0NvbnRlbnQiOlsiYm9keSB7XG4gIG1hcmdpbjogMDtcbiAgZm9udC1mYW1pbHk6IC1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgJ1NlZ29lIFVJJywgJ1JvYm90bycsICdPeHlnZW4nLFxuICAgICdVYnVudHUnLCAnQ2FudGFyZWxsJywgJ0ZpcmEgU2FucycsICdEcm9pZCBTYW5zJywgJ0hlbHZldGljYSBOZXVlJyxcbiAgICBzYW5zLXNlcmlmO1xuICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDtcbiAgLW1vei1vc3gtZm9udC1zbW9vdGhpbmc6IGdyYXlzY2FsZTtcbn1cblxuY29kZSB7XG4gIGZvbnQtZmFtaWx5OiBzb3VyY2UtY29kZS1wcm8sIE1lbmxvLCBNb25hY28sIENvbnNvbGFzLCAnQ291cmllciBOZXcnLFxuICAgIG1vbm9zcGFjZTtcbn1cblxuLnBpY3R1cmUtZ3JpZCB7XG4gIGRpc3BsYXk6IGdyaWQ7XG4gIGdyaWQtdGVtcGxhdGUtY29sdW1uczogcmVwZWF0KDMsIDFmcik7XG4gIGdhcDogMmVtO1xuICBwYWRkaW5nLWJvdHRvbTogMWVtO1xufVxuXG4ucGljdHVyZS1jYXJkIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNDAsIDE5NSwgMTQwLCAwLjcpO1xuICBib3JkZXItcmFkaXVzOiA0Y2g7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWNvbnRlbnQ6IHN0cmV0Y2g7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBmbGV4LXdyYXA6IHdyYXA7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIGhlaWdodDogMjByZW07XG4gIHdpZHRoOjI2cmVtIDtcbiAgYm94LXNoYWRvdzogMCAuMnJlbSAxcmVtIHJnYmEoMCwxLDAsMSk7XG4gICBcbn1cblxuLnNtYWxsLWNhcmQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDI1NSwgMTgyLCA5MywgMC44NjQpO1xuICBib3JkZXItcmFkaXVzOiA0Y2g7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGFsaWduLWNvbnRlbnQ6IGNlbnRlcjtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIGZsZXgtd3JhcDogd3JhcDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgaGVpZ2h0OiA0cmVtO1xuICBcbn1cblxuLmJ1dHRvbi1mb250IHtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIGNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuNzkzKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDI1NSwgMjA3LCAxMDQpO1xuICBib3JkZXI6IDNweCBzb2xpZCAjYmM5MTAwO1xuXG59XG5cbnBpY3R1cmUge1xuICBkaXNwbGF5OiBncmlkOyBcbiAgcGxhY2UtaXRlbXM6IGNlbnRlcjtcbiAgdmVydGljYWwtYWxpZ246IG1pZGRsZTsgICAgXG59XG5cbm5hdiB7XG4gIGJvcmRlci1yYWRpdXM6IDIwcHggMjBweCAyMHB4IDIwcHggOyAgIFxuICBtYXJnaW4tdG9wOiAzcHg7XG4gIG1hcmdpbi1sZWZ0OiA3cHg7XG4gIG1hcmdpbi1yaWdodDogN3B4O1xuICBib3gtc2hhZG93OiAwIC4ycmVtIC41cmVtIHJnYmEoMCwxLDAsLjUpOyBcbiBcbn1cblxuLnNwZWNpYWwge1xuICBwYWRkaW5nLXRvcDogNXJlbTtcbn1cblxuLmxpZ2h0X3BhZGRpbmcge1xuICBwYWRkaW5nLXRvcDogM3JlbTtcbiAgcGFkZGluZy1ib3R0b206IDNyZW07XG59XG4ucHJvZmlsZV9jaXJjbGUge1xuICBib3JkZXItcmFkaXVzOiAxMDBjaDtcbiAgaGVpZ2h0OiA0cmVtO1xuICB3aWR0aDo0cmVtIDtcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1jb250ZW50OiByaWdodDtcbiAgYWxpZ24taXRlbXM6IHJpZ2h0O1xuICBcbiAgYm9yZGVyOiAzcHggc29saWQgI2ZmYzUwN2UwO1xuICB9XG5cbi5zcGVjaWFsX25hdiB7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3ctcmV2ZXJzZVxufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      src="./Campfire_files/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

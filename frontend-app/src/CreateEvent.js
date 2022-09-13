@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import {useJsApiLoader,GoogleMap,Marker,Autocomplete,DirectionsRenderer,} from '@react-google-maps/api'
 import usePlacesAutocomplete , {getGeocode,getLatLng,} from "use-places-autocomplete" ;
-import { useStatStyles } from '@chakra-ui/react';
+
 
 const center = { lat: 69, lng: 69 }
 const libraries = ['places']
@@ -23,12 +23,12 @@ function BootstrapInputReadOnly(props) {
     </div>)
 }
 function BootstrapInputDate(props) {
-    const { id, placeholder, labletext, changeHandler, value, type } =props;
+    const { id, placeholder, labletext, changeHandler, value, type ,changehandler2} =props;
     return(
     <div className="input-group mb-3">
         <input  name="date" id={id} value = {value} onChange={changeHandler} className="form-control" type={type} placeholder={placeholder} />
         <span className="input-group-text">@</span>
-        <input type="time" className="form-control" placeholder="Server" aria-label="Server"/>
+        <input type="time" className="form-control" placeholder="Server" aria-label="Server" onChange={changehandler2}/>
     </div>
     )
 }
@@ -49,11 +49,14 @@ function CreateEvent() {
     const[start, SetStart] = useState('');
     const[end, setEnd] = useState('');
     const[description, setDescription] = useState('');
-    const[owner, setOwner] = useState('');
+    const[owner, setOwner] = useState(0);
     const[activity, setActivity] = useState('');
     const[picture_url, setPicture_url] = useState('');
     const[map, setMap] = useState(/** @type google.maps.Map */ (null));
     const[selected, setSelected] = useState({});
+    const[userData, setUserId] = useState("");
+    const[startTime, setStartTime] = useState("");
+    const[endTime, setEndTime] = useState("");
 
 
 
@@ -68,12 +71,29 @@ function CreateEvent() {
                 console.log(err.stack)
         }
         }
-        (async () => await fetchItems())()
-    },[])
+        fetchItems()
+
+
+        const getUserdata = async () => {
+            const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
+            console.log("sendhelp")
+            const response = await fetch(url, { credentials: "include" });
+            if (response.ok) {
+                console.log("67")
+                const userData = await response.json()
+                console.log(userData)
+                setUserId(userData)
+            }
+        }
+        getUserdata()
+
+    }, [])
+
 
     function Tester(){
         const oops = Object.values(activitys)
         console.log(activitys)
+        console.log(userData)
 
     }
 
@@ -98,32 +118,33 @@ function CreateEvent() {
         map.setZoom(15);
       }
     
-      function clearGeocode() {
-        markerRef.current.value = ''
-      }
 
-      async function onSubmit() {
-console.log("iwannacry")
+    async function onSubmit(e) {
+        e.preventDefault()
+        console.log("iwannacry")
         const data = {
             "name": name,
-            "latitude": selected.lat,
-            "longitude": selected.lng,
-            "start": start,
-            "end": end,
+            "latitude": selected.lat.toString(),
+            "longitude": selected.lng.toString(),
+            "start": start+'T'+startTime+':00+00:00',
+            "end": end+'T'+endTime+':00+00:00',
             "description": description,
-            "owner": owner,
-            "activity": activity,
+            "owner": userData.id,
+            "activity": Number(Array.from(activity)[0]),
             "picture_url": picture_url
         }
+        console.log(data)
+        const url = "http://localhost:8090/events/";
         const doodle = JSON.stringify(data)
         console.log(doodle)
-        const response = await fetch(EventAPI_URL, {
+        const response = await fetch(url, {
           method: "post",
-          doodle,
+          body: doodle,
           headers: {
             "Content-Type": "application/json",
           },
-        });}
+        });
+    }
 
       
 
@@ -189,6 +210,7 @@ if (activitys.length !== 0) {
                     placeholder="start Date and time" 
                     labletext="start Date" 
                     value={start} 
+                    changehandler2={e => setStartTime(e.target.value)}
                     changeHandler={e => SetStart(e.target.value)}
                     type="date">
                 </BootstrapInputDate>
@@ -199,6 +221,7 @@ if (activitys.length !== 0) {
                     labletext="end" 
                     value={end} 
                     changeHandler={e => setEnd(e.target.value)}
+                    changehandler2={e => setEndTime(e.target.value)}
                     type="date">
                 </BootstrapInputDate><BootstrapInput 
                     id="description"
@@ -207,19 +230,12 @@ if (activitys.length !== 0) {
                     value={description} 
                     changeHandler={e => setDescription(e.target.value)}
                     type="description">
-                </BootstrapInput><BootstrapInput 
-                    id="owner"
-                    placeholder="owner" 
-                    labletext="owner" 
-                    value={owner} 
-                    changeHandler={e => setOwner(e.target.value)}
-                    type="owner">
                 </BootstrapInput>
                 <label className="form-lable">Chose yor activity</label>
-                <select className="form-select" id="activitys" aria-label="chose your activity">
+                <select className="form-select" id="activitys" aria-label="chose your activity" onChange={e => setActivity(e.target.value)} >
                     <option value="">Open this select menu</option>
                     {
-                    activitys[0].map((activity) => { return (<option key={(activity)}>{activity.name}</option>)})
+                    activitys[0].map((activity) => { return (<option onselect={e => setActivity(activity.id)} key={(activity.id)}>{activity.id}:{activity.name}</option>)})
                     }
                 </select>
                 <BootstrapInput 

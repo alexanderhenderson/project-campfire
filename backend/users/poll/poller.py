@@ -15,27 +15,21 @@ django.setup()
 # the below import works once the program is running
 from users_app.models import ActivityVO
 
+
 def get_activities():
 
-    # print("We are in the polling function")
     response = requests.get("http://events:8000/events/activities/")
-
     content = json.loads(response.content)
 
-    # print("Polled and received content: ", content)
-
-
     for activity in content["Activities"]:
-        # print("activity: ", activity)
         ActivityVO.objects.update_or_create(
-            id = activity['id'],
-            defaults = { "name" : activity['name'] }
+            id=activity['id'],
+            defaults={"name": activity['name']}
         )
 
 
 def poll():
     while True:
-        # print('User poller active - polling')
         try:
             get_activities()
         except Exception as e:
