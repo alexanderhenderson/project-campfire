@@ -128,9 +128,12 @@ def api_friend_kindler(request):
         # equal to the number of activity entries in the database.
         num_activities = len(ActivityVO.objects.all())
 
-        # we go from the starting key down to zero and stop there. We are looking
-        # for 9 user IDs, less than that is fine if the database only has 9 users
-        # with an activity selected. The results list will be a list of 9 or fewer
+        # we go from the starting key down to zero and stop there. We are 
+        # looking
+        # for 9 user IDs, less than that is fine if the database only has 
+        # 9 users
+        # with an activity selected. The results list will be a list of 9 
+        # or fewer
         # user IDs which are who we have matched with the client user.
         results_list = []
         done = False

@@ -1,10 +1,9 @@
-from tkinter.tix import Form
+# from tkinter.tix import Form
 from django.test import TestCase
 import json
 from .models import ActivityVO, User
 from django.urls import reverse
-from .models import User
-from django.http.cookie import SimpleCookie
+# from django.http.cookie import SimpleCookie
 
 #  lient.cookies is an instance of http.cookies.SimpleCookie
 
@@ -83,7 +82,8 @@ class UsersApiTest(TestCase):
         # body: form,
         # });
 
-        # resp = self.client.post(url, {'username':'user@foo.com', 'password':'pass'}, format='json')
+        # resp = self.client.post(url, {'username':'user@foo.com', 
+        # 'password':'pass'}, format='json')
         # self.assertEqual(resp.status_code, 200)
         # self.assertTrue('token' in resp.data)
         # token = resp.data['token']
@@ -93,10 +93,12 @@ class UsersApiTest(TestCase):
         # client.cookies[key] = data
 
         # verification_url = reverse('api-jwt-verify')
-        # resp = self.client.post(verification_url, {'token': token}, format='json')
+        # resp = self.client.post(verification_url,
+        #  {'token': token}, format='json')
         # self.assertEqual(resp.status_code, status.HTTP_200_OK)
 
-        # resp = self.client.post(verification_url, {'token': 'abc'}, format='json')
+        # resp = self.client.post(verification_url, {'token': 'abc'},
+        #  format='json')
         # self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
 
         # client = APIClient()
