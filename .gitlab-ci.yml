@@ -60,9 +60,9 @@ deploy-users-api-image-job:
     - docker:20.10.16-dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker login --username=_ --password-stdin=$HEROKU_API_KEY registry.heroku.com
-    - docker pull ${CI_REGISTRY_IMAGE}/users-api:latest
-    - docker tag ${CI_REGISTRY_IMAGE}/users-api:latest registry.heroku.com/$HEROKU_ACCOUNT_USERS_API/web:latest
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - docker pull ${CI_REGISTRY_IMAGE}/users-api:$CI_JOB_ID
+    - docker tag ${CI_REGISTRY_IMAGE}/users-api:$CI_JOB_ID registry.heroku.com/$HEROKU_ACCOUNT_USERS_API/web:latest
     - docker push registry.heroku.com/$HEROKU_ACCOUNT_USERS_API/web:latest
 
 release-users-api-job:
@@ -240,4 +240,3 @@ pages:
   artifacts:
     paths:
       - public
-      
