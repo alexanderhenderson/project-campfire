@@ -118,7 +118,9 @@ def api_friend_kindler(request):
                 # exist we create one, or we add the user id to the
                 # existing value if the key does exist.
                 if number_common_activities in resultsV2:
-                    resultsV2[number_common_activities].append(compared_user.id)
+                    resultsV2[number_common_activities].append(
+                        compared_user.id
+                    )
                 else:
                     resultsV2[number_common_activities] = [compared_user.id]
 
@@ -196,6 +198,7 @@ class UserDetailEncoder(ModelEncoder):
         "favorite_activities": ActivityVOEncoder(),
         "friends": FriendsEncoder(),
     }
+
 
 class CommentEncoder(ModelEncoder):
     model = Comment
@@ -398,18 +401,20 @@ def api_friend_detail(request):
 
 
 @auth.jwt_login_required
-@require_http_methods(['GET', 'POST'])
+@require_http_methods(["GET", "POST"])
 def list_comments(request):
-    if request.method == 'GET':
+    if request.method == "GET":
         comments = Comment.objects.all()
         return JsonResponse({"comments": comments}, encoder=CommentEncoder)
-    if request.method == 'POST':
+    if request.method == "POST":
         try:
             token_data = request.payload
             user_id = token_data["user"]["id"]
             content = json.loads(request.body)
-            content['commenter'] = Comment.objects.get(id=content[user_id])
-            content['user_profile'] = Comment.objects.get(id=content['user_profile'])
+            content["commenter"] = Comment.objects.get(id=content[user_id])
+            content["user_profile"] = Comment.objects.get(
+                id=content["user_profile"]
+            )
             comment = Comment.objects.create(**content)
             comment.save()
             return JsonResponse({"comment": comment}, encoder=CommentEncoder)
@@ -418,18 +423,19 @@ def list_comments(request):
             response.status_code = 400
             return response
 
+
 @auth.jwt_login_required
-@require_http_methods(['GET', 'PUT', 'DELETE'])
+@require_http_methods(["GET", "PUT", "DELETE"])
 def comment_detail(request, pk):
-    if request.method == 'GET':
+    if request.method == "GET":
         try:
             comment = comment.objects.get(id=pk)
-            return JsonResponse(user, encoder=CommentEncoder, safe=False)
+            return JsonResponse(User, encoder=CommentEncoder, safe=False)
         except Comment.DoesNotExist:
             response = JsonResponse({"Error": "Comment does not exist"})
             response.status_code = 404
             return response
-    elif request.method == 'DELETE':
+    elif request.method == "DELETE":
         try:
             comment = Comment.objects.get(id=pk)
             comment.delete()
@@ -440,7 +446,7 @@ def comment_detail(request, pk):
             )
         except Comment.DoesNotExist:
             return JsonResponse({"Error": "Comment does not exist"})
-    elif request.method == 'PUT':
+    elif request.method == "PUT":
         try:
             content = json.loads(request.body)
             comment = User.objects.get(id=pk)
