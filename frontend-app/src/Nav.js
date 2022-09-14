@@ -4,15 +4,37 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 // import NavDropdown from 'react-bootstrap/NavDropdown'
 
+function settingLinks() {
+  const NAVLINK = process.env.REACT_APP_NAVLINK
+  
+  // declare link variables here
+  let home = ''
+  let intro = ''
+
+  if (NAVLINK !== undefined) {
+    // add a link variable = NAVLINK + current href
+    home = NAVLINK + "/"
+    intro = NAVLINK + "/intro/"
+  } else {
+    // add a link variable = current href
+    home = "/"
+    intro = "/intro/"
+  }
+  // add link variable to return array
+  return ([home, intro])
+}
 
 function NavBar() {
+  // add link variable to declare const array
+  const [homeLink, introLink] = settingLinks()
+
   return (
     <div className='mb-3'>
       <Navbar sticky="top" variant="dark" bg="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand href="/">
             <img
-            // will need to update across the app
+            // will need to update all src= across the app
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
               width="30"
               height="30"
@@ -20,14 +42,15 @@ function NavBar() {
               alt="logo"
             />
           </Navbar.Brand>
-          <Navbar.Brand href="/">Campfire</Navbar.Brand>
+          <Navbar.Brand href={homeLink}>Campfire</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar-dark-example" />
           <Navbar.Collapse id="navbar-dark-example">
+            {/* replace href with {link variable} */}
             <Nav>
-              <Nav.Link href="/">
+              <Nav.Link href={homeLink}>
                 Home
               </Nav.Link>
-              <Nav.Link href="/intro/">
+              <Nav.Link href={introLink}>
                 New Here?
               </Nav.Link>
               <Nav.Link href="/profile/">

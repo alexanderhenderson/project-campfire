@@ -41,7 +41,6 @@ ALLOWED_HOSTS = [
     "http://localhost:8080",
     "127.0.0.1",
     "[::1]",
-    "*",
     os.environ.get("DEPLOYED_HOST", "localhost"),
 ]
 
@@ -70,12 +69,13 @@ DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=30)
 # Your DEBUG value MUST be False in production
 DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
 
+# CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8080",
     "https://66617.gitlab.io",
-    "*",
-    # "https://campfire-events-api.herokuapp.com",
+    "https://campfire-events-api.herokuapp.com",
     os.environ.get("CORS_HOST", "http://localhost:3001"),
 ]
 CORS_ALLOW_CREDENTIALS = True
