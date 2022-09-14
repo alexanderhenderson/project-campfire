@@ -11,28 +11,28 @@ variables:
   DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
   DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
 
-# events-api-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - cd ./backend/events
-#     - pip install -r requirements.txt
-#     - python manage.py test
+events-api-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd ./backend/events
+    - pip install -r requirements.txt
+    - python manage.py test
 
-# users-api-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - cd ./backend/users
-#     - pip install -r requirements.txt
-#     - python manage.py test
+users-api-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd ./backend/users
+    - pip install -r requirements.txt
+    - python manage.py test
 
-# lint-python-projects-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - pip install flake8
-#     - flake8 ./backend/users ./backend/events
+lint-python-projects-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 ./backend/users ./backend/events
 
 build-users-api-job:
   # rules:
@@ -44,7 +44,6 @@ build-users-api-job:
   script:
     - cd backend/users
     - docker build -t ${CI_REGISTRY_IMAGE}/users_api:latest .
-    # potentially CD_PIPELINE_ID instead if CI_JOB_ID
     - docker tag ${CI_REGISTRY_IMAGE}/users_api:latest ${CI_REGISTRY_IMAGE}/users_api_backups:$CI_PIPELINE_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker push ${CI_REGISTRY_IMAGE}/users_api_backups:$CI_PIPELINE_ID
@@ -214,9 +213,9 @@ release-events-poller-job:
 front-end-build-job:
   image: node:lts-bullseye
   stage: build
-  # needs:
-  #   - users-api-test-job
-  #   - lint-python-projects-job
+  needs:
+    - users-api-test-job
+    - lint-python-projects-job
   variables:
     PUBLIC_URL: https://66617.gitlab.io/project-gamma
   script:

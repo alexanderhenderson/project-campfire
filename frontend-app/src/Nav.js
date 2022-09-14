@@ -10,23 +10,44 @@ function settingLinks() {
   // declare link variables here
   let home = ''
   let intro = ''
+  let profile = ''
+  let events = ''
+  let activities = ''
+  let kindler = ''
+  let signup = ''
+  let login = ''
+  let logout = ''
 
   if (NAVLINK !== undefined) {
     // add a link variable = NAVLINK + current href
     home = NAVLINK + "/"
     intro = NAVLINK + "/intro/"
+    profile = NAVLINK + "/profile/"
+    events = NAVLINK + "/events/"
+    activities = NAVLINK + "/activities/"
+    kindler = NAVLINK + "/kindler/"
+    signup = NAVLINK + "/signup/"
+    login = NAVLINK + "/login/"
+    logout = NAVLINK + "/logout/"
   } else {
     // add a link variable = current href
     home = "/"
     intro = "/intro/"
+    profile = "/profile/"
+    events = "/events/"
+    activities = "/activities/"
+    kindler = "/kindler/"
+    signup = "/signup/"
+    login = "/login/"
+    logout = "/logout/"
   }
   // add link variable to return array
-  return ([home, intro])
+  return ([home, intro, profile, events, activities, kindler, signup, login, logout])
 }
 
 function NavBar() {
   // add link variable to declare const array
-  const [homeLink, introLink] = settingLinks()
+  const [homeLink, introLink, profileLink, eventsLink, activitiesLink, kindlerLink, signupLink, loginLink, logoutLink] = settingLinks()
 
   return (
     <div className='mb-3'>
@@ -53,16 +74,16 @@ function NavBar() {
               <Nav.Link href={introLink}>
                 New Here?
               </Nav.Link>
-              <Nav.Link href="/profile/">
+              <Nav.Link href={profileLink}>
                 Profile 🚧
               </Nav.Link>
-              <Nav.Link href="/events/">
+              <Nav.Link href={eventsLink}>
                 Events
               </Nav.Link>
-              <Nav.Link href="/activities/">
+              <Nav.Link href={activitiesLink}>
                 Activities
               </Nav.Link>
-              <Nav.Link href="/kindler/">
+              <Nav.Link href={kindlerLink}>
                 Kindler
               </Nav.Link>
 
@@ -77,18 +98,15 @@ function NavBar() {
                 <NavDropdown.Divider />
               </NavDropdown> */}
 
-                <Nav.Link href="/signup">
+                <Nav.Link href={signupLink}>
                   Sign Up
                 </Nav.Link>
-                <Nav.Link href="/login">
+                <Nav.Link href={loginLink}>
                   Login
                 </Nav.Link>
-                <Nav.Link href="/logout">
+                <Nav.Link href={logoutLink}>
                   Logout
                 </Nav.Link>
-
-
-
             </Nav>
           </Navbar.Collapse>
         </Container>
