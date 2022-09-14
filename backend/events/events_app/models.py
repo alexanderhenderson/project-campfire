@@ -43,8 +43,8 @@ class Event(models.Model):
     )
     start = models.DateTimeField(null=False, blank=False)
     end = models.DateTimeField(null=False, blank=False)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    latitude = models.DecimalField(max_digits=19, decimal_places=16)
+    longitude = models.DecimalField(max_digits=19, decimal_places=16)
     attendees = models.ManyToManyField(
         UserVO, blank=True, related_name="users"
     )

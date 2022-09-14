@@ -8,7 +8,6 @@ import { useState, useEffect } from 'react'
 import { useToken } from './Authorization'
 
 
-
 export default function NavBar() {
   // eslint-disable-next-line no-unused-vars
   const [token, login, logout] = useToken()
@@ -32,8 +31,6 @@ export default function NavBar() {
     console.log('LOGGED OUT SUCCESSFULLY')
   }
 
-  console.log('LOGGED')
-
   return (
     <div className='mb-3'>
       <Navbar sticky="top" variant="dark" bg="dark" expand="lg">
@@ -51,48 +48,15 @@ export default function NavBar() {
           <Navbar.Toggle aria-controls="navbar-dark-example" />
           <Navbar.Collapse id="navbar-dark-example">
             <Nav>
-              <Nav.Link href="/" className='mx-1'>
-                Home
-              </Nav.Link>
-              <Nav.Link href="/intro/" className='mx-1'>
-                New Here?
-              </Nav.Link>
-              <Nav.Link href="/profile/" className='mx-1'>
-                Profile 🚧
-              </Nav.Link>
-              <Nav.Link href="/events/" className='mx-1'>
-                Events
-              </Nav.Link>
-              <Nav.Link href="/activities/" className='mx-1'>
-                Activities
-              </Nav.Link>
-              <Nav.Link href="/kindler/" className='mx-1'>
-                Kindler
-              </Nav.Link>
-
-              {/* <NavDropdown
-                id="nav-dropdown-dark-example"
-                title="Social"
-                menuVariant="dark"
-              >
-                <NavDropdown.Item href="/events/new/">
-                  Add Event 🚧
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-              </NavDropdown> */}
-
-              <Nav.Link href="/signup" className={"mx-1" + (loggedIn ? " d-none":"")}>
-                Sign Up
-              </Nav.Link>
-              <Nav.Link href="/login" className={"xy-1" + (loggedIn ? " d-none":"") }>
-                Login
-              </Nav.Link>
-              <Nav.Link onClick={onLogout} className={"mx-1" + (loggedIn ? "":" d-none")}>
-                Logout
-              </Nav.Link>
-
-
-
+              <Nav.Link href="/" className='mx-1'> Home </Nav.Link>
+              <Nav.Link href="/intro/" className='mx-1'> New Here? </Nav.Link>
+              <Nav.Link href="/profile/" className='mx-1'> Profile </Nav.Link>
+              <Nav.Link href="/events/" className='mx-1'> Events </Nav.Link>
+              <Nav.Link href="/activities/" className='mx-1'> Activities </Nav.Link>
+              <Nav.Link href="/kindler/" className='mx-1'> Kindler </Nav.Link>
+              <Nav.Link href="/signup" className={"mx-1" + (loggedIn ? " d-none":"")}> Sign Up </Nav.Link>
+              <Nav.Link href="/login" className={"xy-1" + (loggedIn ? " d-none":"") }> Login </Nav.Link>
+              <Nav.Link onClick={onLogout} className={"mx-1" + (loggedIn ? "":" d-none")}> Logout </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
