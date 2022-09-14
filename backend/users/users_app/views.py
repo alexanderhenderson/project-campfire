@@ -429,7 +429,7 @@ def list_comments(request):
 def comment_detail(request, pk):
     if request.method == "GET":
         try:
-            comment = comment.objects.get(id=pk)
+            comment = Comment.objects.get(id=pk)
             return JsonResponse(User, encoder=CommentEncoder, safe=False)
         except Comment.DoesNotExist:
             response = JsonResponse({"Error": "Comment does not exist"})
