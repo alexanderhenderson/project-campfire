@@ -217,8 +217,8 @@ front-end-build-job:
     - users-api-test-job
     - lint-python-projects-job
   variables:
-    PUBLIC_URL: https://66617.gitlab.io/campfire
-    REACT_APP_NAVLINK: /campfire
+    PUBLIC_URL: https://66617.gitlab.io/project-gamma
+    REACT_APP_NAVLINK: /project-gamma
   script:
     - cd frontend-app
     - npm install
