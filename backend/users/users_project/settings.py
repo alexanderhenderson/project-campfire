@@ -41,6 +41,7 @@ ALLOWED_HOSTS = [
     "http://localhost:8080",
     "127.0.0.1",
     "[::1]",
+    "campfire-events-api.herokuapp.com",
     os.environ.get("DEPLOYED_HOST", "localhost"),
 ]
 
