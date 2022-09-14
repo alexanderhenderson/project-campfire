@@ -41,6 +41,7 @@ ALLOWED_HOSTS = [
     "http://localhost:8080",
     "127.0.0.1",
     "[::1]",
+    "*",
     os.environ.get("DEPLOYED_HOST", "localhost"),
 ]
 
@@ -52,6 +53,7 @@ AUTH_USER_MODEL = 'users_app.User'  #  where user is the app name and User is th
 
 INSTALLED_APPS = [
     'users_app.apps.UsersAppConfig',
+    'corsheaders',
     'djwto',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -71,7 +73,7 @@ DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8080",
-    # "https://66617.gitlab.io",
+    "https://66617.gitlab.io",
     # "https://campfire-events-api.herokuapp.com",
     os.environ.get("CORS_HOST", "http://localhost:3001"),
 ]
