@@ -12,7 +12,8 @@ function NavBar() {
         <Container fluid>
           <Navbar.Brand href="/">
             <img
-              src="/favicon.ico"
+            // will need to update across the app
+              src={`${process.env.PUBLIC_URL}/favicon.ico`}
               width="30"
               height="30"
               className="d-inline-block align-top"

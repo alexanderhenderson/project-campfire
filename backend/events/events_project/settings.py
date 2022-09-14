@@ -66,6 +66,7 @@ DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "events",
+    "*",
     os.environ.get("CORS_HOST", "http://localhost:3001"),
 ]
 CORS_ALLOW_CREDENTIALS = True
