@@ -72,11 +72,11 @@ export default function UserProfile() {
                                             <tbody>
                                                 {attendedEvents.map(att => (
                                                     <tr key={att.id}>
-                                                        <td><a className="pointer2"
+                                                        <td className="pointer2"
                                                         onClick={() => {
                                                             navigate(`/events/${att.id}/`)
-                                                          }}>{att.name}</a></td>
-                                                        <td ><img  className="tiny-card pointer"
+                                                          }}>{att.name}</td>
+                                                        <td ><img className="tiny-card pointer"
                                                          src={att.picture_url} alt="" 
                                                         onClick={() => {
                                                             navigate(`/events/${att.id}/`)
