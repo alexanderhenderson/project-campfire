@@ -78,7 +78,8 @@ export default function UserProfile() {
                                                         onClick={() => {
                                                             navigate(`/events/${att.id}/`)
                                                           }}>{att.name}</a></td>
-                                                        <td ><img  className="tiny-card pointer" src={att.picture_url} alt="" 
+                                                        <td ><img  className="tiny-card pointer"
+                                                         src={att.picture_url} alt="" 
                                                         onClick={() => {
                                                             navigate(`/events/${att.id}/`)
                                                           }}>
@@ -90,57 +91,65 @@ export default function UserProfile() {
                                     </div>
 
                                     <div className="col">
-                                        <h4>Activities List</h4>
-                                    <div className="accordion" id="accordionExample">
-                                        <div className="accordion-item">
-                                            <h2 className="accordion-header" id="headingOne">
-                                                <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                    Click to expand
-                                                </button>
-                                            </h2>
-                                            <div id="collapseOne" className="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                            <div className="accordion-body">
-                                            <div className="col">
-                                                <table className="table ">
-                                                    <tbody>
-                                                        {userData?.favorite_activities?.map(activity => (
-                                                            <tr key={activity.id}>
-                                                                <td>{activity.name}</td>
-                                                            </tr>
-                                                        ))}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            </div>
-                                            </div>
-                                        </div>           
-                                    {/* <div className="col">
                                         <h4>Favorite Activities</h4>
-                                        <table className="table">
-                                            <tbody>
-                                                {userData?.favorite_activities?.map(activity => (
-                                                    <tr key={activity.id}>
-                                                        <td>{activity.name}</td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table> */}
-                                        
-                                        <h4 className="col padding-top">Friends</h4>
-                                        <table className="table">
-                                            <tbody>
-                                                {userData?.friends?.map(friend => (
-                                                    <tr key={friend.id}>
-                                                        <td
-                                                         onClick={() => {
-                                                            navigate(`/profile/${friend.id}/`)
-                                                          }}>
-                                                        {friend.username}</td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>                
-                                        
+                                        <div className="accordion" id="accordionExample">
+                                            <div className="accordion-item">
+                                                <h2 className="accordion-header" id="headingOne">
+                                                    <button className="accordion-button" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseOne" 
+                                                    aria-expanded="true" aria-controls="collapseOne">
+                                                        Click to expand
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseOne" className="accordion-collapse collapse" 
+                                                aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                    <div className="accordion-body">
+                                                        <div className="col">
+                                                            <table className="table ">
+                                                                <tbody>
+                                                                    {userData?.favorite_activities?.map(activity => (
+                                                                        <tr key={activity.id}>
+                                                                            <td>{activity.name}</td>
+                                                                        </tr>
+                                                                    ))}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <h4 className="col padding-top-med">Friends List</h4>
+                                        <div className="accordion" id="accordionExample">
+                                            <div className="accordion-item">
+                                                <h2 className="accordion-header" id="headingOne">
+                                                    <button className="accordion-button" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#collapseTwo" 
+                                                        aria-expanded="true" aria-controls="collapseTwo">
+                                                    Click to expand
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseTwo" className="accordion-collapse collapse" 
+                                                    aria-labelledby="headingTwo" >
+                                                <div className="accordion-body">
+                                                    <div className="col">
+                                                        <table className="table">
+                                                            <tbody>
+                                                                {userData?.friends?.map(friend => (
+                                                                    <tr key={friend.id}>
+                                                                        <td
+                                                                        onClick={() => {
+                                                                            navigate(`/profile/${friend.id}/`)
+                                                                        }}>
+                                                                        {friend.username}</td>
+                                                                    </tr>
+                                                                ))}
+                                                            </tbody>
+                                                        </table>  
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
