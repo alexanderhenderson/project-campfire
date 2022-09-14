@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer, } from '@react-google-maps/api'
-import usePlacesAutocomplete, { getGeocode, getLatLng, } from "use-places-autocomplete";
-// import REACT_APP_GOOGLE_API_KEY 
+import usePlacesAutocomplete, { getGeocode, getLatLng, } from "use-places-autocomplete"
+import googleAPI from './keys'
 
 const center = { lat: 37.7749295, lng: -122.4194155 }
 const libraries = ['places']
@@ -49,10 +49,10 @@ function BootstrapInputDate(props) {
 }
 function CreateEvent() {
     const API_URL = `${process.env.REACT_APP_EVENTS}/events/activities/`
-    const EventAPI_URL = `${process.env.REACT_APP_EVENTS}events/`
+    const EventAPI_URL = `${process.env.REACT_APP_EVENTS}/events/`
     const containerStyle = { width: '400px', height: '400px' }
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: "AIzaSyCikgdlt4Cso4GdFZYzgkKnGdptkbXsubw",
+        googleMapsApiKey: googleAPI(),
         libraries
     })
 
@@ -67,7 +67,7 @@ function CreateEvent() {
     const [activity, setActivity] = useState('');
     const [picture_url, setPicture_url] = useState('');
     const [map, setMap] = useState(/** @type google.maps.Map */(null));
-    const [selected, setSelected] = useState({});
+    const [selected, setSelected] = useState({lat: 37.7749295, lng: -122.4194155});
     const [userData, setUserId] = useState("");
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
