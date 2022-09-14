@@ -159,13 +159,9 @@ def api_friend_kindler(request):
 
         # JSON Response
         if token_data:
-<<<<<<< HEAD
-            return JsonResponse(user_list, encoder=UserDetailEncoder, safe=False)
-=======
             return JsonResponse(
                 user_list, encoder=UserDetailEncoder, safe=False
             )
->>>>>>> 9966feef0d7a85384cc7d543293c6fb9219766e5
 
     response = JsonResponse({"token": None})
     return response
