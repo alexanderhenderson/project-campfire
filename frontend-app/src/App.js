@@ -18,7 +18,7 @@ export default function App() {
   const basename = process.env.PUBLIC_URL.replace(domain, '')
   return (
   <AuthProvider>
-    <BrowserRouter basename={basename}>
+    <BrowserRouter basename={basename + "/project-gamma/"}>
         <NavBar />
         <div className="container">
           <Routes>
