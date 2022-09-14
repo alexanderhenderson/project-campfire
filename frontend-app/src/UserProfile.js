@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
-
+import { useNavigate } from 'react-router-dom'
+import skiingguy from './Assets/skiingguy.jpeg';
+import hikingact from './Assets/hikingact.jpeg';
 
 export default function UserProfile() {
     const [userData, setUserData] = useState({})
     const [events, setEvents] = useState([])
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getUserdata = async () => {
@@ -40,7 +43,6 @@ export default function UserProfile() {
            }
         }
     }
-
     return (
         <>
             <div className="container p-4">
@@ -65,20 +67,54 @@ export default function UserProfile() {
                                             <p>{userData.city}, {userData.state}</p>
                                         </div>
                                     </div>
+
                                     <div className="col">
                                         <h4>Events I'm Attending</h4>
                                         <table className="table">
                                             <tbody>
                                                 {attendedEvents.map(att => (
                                                     <tr key={att.id}>
-                                                        <td>{att.name}</td>
-                                                        <td ><img className="tiny-card" src={att.picture_url} alt="" ></img></td>  
+                                                        <td><a className="pointer2"
+                                                        onClick={() => {
+                                                            navigate(`/events/${att.id}/`)
+                                                          }}>{att.name}</a></td>
+                                                        <td ><img  className="tiny-card pointer" src={att.picture_url} alt="" 
+                                                        onClick={() => {
+                                                            navigate(`/events/${att.id}/`)
+                                                          }}>
+                                                        </img></td>  
                                                     </tr>
                                                 ))}
                                             </tbody>
                                         </table>
                                     </div>
+
                                     <div className="col">
+                                        <h4>Activities List</h4>
+                                    <div className="accordion" id="accordionExample">
+                                        <div className="accordion-item">
+                                            <h2 className="accordion-header" id="headingOne">
+                                                <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    Click to expand
+                                                </button>
+                                            </h2>
+                                            <div id="collapseOne" className="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div className="accordion-body">
+                                            <div className="col">
+                                                <table className="table ">
+                                                    <tbody>
+                                                        {userData?.favorite_activities?.map(activity => (
+                                                            <tr key={activity.id}>
+                                                                <td>{activity.name}</td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            </div>
+                                            </div>
+                                        </div>           
+                                    {/* <div className="col">
                                         <h4>Favorite Activities</h4>
                                         <table className="table">
                                             <tbody>
@@ -88,17 +124,24 @@ export default function UserProfile() {
                                                     </tr>
                                                 ))}
                                             </tbody>
-                                        </table>
-                                        <h4>Friends</h4>
+                                        </table> */}
+                                        
+                                        <h4 className="col padding-top">Friends</h4>
                                         <table className="table">
                                             <tbody>
                                                 {userData?.friends?.map(friend => (
                                                     <tr key={friend.id}>
-                                                        <td>{friend.username}</td>
+                                                        <td
+                                                         onClick={() => {
+                                                            navigate(`/profile/${friend.id}/`)
+                                                          }}>
+                                                        {friend.username}</td>
                                                     </tr>
                                                 ))}
                                             </tbody>
-                                        </table>
+                                        </table>                
+                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
