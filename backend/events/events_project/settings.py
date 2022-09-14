@@ -38,6 +38,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "[::1]",
     "campfire-events-api.herokuapp.com",
+    "campfire-users-api.herokuapp.com",
     os.environ.get("DEPLOYED_HOST", "localhost"),
 ]
 
@@ -67,6 +68,8 @@ DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "events",
+    "https://campfire-users-api.herokuapp.com",
+    "https://campfire-events-api.herokuapp.com",
     os.environ.get("CORS_HOST", "http://localhost:3001"),
 ]
 CORS_ALLOW_CREDENTIALS = True
