@@ -117,6 +117,11 @@ export function useToken() {
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
+
+    console.log("Form data: ", typeof form)
+    // console.log("Form target?: ", form.values())
+
+
     const response = await fetch(url, {
       method: "post",
       credentials: "include",

@@ -3,7 +3,6 @@ from django.test import TestCase
 import json
 from .models import ActivityVO, User
 from django.urls import reverse
-from .models import User
 from django.http.cookie import SimpleCookie
 
 #  lient.cookies is an instance of http.cookies.SimpleCookie
@@ -31,6 +30,7 @@ class UsersApiTest(TestCase):
         self.user = User.objects.create(
             id=2,
             username="TestUser",
+            password= "password",
             first_name="Test",
             last_name="User",
             email="testemail@gmail.com",
@@ -70,18 +70,20 @@ class UsersApiTest(TestCase):
         print("Access Token: ", request)#.COOKIES['jwt_access_token'])
 
         test = Form()
-        test.append("username")
+        #test.append("username")
+
+        print("Test form?: ", dir(test))
 
     
 
-        const form = new FormData();
-        form.append("username", username);
-        form.append("password", password);
-        const response = await fetch(url, {
-        method: "post",
-        credentials: "include",
-        body: form,
-        });
+        # const form = new FormData();
+        # form.append("username", username);
+        # form.append("password", password);
+        # const response = await fetch(url, {
+        # method: "post",
+        # credentials: "include",
+        # body: form,
+        # });
 
 
 
