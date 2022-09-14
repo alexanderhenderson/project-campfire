@@ -2,11 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer, } from '@react-google-maps/api'
 import usePlacesAutocomplete, { getGeocode, getLatLng, } from "use-places-autocomplete";
 
-
-const center = { lat: 69, lng: 69 }
-const libraries = ['places']
-const containerStyle = { width: '400px', height: '400px' };
-
 function BootstrapInput(props) {
     const { id, placeholder, labeltext, changeHandler, value, type } = props;
     return (
@@ -15,13 +10,7 @@ function BootstrapInput(props) {
             <input id={id} value={value} onChange={changeHandler} className="form-control" type={type} placeholder={placeholder} required />
         </div>)
 }
-function BootstrapInputReadOnly(props) {
-    const { id, placeholder, labeltext, changeHandler, value, type } = props;
-    return (
-        <div className="form-group">
-            <input readOnly id={id} value={value} onChange={changeHandler} className="form-control" type={type} placeholder={placeholder} required />
-        </div>)
-}
+
 function BootstrapInputDate(props) {
     const { id, placeholder, labeltext, changeHandler, value, type, changehandler2 } = props;
     return (
@@ -35,6 +24,10 @@ function BootstrapInputDate(props) {
 function CreateEvent() {
     const API_URL = "http://localhost:8090/events/activities/"
     const EventAPI_URL = "http://localhost:8090/events/"
+
+    const center = { lat: 37.7749295, lng: -122.4194155 }
+    const libraries = ['places']
+    const containerStyle = { width: '400px', height: '400px' }
 
 
     const { isLoaded } = useJsApiLoader({
@@ -115,7 +108,7 @@ function CreateEvent() {
         const { lat, lng } = await getLatLng(results[0]);
         setSelected({ lat, lng });
         map.panTo({ lat, lng });
-        map.setZoom(15);
+        map.setZoom(20);
     }
 
 
@@ -186,35 +179,17 @@ function CreateEvent() {
                             {selected && <Marker position={selected} draggable={true} onDrag={(event) => { setSelected({ lat: event.latLng.lat(), lng: event.latLng.lng() }) }} />}
                         </GoogleMap>
                     </div>
-                    {/* <p>Lat: {selected.lat}</p>
-                <p>Lat: {selected.lng}</p> */}
-                    <BootstrapInputReadOnly
-                        id="latitude"
-                        placeholder="latitude"
-                        labeltext="latitude"
-                        value={selected.lat}
-                        changeHandler={e => setLatitude(e.target.value)}
-                        type="latitude"
-                    >
-                    </BootstrapInputReadOnly><BootstrapInputReadOnly
-                        id="longitude"
-                        placeholder="longitude"
-                        labeltext="Nalongitudeme"
-                        value={selected.lng}
-                        changeHandler={e => setLongitude(e.target.value)}
-                        type="longitude">
-                    </BootstrapInputReadOnly>
-                    <label className="form-label">Event start date and time</label>
+                    <label className="form-label">Event Start</label>
                     <BootstrapInputDate
                         id="start"
-                        placeholder="start Date and time"
+                        placeholder="Start Date and time"
                         labeltext="start Date"
                         value={start}
                         changehandler2={e => setStartTime(e.target.value)}
                         changeHandler={e => SetStart(e.target.value)}
                         type="date">
                     </BootstrapInputDate>
-                    <label className="form-label">Event end date and time</label>
+                    <label className="form-label">Event End</label>
                     <BootstrapInputDate
                         id="end"
                         placeholder="End Date and Time"
@@ -223,25 +198,26 @@ function CreateEvent() {
                         changeHandler={e => setEnd(e.target.value)}
                         changehandler2={e => setEndTime(e.target.value)}
                         type="date">
-                    </BootstrapInputDate><BootstrapInput
+                    </BootstrapInputDate>
+                    <BootstrapInput
                         id="description"
                         placeholder="Event description"
-                        labeltext="description"
+                        labeltext="Description"
                         value={description}
                         changeHandler={e => setDescription(e.target.value)}
                         type="description">
                     </BootstrapInput>
                     <label className="form-label">Choose Your Activity</label>
-                    <select className="form-select" id="activitys" aria-label="chose your activity" onChange={e => setActivity(e.target.value)} >
+                    <select className="form-select" id="activitys" aria-label="Choose your activity" onChange={e => setActivity(e.target.value)} >
                         <option value="">Choose Your Activity</option>
                         {
-                            activitys[0].map((activity) => { return (<option onselect={e => setActivity(activity.id)} key={(activity.id)}>{activity.id}:{activity.name}</option>) })
+                            activitys[0].map((activity) => { return (<option onSelect={e => setActivity(activity.id)} key={(activity.id)}>{activity.id}:{activity.name}</option>) })
                         }
                     </select>
                     <BootstrapInput
                         id="picture_url"
-                        placeholder="picture_url"
-                        labeltext="picture_url"
+                        placeholder="Picture URL"
+                        labeltext="Picture URL"
                         value={picture_url}
                         changeHandler={e => setPicture_url(e.target.value)}
                         type="picture_url">
