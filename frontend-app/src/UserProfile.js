@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom'
-import skiingguy from './Assets/skiingguy.jpeg';
-import hikingact from './Assets/hikingact.jpeg';
 
 export default function UserProfile() {
     const [userData, setUserData] = useState({})
