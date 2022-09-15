@@ -99,6 +99,7 @@ export default function UserProfile() {
                                                 ))}
                                             </tbody>
                                         </table>
+                                        
                                     </div>
                                 </div>
                             </div>
