@@ -51,7 +51,7 @@ export function settingLinks() {
 }
 
 export default function NavBar() {
-  const [homeLink, introLink, profileLink, eventsLink, activitiesLink, kindlerLink, signupLink, loginLink] = settingLinks()
+  const [homeLink, introLink, , eventsLink, activitiesLink, kindlerLink, signupLink, loginLink] = settingLinks()
   // eslint-disable-next-line no-unused-vars
   const [token, login, logout] = useToken()
   // eslint-disable-next-line no-unused-vars

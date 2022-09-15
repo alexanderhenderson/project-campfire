@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {UserContext} from "./UserContext"
-import { settingLinks } from "./Nav"
 
 let internalToken = null;
 
@@ -109,7 +108,6 @@ export const useAuthContext = () => useContext(AuthContext)
 export function useToken() {
 
   // const {userId, setUserId} = useContext(MainContext)
-  const [homeLink, introLink] = settingLinks()
   const { token, setToken } = useAuthContext();
   const navigate = useNavigate();
   const {setUserId} = useContext(UserContext)

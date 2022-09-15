@@ -2,7 +2,7 @@ import React from 'react'
 import { settingLinks } from "./Nav"
 
 export default function IntroPage() {
-  const [homeLink, introLink, profileLink, eventsLink, activitiesLink, kindlerLink, signupLink, loginLink] = settingLinks()
+  const [, , , eventsLink, activitiesLink, kindlerLink] = settingLinks()
   return (
     <>
       <div className='intro-bg'></div>

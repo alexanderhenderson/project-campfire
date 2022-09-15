@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useParams } from "react-router-dom"
-import { settingLinks } from "./Nav"
+
 
 export default function UserProfile() {
     const [userData, setUserData] = useState({})
     const [events, setEvents] = useState([])
     const navigate = useNavigate();
     const { id } = useParams()
-    const [, , profileLink] = settingLinks()
+
 
     console.log(id)
     useEffect(() => {
