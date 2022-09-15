@@ -10,11 +10,7 @@ export default function FetchActivities() {
     const [filteredActivities, setFilteredActivities] = useState([])
 
     useEffect(() => {
-        //promise Chain cool!
-        // const userFetch = fetch (`${process.env.REACT_APP_USERS}/users/api/tokens/user/`, {
-        //     credentials: "include",
-        //   }).then(response => response.json()).then(data => setUserId(data.id))
-
+       
         const getActivityData = async () => {
             const url = `${process.env.REACT_APP_EVENTS}/events/activities/`
             const response = await fetch(url)
@@ -57,8 +53,8 @@ export default function FetchActivities() {
     const userFavesIds = activityList.map(act => act.id)
     const activityState = filteredActivities.length < 1
         ? activities
-        : filteredActivities
-
+        : filteredActivities;
+    
     return (
         <main>
             <div className='activities-bg'></div>

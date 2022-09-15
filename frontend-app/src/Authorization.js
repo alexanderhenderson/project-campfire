@@ -1,11 +1,28 @@
-import { createContext, useContext, useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-let internalToken = null
+import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {UserContext} from "./UserContext"
 
+let internalToken = null;
+
+function parseJwt(token) {
+  // console.log("THIS IS THE TOKEN", token)
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
+  }
+};
+
+export function getUserInfo() {
+  const parsedToken = parseJwt(getToken())
+  return {
+    "username": parsedToken.user.username,
+    "id": parsedToken.user.id
+  }
+};
 export function getToken() {
   return internalToken
 }
-
 export async function getTokenInternal() {
   const url = `${process.env.REACT_APP_USERS}/users/api/tokens/mine/`
   //const url = `${process.env.REACT_APP_USERS}/api/accounts/me/token/`
@@ -67,8 +84,8 @@ export const AuthContext = createContext({
 
 
 export const AuthProvider = (props) => {
-  const [token, setToken] = useState(null)
-
+  const [token, setToken] = useState(null);
+  
   // console.log("props: ", props)
   
   if (getTokenInternal()){
@@ -89,8 +106,11 @@ export const AuthProvider = (props) => {
 export const useAuthContext = () => useContext(AuthContext)
 
 export function useToken() {
-  const { token, setToken } = useAuthContext()
-  const navigate = useNavigate()
+
+  // const {userId, setUserId} = useContext(MainContext)
+  const { token, setToken } = useAuthContext();
+  const navigate = useNavigate();
+  const {setUserId} = useContext(UserContext)
 
   useEffect(() => {
     async function fetchToken() {
@@ -123,10 +143,13 @@ export function useToken() {
       body: form,
     })
     if (response.ok) {
-      const token = await getTokenInternal()
-      setToken(token)
-      navigate("/intro/")
-      return
+      const token = await getTokenInternal();
+      setToken(token);
+      console.log("Token from Auth: ", token)
+      let tokeninfo = await parseJwt(token)
+      setUserId(tokeninfo.user)  
+      navigate("/intro/");
+      // console.log("User ID info in auth", userId)
     }
     let error = await response.json()
     return handleErrorMessage(error)
@@ -182,19 +205,3 @@ export function useToken() {
 }
 
 
-function parseJwt(token) {
-  // console.log("THIS IS THE TOKEN", token)
-  try {
-    return JSON.parse(atob(token.split('.')[1]))
-  } catch (e) {
-    return null
-  }
-}
-
-export function getUserInfo() {
-  const parsedToken = parseJwt(getToken())
-  return {
-    "username": parsedToken.user.username,
-    "id": parsedToken.user.id
-  }
-}
