@@ -18,7 +18,7 @@ export default function IntroPage() {
           <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" className=""></button>
         </div>
         <div className="carousel-inner">
-          <div className="carousel-item">
+          <div className="carousel-item active">
             {/* <svg className="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg> */}
             <img
               className="d-block"
@@ -54,7 +54,7 @@ export default function IntroPage() {
               </div>
             </div>
           </div>
-          <div className="carousel-item active">
+          <div className="carousel-item">
             {/* <svg className="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg> */}
             <img
               className="d-block"
