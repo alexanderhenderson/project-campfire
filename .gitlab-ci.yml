@@ -35,8 +35,8 @@ lint-python-projects-job:
     - flake8 ./backend/users ./backend/events
 
 build-users-api-job:
-  # rules:
-  #   - if: $CI_COMMIT_BRANCH == heroku
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: build
   image: docker:20.10.16
   services:
@@ -50,8 +50,8 @@ build-users-api-job:
     - docker push ${CI_REGISTRY_IMAGE}/users_api:latest
 
 deploy-users-api-image-job:
-  # rules:
-  #   - if: $CI_COMMIT_BRANCH == heroku
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: deploy
   image: docker:20.10.16
   needs:
@@ -70,8 +70,8 @@ release-users-api-job:
   image: node:10.17-alpine
   needs:
     - deploy-users-api-image-job
-  # rules:
-  #   - if: $CI_COMMIT_BRANCH == heroku
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   before_script:
     - apk add curl bash
     - curl https://cli-assets.heroku.com/install.sh | sh
@@ -79,8 +79,8 @@ release-users-api-job:
     - heroku container:release web --app $HEROKU_ACCOUNT_USERS_API
 
 build-users-poller-job:
-  # rules:
-  #   - if: $CI_COMMIT_BRANCH == heroku
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: build
   image: docker:20.10.16
   services:
@@ -94,8 +94,8 @@ build-users-poller-job:
     - docker push ${CI_REGISTRY_IMAGE}/users_poller:latest
 
 deploy-users-poller-image-job:
-  # rules:
-  #   - if: $CI_COMMIT_BRANCH == heroku
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: deploy
   image: docker:20.10.16
   needs:
@@ -114,8 +114,8 @@ release-users-poller-job:
   image: node:10.17-alpine
   needs:
     - deploy-users-poller-image-job
-  # rules:
-  #   - if: $CI_COMMIT_BRANCH == heroku
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   before_script:
     - apk add curl bash
     - curl https://cli-assets.heroku.com/install.sh | sh
@@ -123,8 +123,8 @@ release-users-poller-job:
     - heroku container:release worker --app $HEROKU_ACCOUNT_USERS_POLLER
 
 build-events-api-job:
-  # rules:
-  #   - if: $CI_COMMIT_BRANCH == heroku
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: build
   image: docker:20.10.16
   services:
@@ -138,8 +138,8 @@ build-events-api-job:
     - docker push ${CI_REGISTRY_IMAGE}/events_api:latest
 
 deploy-events-api-image-job:
-  # rules:
-  #   - if: $CI_COMMIT_BRANCH == heroku
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: deploy
   image: docker:20.10.16
   needs:
@@ -158,8 +158,8 @@ release-events-api-job:
   image: node:10.17-alpine
   needs:
     - deploy-events-api-image-job
-  # rules:
-  #   - if: $CI_COMMIT_BRANCH == heroku
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   before_script:
     - apk add curl bash
     - curl https://cli-assets.heroku.com/install.sh | sh
@@ -167,8 +167,8 @@ release-events-api-job:
     - heroku container:release web --app $HEROKU_ACCOUNT_EVENTS_API
 
 build-events-poller-job:
-  # rules:
-  #   - if: $CI_COMMIT_BRANCH == heroku
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: build
   image: docker:20.10.16
   services:
@@ -182,8 +182,8 @@ build-events-poller-job:
     - docker push ${CI_REGISTRY_IMAGE}/events_poller:latest
 
 deploy-events-poller-image-job:
-  # rules:
-  #   - if: $CI_COMMIT_BRANCH == heroku
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: deploy
   image: docker:20.10.16
   needs:
@@ -202,8 +202,8 @@ release-events-poller-job:
   image: node:10.17-alpine
   needs:
     - deploy-events-poller-image-job
-  # rules:
-  #   - if: $CI_COMMIT_BRANCH == heroku
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   before_script:
     - apk add curl bash
     - curl https://cli-assets.heroku.com/install.sh | sh
@@ -230,8 +230,8 @@ front-end-build-job:
 
 pages:
   stage: deploy
-  # rules:
-  #   - if: $CI_COMMIT_BRANCH == heroku
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   dependencies:
     - front-end-build-job
   needs:
