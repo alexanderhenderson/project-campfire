@@ -13,7 +13,6 @@ import EventDetail from './EventDetail'
 import MainPage from "./MainPage"
 import Kindler from "./Kindler"
 import CreateEvent from'./CreateEvent';
-import TESTMAP from "./CreateEventMap";
 import { UserContext } from "./UserContext"
 import { useState, useEffect } from "react"
 

@@ -10,11 +10,8 @@ export default function LogIn() {
   const [token, login] = useToken();
   const [loginResponse, setLoginResponse] = useState();
   async function onSubmit() {
-
     //console.log("Submitted, token: ", token)
-
     //console.log("function: ", login);
-
     const result = await login(username, password)
     setLoginResponse(result)
     console.log('LOGGED IN SUCCESSFULLY')

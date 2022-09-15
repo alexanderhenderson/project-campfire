@@ -35,6 +35,7 @@ export default function UserProfile() {
 
     let currentUser = userData.id
     let attendedEvents = []
+   
     for(let evt of events){
         let evtAtt = evt.attendees
         for(let x of evtAtt){
@@ -43,6 +44,8 @@ export default function UserProfile() {
            }
         }
     }
+
+    let slicedlist = attendedEvents.slice(0,3)
     return (
         <>
             <div className="container p-4">
@@ -72,7 +75,7 @@ export default function UserProfile() {
                                         <h4>Events I'm Attending</h4>
                                         <table className="table">
                                             <tbody>
-                                                {attendedEvents.map(att => (
+                                                {slicedlist.map(att => (
                                                     <tr key={att.id}>
                                                         <td className="pointer2"
                                                         onClick={() => {
