@@ -110,7 +110,7 @@ export default function Kindler() {
 						</div>
 					) : (
 						<div>
-							<img className="mw-100" src="/MuchWow.png" alt="Max-width 100%"></img>
+							<img className="mw-100" src={`${process.env.PUBLIC_URL}/MuchWow.png`} alt="Max-width 100%"></img>
 							<h2 className="card-text">Wow! You are already friends with everybody!</h2>
 						</div>
 					)}

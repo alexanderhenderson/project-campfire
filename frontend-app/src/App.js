@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AuthProvider } from "./Authorization"
 import IntroPage from "./IntroPage"
-import UserHomepage from "./UserHomepage"
 import NavBar from './Nav'
 import UserProfile from './UserProfile'
 import LogIn from './Login'
@@ -48,7 +47,6 @@ export default function App() {
             <Route path="kindler" element ={<Kindler/>} />
             <Route path="/" element={<MainPage />} />
             <Route path="intro" element={<IntroPage />} />
-            <Route path="userhome" element={<UserHomepage />} />
             <Route path="profile/:id" element={<UserProfile />} />
             <Route path="login" element={<LogIn />} />
             <Route path="logout" element={<LogOut />} />
