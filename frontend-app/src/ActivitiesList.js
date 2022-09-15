@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import { addActivities } from "./Components/AddActivityToList"
-import { UserInfo } from "./UserContext";
+// import { UserInfo } from "./UserContext";
 
 export default function FetchActivities() {
 
     
 
-let [testingCon, setTest] = UserInfo()
-setTest("Is this setting working")
-console.log("TestingCon", testingCon)
+// // let [testingCon, setTest] = UserInfo()
+// setTest("Is this setting working")
+// console.log("TestingCon", testingCon)
 
     const [activities, setActivitiesData] = useState([])
     const [userData, setUserId] = useState("")

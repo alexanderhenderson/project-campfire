@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {UserContext} from "./UserContext"
 
 let internalToken = null;
 
@@ -86,7 +87,7 @@ export const AuthContext = createContext({
 
 export const AuthProvider = (props) => {
   const [token, setToken] = useState(null);
-
+  
   // console.log("props: ", props)
   
   if (getTokenInternal()){
@@ -111,6 +112,7 @@ export function useToken() {
   // const {userId, setUserId} = useContext(MainContext)
   const { token, setToken } = useAuthContext();
   const navigate = useNavigate();
+  const {setUserId} = useContext(UserContext)
 
   useEffect(() => {
     async function fetchToken() {
@@ -124,6 +126,7 @@ export function useToken() {
 
   function UpdateUserState(tokeninfo){
     // UpdateUserInfo(tokeninfo)
+    // console.log("Token Info", tokeninfo)
   }
 
   async function logout() {
@@ -151,12 +154,8 @@ export function useToken() {
       setToken(token);
       console.log("Token from Auth: ", token)
       let tokeninfo = await parseJwt(token)
-      // setUserId(tokeninfo.user)
-      // getUserdata();
-      UpdateUserState(tokeninfo)
-      
+      setUserId(tokeninfo.user)  
       navigate("/intro/");
-      console.log("checking to see if token info", tokeninfo.user)
       // console.log("User ID info in auth", userId)
       return;
     }

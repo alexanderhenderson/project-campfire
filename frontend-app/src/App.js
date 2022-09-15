@@ -14,13 +14,33 @@ import MainPage from "./MainPage"
 import Kindler from "./Kindler"
 import CreateEvent from'./CreateEvent';
 import TESTMAP from "./CreateEventMap";
-import { UserProvider } from "./UserContext"
+import { UserContext } from "./UserContext"
+import { useState, useEffect } from "react"
 
 
 export default function App() {
 
+const [userId, setUserId] = useState('')
+
+useEffect(() => {
+  
+  const getUserdata = async () => {
+      const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
+      const response = await fetch(url, { credentials: "include" });
+      if (response.ok) {
+          const userData = await response.json()
+          setUserId(userData)
+      }
+  }
+  getUserdata()
+
+}, [])
+
+
   return (
-  <UserProvider>
+  <UserContext.Provider value={{
+    userId, setUserId
+  }}>
   <AuthProvider>
     <BrowserRouter>
         <NavBar />
@@ -45,6 +65,6 @@ export default function App() {
         </div>
       </BrowserRouter>
     </AuthProvider>
-    </UserProvider>
+    </UserContext.Provider>
   )
 }

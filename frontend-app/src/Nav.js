@@ -7,7 +7,8 @@ import React, { useContext } from 'react'
 import { useState, useEffect } from 'react'
 import { token, useToken } from './Authorization'
 import { useNavigate } from 'react-router-dom'
-import { UserProvider } from "./UserContext";
+import { UserContext } from "./UserContext";
+
 
 export default function NavBar() {
   // eslint-disable-next-line no-unused-vars
@@ -17,17 +18,18 @@ export default function NavBar() {
   const [loggedIn, setLoggedIn]=useState(false)
   // const [userId, setUserId] = useState([])
   const navigate = useNavigate();
-  const userId = useContext(UserProvider)
-  
+  const {userId} = useContext(UserContext)
+
+
   function checkLoggedIn(token){
     if (token){
         setLoggedIn(true)
         console.log('token exists')
     }
   }
-console.log("what is in the ", userId)
-  useEffect( ()=>{checkLoggedIn(token)},[token])
 
+
+  useEffect( ()=>{checkLoggedIn(token)},[token])
   async function onLogout() {
     const result = await logout()
     setLogoutResponse(result)

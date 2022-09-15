@@ -27,7 +27,6 @@ export default function UserProfile() {
               setEvents(events.current)
             }
         }
-          
           requestEvents()
         console.log("id 2", id)
         getUserdata()
