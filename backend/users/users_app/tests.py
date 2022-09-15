@@ -2,7 +2,6 @@
 from django.test import TestCase
 import json
 from .models import ActivityVO, User
-from django.urls import reverse
 
 # from django.http.cookie import SimpleCookie
 
