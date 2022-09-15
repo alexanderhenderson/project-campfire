@@ -66,7 +66,7 @@ class UsersApiTest(TestCase):
     #     login_url = reverse("login")
     #     print("Log in url: ", login_url)
     #     request = self.client.post(
-    #         login_url, {"username": "user", "password": "pass"}, 
+    #         login_url, {"username": "user", "password": "pass"},
     #           format="json"
     #     )
     #     # response = json.loads(request)
