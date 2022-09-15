@@ -66,7 +66,8 @@ class UsersApiTest(TestCase):
     #     login_url = reverse("login")
     #     print("Log in url: ", login_url)
     #     request = self.client.post(
-    #         login_url, {"username": "user", "password": "pass"}, format="json"
+    #         login_url, {"username": "user", "password": "pass"}, 
+    #           format="json"
     #     )
     #     # response = json.loads(request)
     #     print("Access Token: ", request)  # .COOKIES['jwt_access_token'])
