@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar'
 // import NavDropdown from 'react-bootstrap/NavDropdown'
 import React, { useContext } from 'react'
 import { useState, useEffect } from 'react'
-import { token, useToken } from './Authorization'
+import { useToken } from './Authorization'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from "./UserContext";
 

@@ -122,11 +122,6 @@ export function useToken() {
     }
   }, [setToken, token])
 
-  function UpdateUserState(tokeninfo){
-    // UpdateUserInfo(tokeninfo)
-    // console.log("Token Info", tokeninfo)
-  }
-
   async function logout() {
     if (token) {
       const url = `${process.env.REACT_APP_USERS}/api/token/refresh/logout/`
