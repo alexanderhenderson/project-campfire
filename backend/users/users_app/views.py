@@ -1,5 +1,5 @@
 from django.views.decorators.http import require_http_methods
-from .models import User, ActivityVO
+from .models import User, ActivityVO, Comment
 from django.http import JsonResponse
 import json
 from common.json import ModelEncoder
@@ -7,6 +7,8 @@ import djwto.authentication as auth
 
 
 # Create your views here.
+
+
 @auth.jwt_login_required
 @require_http_methods(["GET"])
 def api_user_token(request):
@@ -78,8 +80,14 @@ def api_friend_kindler(request):
         for activity in user_activities:
             user_activity_setlist.add(activity.id)
 
+        # getting all existing friends
+        friends = user.friends.all()
+
         # getting all of the users excluding the client
+        # using the friend set, we will also exclude
+        # existing friends
         users = User.objects.exclude(id=user_id)
+        users = set(users).difference(set(friends))
 
         # setting initial empty dict
         resultsV2 = {}
@@ -121,10 +129,12 @@ def api_friend_kindler(request):
         num_activities = len(ActivityVO.objects.all())
 
         # we go from the starting key down to zero and stop there. We are
-        # looking for 10 user IDs, less than that is fine if the database only
-        # has 10 users with an activity selected. The results list will be
-        # a list of 10 or fewer user IDs which are who we have matched with
-        # the client user.
+        # looking
+        # for 9 user IDs, less than that is fine if the database only has
+        # 9 users
+        # with an activity selected. The results list will be a list of 9
+        # or fewer
+        # user IDs which are who we have matched with the client user.
         results_list = []
         done = False
         for i in range(num_activities, 0, -1):
@@ -133,11 +143,11 @@ def api_friend_kindler(request):
             if i in resultsV2:
                 if done is True:
                     break
-                if (len(results_list) + len(resultsV2[i])) <= 10:
+                if (len(results_list) + len(resultsV2[i])) <= 9:
                     results_list = results_list + resultsV2[i]
                 else:
                     for res in resultsV2[i]:
-                        if len(results_list) < 10:
+                        if len(results_list) < 9:
                             results_list.append(res)
                         else:
                             done = True
@@ -190,13 +200,37 @@ class UserDetailEncoder(ModelEncoder):
     }
 
 
+class UserCommentEncoder(ModelEncoder):
+    model = User
+    properties = [
+        "id",
+        "username",
+        "first_name",
+        "last_name",
+    ]
+
+
+class CommentEncoder(ModelEncoder):
+    model = Comment
+    properties = [
+        "id",
+        "comment",
+        "commenter",
+        "user_profile",
+    ]
+    encoders = {
+        "commenter": UserCommentEncoder(),
+        "user_profile": UserCommentEncoder(),
+    }
+
+
 # @auth.jwt_login_required
 # def get_some_data(request):
 #     token_data = request.payload
 #     # do stuff
 #     return response
 
-
+# @auth.jwt_login_required
 @require_http_methods(["GET", "POST"])
 def list_users(request):
     if request.method == "GET":
@@ -332,7 +366,6 @@ def activity_detail(request, pk):
         try:
             content = json.loads(request.body)
             activityVO = ActivityVO.objects.get(id=pk)
-
             props = ["name"]
             for prop in props:
                 if prop in content:
@@ -381,7 +414,74 @@ def api_friend_detail(request):
         return response
 
 
+# @auth.jwt_login_required
+@require_http_methods(["GET", "POST"])
+def list_comments(request):
+    if request.method == "GET":
+        comments = Comment.objects.all()
+        return JsonResponse(
+            {"comments": comments},
+            encoder=CommentEncoder,
+            safe=False,
+        )
+    if request.method == "POST":
+        token_data = request.payload
+        user_id = token_data["user"]["id"]
+        content = json.loads(request.body)
+        # user_id = content["user_id"]
+        content["commenter"] = User.objects.get(id=user_id)
+        # del content["user_id"]
+        content["user_profile"] = User.objects.get(id=content["user_profile"])
+        # How do we grab the user id of the profile we're on?
+        comment = Comment.objects.create(**content)
+        return JsonResponse(
+            {"comment": comment},
+            encoder=CommentEncoder,
+            safe=False,
+        )
+
+
+# @auth.jwt_login_required
+@require_http_methods(["GET", "PUT", "DELETE"])
+def comment_detail(request, pk):
+    if request.method == "GET":
+        try:
+            comment = Comment.objects.get(id=pk)
+            return JsonResponse(
+                {"Comment": comment},
+                encoder=CommentEncoder,
+                safe=False,
+            )
+        except Comment.DoesNotExist:
+            return JsonResponse("Comment does not exist.", status=400)
+    elif request.method == "PUT":
+        content = json.loads(request.body)
+        try:
+            comment = Comment.objects.get(id=pk)
+            props = [
+                "comment",
+            ]
+            for prop in props:
+                if prop in content:
+                    setattr(comment, prop, content[prop])
+            comment.save()
+        except Comment.DoesNotExist:
+            return JsonResponse("Comment does not exist", status=400)
+        return JsonResponse(
+            {"Comment": comment},
+            encoder=CommentEncoder,
+            safe=False,
+        )
+    elif request.method == "DELETE":
+        try:
+            Comment.objects.get(id=pk).delete()
+            count, _ = Comment.objects.filter(id=pk).delete()
+            return JsonResponse({"Deleted": count == 0})
+        except Comment.DoesNotExist:
+            return JsonResponse({"Error": "Comment does not exist"})
+
+
 # stretch goal
 # @require_http_methods(["GET"])
 # def list_users_groups(request):
-#     pass
+#   pass

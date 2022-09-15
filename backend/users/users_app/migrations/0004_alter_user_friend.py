@@ -7,13 +7,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users_app', '0003_user_friend'),
+        ("users_app", "0003_user_friend"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='user',
-            name='friend',
-            field=models.ManyToManyField(blank=True, to=settings.AUTH_USER_MODEL),
+            model_name="user",
+            name="friend",
+            field=models.ManyToManyField(
+                blank=True, to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

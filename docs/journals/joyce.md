@@ -1,3 +1,24 @@
+## Thursday, September 14, 2022
+Changed intro page into a carousel with steps on what
+to do to get the most out of the app. The team had token
+issues lately and we're spending a lot of time on that.
+Updated the css on Austin's create event form as best 
+as I could and tried to refactor it. Learned a different
+way to pass props into input tags. Learned how to hide
+Google API key. Switched out localhost links to use the
+environment variables.
+
+## Tuesday, September 13, 2022
+Had a lot of auth related issues with the tests failing
+since there's forbidden access. Trying to remedy that.
+We deployed but navbar links were broken. We also did
+some major linting.
+
+## Monday, September 12, 2022
+Updated links as needed, worked on small changes to css.
+Updated navbar to show and hide login/logout/sign up as
+needed.
+
 ## Sunday, September 11, 2022
 Finished the new home page and created the intro page
 which is where newly registered users will be directed

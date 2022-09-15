@@ -1,10 +1,15 @@
-import "./index.css";
+import "./index.css"
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 // import NavDropdown from 'react-bootstrap/NavDropdown'
+import React, { useContext } from 'react'
+import { useState, useEffect } from 'react'
+import { useToken } from './Authorization'
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from "./UserContext";
 
-function settingLinks() {
+export function settingLinks() {
   const NAVLINK = process.env.REACT_APP_NAVLINK
   
   // declare link variables here
@@ -45,15 +50,38 @@ function settingLinks() {
   return ([home, intro, profile, events, activities, kindler, signup, login, logout])
 }
 
-function NavBar() {
-  // add link variable to declare const array
-  const [homeLink, introLink, profileLink, eventsLink, activitiesLink, kindlerLink, signupLink, loginLink, logoutLink] = settingLinks()
+export default function NavBar() {
+  const [homeLink, introLink, profileLink, eventsLink, activitiesLink, kindlerLink, signupLink, loginLink] = settingLinks()
+  // eslint-disable-next-line no-unused-vars
+  const [token, login, logout] = useToken()
+  // eslint-disable-next-line no-unused-vars
+  const [logoutResponse, setLogoutResponse] = useState()
+  const [loggedIn, setLoggedIn]=useState(false)
+  // const [userId, setUserId] = useState([])
+  const navigate = useNavigate();
+  const {userId} = useContext(UserContext)
 
+
+  function checkLoggedIn(token){
+    if (token){
+        setLoggedIn(true)
+        console.log('token exists')
+    }
+  }
+
+
+  useEffect( ()=>{checkLoggedIn(token)},[token])
+  async function onLogout() {
+    const result = await logout()
+    setLogoutResponse(result)
+    console.log('LOGGED OUT SUCCESSFULLY')
+  }
+  // console.log("this should be userID", userId)
   return (
     <div className='mb-3'>
       <Navbar sticky="top" variant="dark" bg="dark" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href={homeLink}>
             <img
             // will need to update all src= across the app
               src={`${process.env.PUBLIC_URL}/favicon.ico`}
@@ -68,45 +96,15 @@ function NavBar() {
           <Navbar.Collapse id="navbar-dark-example">
             {/* replace href with {link variable} */}
             <Nav>
-              <Nav.Link href={homeLink}>
-                Home
-              </Nav.Link>
-              <Nav.Link href={introLink}>
-                New Here?
-              </Nav.Link>
-              <Nav.Link href={profileLink}>
-                Profile 🚧
-              </Nav.Link>
-              <Nav.Link href={eventsLink}>
-                Events
-              </Nav.Link>
-              <Nav.Link href={activitiesLink}>
-                Activities
-              </Nav.Link>
-              <Nav.Link href={kindlerLink}>
-                Kindler
-              </Nav.Link>
-
-              {/* <NavDropdown
-                id="nav-dropdown-dark-example"
-                title="Social"
-                menuVariant="dark"
-              >
-                <NavDropdown.Item href="/events/new/">
-                  Add Event 🚧
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-              </NavDropdown> */}
-
-                <Nav.Link href={signupLink}>
-                  Sign Up
-                </Nav.Link>
-                <Nav.Link href={loginLink}>
-                  Login
-                </Nav.Link>
-                <Nav.Link href={logoutLink}>
-                  Logout
-                </Nav.Link>
+              <Nav.Link href={homeLink} className='mx-1'> Home </Nav.Link>
+              <Nav.Link href={introLink} className='mx-1'> New Here? </Nav.Link>
+              <Nav.Link onClick={() => { navigate(`${profileLink}${userId.id}`)}} className='mx-1'> Profile </Nav.Link>
+              <Nav.Link href={eventsLink} className='mx-1'> Events </Nav.Link>
+              <Nav.Link href={activitiesLink} className='mx-1'> Activities </Nav.Link>
+              <Nav.Link href={kindlerLink} className='mx-1'> Kindler </Nav.Link>
+              <Nav.Link href={signupLink} className={"mx-1" + (loggedIn ? " d-none":"")}> Sign Up </Nav.Link>
+              <Nav.Link href={loginLink} className={"xy-1" + (loggedIn ? " d-none":"") }> Login </Nav.Link>
+              <Nav.Link onClick={onLogout} className={"mx-1" + (loggedIn ? "":" d-none")}> Logout </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -114,4 +112,3 @@ function NavBar() {
     </div>
   )
 }
-export default NavBar

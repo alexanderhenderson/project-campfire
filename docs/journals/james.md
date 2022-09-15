@@ -1,6 +1,17 @@
+## Wed, Sept 14, 2022
+Added a drop down menu to the the User profile page for the friends list, and also the activities list, then proceeded to rewrite the get request for the user profile page using the useParams hook, so you could travel to other user profile pages.Created a useContext file, Changed the app page to make a call for the user token, and store that info in the UseContext file, so that we can access it throughout the entire app.
+
+## Tues, Sept 13, 2022
+Added an activities list pop up on the activities page, so current user could view the current favorite activites, updates automatically. Updated the User Profile to render dynamically with attached token to the current user, and also added a column for the current events that the user is attending using spicy(read "simple") logic. Added the pictures of the events onto the user profile and just generally spruced up the profile page.
+
+## Mon, Sept 12, 2022
+added a test to the events microservice, testing for the activities list, added and worked on some css to make the activities page and events page more cohesive.
+
+## Friday Sept 9 2022
+added functionality to Events page, fixed the add attendees button to disapear when clicked and user is in the list.
 
 ## Thursday, Sept 8, 2022
-Helped alex with Matching algo?
+Helped alex with Matching algo, and added clickable events that lead to specific event detail.
 
 ## Wednesday, Sept 7, 2022
 Added the add attendees component to the events detail page, had to rewrite the put request in the events.views in order to get it to accept the M2M relationship, referenced Tim's users views in order to do this but had to make some adjustments. Page also re-renders using the use-effect, based on attendeeslist changing. Upon click, Attendees list renders in the html underneath. 

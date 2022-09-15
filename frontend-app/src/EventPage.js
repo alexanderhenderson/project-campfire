@@ -1,18 +1,20 @@
 import { useNavigate } from 'react-router-dom'
 import React, { useState, useEffect, useRef } from 'react'
+import { settingLinks } from "./Nav"
 
 
 export default function EventList(props) {
   const events = useRef([])
   const [filteredEvents, setFilteredEvents] = useState([])
   const [search, setSearch] = useState('')
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const [, , , eventsLink] = settingLinks()
 
 
   useEffect(() => {
     const requestEvents = async () => {
       const url = `${process.env.REACT_APP_EVENTS}/events/`
-      const response = await fetch(url);
+      const response = await fetch(url)
       if (response.ok) {
         const data = await response.json()
         events.current = data.Events
@@ -42,11 +44,11 @@ export default function EventList(props) {
       <div className="mt-3 mb-3">
         <div className='container'>
           <div className="row">
-            <div className="col text-white">
+            <div className="col">
               <h1>Events</h1>
             </div>
             <div className="col">
-            <div className="align-right"><a className="btn btn-primary rounded-pill mb-3" href="/events/new/" role="button">Add Event</a></div>
+            <div className="align-right"><a className="btn btn-dark rounded-pill mb-3" href="/events/create/" role="button">Add Event</a></div>
             </div>
           </div>
           </div>
@@ -66,7 +68,7 @@ export default function EventList(props) {
               <div className="col-sm-4 mt-3 mb-3" key={event.id}>
                 <div className="card mb-3 shadow h-100 pointer"
                   onClick={() => {
-                    navigate(`/events/${event.id}/`)
+                    navigate(`${eventsLink}${event.id}/`)
                   }}>
                   <img src={event.picture_url} className="card-img-top crop-image" alt="" />
                   <div className="card-body">
@@ -86,7 +88,7 @@ export default function EventList(props) {
                   </div>
                 </div>
               </div>
-            );
+            )
           })}
         </div>
         </div>
