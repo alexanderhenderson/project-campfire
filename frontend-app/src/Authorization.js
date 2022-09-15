@@ -1,6 +1,24 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 let internalToken = null;
+
+function parseJwt(token) {
+  // console.log("THIS IS THE TOKEN", token)
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
+  }
+};
+
+export function getUserInfo() {
+  const parsedToken = parseJwt(getToken())
+  return {
+    "username": parsedToken.user.username,
+    "id": parsedToken.user.id
+  }
+};
 
 export function getToken() {
   return internalToken;
@@ -89,6 +107,8 @@ export const AuthProvider = (props) => {
 export const useAuthContext = () => useContext(AuthContext);
 
 export function useToken() {
+
+  // const {userId, setUserId} = useContext(MainContext)
   const { token, setToken } = useAuthContext();
   const navigate = useNavigate();
 
@@ -101,6 +121,10 @@ export function useToken() {
       fetchToken();
     }
   }, [setToken, token]);
+
+  function UpdateUserState(tokeninfo){
+    // UpdateUserInfo(tokeninfo)
+  }
 
   async function logout() {
     if (token) {
@@ -125,7 +149,15 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
+      console.log("Token from Auth: ", token)
+      let tokeninfo = await parseJwt(token)
+      // setUserId(tokeninfo.user)
+      // getUserdata();
+      UpdateUserState(tokeninfo)
+      
       navigate("/intro/");
+      console.log("checking to see if token info", tokeninfo.user)
+      // console.log("User ID info in auth", userId)
       return;
     }
     let error = await response.json();
@@ -182,19 +214,3 @@ export function useToken() {
 }
 
 
-function parseJwt(token) {
-  // console.log("THIS IS THE TOKEN", token)
-  try {
-    return JSON.parse(atob(token.split('.')[1]));
-  } catch (e) {
-    return null;
-  }
-};
-
-export function getUserInfo() {
-  const parsedToken = parseJwt(getToken())
-  return {
-    "username": parsedToken.user.username,
-    "id": parsedToken.user.id
-  }
-};

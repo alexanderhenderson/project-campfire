@@ -14,9 +14,13 @@ import MainPage from "./MainPage"
 import Kindler from "./Kindler"
 import CreateEvent from'./CreateEvent';
 import TESTMAP from "./CreateEventMap";
+import { UserProvider } from "./UserContext"
+
 
 export default function App() {
+
   return (
+  <UserProvider>
   <AuthProvider>
     <BrowserRouter>
         <NavBar />
@@ -26,7 +30,7 @@ export default function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="intro" element={<IntroPage />} />
             <Route path="userhome" element={<UserHomepage />} />
-            <Route path="profile" element={<UserProfile />} />
+            <Route path="profile/:id" element={<UserProfile />} />
             <Route path="login" element={<LogIn />} />
             <Route path="logout" element={<LogOut />} />
             <Route path="signup" element={<Signup />} />
@@ -41,5 +45,6 @@ export default function App() {
         </div>
       </BrowserRouter>
     </AuthProvider>
+    </UserProvider>
   )
 }

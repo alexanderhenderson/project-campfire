@@ -3,10 +3,11 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 // import NavDropdown from 'react-bootstrap/NavDropdown'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState, useEffect } from 'react'
-import { useToken } from './Authorization'
-
+import { token, useToken } from './Authorization'
+import { useNavigate } from 'react-router-dom'
+import { UserProvider } from "./UserContext";
 
 export default function NavBar() {
   // eslint-disable-next-line no-unused-vars
@@ -14,15 +15,17 @@ export default function NavBar() {
   // eslint-disable-next-line no-unused-vars
   const [logoutResponse, setLogoutResponse] = useState()
   const [loggedIn, setLoggedIn]=useState(false)
-
-
+  // const [userId, setUserId] = useState([])
+  const navigate = useNavigate();
+  const userId = useContext(UserProvider)
+  
   function checkLoggedIn(token){
     if (token){
         setLoggedIn(true)
         console.log('token exists')
     }
   }
-
+console.log("what is in the ", userId)
   useEffect( ()=>{checkLoggedIn(token)},[token])
 
   async function onLogout() {
@@ -30,7 +33,7 @@ export default function NavBar() {
     setLogoutResponse(result)
     console.log('LOGGED OUT SUCCESSFULLY')
   }
-
+  // console.log("this should be userID", userId)
   return (
     <div className='mb-3'>
       <Navbar sticky="top" variant="dark" bg="dark" expand="lg">
@@ -50,7 +53,7 @@ export default function NavBar() {
             <Nav>
               <Nav.Link href="/" className='mx-1'> Home </Nav.Link>
               <Nav.Link href="/intro/" className='mx-1'> New Here? </Nav.Link>
-              <Nav.Link href="/profile/" className='mx-1'> Profile </Nav.Link>
+              <Nav.Link onClick={() => { navigate(`/profile/${userId.id}`)}} className='mx-1'> Profile </Nav.Link>
               <Nav.Link href="/events/" className='mx-1'> Events </Nav.Link>
               <Nav.Link href="/activities/" className='mx-1'> Activities </Nav.Link>
               <Nav.Link href="/kindler/" className='mx-1'> Kindler </Nav.Link>

@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom'
+import { useParams } from "react-router-dom"
 
 export default function UserProfile() {
     const [userData, setUserData] = useState({})
     const [events, setEvents] = useState([])
     const navigate = useNavigate();
+    const { id } = useParams()
 
+    console.log(id)
     useEffect(() => {
         const getUserdata = async () => {
-            const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
+            const url = `${process.env.REACT_APP_USERS}/users/${id}`;
             const response = await fetch(url, { credentials: "include" });
             if (response.ok) {
                 const data = await response.json()
@@ -26,10 +29,10 @@ export default function UserProfile() {
         }
           
           requestEvents()
-
+        console.log("id 2", id)
         getUserdata()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [id])
 
     let currentUser = userData.id
     let attendedEvents = []
@@ -134,7 +137,7 @@ export default function UserProfile() {
                                                             <tbody>
                                                                 {userData?.friends?.map(friend => (
                                                                     <tr key={friend.id}>
-                                                                        <td
+                                                                        <td className= "pointer"
                                                                         onClick={() => {
                                                                             navigate(`/profile/${friend.id}/`)
                                                                         }}>
