@@ -37,38 +37,38 @@ class UsersApiTest(TestCase):
 
     # DO NOT LEAVE THE BELOW FUNCTION IN FINAL PRODUCT
     # Pulled directory from stack overflow
-    def test_api_jwt(self):
+    # def test_djwto(self):
 
-        print("---")
-        print("---")
-        print("---")
-        print("test1 running")
+    #     print("---")
+    #     print("---")
+    #     print("---")
+    #     print("test1 running")
 
-        url = reverse("user_token")
-        # url = reverse('api-jwt-auth')
-        u = User.objects.create_user(
-            username="user", email="user@foo.com", password="pass"
-        )
-        u.is_active = False
-        u.save()
+    #     url = reverse("user_token")
+    #     # url = reverse('api-jwt-auth')
+    #     u = User.objects.create_user(
+    #         username="user", email="user@foo.com", password="pass"
+    #     )
+    #     u.is_active = False
+    #     u.save()
 
-        resp = self.client.post(
-            url, {"email": "user@foo.com", "password": "pass"}, format="json"
-        )
-        self.assertEqual(resp.status_code, 403)
-        # self.assertEqual(resp.status_code, HTTP_400_BAD_REQUEST)
+    #     resp = self.client.post(
+    #         url, {"email": "user@foo.com", "password": "pass"}, format="json"
+    #     )
+    #     self.assertEqual(resp.status_code, 403)
+    #     # self.assertEqual(resp.status_code, HTTP_400_BAD_REQUEST)
 
-        # resp.set_cookie
-        u.is_active = True
-        u.save()
+    #     # resp.set_cookie
+    #     u.is_active = True
+    #     u.save()
 
-        login_url = reverse("login")
-        print("Log in url: ", login_url)
-        request = self.client.post(
-            login_url, {"username": "user", "password": "pass"}, format="json"
-        )
-        # response = json.loads(request)
-        print("Access Token: ", request)  # .COOKIES['jwt_access_token'])
+    #     login_url = reverse("login")
+    #     print("Log in url: ", login_url)
+    #     request = self.client.post(
+    #         login_url, {"username": "user", "password": "pass"}, format="json"
+    #     )
+    #     # response = json.loads(request)
+    #     print("Access Token: ", request)  # .COOKIES['jwt_access_token'])
 
         # test = Form()
         # test.append("username")
@@ -109,9 +109,9 @@ class UsersApiTest(TestCase):
         # resp = client.get('/api/v1/account/', data={'format': 'json'})
         # self.assertEqual(resp.status_code, status.HTTP_200_OK)
 
-        print("---")
-        print("---")
-        print("---")
+        # print("---")
+        # print("---")
+        # print("---")
 
     def test_list_users(self):
         response = self.client.get("/users/")
@@ -173,3 +173,25 @@ class UsersApiTest(TestCase):
         content = response.json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(content["ActivityVOs"][0]["id"], self.activity.id)
+
+    def test_update_user(self):
+
+        data = json.dumps(
+            {
+                "username": "TestUpdate",
+                "first_name": "Test_UpdateFirstname",
+                "last_name": "TestUpdateLastname",
+                "email": "UpdateEmail@gmail.com",
+                "profile_description": "this is a test for updating a user",
+                "city": "Updated City",
+                "state": "US",
+            }
+        )
+
+        response = self.client.put(
+            "/users/1/",
+            data,
+            content_type="application/json",
+        )
+
+        self.assertEqual(response.status_code, 200)

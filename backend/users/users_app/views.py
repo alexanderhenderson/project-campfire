@@ -13,7 +13,6 @@ def api_user_token(request):
 
     if "jwt_access_token" in request.COOKIES:
         token = request.COOKIES["jwt_access_token"]
-        # print("Backend - Token: ", token)
         if token:
             return JsonResponse({"token": token})
     response = JsonResponse({"token": None})
@@ -102,9 +101,7 @@ def api_friend_kindler(request):
 
             # comparing the sets of activity ids, and counting the number of
             # common activity (ids)
-            common_activities = user_activity_setlist.intersection(
-                compare_set
-            )
+            common_activities = user_activity_setlist.intersection(compare_set)
             number_common_activities = len(common_activities)
 
             # checking if they have at least 1 activity in common
@@ -116,9 +113,7 @@ def api_friend_kindler(request):
                 # exist we create one, or we add the user id to the
                 # existing value if the key does exist.
                 if number_common_activities in resultsV2:
-                    resultsV2[number_common_activities].append(
-                        compared_user.id
-                    )
+                    resultsV2[number_common_activities].append(compared_user.id)
                 else:
                     resultsV2[number_common_activities] = [compared_user.id]
 
@@ -159,9 +154,7 @@ def api_friend_kindler(request):
 
         # JSON Response
         if token_data:
-            return JsonResponse(
-                user_list, encoder=UserDetailEncoder, safe=False
-            )
+            return JsonResponse(user_list, encoder=UserDetailEncoder, safe=False)
 
     response = JsonResponse({"token": None})
     return response
@@ -174,6 +167,7 @@ class ActivityVOEncoder(ModelEncoder):
 
 class FriendsEncoder(ModelEncoder):
     model = User
+
     properties = ["id", "username", "email", "profile_photo"]
 
 
@@ -199,18 +193,10 @@ class UserDetailEncoder(ModelEncoder):
 
 
 # @auth.jwt_login_required
-# def get_some_data(request):
-#     token_data = request.payload
-#     # do stuff
-#     return response
-
-# @auth.jwt_login_required
 @require_http_methods(["GET", "POST"])
 def list_users(request):
     if request.method == "GET":
-        # print("Printstop 1")
         users = User.objects.all()
-        # print("Printstop 2")
         return JsonResponse({"users": users}, encoder=UserListEncoder)
     else:  # POST
         try:
@@ -291,18 +277,12 @@ def user_detail(request, pk):
 def list_activities(request):
     if request.method == "GET":
         activityVO = ActivityVO.objects.all()
-        return JsonResponse(
-            {"ActivityVOs": activityVO}, encoder=ActivityVOEncoder
-        )
+        return JsonResponse({"ActivityVOs": activityVO}, encoder=ActivityVOEncoder)
     else:
         try:
-            # print(request.body)
             content = json.loads(request.body)
             activityVO = ActivityVO.objects.create(**content)
-            # print(activityVO)
-            return JsonResponse(
-                {"activityVO": activityVO}, encoder=ActivityVOEncoder
-            )
+            return JsonResponse({"activityVO": activityVO}, encoder=ActivityVOEncoder)
         except ActivityVO.DoesNotExist:
             response = JsonResponse({"message": "something went wrong"})
             response.status_code = 400
@@ -314,9 +294,7 @@ def activity_detail(request, pk):
     if request.method == "GET":
         try:
             activityVO = ActivityVO.objects.get(id=pk)
-            return JsonResponse(
-                activityVO, encoder=ActivityVOEncoder, safe=False
-            )
+            return JsonResponse(activityVO, encoder=ActivityVOEncoder, safe=False)
         except ActivityVO.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
@@ -359,8 +337,6 @@ def activity_detail(request, pk):
 @require_http_methods(["PUT"])
 def api_friend_detail(request):
 
-    print("Made it into api friends list")
-
     try:
         if "jwt_access_token" in request.COOKIES:
 
@@ -383,9 +359,3 @@ def api_friend_detail(request):
         response = JsonResponse({"message": "failed to add friend"})
         response.status_code = 200
         return response
-
-
-# stretch goal
-# @require_http_methods(["GET"])
-# def list_users_groups(request):
-#     pass

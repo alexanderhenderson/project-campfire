@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import React, { useState, useEffect, useRef } from 'react'
 
 
+
+
 export default function EventList(props) {
   const events = useRef([])
   const [filteredEvents, setFilteredEvents] = useState([])
@@ -35,6 +37,8 @@ export default function EventList(props) {
   function handleChange(event) {
     setSearch(event.target.value)
   }
+
+
 
   return (
     <>

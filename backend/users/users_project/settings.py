@@ -68,7 +68,7 @@ DJWTO_CSRF = False
 DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=30)
 
 # Your DEBUG value MUST be False in production
-DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
+DJWTO_SAME_SITE = "NONE"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
