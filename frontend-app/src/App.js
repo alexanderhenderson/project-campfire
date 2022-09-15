@@ -12,7 +12,7 @@ import ActivitiesList from './ActivitiesList'
 import EventDetail from './EventDetail'
 import MainPage from "./MainPage"
 import Kindler from "./Kindler"
-import CreateEvent from'./CreateEvent';
+import CreateEvent from'./CreateEvent'
 import { UserContext } from "./UserContext"
 import { useState, useEffect } from "react"
 
