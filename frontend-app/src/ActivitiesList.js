@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react"
 import { addActivities } from "./Components/AddActivityToList"
-// import { UserInfo } from "./UserContext";
 
 export default function FetchActivities() {
-
-    
-
-// // let [testingCon, setTest] = UserInfo()
-// setTest("Is this setting working")
-// console.log("TestingCon", testingCon)
 
     const [activities, setActivitiesData] = useState([])
     const [userData, setUserId] = useState("")
@@ -17,11 +10,7 @@ export default function FetchActivities() {
     const [filteredActivities, setFilteredActivities] = useState([])
 
     useEffect(() => {
-        //promise Chain cool!
-        // const userFetch = fetch (`${process.env.REACT_APP_USERS}/users/api/tokens/user/`, {
-        //     credentials: "include",
-        //   }).then(response => response.json()).then(data => setUserId(data.id))
-
+       
         const getActivityData = async () => {
             const url = `${process.env.REACT_APP_EVENTS}/events/activities/`;
             const response = await fetch(url);

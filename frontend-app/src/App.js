@@ -17,13 +17,11 @@ import TESTMAP from "./CreateEventMap";
 import { UserContext } from "./UserContext"
 import { useState, useEffect } from "react"
 
-
 export default function App() {
 
 const [userId, setUserId] = useState('')
 
 useEffect(() => {
-  
   const getUserdata = async () => {
       const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
       const response = await fetch(url, { credentials: "include" });
@@ -35,7 +33,6 @@ useEffect(() => {
   getUserdata()
 
 }, [])
-
 
   return (
   <UserContext.Provider value={{

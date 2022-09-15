@@ -2,20 +2,6 @@ import React, { useContext } from 'react';
 import { useState } from 'react';
 import { useToken } from './Authorization';
 
-
-
-// export const getUserdata = async () => {
-//     const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
-//     const response = await fetch(url, { credentials: "include" });
-//     if (response.ok) {
-//         userId = await response.json()
-//         console.log("BADAAABOOM",userId)
-//         // Test()
-//     }
-// }
-
-// import { getUserInfo } from './Authorization'; // testing don't leave in imports
-
 export default function LogIn() {
 
   const [username, setUsername] = useState('');
@@ -23,9 +9,6 @@ export default function LogIn() {
   // eslint-disable-next-line no-unused-vars
   const [token, login] = useToken();
   const [loginResponse, setLoginResponse] = useState();
-  
-  
-
   async function onSubmit() {
 
     //console.log("Submitted, token: ", token)

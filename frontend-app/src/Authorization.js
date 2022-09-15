@@ -20,11 +20,9 @@ export function getUserInfo() {
     "id": parsedToken.user.id
   }
 };
-
 export function getToken() {
   return internalToken;
 }
-
 export async function getTokenInternal() {
   const url = `${process.env.REACT_APP_USERS}/users/api/tokens/mine/`;
   //const url = `${process.env.REACT_APP_USERS}/api/accounts/me/token/`;
