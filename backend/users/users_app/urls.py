@@ -25,6 +25,6 @@ urlpatterns = [
     path('activities/', list_activities, name='api_list_activities'),
     path('activities/<int:pk>/', activity_detail, name='api_activity_details'),
     path('api/friend/', api_friend_detail, name='api_friend_detail'),
-    path('/comments/', list_comments, name='list_comments'),
+    path('comments/', list_comments, name='list_comments'),
     path('comments/<int:pk>/', comment_detail, name='comment_details'),
 ]

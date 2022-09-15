@@ -197,6 +197,15 @@ class UserDetailEncoder(ModelEncoder):
         "friends": FriendsEncoder(),
     }
 
+class UserCommentEncoder(ModelEncoder):
+    model = User
+    properties = [
+        "id",
+        "username",
+        "first_name",
+        "last_name",
+    ]
+
 class CommentEncoder(ModelEncoder):
     model = Comment
     properties = [
@@ -206,8 +215,8 @@ class CommentEncoder(ModelEncoder):
         "user_profile",
     ]
     encoders = {
-        "commenter": UserDetailEncoder(),
-        "user_profile": UserDetailEncoder(),
+        "commenter": UserCommentEncoder(),
+        "user_profile": UserCommentEncoder(),
     }
 
 
@@ -397,75 +406,69 @@ def api_friend_detail(request):
         return response
 
 
-@auth.jwt_login_required
 @require_http_methods(['GET', 'POST'])
 def list_comments(request):
     if request.method == 'GET':
         comments = Comment.objects.all()
-        return JsonResponse({"comments": comments}, encoder=CommentEncoder)
+        return JsonResponse(
+            {"comments": comments},
+            encoder=CommentEncoder,
+            safe=False,
+        )
     if request.method == 'POST':
-        try:
-            token_data = request.payload
-            user_id = token_data["user"]["id"]
-            content = json.loads(request.body)
-            content['commenter'] = Comment.objects.get(id=content[user_id])
-            content['user_profile'] = Comment.objects.get(id=content['user_profile'])
-            comment = Comment.objects.create(**content)
-            comment.save()
-            return JsonResponse({"comment": comment}, encoder=CommentEncoder)
-        except User.DoesNotExist:
-            response = JsonResponse({"Error": "User does not exist"})
-            response.status_code = 400
-            return response
+        # token_data = request.payload
+        # user_id = token_data["user"]["id"]
+        content = json.loads(request.body)
+        user_id = content['user_id']
+        content['commenter'] = User.objects.get(id=user_id)
+        del content['user_id']
+        content['user_profile'] = User.objects.get(id=content['user_profile'])
+        # How do we grab the user id of the profile we're on?
+        comment = Comment.objects.create(**content)
+        return JsonResponse(
+            {"comment": comment},
+            encoder=CommentEncoder,
+            safe=False,
+        )
 
-@auth.jwt_login_required
+# @auth.jwt_login_required
 @require_http_methods(['GET', 'PUT', 'DELETE'])
 def comment_detail(request, pk):
     if request.method == 'GET':
         try:
-            comment = comment.objects.get(id=pk)
-            return JsonResponse(user, encoder=CommentEncoder, safe=False)
-        except Comment.DoesNotExist:
-            response = JsonResponse({"Error": "Comment does not exist"})
-            response.status_code = 404
-            return response
-    elif request.method == 'DELETE':
-        try:
             comment = Comment.objects.get(id=pk)
-            comment.delete()
             return JsonResponse(
-                comment,
+                {'Comment': comment},
                 encoder=CommentEncoder,
                 safe=False,
             )
         except Comment.DoesNotExist:
-            return JsonResponse({"Error": "Comment does not exist"})
+            return JsonResponse("Comment does not exist.", status=400)
     elif request.method == 'PUT':
+        content = json.loads(request.body)
         try:
-            content = json.loads(request.body)
-            comment = User.objects.get(id=pk)
-            if "comment" in content:
-                comment = content["comment"]
-                for id in comment:
-                    comment = Comment.objects.get(id=id)
-                    comment.comments.add(comment)
+            comment = Comment.objects.get(id=pk)
             props = [
-                "id",
                 "comment",
             ]
             for prop in props:
                 if prop in content:
-                    setattr(Comment, prop, content[prop])
+                    setattr(comment, prop, content[prop])
             comment.save()
-            return JsonResponse(
-                Comment,
-                encoder=CommentEncoder,
-                safe=False,
-            )
-        except User.DoesNotExist:
-            response = JsonResponse({"message": "Does not exist"})
-            response.status_code = 404
-            return response
+        except Comment.DoesNotExist:
+            return JsonResponse("Comment does not exist", status=400)
+        return JsonResponse(
+            {"Comment": comment},
+            encoder=CommentEncoder,
+            safe=False,
+        )
+    elif request.method == 'DELETE':
+        try:
+            Comment.objects.get(id=pk).delete()
+            count, _ = Comment.objects.filter(id=pk).delete()
+            return JsonResponse({"Deleted": count == 0})
+        except Comment.DoesNotExist:
+            return JsonResponse({"Error": "Comment does not exist"})
 
 
 # stretch goal
