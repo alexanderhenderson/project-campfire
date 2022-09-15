@@ -97,6 +97,5 @@ class EventsApiTest(TestCase):
     def test_delete_event_detail(self):
 
         response = self.client.delete("/events/1/")
-        content = response.json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(Event.objects.all()), 0)
