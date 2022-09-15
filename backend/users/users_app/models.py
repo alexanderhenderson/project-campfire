@@ -26,3 +26,19 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+class Comment(models.Model):
+    comment = models.TextField(null=True, blank=True)
+    time_posted = models.DateTimeField(auto_now_add=True)
+    commenter = models.ForeignKey(
+        User,
+        related_name="comments",
+        on_delete=models.PROTECT,
+    )
+    user_profile = models.ForeignKey(
+        User, related_name="user_profiles", on_delete=models.PROTECT
+    )
+
+    def __str__(self):
+        return f"{self.commenter} to {self.user_profile}: {self.comment}"
