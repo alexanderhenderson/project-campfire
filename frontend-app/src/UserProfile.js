@@ -135,7 +135,7 @@ export default function UserProfile() {
                                                                     <tr key={friend.id}>
                                                                         <td className= "pointer"
                                                                         onClick={() => {
-                                                                            navigate(`${profileLink}${friend.id}/`)
+                                                                            navigate(`/profile/${friend.id}/`)
                                                                         }}>
                                                                         {friend.username}</td>
                                                                     </tr>

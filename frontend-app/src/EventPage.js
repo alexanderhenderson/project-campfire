@@ -48,7 +48,7 @@ export default function EventList(props) {
               <h1>Events</h1>
             </div>
             <div className="col">
-            <div className="align-right"><a className="btn btn-dark rounded-pill mb-3" href="/events/create/" role="button">Add Event</a></div>
+            <div className="align-right"><a className="btn btn-dark rounded-pill mb-3" href={`${eventsLink}create/`} role="button">Add Event</a></div>
             </div>
           </div>
           </div>
@@ -68,7 +68,7 @@ export default function EventList(props) {
               <div className="col-sm-4 mt-3 mb-3" key={event.id}>
                 <div className="card mb-3 shadow h-100 pointer"
                   onClick={() => {
-                    navigate(`${eventsLink}${event.id}/`)
+                    navigate(`/events/${event.id}/`)
                   }}>
                   <img src={event.picture_url} className="card-img-top crop-image" alt="" />
                   <div className="card-body">

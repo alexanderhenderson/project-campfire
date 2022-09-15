@@ -130,7 +130,7 @@ export function useToken() {
       await fetch(url, { method: "delete", credentials: "include" })
       internalToken = null
       setToken(null)
-      navigate(homeLink)
+      navigate("/")
     }
   }
 
@@ -150,7 +150,7 @@ export function useToken() {
       console.log("Token from Auth: ", token)
       let tokeninfo = await parseJwt(token)
       setUserId(tokeninfo.user)  
-      navigate(introLink);
+      navigate("/intro/");
       // console.log("User ID info in auth", userId)
     }
     let error = await response.json()
@@ -176,7 +176,7 @@ export function useToken() {
     })
     if (response.ok) {
       await login(username, password)
-      navigate(homeLink)
+      navigate("/intro/")
     }
     return false
   }

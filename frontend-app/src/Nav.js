@@ -98,7 +98,7 @@ export default function NavBar() {
             <Nav>
               <Nav.Link href={homeLink} className='mx-1'> Home </Nav.Link>
               <Nav.Link href={introLink} className='mx-1'> New Here? </Nav.Link>
-              <Nav.Link onClick={() => { navigate(`${profileLink}${userId.id}`)}} className='mx-1'> Profile </Nav.Link>
+              <Nav.Link onClick={() => { navigate(`/profile/${userId.id}`)}} className='mx-1'> Profile </Nav.Link>
               <Nav.Link href={eventsLink} className='mx-1'> Events </Nav.Link>
               <Nav.Link href={activitiesLink} className='mx-1'> Activities </Nav.Link>
               <Nav.Link href={kindlerLink} className='mx-1'> Kindler </Nav.Link>

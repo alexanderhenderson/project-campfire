@@ -1,8 +1,8 @@
 import React from 'react'
-
+import { settingLinks } from "./Nav"
 
 export default function IntroPage() {
-
+  const [homeLink, introLink, profileLink, eventsLink, activitiesLink, kindlerLink, signupLink, loginLink] = settingLinks()
   return (
     <>
       <div className='intro-bg'></div>
@@ -31,7 +31,7 @@ export default function IntroPage() {
                 <h1>Activities</h1>
                 <h3>Let us know what you're into.</h3>
                 <div className='mt-4'>
-                  <p> <a className="btn btn-outline-dark btn-lg rounded-pill mb-3" href="/activities/" role="button">See All Activities</a></p>
+                  <p> <a className="btn btn-outline-dark btn-lg rounded-pill mb-3" href={activitiesLink} role="button">See All Activities</a></p>
                 </div>
               </div>
             </div>
@@ -49,7 +49,7 @@ export default function IntroPage() {
                 <h1>Kindler</h1>
                 <div className='mt-4'>
                   <h3>Meet friends based on common interests. </h3>
-                  <p><a className="btn btn-outline-dark btn-lg rounded-pill mb-3" href="/partnerfinder/" role="button">Kindler: Meet Your Match 🔥</a></p>
+                  <p><a className="btn btn-outline-dark btn-lg rounded-pill mb-3" href={kindlerLink} role="button">Kindler: Meet Your Match 🔥</a></p>
                 </div>
               </div>
             </div>
@@ -67,7 +67,7 @@ export default function IntroPage() {
                 <h1>Events</h1>
                 <h3>Find your next adventure or create your own!</h3>
                 <div className='mt-4'>
-                  <p><a className="btn btn-outline-dark btn-lg rounded-pill mb-3" href="/events/" role="button">See All Events</a></p>
+                  <p><a className="btn btn-outline-dark btn-lg rounded-pill mb-3" href={eventsLink} role="button">See All Events</a></p>
                 </div>
               </div>
             </div>
