@@ -45,7 +45,11 @@ class Event(models.Model):
     end = models.DateTimeField(null=False, blank=False)
     latitude = models.DecimalField(max_digits=19, decimal_places=16)
     longitude = models.DecimalField(max_digits=19, decimal_places=16)
-    attendees = models.ManyToManyField(UserVO, blank=True, related_name="users")
+    attendees = models.ManyToManyField(
+        UserVO,
+        blank=True,
+        related_name="users"
+    )
     picture_url = models.URLField(blank=True, null=True)
 
     def __str__(self):
