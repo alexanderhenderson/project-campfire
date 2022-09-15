@@ -31,7 +31,7 @@ export default function App() {
             <Route path="signup" element={<Signup />} />
             <Route path="events" element={<EventList />} />
             <Route path="activities" element={<ActivitiesList />} />
-            <Route path="kinder" element={<Kindler />} />
+            <Route path="kindler" element={<Kindler />} />
             <Route path="events">
               <Route path=":dynamicId" element={<EventDetail />} />
               <Route path="create" element={<CreateEvent/>} />

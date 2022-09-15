@@ -6,13 +6,13 @@ export default function EventList(props) {
   const events = useRef([])
   const [filteredEvents, setFilteredEvents] = useState([])
   const [search, setSearch] = useState('')
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
 
   useEffect(() => {
     const requestEvents = async () => {
       const url = `${process.env.REACT_APP_EVENTS}/events/`
-      const response = await fetch(url);
+      const response = await fetch(url)
       if (response.ok) {
         const data = await response.json()
         events.current = data.Events
@@ -86,7 +86,7 @@ export default function EventList(props) {
                   </div>
                 </div>
               </div>
-            );
+            )
           })}
         </div>
         </div>
