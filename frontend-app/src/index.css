@@ -113,7 +113,6 @@ nav {
   display: flex;
   justify-content: right;
   align-items: right;
-
   border: 3px solid #ffc507e0;
 }
 
@@ -160,6 +159,7 @@ nav {
   opacity: 0.6;
   /* filter: blur(1px); */
 }
+
 
 .event-bg {
   /* Sizing */
@@ -269,7 +269,7 @@ justify-content: right;
 }
 
 .box_bg{
-  background-color: #0561f4bd;
+  background-color: #000000bd;
   border-radius: 1.9ch;
 }
 
@@ -317,4 +317,29 @@ a:hover{
 
 .padding-top-med {
   padding-top: 3rem;
+}
+
+/* .wordbg{
+    text-shadow: 
+        -1px -1px 0px rgba(255, 255, 255, 0.512),
+         0px -1px 0px rgba(255, 255, 255, 0.539),
+         1px -1px 0px rgba(255, 255, 255, 0.533),
+        -1px  0px 0px rgba(255, 255, 255, 0.534),
+         1px  0px 0px rgba(255, 255, 255, 0.514),
+        -1px  1px 0px rgba(255, 255, 255, 0.525),
+         0px  1px 0px rgba(255, 255, 255, 0.528),
+         1px  1px 0px rgba(255, 255, 255, 0.532);
+
+} */
+
+.carousel-control-next-icon{
+  border-radius: .9ch;
+  background-color: rgba(0, 0, 0, 0.574);
+
+}
+.carousel-control-prev-icon{
+  
+  border-radius: .9ch;
+  background-color: rgba(0, 0, 0, 0.574);
+
 }

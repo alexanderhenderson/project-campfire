@@ -7,7 +7,7 @@ export default function IntroPage() {
     <>
       <div className='intro-bg'></div>
       <div className="px-4 text-center text-black over-bg padding-top">
-        <div className="mb-3">
+        <div className="mb-3 wordbg">
           <h1>New here? Let us show you around.</h1>
         </div>
       </div>

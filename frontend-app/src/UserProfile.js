@@ -28,7 +28,7 @@ export default function UserProfile() {
             }
         }
           requestEvents()
-        console.log("id 2", id)
+        
         getUserdata()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
