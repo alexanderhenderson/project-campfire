@@ -24,9 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    "django-insecure-wjyq3ncl&i@x2ln8=mwab$*21w)nxadc_c=by%ysnn=-383f=m"
-)
+SECRET_KEY = "django-insecure-wjyq3ncl&i@x2ln8=mwab$*21w)nxadc_c=by%ysnn=-383f=m"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -48,7 +46,9 @@ ALLOWED_HOSTS = [
 ]
 
 
-AUTH_USER_MODEL = "users_app.User"  #  where user is the app name and User is the model class name
+AUTH_USER_MODEL = (
+    "users_app.User"  #  where user is the app name and User is the model class name
+)
 
 
 # Application definition
@@ -67,7 +67,7 @@ INSTALLED_APPS = [
 DJWTO_MODE = "TWO-COOKIES"
 DJWTO_CSRF = False
 DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=30)
-DJWTO_SIGNING_KEY = os.getenv('DJWTO_SIGNING_KEY')
+DJWTO_SIGNING_KEY = os.getenv("DJWTO_SIGNING_KEY")
 
 # Your DEBUG value MUST be False in production
 DJWTO_SAME_SITE = "NONE"
@@ -80,13 +80,13 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 
 DJWTO_DOMAIN = [
-    'DJWTO_DOMAIN',
+    "DJWTO_DOMAIN",
     "http://localhost:8080",
     "http://localhost:8090",
     "localhost:8080",
     "localhost:8090",
     "events",
-    "users"
+    "users",
 ]
 
 

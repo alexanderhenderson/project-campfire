@@ -55,7 +55,6 @@ def list_all_uservos(request):
         )
 
 
-
 # Create your views here.
 @require_http_methods(["GET", "POST"])
 def list_all_events(request):

@@ -24,9 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    "django-insecure-ojkhvqy0j4+@q(jh8(m-a7x3(b3&=k9g+-2!&m(4n8rmw52tle"
-)
+SECRET_KEY = "django-insecure-ojkhvqy0j4+@q(jh8(m-a7x3(b3&=k9g+-2!&m(4n8rmw52tle"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -62,19 +60,19 @@ INSTALLED_APPS = [
 DJWTO_MODE = "TWO-COOKIES"
 DJWTO_CSRF = False
 DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=30)
-DJWTO_SIGNING_KEY = os.getenv('DJWTO_SIGNING_KEY')
+DJWTO_SIGNING_KEY = os.getenv("DJWTO_SIGNING_KEY")
 
 # Your DEBUG value MUST be False in production
 DJWTO_SAME_SITE = "NONE"
 
 DJWTO_DOMAIN = [
-    'DJWTO_DOMAIN',
+    "DJWTO_DOMAIN",
     "http://localhost:8080",
     "http://localhost:8090",
     "localhost:8080",
     "localhost:8090",
     "events",
-    "users"
+    "users",
 ]
 
 # CORS_ALLOW_ALL_ORIGINS = True

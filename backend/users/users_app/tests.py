@@ -1,6 +1,7 @@
 from django.test import TestCase
 import json
 from .models import ActivityVO, User
+
 # from django.urls import reverse
 # from django.http.cookie import SimpleCookie
 
@@ -25,7 +26,7 @@ class UsersApiTest(TestCase):
         self.user = User.objects.create(
             id=2,
             username="TestUser",
-            password= "password",
+            password="password",
             first_name="Test",
             last_name="User",
             email="testemail@gmail.com",
@@ -70,48 +71,48 @@ class UsersApiTest(TestCase):
     #     # response = json.loads(request)
     #     print("Access Token: ", request)  # .COOKIES['jwt_access_token'])
 
-        # test = Form()
-        # test.append("username")
+    # test = Form()
+    # test.append("username")
 
-        # const form = new FormData();
-        # form.append("username", username);
-        # form.append("password", password);
-        # const response = await fetch(url, {
-        # method: "post",
-        # credentials: "include",
-        # body: form,
-        # });
+    # const form = new FormData();
+    # form.append("username", username);
+    # form.append("password", password);
+    # const response = await fetch(url, {
+    # method: "post",
+    # credentials: "include",
+    # body: form,
+    # });
 
-        # resp = self.client.post(url, {'username':'user@foo.com',
-        # 'password':'pass'}, format='json')
-        # self.assertEqual(resp.status_code, 200)
-        # self.assertTrue('token' in resp.data)
-        # token = resp.data['token']
-        # print(token)
+    # resp = self.client.post(url, {'username':'user@foo.com',
+    # 'password':'pass'}, format='json')
+    # self.assertEqual(resp.status_code, 200)
+    # self.assertTrue('token' in resp.data)
+    # token = resp.data['token']
+    # print(token)
 
-        # how we can set a token manually:
-        # client.cookies[key] = data
+    # how we can set a token manually:
+    # client.cookies[key] = data
 
-        # verification_url = reverse('api-jwt-verify')
-        # resp = self.client.post(verification_url,
-        #  {'token': token}, format='json')
-        # self.assertEqual(resp.status_code, status.HTTP_200_OK)
+    # verification_url = reverse('api-jwt-verify')
+    # resp = self.client.post(verification_url,
+    #  {'token': token}, format='json')
+    # self.assertEqual(resp.status_code, status.HTTP_200_OK)
 
-        # resp = self.client.post(verification_url, {'token': 'abc'},
-        #  format='json')
-        # self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
+    # resp = self.client.post(verification_url, {'token': 'abc'},
+    #  format='json')
+    # self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
 
-        # client = APIClient()
-        # client.credentials(HTTP_AUTHORIZATION='JWT ' + 'abc')
-        # resp = client.get('/api/v1/account/', data={'format': 'json'})
-        # self.assertEqual(resp.status_code, status.HTTP_401_UNAUTHORIZED)
-        # client.credentials(HTTP_AUTHORIZATION='JWT ' + token)
-        # resp = client.get('/api/v1/account/', data={'format': 'json'})
-        # self.assertEqual(resp.status_code, status.HTTP_200_OK)
+    # client = APIClient()
+    # client.credentials(HTTP_AUTHORIZATION='JWT ' + 'abc')
+    # resp = client.get('/api/v1/account/', data={'format': 'json'})
+    # self.assertEqual(resp.status_code, status.HTTP_401_UNAUTHORIZED)
+    # client.credentials(HTTP_AUTHORIZATION='JWT ' + token)
+    # resp = client.get('/api/v1/account/', data={'format': 'json'})
+    # self.assertEqual(resp.status_code, status.HTTP_200_OK)
 
-        # print("---")
-        # print("---")
-        # print("---")
+    # print("---")
+    # print("---")
+    # print("---")
 
     def test_list_users(self):
         response = self.client.get("/users/")
@@ -173,25 +174,3 @@ class UsersApiTest(TestCase):
         content = response.json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(content["ActivityVOs"][0]["id"], self.activity.id)
-
-    def test_update_user(self):
-
-        data = json.dumps(
-            {
-                "username": "TestUpdate",
-                "first_name": "Test_UpdateFirstname",
-                "last_name": "TestUpdateLastname",
-                "email": "UpdateEmail@gmail.com",
-                "profile_description": "this is a test for updating a user",
-                "city": "Updated City",
-                "state": "US",
-            }
-        )
-
-        response = self.client.put(
-            "/users/1/",
-            data,
-            content_type="application/json",
-        )
-
-        self.assertEqual(response.status_code, 200)

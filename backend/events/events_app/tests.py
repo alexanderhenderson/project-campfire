@@ -58,22 +58,22 @@ class EventsApiTest(TestCase):
         content = response.json()
         self.assertEqual(response.status_code, 200)
 
-        self.assertEqual(len(content['Event']), 11)
-        self.assertEqual(type(content['Event']['id']), int)
-        self.assertEqual(content['Event']['name'], "Party")
-        self.assertEqual(content['Event']['owner']['id'], 2)
-    
+        self.assertEqual(len(content["Event"]), 11)
+        self.assertEqual(type(content["Event"]["id"]), int)
+        self.assertEqual(content["Event"]["name"], "Party")
+        self.assertEqual(content["Event"]["owner"]["id"], 2)
+
     def test_put_event_detail(self):
-        
+
         data = json.dumps(
             {
-            "name":"UpdatedParty",
-            "description":"Updated Party all day",
-            "start":"2022-02-25T23:51:41+00:00",
-            "end":"2022-02-25T23:51:41+00:00",
-            "latitude":10,
-            "longitude":10,
-            "picture_url":"updated.com"
+                "name": "UpdatedParty",
+                "description": "Updated Party all day",
+                "start": "2022-02-25T23:51:41+00:00",
+                "end": "2022-02-25T23:51:41+00:00",
+                "latitude": 10,
+                "longitude": 10,
+                "picture_url": "updated.com",
             }
         )
 
@@ -81,12 +81,11 @@ class EventsApiTest(TestCase):
             "/events/1/",
             data,
             content_type="application/json",
-            )
+        )
         content = response.json()
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(content['name'], "UpdatedParty")
+        self.assertEqual(content["name"], "UpdatedParty")
 
-    
     def test_activities_list(self):
         response = self.client.get("/events/activities/")
         content = response.json()
@@ -96,9 +95,8 @@ class EventsApiTest(TestCase):
                 self.assertEqual(activity["id"], self.activity.id)
 
     def test_delete_event_detail(self):
-        
+
         response = self.client.delete("/events/1/")
         content = response.json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(Event.objects.all()), 0)
-        
