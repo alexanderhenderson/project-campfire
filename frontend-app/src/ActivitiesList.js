@@ -10,14 +10,10 @@ export default function FetchActivities() {
     const [filteredActivities, setFilteredActivities] = useState([])
 
     useEffect(() => {
-        //promise Chain cool!
-        // const userFetch = fetch (`${process.env.REACT_APP_USERS}/users/api/tokens/user/`, {
-        //     credentials: "include",
-        //   }).then(response => response.json()).then(data => setUserId(data.id))
-
+       
         const getActivityData = async () => {
-            const url = `${process.env.REACT_APP_EVENTS}/events/activities/`;
-            const response = await fetch(url);
+            const url = `${process.env.REACT_APP_EVENTS}/events/activities/`
+            const response = await fetch(url)
             if (response.ok) {
                 const data = await response.json()
                 setActivitiesData(data["Activities"])
@@ -25,8 +21,8 @@ export default function FetchActivities() {
             }
         }
         const getUserdata = async () => {
-            const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
-            const response = await fetch(url, { credentials: "include" });
+            const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`
+            const response = await fetch(url, { credentials: "include" })
             if (response.ok) {
                 const userData = await response.json()
                 setUserId(userData)
@@ -54,31 +50,31 @@ export default function FetchActivities() {
         setSearch(event.target.value)
     }
 
-    const userFavesIds = activityList.map(act => act.id);
+    const userFavesIds = activityList.map(act => act.id)
     const activityState = filteredActivities.length < 1
         ? activities
         : filteredActivities;
-
+    
     return (
         <main>
             <div className='activities-bg'></div>
             <div className="m-3">
                 <h1>Activities</h1>
                 <h4>Click card to add to your favorite activities list!</h4>
-                    <button className="btn btn-primary rounded-pill" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Click to see activities list
+                    <button className="btn btn-dark rounded-pill" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">See Favorited Activities
                     </button>
                 <div className="offcanvas offcanvas-bottom border background-opacity" data-bs-scroll="true" tabIndex="-1" id="offcanvasBottom"
                     aria-labelledby="offcanvasBottomLabel">
                         <div className="offcanvas-header box_bg center">
-                            <h5 className="offcanvas-title " id="offcanvasBottomLabel">Favorite Activities:</h5>
+                            <h5 className="offcanvas-title " id="offcanvasBottomLabel">Your Favorite Activities</h5>
                         </div>
                         <div className="offcanvas-body large ">
                             {activityList?.slice(0).reverse().map(act => {
                                 return (
                                     <ul className="activeList" key={act.id}>
-                                        <li className="item" >
-                                            {act.name} 
+                                        <li className="item">
+                                            {act.name}
                                         </li>
                                     </ul>
                                 )})}
@@ -112,10 +108,10 @@ export default function FetchActivities() {
                                         </div>
                                     </div>
                                 </div>
-                            );
+                            )
                         })}
                 </div>
             </div>
         </main>
-    );
+    )
 }
