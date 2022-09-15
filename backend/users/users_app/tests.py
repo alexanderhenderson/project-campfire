@@ -1,9 +1,7 @@
-# from tkinter.tix import Form
 from django.test import TestCase
 import json
 from .models import ActivityVO, User
-from django.urls import reverse
-
+# from django.urls import reverse
 # from django.http.cookie import SimpleCookie
 
 #  lient.cookies is an instance of http.cookies.SimpleCookie
@@ -27,6 +25,7 @@ class UsersApiTest(TestCase):
         self.user = User.objects.create(
             id=2,
             username="TestUser",
+            password= "password",
             first_name="Test",
             last_name="User",
             email="testemail@gmail.com",

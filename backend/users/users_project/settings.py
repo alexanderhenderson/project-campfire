@@ -40,6 +40,7 @@ ALLOWED_HOSTS = [
     ".localhost",
     "localhost",
     "http://localhost:3000",
+    "http://localhost:8090",
     "http://localhost:8080",
     "127.0.0.1",
     "[::1]",
@@ -66,6 +67,7 @@ INSTALLED_APPS = [
 DJWTO_MODE = "TWO-COOKIES"
 DJWTO_CSRF = False
 DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=30)
+DJWTO_SIGNING_KEY = os.getenv('DJWTO_SIGNING_KEY')
 
 # Your DEBUG value MUST be False in production
 DJWTO_SAME_SITE = "NONE"
@@ -76,6 +78,16 @@ CORS_ALLOWED_ORIGINS = [
     os.environ.get("CORS_HOST", "http://localhost:3001"),
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+DJWTO_DOMAIN = [
+    'DJWTO_DOMAIN',
+    "http://localhost:8080",
+    "http://localhost:8090",
+    "localhost:8080",
+    "localhost:8090",
+    "events",
+    "users"
+]
 
 
 MIDDLEWARE = [
