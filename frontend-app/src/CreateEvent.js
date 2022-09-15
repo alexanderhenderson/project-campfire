@@ -1,13 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
-import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer, } from '@react-google-maps/api'
-import usePlacesAutocomplete, { getGeocode, getLatLng, } from "use-places-autocomplete"
+import { useState, useRef, useEffect } from 'react'
+import { useJsApiLoader, GoogleMap, Marker, Autocomplete } from '@react-google-maps/api'
+import { getGeocode, getLatLng, } from "use-places-autocomplete"
 import googleAPI from './keys'
 
 const center = { lat: 37.7749295, lng: -122.4194155 }
 const libraries = ['places']
 
 function BootstrapInput(props) {
-    const { id, placeholder, changeHandler, value, type, label } = props;
+    const { id, placeholder, changeHandler, value, type, label } = props
     return (
         <div className="form-group form-floating">
             <input
@@ -25,7 +25,7 @@ function BootstrapInput(props) {
 }
 
 function BootstrapInputDate(props) {
-    const { id, placeholder, changeHandler, value, type, label, changehandler2 } = props;
+    const { id, placeholder, changeHandler, value, type, label, changehandler2 } = props
     return (
         <div className="input-group mb-3">
             <input
@@ -49,38 +49,38 @@ function BootstrapInputDate(props) {
 }
 function CreateEvent() {
     const API_URL = `${process.env.REACT_APP_EVENTS}/events/activities/`
-    const EventAPI_URL = `${process.env.REACT_APP_EVENTS}/events/`
+    // const EventAPI_URL = `${process.env.REACT_APP_EVENTS}/events/`
     const containerStyle = { width: '400px', height: '400px' }
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: googleAPI(),
         libraries
     })
 
-    const [activitys, setActivitys] = useState([]);
-    const [name, setName] = useState('');
-    const [latitude, setLatitude] = useState('');
-    const [longitude, setLongitude] = useState('');
-    const [start, SetStart] = useState('');
-    const [end, setEnd] = useState('');
-    const [description, setDescription] = useState('');
-    const [owner, setOwner] = useState(0);
-    const [activity, setActivity] = useState('');
-    const [picture_url, setPicture_url] = useState('');
-    const [map, setMap] = useState(/** @type google.maps.Map */(null));
-    const [selected, setSelected] = useState({ lat: 37.7749295, lng: -122.4194155 });
-    const [userData, setUserId] = useState("");
-    const [startTime, setStartTime] = useState("");
-    const [endTime, setEndTime] = useState("");
+    const [activitys, setActivitys] = useState([])
+    const [name, setName] = useState('')
+    // const [latitude, setLatitude] = useState('')
+    // const [longitude, setLongitude] = useState('')
+    const [start, SetStart] = useState('')
+    const [end, setEnd] = useState('')
+    const [description, setDescription] = useState('')
+    // const [owner, setOwner] = useState(0)
+    const [activity, setActivity] = useState('')
+    const [picture_url, setPicture_url] = useState('')
+    const [map, setMap] = useState(/** @type google.maps.Map */(null))
+    const [selected, setSelected] = useState({ lat: 37.7749295, lng: -122.4194155 })
+    const [userData, setUserId] = useState("")
+    const [startTime, setStartTime] = useState("")
+    const [endTime, setEndTime] = useState("")
 
 
 
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
+                const response = await fetch(API_URL)
+                const data = await response.json()
                 console.log(data)
-                setActivitys(Object.values(data));
+                setActivitys(Object.values(data))
             } catch (err) {
                 console.log(err.stack)
             }
@@ -89,8 +89,8 @@ function CreateEvent() {
 
 
         const getUserdata = async () => {
-            const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
-            const response = await fetch(url, { credentials: "include" });
+            const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`
+            const response = await fetch(url, { credentials: "include" })
             if (response.ok) {
                 const userData = await response.json()
                 console.log(userData)
@@ -98,7 +98,7 @@ function CreateEvent() {
             }
         }
         getUserdata()
-
+    //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     /** @type React.MutableRefObject<HTMLInputElement> */
@@ -115,11 +115,11 @@ function CreateEvent() {
         }
         console.log(markerRef.current.value)
         const address = markerRef.current.value
-        const results = await getGeocode({ address });
-        const { lat, lng } = await getLatLng(results[0]);
-        setSelected({ lat, lng });
-        map.panTo({ lat, lng });
-        map.setZoom(20);
+        const results = await getGeocode({ address })
+        const { lat, lng } = await getLatLng(results[0])
+        setSelected({ lat, lng })
+        map.panTo({ lat, lng })
+        map.setZoom(20)
     }
 
 
@@ -137,16 +137,16 @@ function CreateEvent() {
             "picture_url": picture_url
         }
         console.log(data)
-        const url = `${process.env.REACT_APP_EVENTS}/events/`;
+        const url = `${process.env.REACT_APP_EVENTS}/events/`
         const content = JSON.stringify(data)
         console.log(content)
-        const response = await fetch(url, {
+        await fetch(url, {
             method: "post",
             body: content,
             headers: {
                 "Content-Type": "application/json",
             },
-        });
+        })
     }
 
 
@@ -271,7 +271,7 @@ function CreateEvent() {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
     else { return <h1> LOADING </h1> }
 }

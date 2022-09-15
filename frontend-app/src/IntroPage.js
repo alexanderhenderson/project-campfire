@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import Carousel from 'react-bootstrap/Carousel'
+import React from 'react'
 
 
 export default function IntroPage() {
@@ -25,6 +24,7 @@ export default function IntroPage() {
               className="d-block"
               src="https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png"
               height='300'
+              alt=''
             />
             <div className="container">
               <div className="carousel-caption text-black">
@@ -42,6 +42,7 @@ export default function IntroPage() {
               className="d-block"
               src="https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png"
               height='300'
+              alt=''
             />
             <div className="container">
               <div className="carousel-caption text-black">
@@ -59,6 +60,7 @@ export default function IntroPage() {
               className="d-block"
               src="https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png"
               height='300'
+              alt=''
             />
             <div className="container">
               <div className="carousel-caption text-black">
