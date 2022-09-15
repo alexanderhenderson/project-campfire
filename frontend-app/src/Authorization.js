@@ -1,17 +1,17 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import {UserContext} from "./UserContext"
 
-let internalToken = null;
+let internalToken = null
 
 function parseJwt(token) {
   // console.log("THIS IS THE TOKEN", token)
   try {
-    return JSON.parse(atob(token.split('.')[1]));
+    return JSON.parse(atob(token.split('.')[1]))
   } catch (e) {
-    return null;
+    return null
   }
-};
+}
 
 export function getUserInfo() {
   const parsedToken = parseJwt(getToken())
@@ -19,7 +19,7 @@ export function getUserInfo() {
     "username": parsedToken.user.username,
     "id": parsedToken.user.id
   }
-};
+}
 export function getToken() {
   return internalToken
 }
@@ -84,7 +84,7 @@ export const AuthContext = createContext({
 
 
 export const AuthProvider = (props) => {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(null)
   
   // console.log("props: ", props)
   
@@ -108,8 +108,8 @@ export const useAuthContext = () => useContext(AuthContext)
 export function useToken() {
 
   // const {userId, setUserId} = useContext(MainContext)
-  const { token, setToken } = useAuthContext();
-  const navigate = useNavigate();
+  const { token, setToken } = useAuthContext()
+  const navigate = useNavigate()
   const {setUserId} = useContext(UserContext)
 
   useEffect(() => {
@@ -143,12 +143,12 @@ export function useToken() {
       body: form,
     })
     if (response.ok) {
-      const token = await getTokenInternal();
-      setToken(token);
+      const token = await getTokenInternal()
+      setToken(token)
       console.log("Token from Auth: ", token)
       let tokeninfo = await parseJwt(token)
       setUserId(tokeninfo.user)  
-      navigate("/intro/");
+      navigate("/intro/")
       // console.log("User ID info in auth", userId)
     }
     let error = await response.json()

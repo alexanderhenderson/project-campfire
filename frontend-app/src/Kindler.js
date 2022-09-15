@@ -75,8 +75,8 @@ export default function Kindler() {
 								return (
 									<div className="col-sm-4" key={KindlerUser.id}>
 										<div className="card mb-3 shadow">
-											<img className="crop-image" src={KindlerUser?.profile_photo || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPJFBrPoazCA8scTIXSLI6fwQHWFI-VhSkQ&usqp=CAU"} alt="" />
-											<div className="card-body ">
+											<img className="crop-image" src={KindlerUser?.profile_photo || "https://cdn-icons-png.flaticon.com/512/4123/4123763.png"} alt="" />
+											<div className="card-body h-200">
 												<h5 className="card-title">{KindlerUser.username}</h5>
 												{!KindlerUser?.friend ? (
 													<button

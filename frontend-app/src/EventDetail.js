@@ -29,8 +29,8 @@ console.log(dynamicId)
 
 
         const getUserdata = async () => {
-            const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
-            const response = await fetch(url, { credentials: "include" });
+            const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`
+            const response = await fetch(url, { credentials: "include" })
             if (response.ok) {
                 const userData = await response.json()
                 setUserId(userData)

@@ -33,11 +33,11 @@ class Comment(models.Model):
     time_posted = models.DateTimeField(auto_now_add=True)
     commenter = models.ForeignKey(
         User,
-        related_name="comments",
+        related_name="commenters",
         on_delete=models.PROTECT,
     )
     user_profile = models.ForeignKey(
-        User, related_name="user_profiles", on_delete=models.PROTECT
+        User, related_name="comment_location", on_delete=models.PROTECT
     )
 
     def __str__(self):
