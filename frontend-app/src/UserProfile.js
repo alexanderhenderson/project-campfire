@@ -32,7 +32,7 @@ export default function UserProfile() {
 
         getUserdata()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [id])
 
     let currentUser = userData.id
     let attendedEvents = []
