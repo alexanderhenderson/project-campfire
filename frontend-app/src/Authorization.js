@@ -91,32 +91,6 @@ export function useToken() {
 		}
 	}
 
-<<<<<<< HEAD
-  async function login(username, password) {
-    const url = `${process.env.REACT_APP_USERS}/login/`;
-    const form = new FormData();
-    form.append("username", username);
-    form.append("password", password);
-
-    console.log("Form data: ", typeof form)
-    // console.log("Form target?: ", form.values())
-
-
-    const response = await fetch(url, {
-      method: "post",
-      credentials: "include",
-      body: form,
-    });
-    if (response.ok) {
-      const token = await getTokenInternal();
-      setToken(token);
-      navigate("/intro/");
-      return;
-    }
-    let error = await response.json();
-    return handleErrorMessage(error);
-  }
-=======
 	async function login(username, password) {
 		const url = `${process.env.REACT_APP_USERS}/login/`;
 		const form = new FormData();
@@ -130,7 +104,6 @@ export function useToken() {
 		if (response.ok) {
 			// console.log("Settoken", setToken);
 			// console.log("Setuser", setUser);
->>>>>>> main
 
 			const token = await getTokenInternal();
 			setToken(token);

@@ -70,15 +70,8 @@ class UsersApiTest(TestCase):
     #     # response = json.loads(request)
     #     print("Access Token: ", request)  # .COOKIES['jwt_access_token'])
 
-<<<<<<< HEAD
-        test = Form()
-        #test.append("username")
-
-        print("Test form?: ", dir(test))
-=======
         # test = Form()
         # test.append("username")
->>>>>>> main
 
         # const form = new FormData();
         # form.append("username", username);
@@ -89,24 +82,8 @@ class UsersApiTest(TestCase):
         # body: form,
         # });
 
-<<<<<<< HEAD
-        # const form = new FormData();
-        # form.append("username", username);
-        # form.append("password", password);
-        # const response = await fetch(url, {
-        # method: "post",
-        # credentials: "include",
-        # body: form,
-        # });
-
-
-
-        
-        # resp = self.client.post(url, {'username':'user@foo.com', 'password':'pass'}, format='json')
-=======
         # resp = self.client.post(url, {'username':'user@foo.com',
         # 'password':'pass'}, format='json')
->>>>>>> main
         # self.assertEqual(resp.status_code, 200)
         # self.assertTrue('token' in resp.data)
         # token = resp.data['token']

@@ -2,7 +2,6 @@ from common.json import ModelEncoder
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-import djwto.authentication as auth
 
 
 from .models import Activity, Event, UserVO
@@ -58,7 +57,6 @@ def list_all_uservos(request):
 
 
 # Create your views here.
-@auth.jwt_login_required
 @require_http_methods(["GET", "POST"])
 def list_all_events(request):
 
