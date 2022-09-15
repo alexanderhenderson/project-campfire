@@ -22,26 +22,26 @@ export default function UserProfile() {
             const url = `${process.env.REACT_APP_EVENTS}/events/`
             const response = await fetch(url);
             if (response.ok) {
-              const data = await response.json()
-              events.current = data.Events
-              setEvents(events.current)
+                const data = await response.json()
+                events.current = data.Events
+                setEvents(events.current)
             }
         }
-          requestEvents()
-        console.log("id 2", id)
+
+        requestEvents()
+
         getUserdata()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     let currentUser = userData.id
     let attendedEvents = []
-   
-    for(let evt of events){
+    for (let evt of events) {
         let evtAtt = evt.attendees
-        for(let x of evtAtt){
-           if(x.id === currentUser){
-               attendedEvents.push(evt)
-           }
+        for (let x of evtAtt) {
+            if (x.id === currentUser) {
+                attendedEvents.push(evt)
+            }
         }
     }
 
@@ -77,16 +77,8 @@ export default function UserProfile() {
                                             <tbody>
                                                 {slicedlist.map(att => (
                                                     <tr key={att.id}>
-                                                        <td className="pointer2"
-                                                        onClick={() => {
-                                                            navigate(`/events/${att.id}/`)
-                                                          }}>{att.name}</td>
-                                                        <td ><img className="tiny-card pointer"
-                                                         src={att.picture_url} alt="" 
-                                                        onClick={() => {
-                                                            navigate(`/events/${att.id}/`)
-                                                          }}>
-                                                        </img></td>  
+                                                        <td>{att.name}</td>
+                                                        <td ><img className="tiny-card" src={att.picture_url} alt="" ></img></td>
                                                     </tr>
                                                 ))}
                                             </tbody>

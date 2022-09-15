@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useJsApiLoader, GoogleMap, Marker, Autocomplete } from '@react-google-maps/api'
 import { getGeocode, getLatLng, } from "use-places-autocomplete"
 import googleAPI from './keys'
+import { useNavigate } from 'react-router-dom'
 
 const center = { lat: 37.7749295, lng: -122.4194155 }
 const libraries = ['places']
@@ -49,7 +50,7 @@ function BootstrapInputDate(props) {
 }
 function CreateEvent() {
     const API_URL = `${process.env.REACT_APP_EVENTS}/events/activities/`
-    // const EventAPI_URL = `${process.env.REACT_APP_EVENTS}/events/`
+    const navigate = useNavigate()
     const containerStyle = { width: '400px', height: '400px' }
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: googleAPI(),
@@ -137,13 +138,17 @@ function CreateEvent() {
         const url = `${process.env.REACT_APP_EVENTS}/events/`
         const content = JSON.stringify(data)
         console.log(content)
-        await fetch(url, {
+        const response = await fetch(url, {
             method: "post",
             body: content,
             headers: {
                 "Content-Type": "application/json",
             },
         })
+        
+        if (response.ok) {
+            navigate("/events/")
+        }
     }
 
 
