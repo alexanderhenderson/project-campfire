@@ -46,7 +46,7 @@ export default function EventList(props) {
               <h1>Events</h1>
             </div>
             <div className="col">
-            <div className="align-right"><a className="btn btn-primary rounded-pill mb-3" href="/events/create/" role="button">Add Event</a></div>
+            <div className="align-right"><a className="btn btn-dark rounded-pill mb-3" href="/events/create/" role="button">Add Event</a></div>
             </div>
           </div>
           </div>

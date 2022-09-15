@@ -67,7 +67,7 @@ function CreateEvent() {
     const [activity, setActivity] = useState('');
     const [picture_url, setPicture_url] = useState('');
     const [map, setMap] = useState(/** @type google.maps.Map */(null));
-    const [selected, setSelected] = useState({lat: 37.7749295, lng: -122.4194155});
+    const [selected, setSelected] = useState({ lat: 37.7749295, lng: -122.4194155 });
     const [userData, setUserId] = useState("");
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
@@ -155,107 +155,121 @@ function CreateEvent() {
 
     if (activitys.length !== 0) {
         return (
-            <div>
-                <form onSubmit={onSubmit}>
-                    <h3>Create An Event</h3>
-                    <BootstrapInput
-                        id="Event Name"
-                        placeholder="Event Name"
-                        value={name}
-                        changeHandler={e => setName(e.target.value)}
-                        type="text"
-                        label='Event Name'
-                        >
-                    </BootstrapInput>
-                    <div className="input-group mb-3">
-                        <Autocomplete>
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Event Address"
-                                ref={markerRef} />
-                        </Autocomplete>
-                        <button
-                            className="btn btn-outline-secondary"
-                            type="button"
-                            id="button-addon2"
-                            onClick={Geocode}>
-                            Search Address
-                        </button>
-                    </div>
-                    <label className="form-label">Pin Your Event Location</label>
-                    <div>
-                        <GoogleMap
-                            center={center}
-                            mapContainerStyle={containerStyle}
-                            zoom={5}
-                            onLoad={map => setMap(map)}
-                            options={{
-                                streetViewControl: false,
-                                mapTypeControl: false,
-                                fullscreenControl: false,
-                            }}>
-                            {selected && <Marker position={selected} draggable={true} onDrag={(event) => { setSelected({ lat: event.latLng.lat(), lng: event.latLng.lng() }) }} />}
-                        </GoogleMap>
-                    </div>
-                    <BootstrapInputDate
-                        id="start"
-                        placeholder="Start Date and time"
-                        value={start}
-                        changehandler2={e => setStartTime(e.target.value)}
-                        changeHandler={e => SetStart(e.target.value)}
-                        label='Event Start'
-                        type="date"
-                        >
-                    </BootstrapInputDate>
-                    <label className="form-label">Event End</label>
-                    <BootstrapInputDate
-                        id="end"
-                        placeholder="End Date and Time"
-                        value={end}
-                        changeHandler={e => setEnd(e.target.value)}
-                        changehandler2={e => setEndTime(e.target.value)}
-                        label='Event End'
-                        type="date">
-                    </BootstrapInputDate>
-                    <BootstrapInput
-                        id="description"
-                        placeholder="Event Description"
-                        value={description}
-                        changeHandler={e => setDescription(e.target.value)}
-                        label='Description'
-                        type="text">
-                    </BootstrapInput>
+            <div className="container px-4 py-4">
+                <div className="row gx-5">
+                    <div className="col">
+                        <div className="card shadow">
+                            <div className="card body px-4 py-4">
+                                <div className='m-3'>
+                                    <h2 align="center">Create An Event</h2>
+                                </div>
+                                <form onSubmit={onSubmit}>
+                                    <BootstrapInput
+                                        id="Event Name"
+                                        placeholder="Event Name"
+                                        value={name}
+                                        changeHandler={e => setName(e.target.value)}
+                                        type="text"
+                                        label='Event Name'
+                                    >
+                                    </BootstrapInput>
+                                    <div className="input-group mb-3 mt-3">
+                                        <Autocomplete>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                placeholder="Event Address"
+                                                label='Event Address'
+                                                ref={markerRef} />
+                                        </Autocomplete>
+                                        <button
+                                            className="btn btn-outline-secondary"
+                                            type="button"
+                                            id="searchAddress"
+                                            onClick={Geocode}>
+                                            Search Address
+                                        </button>
+                                    </div>
+                                    <label className="form-label ">Pin Your Event Location</label>
+                                    <div className='mb-3'>
+                                        <GoogleMap
+                                            center={center}
+                                            mapContainerStyle={containerStyle}
+                                            zoom={5}
+                                            onLoad={map => setMap(map)}
+                                            options={{
+                                                streetViewControl: false,
+                                                mapTypeControl: false,
+                                                fullscreenControl: false,
+                                            }}>
+                                            {selected && <Marker position={selected} draggable={true} onDrag={(event) => { setSelected({ lat: event.latLng.lat(), lng: event.latLng.lng() }) }} />}
+                                        </GoogleMap>
+                                    </div>
+                                    <label className="form-label">Event Start</label>
+                                    <BootstrapInputDate
+                                        id="start"
+                                        placeholder="Start Date and Time"
+                                        value={start}
+                                        changehandler2={e => setStartTime(e.target.value)}
+                                        changeHandler={e => SetStart(e.target.value)}
+                                        label='Event Start'
+                                        type="date">
+                                    </BootstrapInputDate>
+                                    <label className="form-label">Event End</label>
+                                    <BootstrapInputDate
+                                        id="end"
+                                        placeholder="End Date and Time"
+                                        value={end}
+                                        changeHandler={e => setEnd(e.target.value)}
+                                        changehandler2={e => setEndTime(e.target.value)}
+                                        label='Event End'
+                                        type="date">
+                                    </BootstrapInputDate>
 
-                    <select
-                        className="form-select"
-                        id="activitys"
-                        aria-label="Choose your activity"
-                        onChange={e => setActivity(e.target.value)}>
-                        <option value="">Choose Your Activity</option>
-                        {
-                            activitys[0].map((activity) => { return (<option onSelect={e => setActivity(activity.id)} value={activity.id} key={(activity.id)}>{activity.name}</option>) })
-                        }
-                    </select>
+                                    <BootstrapInput
+                                        id="description"
+                                        placeholder="Event Description"
+                                        value={description}
+                                        changeHandler={e => setDescription(e.target.value)}
+                                        label='Description'
+                                        type="text">
+                                    </BootstrapInput>
+                                    <div className='form-floating mt-3 mb-3'>
+                                        <select
+                                            className="form-select"
+                                            id="activitys"
+                                            aria-label="Choose your activity"
+                                            onChange={e => setActivity(e.target.value)}>
+                                            <option value="">Choose Your Activity</option>
+                                            {
+                                                activitys[0].map((activity) => { return (<option onSelect={e => setActivity(activity.id)} value={activity.id} key={(activity.id)}>{activity.name}</option>) })
+                                            }
+                                        </select>
+                                        <label for="floatingSelectGrid">Activity</label>
+                                    </div>
 
-                    <BootstrapInput
-                        id="picture_url"
-                        placeholder="Picture URL"
-                        value={picture_url}
-                        changeHandler={e => setPicture_url(e.target.value)}
-                        type="picture_url"
-                        label='Picture URL'
-                        >
+                                    <BootstrapInput
+                                        id="picture_url"
+                                        placeholder="Picture URL"
+                                        value={picture_url}
+                                        changeHandler={e => setPicture_url(e.target.value)}
+                                        type="picture_url"
+                                        label='Picture URL'
+                                    >
 
-                    </BootstrapInput>
-                    <div className='m-3'>
-                        <button
-                            type="submit"
-                            className="btn btn-dark btn-lg btn-block">
-                            Submit
-                        </button>
+                                    </BootstrapInput>
+                                    <div className='m-3' align="center">
+                                        <button
+                                            type="submit"
+                                            className="btn btn-dark btn-block">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
         );
     }
