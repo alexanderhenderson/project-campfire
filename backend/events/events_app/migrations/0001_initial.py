@@ -8,40 +8,87 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Activity',
+            name="Activity",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=300)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=300)),
             ],
         ),
         migrations.CreateModel(
-            name='UserVO',
+            name="UserVO",
             fields=[
-                ('id', models.PositiveIntegerField(primary_key=True, serialize=False)),
-                ('username', models.CharField(max_length=150)),
-                ('first_name', models.CharField(blank=True, max_length=30)),
-                ('last_name', models.CharField(blank=True, max_length=150)),
-                ('email', models.EmailField(blank=True, max_length=254)),
+                (
+                    "id",
+                    models.PositiveIntegerField(
+                        primary_key=True, serialize=False
+                    ),
+                ),
+                ("username", models.CharField(max_length=150)),
+                ("first_name", models.CharField(blank=True, max_length=30)),
+                ("last_name", models.CharField(blank=True, max_length=150)),
+                ("email", models.EmailField(blank=True, max_length=254)),
             ],
         ),
         migrations.CreateModel(
-            name='Event',
+            name="Event",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('description', models.TextField()),
-                ('start', models.DateTimeField()),
-                ('end', models.DateTimeField()),
-                ('latitude', models.DecimalField(decimal_places=6, max_digits=9)),
-                ('longitude', models.DecimalField(decimal_places=6, max_digits=9)),
-                ('activity', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='activities', to='events_app.activity')),
-                ('attendees', models.ManyToManyField(blank=True, related_name='users', to='events_app.uservo')),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='owners', to='events_app.uservo')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("description", models.TextField()),
+                ("start", models.DateTimeField()),
+                ("end", models.DateTimeField()),
+                (
+                    "latitude",
+                    models.DecimalField(decimal_places=6, max_digits=9),
+                ),
+                (
+                    "longitude",
+                    models.DecimalField(decimal_places=6, max_digits=9),
+                ),
+                (
+                    "activity",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="activities",
+                        to="events_app.activity",
+                    ),
+                ),
+                (
+                    "attendees",
+                    models.ManyToManyField(
+                        blank=True,
+                        related_name="users",
+                        to="events_app.uservo",
+                    ),
+                ),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="owners",
+                        to="events_app.uservo",
+                    ),
+                ),
             ],
         ),
     ]

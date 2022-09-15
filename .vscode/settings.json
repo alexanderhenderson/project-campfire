@@ -1,3 +1,5 @@
 {
     "files.eol": "\n",
+    "git.ignoreLimitWarning": true,
+    "python.formatting.provider": "black",
 }
