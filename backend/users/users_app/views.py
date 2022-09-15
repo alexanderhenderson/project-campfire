@@ -413,7 +413,7 @@ def api_friend_detail(request):
         response.status_code = 200
         return response
 
-
+# @auth.jwt_login_required
 @require_http_methods(["GET", "POST"])
 def list_comments(request):
     if request.method == "GET":
@@ -424,12 +424,12 @@ def list_comments(request):
             safe=False,
         )
     if request.method == "POST":
-        # token_data = request.payload
-        # user_id = token_data["user"]["id"]
+        token_data = request.payload
+        user_id = token_data["user"]["id"]
         content = json.loads(request.body)
-        user_id = content["user_id"]
+        # user_id = content["user_id"]
         content["commenter"] = User.objects.get(id=user_id)
-        del content["user_id"]
+        # del content["user_id"]
         content["user_profile"] = User.objects.get(id=content["user_profile"])
         # How do we grab the user id of the profile we're on?
         comment = Comment.objects.create(**content)

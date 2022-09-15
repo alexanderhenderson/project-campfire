@@ -1,62 +1,62 @@
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import React from "react"
+import { useState } from "react"
+import { useEffect } from "react"
 
 export default function Kindler() {
 	// eslint-disable-next-line no-unused-vars
-	const [username, setUsername] = useState("");
-	// const [userList, setUserList] = useState([]);
-	const [KindlerList, SetKindlerData] = useState([]);
+	const [username, setUsername] = useState("")
+	// const [userList, setUserList] = useState([])
+	const [KindlerList, SetKindlerData] = useState([])
 //
 	useEffect(() => {
 		const UserInfoRequest = async () => {
-			const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
-			const response = await fetch(url, { credentials: "include" });
+			const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`
+			const response = await fetch(url, { credentials: "include" })
 
 			if (response.ok) {
-				const data = await response.json();
-				console.log("Logged in user data: ", data);
-				setUsername(data);
+				const data = await response.json()
+				console.log("Logged in user data: ", data)
+				setUsername(data)
 			}
-		};
+		}
 
 		const KindlerData = async () => {
-			const url = `${process.env.REACT_APP_USERS}/users/api/kindler`;
-			const response = await fetch(url, { credentials: "include" });
+			const url = `${process.env.REACT_APP_USERS}/users/api/kindler`
+			const response = await fetch(url, { credentials: "include" })
 
 			if (response.ok) {
-				const data = await response.json();
-				console.log("kindler data: ", data);
+				const data = await response.json()
+				console.log("kindler data: ", data)
 
 				// adding additional key-value pair so that we can
 				// track who has been added to a clients friend list
 				for (let friend of data) {
-					friend.friend = false;
+					friend.friend = false
 				}
 
-				SetKindlerData(data);
+				SetKindlerData(data)
 			}
-		};
+		}
 
-		UserInfoRequest();
-		KindlerData();
-	}, []);
+		UserInfoRequest()
+		KindlerData()
+	}, [])
 
 	async function onClick(friendID, objectNum) {
-		console.log("clicked obejctnum: ", objectNum);
+		console.log("clicked obejctnum: ", objectNum)
 
-		const url = `${process.env.REACT_APP_USERS}/users/api/friend/`;
+		const url = `${process.env.REACT_APP_USERS}/users/api/friend/`
 		const params = {
 			method: "put",
 			body: friendID,
 			credentials: "include",
-		};
-		const response = await fetch(url, params);
+		}
+		const response = await fetch(url, params)
 
 		if (response.status === 200) {
-			let kindlerState = [...KindlerList];
-			kindlerState[objectNum].friend = true;
-			SetKindlerData(kindlerState);
+			let kindlerState = [...KindlerList]
+			kindlerState[objectNum].friend = true
+			SetKindlerData(kindlerState)
 		}
 	}
 
@@ -83,7 +83,7 @@ export default function Kindler() {
 														type="button"
 														className="btn btn-warning"
 														onClick={() => {
-															onClick(KindlerUser?.id, index);
+															onClick(KindlerUser?.id, index)
 														}}
 													>
 														{" "}
@@ -105,7 +105,7 @@ export default function Kindler() {
 											</div>
 										</div>
 									</div>
-								);
+								)
 							})}
 						</div>
 					) : (
@@ -117,5 +117,5 @@ export default function Kindler() {
 				</div>
 			</div>
 		</>
-	);
+	)
 }

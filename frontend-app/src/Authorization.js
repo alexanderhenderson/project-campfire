@@ -1,73 +1,73 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-let internalToken = null;
+import { createContext, useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+let internalToken = null
 
 export function getToken() {
-  return internalToken;
+  return internalToken
 }
 
 export async function getTokenInternal() {
-  const url = `${process.env.REACT_APP_USERS}/users/api/tokens/mine/`;
-  //const url = `${process.env.REACT_APP_USERS}/api/accounts/me/token/`;
+  const url = `${process.env.REACT_APP_USERS}/users/api/tokens/mine/`
+  //const url = `${process.env.REACT_APP_USERS}/api/accounts/me/token/`
   try {
     
     const response = await fetch(url, {
       credentials: "include",
-    });
+    })
     
     if (response.ok) {
       
-      const data = await response.json();
-      internalToken = await data.token;
-      return internalToken;
+      const data = await response.json()
+      internalToken = await data.token
+      return internalToken
     }
   } catch (e) { }
-  return false;
+  return false
 }
 
 function handleErrorMessage(error) {
   if ("error" in error) {
-    error = error.error;
+    error = error.error
     try {
-      error = JSON.parse(error);
+      error = JSON.parse(error)
       if ("__all__" in error) {
-        error = error.__all__;
+        error = error.__all__
       }
     } catch { }
   }
   if (Array.isArray(error)) {
-    error = error.join("<br>");
+    error = error.join("<br>")
   } else if (typeof error === "object") {
     error = Object.entries(error).reduce(
       (acc, x) => `${acc}<br>${x[0]}: ${x[1]}`,
       ""
-    );
+    )
   }
-  return error;
+  return error
 }
 
 export const AuthContext = createContext({
   token: null,
   setToken: () => null,
-});
+})
 
 
 // async function validateToken(){
 
-//   const url = `${process.env.REACT_APP_USERS}https://localhost:8001/validate_access/`;
+//   const url = `${process.env.REACT_APP_USERS}https://localhost:8001/validate_access/`
 
 //   const response = await fetch(url, {
 //     credentials: "include",
-//   });
+//   })
 //   if (response.ok) {
-//     return response;
-//   };
+//     return response
+//   }
 
-// };
+// }
 
 
 export const AuthProvider = (props) => {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(null)
 
   // console.log("props: ", props)
   
@@ -83,57 +83,57 @@ export const AuthProvider = (props) => {
     <AuthContext.Provider value={{ token, setToken }}>
       {props.children}
     </AuthContext.Provider>
-  );
-};
+  )
+}
 
-export const useAuthContext = () => useContext(AuthContext);
+export const useAuthContext = () => useContext(AuthContext)
 
 export function useToken() {
-  const { token, setToken } = useAuthContext();
-  const navigate = useNavigate();
+  const { token, setToken } = useAuthContext()
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchToken() {
-      const token = await getTokenInternal();
-      setToken(token);
+      const token = await getTokenInternal()
+      setToken(token)
     }
     if (!token) {
-      fetchToken();
+      fetchToken()
     }
-  }, [setToken, token]);
+  }, [setToken, token])
 
   async function logout() {
     if (token) {
-      const url = `${process.env.REACT_APP_USERS}/api/token/refresh/logout/`;
-      await fetch(url, { method: "delete", credentials: "include" });
-      internalToken = null;
-      setToken(null);
-      navigate("/");
+      const url = `${process.env.REACT_APP_USERS}/api/token/refresh/logout/`
+      await fetch(url, { method: "delete", credentials: "include" })
+      internalToken = null
+      setToken(null)
+      navigate("/")
     }
   }
 
   async function login(username, password) {
-    const url = `${process.env.REACT_APP_USERS}/login/`;
-    const form = new FormData();
-    form.append("username", username);
-    form.append("password", password);
+    const url = `${process.env.REACT_APP_USERS}/login/`
+    const form = new FormData()
+    form.append("username", username)
+    form.append("password", password)
     const response = await fetch(url, {
       method: "post",
       credentials: "include",
       body: form,
-    });
+    })
     if (response.ok) {
-      const token = await getTokenInternal();
-      setToken(token);
-      navigate("/intro/");
-      return;
+      const token = await getTokenInternal()
+      setToken(token)
+      navigate("/intro/")
+      return
     }
-    let error = await response.json();
-    return handleErrorMessage(error);
+    let error = await response.json()
+    return handleErrorMessage(error)
   }
 
   async function signup(username, password, email, first_name, last_name, city, state) {
-    const url = `${process.env.REACT_APP_USERS}/users/`;
+    const url = `${process.env.REACT_APP_USERS}/users/`
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
@@ -148,16 +148,16 @@ export function useToken() {
       headers: {
         "Content-Type": "application/json",
       },
-    });
+    })
     if (response.ok) {
-      await login(username, password);
-      navigate("/home");
+      await login(username, password)
+      navigate("/home")
     }
-    return false;
+    return false
   }
 
   async function update(username, password, email, firstName, lastName) {
-    const url = `${process.env.REACT_APP_USERS}/api/accounts/`;
+    const url = `${process.env.REACT_APP_USERS}/api/accounts/`
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
@@ -170,26 +170,26 @@ export function useToken() {
       headers: {
         "Content-Type": "application/json",
       },
-    });
+    })
     if (response.ok) {
-      await login(username, password);
+      await login(username, password)
 
     }
-    return false;
+    return false
   }
 
-  return [token, login, logout, signup, update];
+  return [token, login, logout, signup, update]
 }
 
 
 function parseJwt(token) {
   // console.log("THIS IS THE TOKEN", token)
   try {
-    return JSON.parse(atob(token.split('.')[1]));
+    return JSON.parse(atob(token.split('.')[1]))
   } catch (e) {
-    return null;
+    return null
   }
-};
+}
 
 export function getUserInfo() {
   const parsedToken = parseJwt(getToken())
@@ -197,4 +197,4 @@ export function getUserInfo() {
     "username": parsedToken.user.username,
     "id": parsedToken.user.id
   }
-};
+}

@@ -16,8 +16,8 @@ export default function FetchActivities() {
         //   }).then(response => response.json()).then(data => setUserId(data.id))
 
         const getActivityData = async () => {
-            const url = `${process.env.REACT_APP_EVENTS}/events/activities/`;
-            const response = await fetch(url);
+            const url = `${process.env.REACT_APP_EVENTS}/events/activities/`
+            const response = await fetch(url)
             if (response.ok) {
                 const data = await response.json()
                 setActivitiesData(data["Activities"])
@@ -25,8 +25,8 @@ export default function FetchActivities() {
             }
         }
         const getUserdata = async () => {
-            const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
-            const response = await fetch(url, { credentials: "include" });
+            const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`
+            const response = await fetch(url, { credentials: "include" })
             if (response.ok) {
                 const userData = await response.json()
                 setUserId(userData)
@@ -54,10 +54,10 @@ export default function FetchActivities() {
         setSearch(event.target.value)
     }
 
-    const userFavesIds = activityList.map(act => act.id);
+    const userFavesIds = activityList.map(act => act.id)
     const activityState = filteredActivities.length < 1
         ? activities
-        : filteredActivities;
+        : filteredActivities
 
     return (
         <main>
@@ -112,10 +112,10 @@ export default function FetchActivities() {
                                         </div>
                                     </div>
                                 </div>
-                            );
+                            )
                         })}
                 </div>
             </div>
         </main>
-    );
+    )
 }
