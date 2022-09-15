@@ -2,9 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import { useToken } from './Authorization';
 
-
-// import { getUserInfo } from './Authorization'; // testing don't leave in imports
-
 export default function LogIn() {
 
   const [username, setUsername] = useState('');
@@ -12,8 +9,6 @@ export default function LogIn() {
   // eslint-disable-next-line no-unused-vars
   const [token, login] = useToken();
   const [loginResponse, setLoginResponse] = useState();
-
-
   async function onSubmit() {
     //console.log("Submitted, token: ", token)
     //console.log("function: ", login);
@@ -23,14 +18,14 @@ export default function LogIn() {
 
     // ---- Testing -- don't leave stuff below here for final production
 
-    const UserInfoRequest = await fetch(`${process.env.REACT_APP_USERS}/users/api/tokens/user/`, {
-      credentials: "include",
-    })
-    console.log(await UserInfoRequest)
-    const data = await UserInfoRequest.json()
-    console.log("User Data: ", await data)
-    console.log("User: ", await data.username)
-    console.log("User ID: ", await data.id)
+    // const UserInfoRequest = await fetch(`${process.env.REACT_APP_USERS}/users/api/tokens/user/`, {
+    //   credentials: "include",
+    // })
+    // console.log(await UserInfoRequest)
+    // const data = await UserInfoRequest.json()
+    // console.log("User Data: ", await data)
+    // console.log("User: ", await data.username)
+    // console.log("User ID: ", await data.id)
 
 
     // console.log("User array: ", getUserInfo())
@@ -39,6 +34,8 @@ export default function LogIn() {
 
     // ---- don't leave stuff above here
 
+    // getUserdata()
+    console.log(token)
 
     if (result == null) {
       setUsername("");

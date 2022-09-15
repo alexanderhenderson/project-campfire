@@ -303,3 +303,18 @@ justify-content: right;
   height:80%;
   border-radius: 1.9ch;
 }
+
+.pointer2 {
+  cursor: pointer;
+  text-decoration:none;
+  color: black;
+}
+
+a:hover{
+  text-decoration: none;
+  color: inherit;
+}
+
+.padding-top-med {
+  padding-top: 3rem;
+}

@@ -9,7 +9,7 @@ function FetchEvent() {
     const [attendeesList, setAttendeesList] = useState([])
     const { dynamicId } = useParams()
 
-
+console.log(dynamicId)
 
     useEffect(() => {
         const getEventData = async () => {
