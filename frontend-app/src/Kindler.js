@@ -4,10 +4,9 @@ import { useEffect } from "react"
 
 export default function Kindler() {
 	// eslint-disable-next-line no-unused-vars
-	const [username, setUsername] = useState("")
-	// const [userList, setUserList] = useState([])
-	const [KindlerList, SetKindlerData] = useState([])
-//
+	const [ , setUsername] = useState("");
+	const [KindlerList, SetKindlerData] = useState([]);
+
 	useEffect(() => {
 		const UserInfoRequest = async () => {
 			const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`

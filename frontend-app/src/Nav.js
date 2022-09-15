@@ -52,12 +52,9 @@ export function settingLinks() {
 
 export default function NavBar() {
   const [homeLink, introLink, , eventsLink, activitiesLink, kindlerLink, signupLink, loginLink] = settingLinks()
-  // eslint-disable-next-line no-unused-vars
-  const [token, login, logout] = useToken()
-  // eslint-disable-next-line no-unused-vars
-  const [logoutResponse, setLogoutResponse] = useState()
+  const [token, , logout] = useToken()
+  const [ , setLogoutResponse] = useState()
   const [loggedIn, setLoggedIn]=useState(false)
-  // const [userId, setUserId] = useState([])
   const navigate = useNavigate();
   const {userId} = useContext(UserContext)
 

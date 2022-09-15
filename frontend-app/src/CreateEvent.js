@@ -3,7 +3,6 @@ import { useJsApiLoader, GoogleMap, Marker, Autocomplete } from '@react-google-m
 import { getGeocode, getLatLng, } from "use-places-autocomplete"
 import googleAPI from './keys'
 import { useNavigate } from 'react-router-dom'
-import { settingLinks } from "./Nav"
 
 const center = { lat: 37.7749295, lng: -122.4194155 }
 const libraries = ['places']
@@ -57,7 +56,6 @@ function CreateEvent() {
         googleMapsApiKey: googleAPI(),
         libraries
     })
-    const [ , , , eventsLink] = settingLinks()
     const [activitys, setActivitys] = useState([])
     const [name, setName] = useState('')
     const [start, SetStart] = useState('')
@@ -148,7 +146,7 @@ function CreateEvent() {
         })
         
         if (response.ok) {
-            navigate(eventsLink)
+            navigate("/events/")
         }
     }
 

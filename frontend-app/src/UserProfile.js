@@ -2,13 +2,11 @@ import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useParams } from "react-router-dom"
 
-
 export default function UserProfile() {
     const [userData, setUserData] = useState({})
     const [events, setEvents] = useState([])
     const navigate = useNavigate();
     const { id } = useParams()
-
 
     console.log(id)
     useEffect(() => {
@@ -29,9 +27,8 @@ export default function UserProfile() {
                 setEvents(events.current)
             }
         }
-
         requestEvents()
-
+        
         getUserdata()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])

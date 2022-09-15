@@ -40,6 +40,7 @@ ALLOWED_HOSTS = [
     ".localhost",
     "localhost",
     "http://localhost:3000",
+    "http://localhost:8090",
     "http://localhost:8080",
     "127.0.0.1",
     "[::1]",
@@ -68,6 +69,7 @@ INSTALLED_APPS = [
 DJWTO_MODE = "TWO-COOKIES"
 DJWTO_CSRF = False
 DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=30)
+DJWTO_SIGNING_KEY = os.getenv("DJWTO_SIGNING_KEY")
 
 # Your DEBUG value MUST be False in production
 DJWTO_SAME_SITE = "NONE"
@@ -84,6 +86,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ALLOW_CREDENTIALS = True
 
+<<<<<<< HEAD
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -96,6 +99,30 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+=======
+DJWTO_DOMAIN = [
+    "DJWTO_DOMAIN",
+    "http://localhost:8080",
+    "http://localhost:8090",
+    "localhost:8080",
+    "localhost:8090",
+    "events",
+    "users",
+]
+
+
+MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
+
+>>>>>>> main
 ROOT_URLCONF = "users_project.urls"
 
 TEMPLATES = [

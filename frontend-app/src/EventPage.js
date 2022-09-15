@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import { settingLinks } from "./Nav"
 
 
+
+
 export default function EventList(props) {
   const events = useRef([])
   const [filteredEvents, setFilteredEvents] = useState([])
@@ -37,6 +39,8 @@ export default function EventList(props) {
   function handleChange(event) {
     setSearch(event.target.value)
   }
+
+
 
   return (
     <>
