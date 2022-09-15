@@ -58,12 +58,9 @@ function CreateEvent() {
 
     const [activitys, setActivitys] = useState([])
     const [name, setName] = useState('')
-    // const [latitude, setLatitude] = useState('')
-    // const [longitude, setLongitude] = useState('')
     const [start, SetStart] = useState('')
     const [end, setEnd] = useState('')
     const [description, setDescription] = useState('')
-    // const [owner, setOwner] = useState(0)
     const [activity, setActivity] = useState('')
     const [picture_url, setPicture_url] = useState('')
     const [map, setMap] = useState(/** @type google.maps.Map */(null))

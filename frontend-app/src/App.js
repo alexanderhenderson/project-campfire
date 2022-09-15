@@ -12,8 +12,7 @@ import ActivitiesList from './ActivitiesList'
 import EventDetail from './EventDetail'
 import MainPage from "./MainPage"
 import Kindler from "./Kindler"
-import CreateEvent from'./CreateEvent';
-import TESTMAP from "./CreateEventMap";
+import CreateEvent from'./CreateEvent'
 
 export default function App() {
   return (
