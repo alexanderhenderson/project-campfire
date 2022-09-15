@@ -413,6 +413,7 @@ def api_friend_detail(request):
         response.status_code = 200
         return response
 
+
 # @auth.jwt_login_required
 @require_http_methods(["GET", "POST"])
 def list_comments(request):
