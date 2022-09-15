@@ -5,13 +5,13 @@ import {UserContext} from "./UserContext"
 let internalToken = null;
 
 function parseJwt(token) {
-  // console.log("THIS IS THE TOKEN", token)
-  try {
-    return JSON.parse(atob(token.split('.')[1]));
-  } catch (e) {
-    return null;
-  }
-};
+	// console.log("THIS IS THE TOKEN", token)
+	try {
+		return JSON.parse(atob(token.split(".")[1]));
+	} catch (e) {
+		return null;
+	}
+}
 
 export function getUserInfo() {
   const parsedToken = parseJwt(getToken())

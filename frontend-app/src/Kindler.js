@@ -4,10 +4,9 @@ import { useEffect } from "react"
 
 export default function Kindler() {
 	// eslint-disable-next-line no-unused-vars
-	const [username, setUsername] = useState("")
-	// const [userList, setUserList] = useState([])
-	const [KindlerList, SetKindlerData] = useState([])
-//
+	const [username, setUsername] = useState("");
+	const [KindlerList, SetKindlerData] = useState([]);
+
 	useEffect(() => {
 		const UserInfoRequest = async () => {
 			const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`
@@ -63,7 +62,7 @@ export default function Kindler() {
 	return (
 		<>
 			<div>
-				<img className="mw-100" src="/bestMountains.png" alt="Max-width 100%"></img>
+				{/* <img height='300' src="/favicon.ico" alt="Max-width 100%"></img> */}
 				<div className="px-4 py-5 my-5 text-center">
 					<h1 className="display-5 fw-bold">The Campfire Kindler</h1>
 					<div className="col-lg-6 mx-auto">

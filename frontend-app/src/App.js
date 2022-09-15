@@ -11,7 +11,7 @@ import ActivitiesList from './ActivitiesList'
 import EventDetail from './EventDetail'
 import MainPage from "./MainPage"
 import Kindler from "./Kindler"
-import CreateEvent from'./CreateEvent';
+import CreateEvent from'./CreateEvent'
 import { UserContext } from "./UserContext"
 import { useState, useEffect } from "react"
 
@@ -50,7 +50,7 @@ useEffect(() => {
             <Route path="signup" element={<Signup />} />
             <Route path="events" element={<EventList />} />
             <Route path="activities" element={<ActivitiesList />} />
-            <Route path="kinder" element={<Kindler />} />
+            <Route path="kindler" element={<Kindler />} />
             <Route path="events">
               <Route path=":dynamicId" element={<EventDetail />} />
               <Route path="create" element={<CreateEvent/>} />
