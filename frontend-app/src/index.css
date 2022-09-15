@@ -343,23 +343,15 @@ a:hover{
 
 .accordion-button{
   color: white;
-  background-color: rgba(0, 0, 0, 0.608);
-  border-bottom-left-radius: .9ch;
-  border-bottom-right-radius: .9ch;;
-
-  
+  background-color: rgba(0, 0, 0, 0.608); 
 }
 .accordion-button:not(.collapsed){
 color: white;
 background-color: rgba(0, 0, 0, 0.753);
-border-bottom-left-radius: .9ch;
-border-bottom-right-radius: .9ch;;
-
 }
 .accordion-button::after{
   color: white;
   border-radius: 1.9ch;
-  
   background-color: rgba(255, 255, 255, 0.539);
 }
 
