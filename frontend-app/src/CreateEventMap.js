@@ -9,7 +9,7 @@ import {
     ChakraProvider,
     Text,
   } from '@chakra-ui/react'
-  import { FaAccessibleIcon, FaAddressCard, FaLocationArrow, FaTimes } from 'react-icons/fa'
+  import { FaAccessibleIcon, FaLocationArrow, FaTimes } from 'react-icons/fa'
   
   import {
     useJsApiLoader,
@@ -18,11 +18,8 @@ import {
     Autocomplete,
     DirectionsRenderer,
   } from '@react-google-maps/api'
-  import { useRef, useState, useMemo } from 'react'
-  import usePlacesAutocomplete , {
-    getGeocode,
-    getLatLng,
-  } from "use-places-autocomplete" ;
+  import { useRef, useState } from 'react'
+  import { getGeocode, getLatLng, } from "use-places-autocomplete" 
   
   // const center = useMemo(() => ({ lat: 69, lng: 69 }), [])
   
@@ -42,7 +39,6 @@ import {
     const [duration, setDuration] = useState('')
     const [selected, setSelected] = useState(null)
     const [markerlatLng, setMarker] = useState({})
-    const [setlat, setLat] = useState('')
   
     /** @type React.MutableRefObject<HTMLInputElement> */
     const originRef = useRef()
@@ -66,9 +62,9 @@ import {
       }
       console.log(markerRef.current.value)
       const address = markerRef.current.value
-      const results = await getGeocode({ address });
-      const { lat, lng } = await getLatLng(results[0]);
-      setSelected({ lat, lng });
+      const results = await getGeocode({ address })
+      const { lat, lng } = getLatLng(results[0])
+      setSelected({ lat, lng })
     }
   
     function clearGeocode() {
@@ -98,10 +94,6 @@ import {
       setDuration('')
       originRef.current.value = ''
       destiantionRef.current.value = ''
-    }
-  
-    function onMarkerDragEnd(coord, index) {
-  
     }
   
     return (
