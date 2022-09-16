@@ -4,10 +4,10 @@ WORKDIR /app
 
 # Copy the top-level files in your service's directory
 # Modify these instructions to do that
-COPY poll/requirements.txt requirements.txt
-COPY poll/poller.py poller.py
-COPY events_app events_app
-COPY events_project events_project
+COPY requirements.txt requirements.txt
+COPY poller.py poller.py
+# COPY events_app events_app
+# COPY events_project events_project
 # Copy all of the subdirectories in your service's directory
 # Modify these instructions to do that
 
