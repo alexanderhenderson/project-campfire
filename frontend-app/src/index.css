@@ -66,13 +66,13 @@ code {
   height: 0;
   padding-top: 100%;
 }
-  =======.kindle-text {
+.kindle-text {
     text-shadow: 0 0 3px rgb(120, 127, 221);
     /* background-color: rgba(255, 0, 0, 0.5); */
   }
 
   .kindle-card {
-    >>>>>>>13dbe6c6035749e4479855c31d1ffd686cb867bb max-width: 100%;
+    max-width: 100%;
     max-height: 50%;
     height: 60%;
     /* object-fit: cover; */
