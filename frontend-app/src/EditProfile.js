@@ -1,23 +1,19 @@
-import React, { useState, useRef } from 'react'
-import { useToken } from './Authorization'
+import React, { useState, useRef,useContext } from 'react'
+import { UserContext } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 
-
-export default function Signup() {
-    const [userData, setUserData] = useState({
-        username: "",
-        password: "",
+export default function EditProfile() {
+    const navigate = useNavigate()
+    const [data, setData] = useState({
         first_name: "",
         last_name: "",
         email: "",
         city: "",
-        state: ""
+        state: "",
+        profile_photo:"",
+        profile_description:""
     })
-
-    const [signupTest, setSignupTest] = useState(true)
-    const { username, password, first_name, last_name, email, city } = userData
-    // eslint-disable-next-line no-unused-vars
-    const [token, login, logout, signup] = useToken()
-
+    const {userId} = useContext(UserContext)
     // List of US states for sign up form
     const USStates = useRef([
         { name: "Alabama", abb: "AL" }, { name: "Alaska", abb: "AK" }, { name: "Arizona", abb: "AZ" },
@@ -35,54 +31,32 @@ export default function Signup() {
         { name: "Washington", abb: "WA" }, { name: "West Virginia", abb: "WV" }, { name: "Wisconsin", abb: "WI" }, { name: "Wyoming", abb: "WY" },
     ])
 
-
     const changeHandler = e => {
-        setUserData({ ...userData, [e.target.name]: [e.target.value] });
+        setData({...data, [e.target.name]: e.target.value});
+        console.log("that is the data",data)
     }
-    console.log(userData)
-
-
-    const submitHandler = e => {
-        e.preventDefault()
-
-        async function signupWithTest() {
-            let test = await signup(
-                userData.username[0],
-                userData.password[0],
-                userData.email[0],
-                userData.first_name[0],
-                userData.last_name[0],
-                userData.city[0],
-                userData.state[0],
-            )
-
-            if (test === false) {
-                setSignupTest(false)
-            } else {
-                setSignupTest(true)
-            }
+    
+    async function handleSubmit(event) {
+        event.preventDefault()
+        let fetchData= {...data}
+        for(let key in fetchData){
+            if(fetchData[key] === ""){
+                console.log(fetchData)
+                delete fetchData[key]
+            }            
         }
-        signupWithTest()
-    }
-
-
-    let SignupFailed = function Waiting() {
-        return (
-            <div>
-            </div>
-        )
-    }
-
-    if (signupTest === false) {
-        SignupFailed = function Failed() {
-            return (
-                <div className="alert alert-danger" role="alert">
-                    Username Is taken. Please try again.
-                </div>
-            )
+        const url = `${process.env.REACT_APP_USERS}/users/${userId.id}/`;
+        const fetchConfig = {
+          method: "PUT",
+          body: JSON.stringify(fetchData),
         }
+        const response = await fetch(url, fetchConfig);
+        if (response.ok) {
+           await response.json();
+           console.log("good response",response)
+        }
+        navigate(-1)
     }
-
 
     return (
         <div className="container px-4 py-4 text-center">
@@ -91,11 +65,10 @@ export default function Signup() {
                     <div className="card shadow">
                         <div className="card body px-4 py-4">
                             <div className='m-3'>
-                                <h2 align="center">Sign Up</h2>
+                                <h2 align="center">Edit Profile Page</h2>
                             </div>
-                            <form onSubmit={submitHandler}>
+                            <form onSubmit={handleSubmit}>
                                 <div className='bt-3'>
-                                    <SignupFailed />
                                     <div className="form-floating mb-2">
                                         <div className="row g-2">
                                             <div className="col md">
@@ -103,12 +76,11 @@ export default function Signup() {
                                                     <input className="form-control"
                                                         type="text"
                                                         name="first_name"
-                                                        value={first_name}
+                                                        value={data.first_name}
                                                         onChange={changeHandler}
                                                         placeholder="First Name"
-                                                        required
                                                     />
-                                                    <label for="floatingInputGrid">First Name</label>
+                                                    <label htmlFor="floatingInputGrid">First Name</label>
                                                 </div>
                                             </div>
                                             <div className="col md">
@@ -116,12 +88,11 @@ export default function Signup() {
                                                     <input className="form-control"
                                                         type="text"
                                                         name="last_name"
-                                                        value={last_name}
+                                                        value={data.last_name}
                                                         onChange={changeHandler}
                                                         placeholder="Last Name"
-                                                        required
                                                     />
-                                                    <label for="floatingInputGrid">Last Name</label>
+                                                    <label htmlFor="floatingInputGrid">Last Name</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -130,54 +101,51 @@ export default function Signup() {
                                 <div className="form-floating mb-2">
                                     <input className="form-control"
                                         type="text"
-                                        value={username}
-                                        name="username"
+                                        value={data.profile_photo}
+                                        name="profile_photo"
                                         onChange={changeHandler}
-                                        placeholder="Enter Username"
-                                        required
+                                        placeholder="Enter URL"
                                     />
-                                    <label for="floatingInputGrid">Username</label>
+                                    <label htmlFor="floatingInputGrid">Profile Photo URL</label>
                                 </div>
                                 <div className="form-floating mb-2">
-                                    <input className="form-control"
-                                        type="password"
-                                        value={password}
-                                        name="password"
+                                    <textarea className="form-control"
+                                        value={data.profile_description}
+                                        name="profile_description"
                                         onChange={changeHandler}
-                                        placeholder="Enter Password"
-                                        required
+                                        placeholder="Enter Profile Description"
+                                        rows="3"
                                     />
-                                    <label for="floatingInputGrid">Password</label>
+                                    <label htmlFor="floatingInputGrid">Profile Description</label>
                                 </div>
+                                
                                 <div className="form-floating mb-2">
                                     <input className="form-control"
                                         type="email"
                                         name="email"
-                                        value={email}
+                                        value={data.email}
                                         onChange={changeHandler}
                                         placeholder="Enter Email"
-                                        required
                                     />
-                                    <label for="floatingInputGrid">Email address</label>
+                                    <label htmlFor="floatingInputGrid">Email address</label>
                                 </div>
 
-                                <div class="row g-2">
-                                    <div class="col-md">
+                                <div className="row g-2">
+                                    <div className="col-md">
                                         <div className="form-floating">
                                             <input className="form-control"
                                                 type="text"
                                                 name="city"
-                                                value={city}
+                                                value={data.city}
                                                 onChange={changeHandler}
                                                 placeholder="Enter City"
-                                                required
                                             />
-                                            <label for="floatingInputGrid">City</label>
+                                            <label htmlFor="floatingInputGrid">City</label>
                                         </div>
                                     </div>
-                                    <div class="col-md">
+                                    <div className="col-md">
                                         <div className="form-floating">
-                                            <select name="state" className="form-select">
+                                            <select onChange={changeHandler} name="state" className="form-select">
                                                 <option value="">Select State</option>
                                                 {USStates.current.map(state => (
                                                     <option key={state.abb} value={state.abb}>
@@ -185,19 +153,19 @@ export default function Signup() {
                                                     </option>
                                                 ))}
                                             </select>
-                                            <label for="floatingSelectGrid">State</label>
+                                            <label htmlFor="floatingSelectGrid">State</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div className='m-4'>
                                     <button
+                                        // onClick={ () => handleSubmit()}
+
                                         type="submit"
-                                        className="btn btn-primary btn-lg">Sign Up
+                                        className="btn btn-primary btn-lg">Edit Profile
                                     </button>
                                 </div>
-                                <p className="forgot-password text-right">
-                                    Already Signed Up? <a href={`Login`}>Log In</a>
-                                </p>
+                                
                             </form>
                         </div>
                     </div>

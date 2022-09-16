@@ -1,3 +1,6 @@
+## Thurs, Sept 15, 2022
+Did a bunch of css front end work, and also made a whole new page that allows you to edit the user profile using a PUT request and an onsubmit, currently working through a weird bug where whenever we submit the pertinent information in the forms, it injects that same information into the URL ... weird
+
 ## Wed, Sept 14, 2022
 Added a drop down menu to the the User profile page for the friends list, and also the activities list, then proceeded to rewrite the get request for the user profile page using the useParams hook, so you could travel to other user profile pages.Created a useContext file, Changed the app page to make a call for the user token, and store that info in the UseContext file, so that we can access it throughout the entire app.
 

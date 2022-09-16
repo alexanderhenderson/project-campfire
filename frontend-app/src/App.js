@@ -14,6 +14,7 @@ import Kindler from "./Kindler"
 import CreateEvent from'./CreateEvent'
 import { UserContext } from "./UserContext"
 import { useState, useEffect } from "react"
+import EditProfile from "./EditProfile"
 
 export default function App() {
 
@@ -45,6 +46,7 @@ useEffect(() => {
             <Route path="/" element={<MainPage />} />
             <Route path="intro" element={<IntroPage />} />
             <Route path="profile/:id" element={<UserProfile />} />
+            <Route path="profile/edit/:id" element={<EditProfile />} />
             <Route path="login" element={<LogIn />} />
             <Route path="logout" element={<LogOut />} />
             <Route path="signup" element={<Signup />} />

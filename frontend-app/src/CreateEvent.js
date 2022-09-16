@@ -70,8 +70,6 @@ function CreateEvent() {
     const [startTime, setStartTime] = useState("")
     const [endTime, setEndTime] = useState("")
 
-
-
     useEffect(() => {
         const fetchItems = async () => {
             try {
@@ -84,7 +82,6 @@ function CreateEvent() {
             }
         }
         fetchItems()
-
 
         const getUserdata = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`
@@ -150,8 +147,6 @@ function CreateEvent() {
             navigate("/events/")
         }
     }
-
-
 
     console.log(selected)
 
