@@ -2,6 +2,7 @@ from django.test import TestCase
 import json
 from .models import ActivityVO, User
 
+
 # Create your tests here.
 class UsersApiTest(TestCase):
     def setUp(self):
