@@ -3,7 +3,7 @@ from .models import User, ActivityVO, Comment
 from django.http import JsonResponse
 import json
 from common.json import ModelEncoder
-# import djwto.authentication as auth
+import djwto.authentication as auth
 
 
 # Create your views here.
