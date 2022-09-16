@@ -8,7 +8,7 @@ export default function UserProfile() {
     const navigate = useNavigate();
     const { id } = useParams()
 
-    console.log(id)
+    console.log("useParams id: ", id)
     useEffect(() => {
         const getUserdata = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/${id}`;
@@ -16,6 +16,8 @@ export default function UserProfile() {
             if (response.ok) {
                 const data = await response.json()
                 setUserData(data)
+            } else {
+                console.log("getsUserData failed")
             }
         }
         const requestEvents = async () => {
