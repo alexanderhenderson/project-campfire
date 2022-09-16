@@ -59,6 +59,18 @@ export default function NavBar() {
   const {userId} = useContext(UserContext)
 
 
+  useEffect( () => {
+    const checkUserID = () => {
+      if (userId.id){
+        setLoggedIn(true)
+      } else {
+        setLoggedIn(false)
+      }
+    };
+    checkUserID();
+  },[userId]);
+
+
   function checkLoggedIn(token){
     if (token){
         setLoggedIn(true)
@@ -68,10 +80,16 @@ export default function NavBar() {
 
 
   useEffect( ()=>{checkLoggedIn(token)},[token])
+  
   async function onLogout() {
     const result = await logout()
+    console.log("Logout result: ", result)
+    if (await result){
+      setLoggedIn(false)
+    }
     setLogoutResponse(result)
     console.log('LOGGED OUT SUCCESSFULLY')
+    setLoggedIn(false)
   }
 
   return (

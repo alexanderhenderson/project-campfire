@@ -151,13 +151,17 @@ function CreateEvent() {
 
     if (activitys.length !== 0) {
         return (
+            <>
+            <div className="create-event-bg "></div>
             <div className="container px-4 py-4">
-                <div className="row gx-5">
+                <div className="row gx-5 ">
                     <div className="col">
-                        <div className="card shadow">
-                            <div className="card body px-4 py-4">
+                        <div className="shadow  kindle-top-level-card">
+                        {/* <div className="card shadow  kindle-top-level-card"> */}
+                            <div className="card-body px-4 py-4 ">
+                            {/* <div className="card body px-4 py-4 "> */}
                                 <div className='m-3'>
-                                    <h2 align="center">Create An Event</h2>
+                                    <h2 align="center">Create an Event</h2>
                                 </div>
                                 <form onSubmit={onSubmit}>
                                     <BootstrapInput
@@ -267,14 +271,18 @@ function CreateEvent() {
                     </div>
                 </div>
             </div>
+            </>
         )
     }
     else {
         return (
-        <div class="d-flex justify-content-center">
-            <div class="spinner-border" role="status">
+        <>
+            <div className="create-event-bg"></div>
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                </div>
             </div>
-        </div>
+        </>
         )
     }
 }

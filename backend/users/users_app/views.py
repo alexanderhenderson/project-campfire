@@ -238,10 +238,7 @@ def list_users(request):
             user = User.objects.create(**content)
             user.set_password(raw_password)
             user.save()
-            return JsonResponse(
-                {"user": user},
-                encoder=UserDetailEncoder
-            )
+            return JsonResponse({"user": user}, encoder=UserDetailEncoder)
         except User.DoesNotExist:
             response = JsonResponse({"message": "something went wrong"})
             response.status_code = 400
