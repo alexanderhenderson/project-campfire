@@ -1,3 +1,9 @@
+## Friday, September 16, 2022
+Finished up the css, hid the navbar items behind the
+token. Was able to fix all the issues we had after
+deployment and wrapped up an MVP along with some extra
+stretch goals.
+
 ## Thursday, September 15, 2022
 Deployment links were broken so we had to fix that.
 Also was able to build out the chat functionality. It
