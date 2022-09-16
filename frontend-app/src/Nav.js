@@ -73,7 +73,7 @@ export default function NavBar() {
     setLogoutResponse(result)
     console.log('LOGGED OUT SUCCESSFULLY')
   }
-  console.log("this should be userID", userId)
+
   return (
     <div className='mb-3'>
       <Navbar sticky="top" variant="dark" bg="dark" expand="lg">
@@ -93,14 +93,14 @@ export default function NavBar() {
           <Navbar.Collapse id="navbar-dark-example">
             {/* replace href with {link variable} */}
             <Nav>
-              <Nav.Link href="/" className='mx-1'> Home </Nav.Link>
-              <Nav.Link href="/intro/" className={"mx-1" + (loggedIn ? "":" d-none")}> New Here? </Nav.Link>
+              <Nav.Link href={homeLink} className='mx-1'> Home </Nav.Link>
+              <Nav.Link href={introLink} className={"mx-1" + (loggedIn ? "":" d-none")}> New Here? </Nav.Link>
               <Nav.Link onClick={() => { navigate(`/profile/${userId.id}`)}} className={"mx-1" + (loggedIn ? "":" d-none")}> Profile </Nav.Link>
-              <Nav.Link href="/events/" className={"mx-1" + (loggedIn ? "":" d-none")}> Events </Nav.Link>
-              <Nav.Link href="/activities/" className={"mx-1" + (loggedIn ? "":" d-none")}> Activities </Nav.Link>
-              <Nav.Link href="/kindler/" className={"mx-1" + (loggedIn ? "":" d-none")}> Kindler </Nav.Link>
-              <Nav.Link href="/signup" className={"mx-1" + (loggedIn ? " d-none":"")}> Sign Up </Nav.Link>
-              <Nav.Link href="/login" className={"xy-1" + (loggedIn ? " d-none":"") }> Login </Nav.Link>
+              <Nav.Link href={eventsLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Events </Nav.Link>
+              <Nav.Link href={activitiesLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Activities </Nav.Link>
+              <Nav.Link href={kindlerLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Kindler </Nav.Link>
+              <Nav.Link href={signupLink} className={"mx-1" + (loggedIn ? " d-none":"")}> Sign Up </Nav.Link>
+              <Nav.Link href={loginLink} className={"xy-1" + (loggedIn ? " d-none":"") }> Login </Nav.Link>
               <Nav.Link onClick={onLogout} className={"mx-1" + (loggedIn ? "":" d-none")}> Logout </Nav.Link>
             </Nav>
           </Navbar.Collapse>

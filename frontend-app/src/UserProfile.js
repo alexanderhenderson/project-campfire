@@ -9,7 +9,7 @@ export default function UserProfile() {
     const [events, setEvents] = useState([])
     const navigate = useNavigate()
     const { id } = useParams()
-    const {userId} = useContext(UserContext)
+    const { userId } = useContext(UserContext)
 
     useEffect(() => {
         const getUserdata = async () => {
@@ -32,7 +32,7 @@ export default function UserProfile() {
             }
         }
         requestEvents()
-        
+
         getUserdata()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
@@ -47,7 +47,7 @@ export default function UserProfile() {
             }
         }
     }
-    let slicedlist = attendedEvents.slice(0,3)
+    let slicedlist = attendedEvents.slice(0, 3)
     return (
         <>
             <div className="container">
@@ -58,12 +58,15 @@ export default function UserProfile() {
                                 <div className="col-sm">
                                     <div className="body my-3 text-center">
                                         <h1>{userData.username}</h1>
+                                        {/* eslint-disable-next-line */}
+                                        {userId.id == id ? (
+                                            <div><a className="btn btn-dark rounded-pill mb-3" href={`/profile/edit/${userId.id}`} role="button">Edit Profile</a></div>) : ""}
                                     </div>
                                     <div className="col">
-                                        <div className='mb-3'>
+                                        <div className='mb-3 text-center'>
                                             <img src={userData.profile_photo} height='200' alt="" />
                                         </div>
-                                        <div className='m-1'>
+                                        <div className='m-1 text-center'>
                                             <h4>Name: </h4>
                                             <p>{userData.first_name} {userData.last_name}</p>
                                             <h4>About Me: </h4>
@@ -72,23 +75,9 @@ export default function UserProfile() {
                                             <p>{userData.city}, {userData.state}</p>
                                         </div>
                                     </div>
+
                                     <div className="col">
-                                        <h4>Events I'm Attending</h4>
-                                        <table className="table">
-                                            <tbody>
-                                                {slicedlist.map(att => (
-                                                    <tr key={att.id}>
-                                                        <td>{att.name}</td>
-                                                        <td ><img className="tiny-card" src={att.picture_url} alt="" ></img></td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div className="col">
-                                {/* eslint-disable-next-line */}
-                                    {userId.id == id?(
-                                    <div className="align-right"><a className="btn btn-dark rounded-pill mb-3" href={`/profile/edit/${userId.id}`} role="button">Edit Profile</a></div>): ""}
+
                                         <h4>Favorite Activities</h4>
                                         <div className="accordion" id="accordionExample">
                                             <div className="accordion-item">
@@ -155,20 +144,20 @@ export default function UserProfile() {
                                     </div>
                                 </div>
 
-                            <div className="col-sm text-center">
-                                <h4>My Events</h4>
-                                <table className="table">
-                                    <tbody>
-                                        {slicedlist.map(att => (
-                                            <tr key={att.id}>
-                                                <td>{att.name}</td>
-                                                <td ><img className="tiny-card" src={att.picture_url} alt="" ></img></td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                <div className="col-sm text-center">
+                                    <h4>RSVP'd Events</h4>
+                                    <table className="table">
+                                        <tbody>
+                                            {slicedlist.map(att => (
+                                                <tr key={att.id}>
+                                                    <td>{att.name}</td>
+                                                    <td ><img className="tiny-card" src={att.picture_url} alt="" ></img></td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                                        </div>
 
 
                             <div className="container">
