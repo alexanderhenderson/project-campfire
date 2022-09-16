@@ -175,7 +175,7 @@ build-events-poller-job:
     - docker:20.10.16-dind
   script:
     - cd backend/events
-    - docker -t ${CI_REGISTRY_IMAGE}/events_poller:latest .
+    - docker build -f Dockerfile_Poller -t ${CI_REGISTRY_IMAGE}/events_poller:latest .
     - docker tag ${CI_REGISTRY_IMAGE}/events_poller:latest ${CI_REGISTRY_IMAGE}/events_poller_backups:$CI_PIPELINE_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker push ${CI_REGISTRY_IMAGE}/events_poller_backups:$CI_PIPELINE_ID
@@ -242,4 +242,3 @@ pages:
     paths:
       - public
 
-# build -f Dockerfile.Poller
