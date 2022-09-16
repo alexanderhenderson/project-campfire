@@ -44,3 +44,4 @@ and are looking to meet similar minded people.
         - docker-compose build
         - docker-compose up
     - visit http://localhost:3000/
+
