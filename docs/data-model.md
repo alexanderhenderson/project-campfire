@@ -68,7 +68,7 @@ The `ActivityVO` entity contains the data for a related Activity entity in the e
 | attendees | list of references to UserVO entities | no | yes |
 | picture_url | url | no | yes |
 
-The `Event` entity 
+The `Event` entity contains the data for a user generated event that other users can click on to attend.
 
 
 ## Comment 
@@ -80,3 +80,4 @@ The `Event` entity
 | commenter | reference to User entity | no | no |
 | user_profile | reference to User entity | no | no |
 
+The `Comment` entity contains the data for comments left on a user profile by users.
