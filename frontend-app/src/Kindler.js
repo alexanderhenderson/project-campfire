@@ -6,8 +6,6 @@ export default function Kindler() {
 	const [KindlerList, SetKindlerData] = useState([]);
 
 	useEffect(() => {
-
-
 		const KindlerData = async () => {
 			const url = `${process.env.REACT_APP_USERS}/users/api/kindler`;
 			const response = await fetch(url, { credentials: "include" });
@@ -21,7 +19,7 @@ export default function Kindler() {
 				for (let friend of data) {
 					friend.friend = false;
 				}
-				
+
 				SetKindlerData(data);
 			}
 		};
@@ -108,8 +106,8 @@ export default function Kindler() {
 						<br />
 						<br />
 						<div className="kindle-top-level-card">
-						<h2 className="card-text">Wow! You are already friends with everybody with similar interests!</h2>
-						<h3 > You can potentially match with more friends by adding new activities. </h3>
+							<h2 className="card-text">Wow! You are already friends with everybody with similar interests!</h2>
+							<h3> You can potentially match with more friends by adding new activities. </h3>
 						</div>
 					</div>
 				)}
