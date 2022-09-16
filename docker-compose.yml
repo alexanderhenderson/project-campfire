@@ -19,9 +19,9 @@ services:
             HOST: "0.0.0.0"
             REACT_APP_EVENTS: http://localhost:8090
             REACT_APP_USERS: http://localhost:8080
-            REACT_APP_MESSENGER: http://localhost:8070
-            REACT_APP: http://localhost:3000
-            NAVLINK: ''
+            REACT_APP_NAVLINK: ''
+            # REACT_APP_MESSENGER: http://localhost:8070
+            # REACT_APP: http://localhost:3000
     postgres:
         image: postgres:14.2-bullseye
         volumes:
@@ -56,18 +56,18 @@ services:
             DATABASE_URL: postgresql://users:password@postgres:5432/users
             WAIT_HOSTS: postgres:5432
             DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
-    messenger:
-        build:
-            context: ./backend/messenger
-            dockerfile: ./Dockerfile.dev
-        ports:
-            - "8070:8000"
-        volumes:
-            - ./backend/messenger:/app
-        environment:
-            DATABASE_URL: postgresql://messenger:password@postgres:5432/messenger
-            WAIT_HOSTS: postgres:5432
-            DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
+    # messenger:
+    #     build:
+    #         context: ./backend/messenger
+    #         dockerfile: ./Dockerfile.dev
+    #     ports:
+    #         - "8070:8000"
+    #     volumes:
+    #         - ./backend/messenger:/app
+    #     environment:
+    #         DATABASE_URL: postgresql://messenger:password@postgres:5432/messenger
+    #         WAIT_HOSTS: postgres:5432
+    #         DJWTO_SIGNING_KEY: c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
     users-poller:
         build:
             context: ./backend/users/poll
@@ -82,7 +82,8 @@ services:
         environment:
             DATABASE_URL: postgresql://users:password@postgres:5432/users
             WAIT_HOSTS: postgres:5432
-            WAIT_TIMEOUT: 300        
+            WAIT_TIMEOUT: 300
+            EVENTS_API: http://events:8000
     events-poller:
         build:
             context: ./backend/events/poll
@@ -97,4 +98,5 @@ services:
         environment:
             DATABASE_URL: postgresql://users:password@postgres:5432/events
             WAIT_HOSTS: postgres:5432
-            WAIT_TIMEOUT: 300      
+            WAIT_TIMEOUT: 300
+            USERS_API: http://users:8000

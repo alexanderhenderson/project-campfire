@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import React, { useState, useEffect, useRef } from 'react'
+import { settingLinks } from "./Nav"
 
 
 
@@ -9,6 +10,7 @@ export default function EventList(props) {
   const [filteredEvents, setFilteredEvents] = useState([])
   const [search, setSearch] = useState('')
   const navigate = useNavigate()
+  const [, , , eventsLink] = settingLinks()
 
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export default function EventList(props) {
               <h1>Events</h1>
             </div>
             <div className="col">
-            <div className="align-right"><a className="btn btn-dark rounded-pill mb-3" href="/events/create/" role="button">Add Event</a></div>
+            <div className="align-right"><a className="btn btn-dark rounded-pill mb-3" href={`${eventsLink}create/`} role="button">Add Event</a></div>
             </div>
           </div>
           </div>

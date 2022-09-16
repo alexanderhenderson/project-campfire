@@ -29,7 +29,7 @@ SECRET_KEY = (
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not os.environ.get("DEBUG")
 
 ALLOWED_HOSTS = [
     "events",
@@ -42,6 +42,8 @@ ALLOWED_HOSTS = [
     "http://localhost:8090",
     "http://localhost:8080",
     "[::1]",
+    "campfire-events-api.herokuapp.com",
+    "campfire-users-api.herokuapp.com",
     os.environ.get("DEPLOYED_HOST", "localhost"),
 ]
 
@@ -67,22 +69,14 @@ DJWTO_SIGNING_KEY = os.getenv("DJWTO_SIGNING_KEY")
 # Your DEBUG value MUST be False in production
 DJWTO_SAME_SITE = "NONE"
 
-DJWTO_DOMAIN = [
-    "DJWTO_DOMAIN",
-    "http://localhost:8080",
-    "http://localhost:8090",
-    "localhost:8080",
-    "localhost:8090",
-    "events",
-    "users",
-]
-
 # CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8090",
     "events",
+    "https://campfire-users-api.herokuapp.com",
+    "https://campfire-events-api.herokuapp.com",
     os.environ.get("CORS_HOST", "http://localhost:3001"),
 ]
 CORS_ALLOW_CREDENTIALS = True

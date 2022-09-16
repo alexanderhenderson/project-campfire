@@ -56,7 +56,6 @@ function CreateEvent() {
         googleMapsApiKey: googleAPI(),
         libraries
     })
-
     const [activitys, setActivitys] = useState([])
     const [name, setName] = useState('')
     const [start, SetStart] = useState('')

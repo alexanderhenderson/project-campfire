@@ -9,14 +9,52 @@ import { useToken } from './Authorization'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from "./UserContext";
 
+export function settingLinks() {
+  const NAVLINK = process.env.REACT_APP_NAVLINK
+  
+  // declare link variables here
+  let home = ''
+  let intro = ''
+  let profile = ''
+  let events = ''
+  let activities = ''
+  let kindler = ''
+  let signup = ''
+  let login = ''
+  let logout = ''
+
+  if (NAVLINK !== undefined) {
+    // add a link variable = NAVLINK + current href
+    home = NAVLINK + "/"
+    intro = NAVLINK + "/intro/"
+    profile = NAVLINK + "/profile/"
+    events = NAVLINK + "/events/"
+    activities = NAVLINK + "/activities/"
+    kindler = NAVLINK + "/kindler/"
+    signup = NAVLINK + "/signup/"
+    login = NAVLINK + "/login/"
+    logout = NAVLINK + "/logout/"
+  } else {
+    // add a link variable = current href
+    home = "/"
+    intro = "/intro/"
+    profile = "/profile/"
+    events = "/events/"
+    activities = "/activities/"
+    kindler = "/kindler/"
+    signup = "/signup/"
+    login = "/login/"
+    logout = "/logout/"
+  }
+  // add link variable to return array
+  return ([home, intro, profile, events, activities, kindler, signup, login, logout])
+}
 
 export default function NavBar() {
-  // eslint-disable-next-line no-unused-vars
-  const [token, login, logout] = useToken()
-  // eslint-disable-next-line no-unused-vars
-  const [logoutResponse, setLogoutResponse] = useState()
+  const [homeLink, introLink, , eventsLink, activitiesLink, kindlerLink, signupLink, loginLink] = settingLinks()
+  const [token, , logout] = useToken()
+  const [ , setLogoutResponse] = useState()
   const [loggedIn, setLoggedIn]=useState(false)
-  // const [userId, setUserId] = useState([])
   const navigate = useNavigate();
   const {userId} = useContext(UserContext)
 
@@ -35,32 +73,34 @@ export default function NavBar() {
     setLogoutResponse(result)
     console.log('LOGGED OUT SUCCESSFULLY')
   }
-  // console.log("this should be userID", userId)
+  console.log("this should be userID", userId)
   return (
     <div className='mb-3'>
       <Navbar sticky="top" variant="dark" bg="dark" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href={homeLink}>
             <img
-              src="/favicon.ico"
+            // will need to update all src= across the app
+              src={`${process.env.PUBLIC_URL}/favicon.ico`}
               width="30"
               height="30"
               className="d-inline-block align-top"
               alt="logo"
             />
           </Navbar.Brand>
-          <Navbar.Brand href="/">Campfire</Navbar.Brand>
+          <Navbar.Brand href={homeLink}>Campfire</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar-dark-example" />
           <Navbar.Collapse id="navbar-dark-example">
+            {/* replace href with {link variable} */}
             <Nav>
-              <Nav.Link href="/" className='mx-1'> Home </Nav.Link>
-              <Nav.Link href="/intro/" className='mx-1'> New Here? </Nav.Link>
+              <Nav.Link href={homeLink} className='mx-1'> Home </Nav.Link>
+              <Nav.Link href={introLink} className='mx-1'> New Here? </Nav.Link>
               <Nav.Link onClick={() => { navigate(`/profile/${userId.id}`)}} className='mx-1'> Profile </Nav.Link>
-              <Nav.Link href="/events/" className='mx-1'> Events </Nav.Link>
-              <Nav.Link href="/activities/" className='mx-1'> Activities </Nav.Link>
-              <Nav.Link href="/kindler/" className='mx-1'> Kindler </Nav.Link>
-              <Nav.Link href="/signup" className={"mx-1" + (loggedIn ? " d-none":"")}> Sign Up </Nav.Link>
-              <Nav.Link href="/login" className={"xy-1" + (loggedIn ? " d-none":"") }> Login </Nav.Link>
+              <Nav.Link href={eventsLink} className='mx-1'> Events </Nav.Link>
+              <Nav.Link href={activitiesLink} className='mx-1'> Activities </Nav.Link>
+              <Nav.Link href={kindlerLink} className='mx-1'> Kindler </Nav.Link>
+              <Nav.Link href={signupLink} className={"mx-1" + (loggedIn ? " d-none":"")}> Sign Up </Nav.Link>
+              <Nav.Link href={loginLink} className={"xy-1" + (loggedIn ? " d-none":"") }> Login </Nav.Link>
               <Nav.Link onClick={onLogout} className={"mx-1" + (loggedIn ? "":" d-none")}> Logout </Nav.Link>
             </Nav>
           </Navbar.Collapse>

@@ -17,6 +17,8 @@ export default function UserProfile() {
             if (response.ok) {
                 const data = await response.json()
                 setUserData(data)
+            } else {
+                console.log("getsUserData failed")
             }
         }
         const requestEvents = async () => {
@@ -28,7 +30,7 @@ export default function UserProfile() {
                 setEvents(events.current)
             }
         }
-          requestEvents()
+        requestEvents()
         
         getUserdata()
         // eslint-disable-next-line react-hooks/exhaustive-deps

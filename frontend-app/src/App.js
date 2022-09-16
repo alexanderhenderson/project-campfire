@@ -17,28 +17,31 @@ import { useState, useEffect } from "react"
 import EditProfile from "./EditProfile"
 
 export default function App() {
+  const domain = /https:\/\/[^/]+/
+  const basename = process.env.PUBLIC_URL.replace(domain, '')
+  
 
-const [userId, setUserId] = useState('')
+  const [userId, setUserId] = useState('')
 
-useEffect(() => {
-  const getUserdata = async () => {
-      const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
-      const response = await fetch(url, { credentials: "include" });
-      if (response.ok) {
-          const userData = await response.json()
-          setUserId(userData)
-      }
-  }
-  getUserdata()
+  useEffect(() => {
+    const getUserdata = async () => {
+        const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
+        const response = await fetch(url, { credentials: "include" });
+        if (response.ok) {
+            const userData = await response.json()
+            setUserId(await userData)
+        }
+    }
+    getUserdata()
 
-}, [])
-
+  }, [])
+  console.log("App.js userId for UserContext: ", userId)
   return (
   <UserContext.Provider value={{
     userId, setUserId
   }}>
   <AuthProvider>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
         <NavBar />
         <div className="container">
           <Routes>

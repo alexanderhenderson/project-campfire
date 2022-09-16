@@ -1,6 +1,8 @@
 stages:
   - test
   - build
+  - deploy_web
+  - deploy_workers
 
 services:
   - postgres:14-bullseye
@@ -33,13 +35,215 @@ lint-python-projects-job:
     - pip install flake8
     - flake8 ./backend/users ./backend/events
 
+build-users-api-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: build
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  script:
+    - cd backend/users
+    - docker build -t ${CI_REGISTRY_IMAGE}/users_api:latest .
+    - docker tag ${CI_REGISTRY_IMAGE}/users_api:latest ${CI_REGISTRY_IMAGE}/users_api_backups:$CI_PIPELINE_ID
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push ${CI_REGISTRY_IMAGE}/users_api_backups:$CI_PIPELINE_ID
+    - docker push ${CI_REGISTRY_IMAGE}/users_api:latest
+
+deploy-users-api-image-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: deploy_web
+  image: docker:20.10.16
+  needs:
+    - build-users-api-job
+  services:
+    - docker:20.10.16-dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker pull ${CI_REGISTRY_IMAGE}/users_api:latest
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - docker tag ${CI_REGISTRY_IMAGE}/users_api:latest registry.heroku.com/$HEROKU_ACCOUNT_USERS_API/web:latest
+    - docker push registry.heroku.com/$HEROKU_ACCOUNT_USERS_API/web:latest
+
+release-users-api-job:
+  stage: deploy_web
+  image: node:10.17-alpine
+  needs:
+    - deploy-users-api-image-job
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - apk add curl bash
+    - curl https://cli-assets.heroku.com/install.sh | sh
+  script:
+    - heroku container:release web --app $HEROKU_ACCOUNT_USERS_API
+
+build-users-poller-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: build
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  script:
+    - cd backend/users
+    - docker build -f Dockerfile.Poller -t ${CI_REGISTRY_IMAGE}/users_poller:latest .
+    - docker tag ${CI_REGISTRY_IMAGE}/users_poller:latest ${CI_REGISTRY_IMAGE}/users_poller_backups:$CI_PIPELINE_ID
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push ${CI_REGISTRY_IMAGE}/users_poller_backups:$CI_PIPELINE_ID
+    - docker push ${CI_REGISTRY_IMAGE}/users_poller:latest
+
+deploy-users-poller-image-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: deploy_workers
+  image: docker:20.10.16
+  needs:
+    - build-users-poller-job
+    - deploy-users-api-image-job
+    - release-users-api-job
+  services:
+    - docker:20.10.16-dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - docker pull ${CI_REGISTRY_IMAGE}/users_poller:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/users_poller:latest registry.heroku.com/$HEROKU_ACCOUNT_USERS_POLLER/worker:latest
+    - docker push registry.heroku.com/$HEROKU_ACCOUNT_USERS_POLLER/worker:latest
+
+release-users-poller-job:
+  stage: deploy_workers
+  image: node:10.17-alpine
+  needs:
+    - deploy-users-poller-image-job
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - apk add curl bash
+    - curl https://cli-assets.heroku.com/install.sh | sh
+  script:
+    - heroku container:release worker --app $HEROKU_ACCOUNT_USERS_POLLER
+
+build-events-api-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: build
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  script:
+    - cd backend/events
+    - docker build -t ${CI_REGISTRY_IMAGE}/events_api:latest .
+    - docker tag ${CI_REGISTRY_IMAGE}/events_api:latest ${CI_REGISTRY_IMAGE}/events_api_backups:$CI_PIPELINE_ID
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push ${CI_REGISTRY_IMAGE}/events_api_backups:$CI_PIPELINE_ID
+    - docker push ${CI_REGISTRY_IMAGE}/events_api:latest
+
+deploy-events-api-image-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: deploy_web
+  image: docker:20.10.16
+  needs:
+    - build-events-api-job
+  services:
+    - docker:20.10.16-dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - docker pull ${CI_REGISTRY_IMAGE}/events_api:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/events_api:latest registry.heroku.com/$HEROKU_ACCOUNT_EVENTS_API/web:latest
+    - docker push registry.heroku.com/$HEROKU_ACCOUNT_EVENTS_API/web:latest
+
+release-events-api-job:
+  stage: deploy_web
+  image: node:10.17-alpine
+  needs:
+    - deploy-events-api-image-job
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - apk add curl bash
+    - curl https://cli-assets.heroku.com/install.sh | sh
+  script:
+    - heroku container:release web --app $HEROKU_ACCOUNT_EVENTS_API
+
+build-events-poller-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: build
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  script:
+    - cd backend/events
+    - docker build -f Dockerfile.Poller -t ${CI_REGISTRY_IMAGE}/events_poller:latest .
+    - docker tag ${CI_REGISTRY_IMAGE}/events_poller:latest ${CI_REGISTRY_IMAGE}/events_poller_backups:$CI_PIPELINE_ID
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push ${CI_REGISTRY_IMAGE}/events_poller_backups:$CI_PIPELINE_ID
+    - docker push ${CI_REGISTRY_IMAGE}/events_poller:latest
+
+deploy-events-poller-image-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: deploy_workers
+  image: docker:20.10.16
+  needs:
+    - build-events-poller-job
+    - deploy-events-api-image-job
+    - release-events-api-job
+  services:
+    - docker:20.10.16-dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - docker pull ${CI_REGISTRY_IMAGE}/events_poller:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/events_poller:latest registry.heroku.com/$HEROKU_ACCOUNT_EVENTS_POLLER/worker:latest
+    - docker push registry.heroku.com/$HEROKU_ACCOUNT_EVENTS_POLLER/worker:latest
+
+release-events-poller-job:
+  stage: deploy_workers
+  image: node:10.17-alpine
+  needs:
+    - deploy-events-poller-image-job
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - apk add curl bash
+    - curl https://cli-assets.heroku.com/install.sh | sh
+  script:
+    - heroku container:release worker --app $HEROKU_ACCOUNT_EVENTS_POLLER
+
 front-end-build-job:
   image: node:lts-bullseye
   stage: build
   needs:
     - users-api-test-job
     - lint-python-projects-job
+  variables:
+    PUBLIC_URL: https://66617.gitlab.io/project-gamma
+    REACT_APP_NAVLINK: /project-gamma
   script:
     - cd frontend-app
     - npm install
     - npm run build
+    - cp build/index.html build/404.html
+  artifacts:
+    paths:
+      - frontend-app/build/
+
+pages:
+  stage: deploy_web
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  dependencies:
+    - front-end-build-job
+  needs:
+    - front-end-build-job
+  script:
+    - mv frontend-app/build/ public
+  artifacts:
+    paths:
+      - public
+

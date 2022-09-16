@@ -1,5 +1,7 @@
-export default function MainPage() {
+import { settingLinks } from "./Nav"
 
+export default function MainPage() {
+  const [, , , , , , signupLink, loginLink] = settingLinks()
 
   return (
     <>
@@ -11,8 +13,8 @@ export default function MainPage() {
               <h1 className="mb-3 hero-text font-weight-bold">Campfire</h1>
               <h4 className="mb-3 hero-sub-text">Come join our campfire</h4>
               <div className='hero-bottom'>
-              <a className="btn btn-outline-light btn-lg rounded-pill mb-3" href="/signup/" role="button">Sign Up</a>
-              <p className="forgot-password"> Already Signed Up? <a href={`Login`}>Log In</a>
+              <a className="btn btn-outline-light btn-lg rounded-pill mb-3" href={signupLink} role="button">Sign Up</a>
+              <p className="forgot-password"> Already Signed Up? <a href={loginLink}>Log In</a>
               </p>
             </div>
             </div>
