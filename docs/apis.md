@@ -2,9 +2,7 @@
 
 ## (USERS Microservice)
 
-## Users
-
-## Get User Detail
+## User Detail
 
 * **Method**: `GET`
 * **Path**: /users/:id/
@@ -32,7 +30,7 @@ This request gets the user/detail at the given id in the URL
 
 ----------------------------------
 
-## Get Users All (List)
+## List All Users
 
 * **Method**: `GET`
 * **Path**: /users/
@@ -142,7 +140,7 @@ This request deletes user associated with the id input in the URL
 
 ## (ActivityVO's)
 
-## List activityVO's
+## List all activityVO's
 
 * **Method**: `GET`
 * **Path**:/users/activities/
@@ -213,11 +211,11 @@ has the name of the activity and generates an id for it.
 
 ----------------------------------
 
-## (EVENTS)
+## (EVENTS Microservice)
 
 ## (UserVO's)
 
-## List User's Events
+## List All User's Events
 
 * **Method**: `GET`
 * **Path**: events/users/:id/
@@ -283,10 +281,10 @@ fields that activity has.
 
 ----------------------------------
 
-## Get User Detail
+## Activity Detail
 
 * **Method**: `GET`
-* **Path**: /users/:id/
+* **Path**: /events/activity/:id/
 
 Input: `None`
 
