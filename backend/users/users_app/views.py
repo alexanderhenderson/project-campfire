@@ -9,7 +9,7 @@ import djwto.authentication as auth
 # Create your views here.
 
 
-@auth.jwt_login_required
+# @auth.jwt_login_required
 @require_http_methods(["GET"])
 def api_user_token(request):
 
@@ -27,7 +27,7 @@ class UserListEncoder(ModelEncoder):
 
 
 # path: http://localhost:8080/users/api/tokens/user/
-@auth.jwt_login_required
+# @auth.jwt_login_required
 @require_http_methods(["GET"])
 def api_user_info(request):
 
@@ -53,7 +53,7 @@ def api_user_info(request):
 
 
 # path: http://localhost:8080/users/
-@auth.jwt_login_required
+# @auth.jwt_login_required
 @require_http_methods(["GET"])
 def api_friend_kindler(request):
 
@@ -371,7 +371,7 @@ def activity_detail(request, pk):
 
 # put request to add friend, at the moment this does not reject duplicate
 # requests
-@auth.jwt_login_required
+# @auth.jwt_login_required
 @require_http_methods(["PUT"])
 def api_friend_detail(request):
 

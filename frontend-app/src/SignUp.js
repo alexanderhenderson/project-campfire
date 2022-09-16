@@ -10,11 +10,11 @@ export default function Signup() {
         last_name: "",
         email: "",
         city: "",
-        state: ""
+        state: "",
     })
 
     const [signupTest, setSignupTest] = useState(true)
-    const { username, password, first_name, last_name, email, city } = userData
+    const { username, password, first_name, last_name, email, city, state } = userData
     // eslint-disable-next-line no-unused-vars
     const [token, login, logout, signup] = useToken()
 
@@ -177,7 +177,7 @@ export default function Signup() {
                                     </div>
                                     <div class="col-md">
                                         <div className="form-floating">
-                                            <select name="state" className="form-select">
+                                            <select name="state" className="form-select" onChange={changeHandler}>
                                                 <option value="">Select State</option>
                                                 {USStates.current.map(state => (
                                                     <option key={state.abb} value={state.abb}>
