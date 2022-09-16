@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useParams } from "react-router-dom"
+import { UserContext } from "./UserContext";
 
 export default function UserProfile() {
     const [userData, setUserData] = useState({})
     const [events, setEvents] = useState([])
     const navigate = useNavigate();
     const { id } = useParams()
+    const {userId} = useContext(UserContext)
 
-    console.log("useParams id: ", id)
     useEffect(() => {
         const getUserdata = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/${id}`;
@@ -45,8 +46,6 @@ export default function UserProfile() {
             }
         }
     }
-    console.log("state: ", userData.state)
-    console.log("userData: ", userData)
     let slicedlist = attendedEvents.slice(0,3)
     return (
         <>
@@ -72,7 +71,6 @@ export default function UserProfile() {
                                             <p>{userData.city}, {userData.state}</p>
                                         </div>
                                     </div>
-
                                     <div className="col">
                                         <h4>Events I'm Attending</h4>
                                         <table className="table">
@@ -86,8 +84,10 @@ export default function UserProfile() {
                                             </tbody>
                                         </table>
                                     </div>
-
                                     <div className="col">
+                                {/* eslint-disable-next-line */}
+                                    {userId.id == id?(
+                                    <div className="align-right"><a className="btn btn-dark rounded-pill mb-3" href={`/profile/edit/${userId.id}`} role="button">Edit Profile</a></div>): ""}
                                         <h4>Favorite Activities</h4>
                                         <div className="accordion" id="accordionExample">
                                             <div className="accordion-item">
