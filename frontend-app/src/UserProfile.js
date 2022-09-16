@@ -106,7 +106,7 @@ export default function UserProfile() {
                                                 </div>
                                             </div>
 
-                                            <div className='mt-5 text-center'>
+                                            <div className='mt-5'>
                                                 <h4>Friends List</h4>
                                                 <div className="accordion" id="accordionExample">
                                                     <div className="accordion-item">
