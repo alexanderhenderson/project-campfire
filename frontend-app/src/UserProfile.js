@@ -2,7 +2,8 @@ import { useEffect, useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useParams } from "react-router-dom"
 import Comments from "./Components/Comments"
-import { UserContext } from "./UserContext";
+import { UserContext } from "./UserContext"
+import { settingLinks } from "./Nav"
 
 export default function UserProfile() {
     const [userData, setUserData] = useState({})
@@ -10,6 +11,7 @@ export default function UserProfile() {
     const navigate = useNavigate()
     const { id } = useParams()
     const { userId } = useContext(UserContext)
+    const [ , , , , , , , , editProfileLink] = settingLinks()
 
     useEffect(() => {
         const getUserdata = async () => {
@@ -60,7 +62,7 @@ export default function UserProfile() {
                                         <h1>{userData.username}</h1>
                                         {/* eslint-disable-next-line */}
                                         {userId.id == id ? (
-                                            <div><a className="btn btn-dark rounded-pill mb-3" href={`/profile/edit/${userId.id}`} role="button">Edit Profile</a></div>) : ""}
+                                            <div><a className="btn btn-dark rounded-pill mb-3" href={`${editProfileLink}${userId.id}`} role="button">Edit Profile</a></div>) : ""}
                                     </div>
                                     <div className="col">
                                         <div className='mb-3 text-center'>

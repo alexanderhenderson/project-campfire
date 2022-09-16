@@ -22,6 +22,7 @@ export function settingLinks() {
   let signup = ''
   let login = ''
   let logout = ''
+  let editProfile = ''
 
   if (NAVLINK !== undefined) {
     // add a link variable = NAVLINK + current href
@@ -34,6 +35,7 @@ export function settingLinks() {
     signup = NAVLINK + "/signup/"
     login = NAVLINK + "/login/"
     logout = NAVLINK + "/logout/"
+    editProfile = NAVLINK + "/profile/edit/"
   } else {
     // add a link variable = current href
     home = "/"
@@ -45,9 +47,10 @@ export function settingLinks() {
     signup = "/signup/"
     login = "/login/"
     logout = "/logout/"
+    editProfile = "/profile/edit/"
   }
   // add link variable to return array
-  return ([home, intro, profile, events, activities, kindler, signup, login, logout])
+  return ([home, intro, profile, events, activities, kindler, signup, login, logout, editProfile])
 }
 
 export default function NavBar() {
