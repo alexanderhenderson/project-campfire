@@ -60,13 +60,13 @@ export default function Kindler() {
 							return (
 								<div className="col-sm-4" key={KindlerUser.id}>
 									<div className="kindle-top-level-card mb-3 shadow">
-										<img className="kindle-card-image" src={KindlerUser?.profile_photo || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPJFBrPoazCA8scTIXSLI6fwQHWFI-VhSkQ&usqp=CAU"} alt="" />
+										<img className="kindle-card-image" src={KindlerUser?.profile_photo || "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"} alt="" />
 										<div className="card-body ">
 											<h5 className="card-title">{KindlerUser.username}</h5>
 											{!KindlerUser?.friend ? (
 												<button
 													type="button"
-													className="btn btn-warning"
+													className="btn btn-dark rounded-pill"
 													onClick={() => {
 														onClick(KindlerUser?.id, index);
 													}}
@@ -86,7 +86,7 @@ export default function Kindler() {
 											)}
 										</div>
 										<div className="card-footer">
-											{KindlerUser.city}-{KindlerUser.state}
+											{KindlerUser.city}, {KindlerUser.state}
 										</div>
 									</div>
 								</div>
