@@ -9,7 +9,7 @@ from common.json import ModelEncoder
 # Create your views here.
 
 
-# @auth.jwt_login_required
+@auth.jwt_login_required
 @require_http_methods(["GET"])
 def api_user_token(request):
 
@@ -27,7 +27,7 @@ class UserListEncoder(ModelEncoder):
 
 
 # path: http://localhost:8080/users/api/tokens/user/
-# @auth.jwt_login_required
+@auth.jwt_login_required
 @require_http_methods(["GET"])
 def api_user_info(request):
 
@@ -53,7 +53,7 @@ def api_user_info(request):
 
 
 # path: http://localhost:8080/users/
-# @auth.jwt_login_required
+@auth.jwt_login_required
 @require_http_methods(["GET"])
 def api_friend_kindler(request):
 
@@ -371,7 +371,7 @@ def activity_detail(request, pk):
 
 # put request to add friend, at the moment this does not reject duplicate
 # requests
-# @auth.jwt_login_required
+@auth.jwt_login_required
 @require_http_methods(["PUT"])
 def api_friend_detail(request):
 
@@ -410,12 +410,12 @@ def list_comments(request):
             safe=False,
         )
     if request.method == "POST":
-        token_data = request.payload
-        user_id = token_data["user"]["id"]
+        # token_data = request.payload
+        # user_id = token_data["user"]["id"]
         content = json.loads(request.body)
-        # user_id = content["user_id"]
+        user_id = content["user_id"]
         content["commenter"] = User.objects.get(id=user_id)
-        # del content["user_id"]
+        del content["user_id"]
         content["user_profile"] = User.objects.get(id=content["user_profile"])
         # How do we grab the user id of the profile we're on?
         comment = Comment.objects.create(**content)

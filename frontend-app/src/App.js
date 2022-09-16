@@ -28,13 +28,13 @@ export default function App() {
         const response = await fetch(url, { credentials: "include" });
         if (response.ok) {
             const userData = await response.json()
-            setUserId(userData)
+            setUserId(await userData)
         }
     }
     getUserdata()
 
   }, [])
-
+  console.log("App.js userId for UserContext: ", userId)
   return (
   <UserContext.Provider value={{
     userId, setUserId

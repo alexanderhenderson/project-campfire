@@ -73,7 +73,7 @@ export default function NavBar() {
     setLogoutResponse(result)
     console.log('LOGGED OUT SUCCESSFULLY')
   }
-  // console.log("this should be userID", userId)
+  console.log("this should be userID", userId)
   return (
     <div className='mb-3'>
       <Navbar sticky="top" variant="dark" bg="dark" expand="lg">
