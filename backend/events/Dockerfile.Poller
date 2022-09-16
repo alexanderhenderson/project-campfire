@@ -6,6 +6,7 @@ WORKDIR /app
 # Modify these instructions to do that
 COPY poll/requirements.txt requirements.txt
 COPY poll/poller.py poller.py
+COPY manage.py manage.py
 COPY events_app events_app
 COPY events_project events_project
 # Copy all of the subdirectories in your service's directory
