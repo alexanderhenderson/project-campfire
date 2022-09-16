@@ -10,7 +10,6 @@ export default function UserProfile() {
     const { id } = useParams()
     const {userId} = useContext(UserContext)
 
-    
     useEffect(() => {
         const getUserdata = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/${id}`;
@@ -84,6 +83,7 @@ export default function UserProfile() {
                                         </table>
                                     </div>
                                     <div className="col">
+                                {/* eslint-disable-next-line */}
                                     {userId.id == id?(
                                     <div className="align-right"><a className="btn btn-dark rounded-pill mb-3" href={`/profile/edit/${userId.id}`} role="button">Edit Profile</a></div>): ""}
                                         <h4>Favorite Activities</h4>
