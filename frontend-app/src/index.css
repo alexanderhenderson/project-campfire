@@ -144,20 +144,18 @@ nav {
 }
 
 .intro-bg {
-  /* Sizing */
   background-image: url("https://wallpaperaccess.com/full/1081641.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   width: 100vw;
   height: 100vh;
-  background-position: top center;
-  background-size: 100%;
-  background-repeat: no-repeat;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -10;
-  object-fit:cover;
-  opacity: 0.6;
+  z-index: -1;
   /* filter: blur(1px); */
+  opacity: 0.6;
 }
 
 .event-bg {
