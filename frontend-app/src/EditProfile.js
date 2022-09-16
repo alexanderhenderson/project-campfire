@@ -106,7 +106,7 @@ export default function EditProfile() {
                                         onChange={changeHandler}
                                         placeholder="Enter URL"
                                     />
-                                    <label htmlFor="floatingInputGrid">Profile Photo URL</label>
+                                    <label htmlFor="floatingInputGrid">Profile Photo URL (limit 1000 characters)</label>
                                 </div>
                                 <div className="form-floating mb-2">
                                     <textarea className="form-control"
