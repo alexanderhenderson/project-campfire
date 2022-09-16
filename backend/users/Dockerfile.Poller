@@ -4,12 +4,15 @@ WORKDIR /app
 
 # Copy the top-level files in your service's directory
 # Modify these instructions to do that
-COPY requirements.txt requirements.txt
-COPY poller.py poller.py
-
+COPY poll/requirements.txt requirements.txt
+COPY poll/poller.py poller.py
+COPY manage.py manage.py
+COPY users_app users_app
+COPY users_project users_project
+COPY common common
 # Copy all of the subdirectories in your service's directory
 # Modify these instructions to do that
 
 
 RUN pip install -r requirements.txt
-CMD python poller.py
+CMD python manage.py migrate && python poller.py
