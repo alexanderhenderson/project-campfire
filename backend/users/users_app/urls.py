@@ -15,9 +15,11 @@ from .views import (
 
 
 urlpatterns = [
-    # JWT web token paths
+    # Endpoints that require JWT
     path("api/tokens/mine/", api_user_token, name="user_token"),
     path("api/tokens/user/", api_user_info, name="user_info"),
+    path("api/kindler", api_friend_kindler, name="api_friend_kindler"),
+    path("api/friend/", api_friend_detail, name="api_friend_detail"),
     # other request endpoints
     path('', list_users, name='api_list_users'),
     path('api/kindler', api_friend_kindler, name='api_friend_kindler'),

@@ -29,7 +29,7 @@ SECRET_KEY = (
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not os.environ.get("DEBUG")
 
 LOGIN_REDIRECT_URL = "http://localhost:3000"
 
@@ -40,9 +40,11 @@ ALLOWED_HOSTS = [
     ".localhost",
     "localhost",
     "http://localhost:3000",
+    "http://localhost:8090",
     "http://localhost:8080",
     "127.0.0.1",
     "[::1]",
+    "campfire-users-api.herokuapp.com",
     os.environ.get("DEPLOYED_HOST", "localhost"),
 ]
 
@@ -53,26 +55,33 @@ AUTH_USER_MODEL = "users_app.User"  #  where user is the app name and User is th
 # Application definition
 
 INSTALLED_APPS = [
-    "users_app.apps.UsersAppConfig",
-    "djwto",
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+    'users_app.apps.UsersAppConfig',
+    'corsheaders',
+    'djwto',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 ]
 
 DJWTO_MODE = "TWO-COOKIES"
 DJWTO_CSRF = False
 DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=30)
+DJWTO_SIGNING_KEY = os.getenv("DJWTO_SIGNING_KEY")
 
 # Your DEBUG value MUST be False in production
-DJWTO_SAME_SITE = "LAX" if DEBUG else "NONE"
+DJWTO_SAME_SITE = "NONE"
+
+# CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8080",
+    "https://66617.gitlab.io",
+    "https://campfire-events-api.herokuapp.com",
+    "https://campfire-users-api.herokuapp.com",
     os.environ.get("CORS_HOST", "http://localhost:3001"),
 ]
 CORS_ALLOW_CREDENTIALS = True

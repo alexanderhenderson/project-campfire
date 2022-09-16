@@ -15,10 +15,12 @@ django.setup()
 # the below import works once the program is running
 from users_app.models import ActivityVO
 
+EVENTS_API = os.environ["EVENTS_API"]
+
 
 def get_activities():
 
-    response = requests.get("http://events:8000/events/activities/")
+    response = requests.get(f"{EVENTS_API}/events/activities/")
     content = json.loads(response.content)
 
     for activity in content["Activities"]:
@@ -29,11 +31,12 @@ def get_activities():
 
 def poll():
     while True:
+        print("polling")
         try:
             get_activities()
         except Exception as e:
             print(e, file=sys.stderr)
-        time.sleep(10)
+        time.sleep(60)
 
 
 if __name__ == "__main__":

@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useParams } from "react-router-dom"
 import Comments from "./Components/Comments"
+import { UserContext } from "./UserContext";
 
 export default function UserProfile() {
     const [userData, setUserData] = useState({})
     const [events, setEvents] = useState([])
     const navigate = useNavigate()
     const { id } = useParams()
+    const {userId} = useContext(UserContext)
 
-    console.log(id)
     useEffect(() => {
         const getUserdata = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/${id}`
@@ -17,6 +18,8 @@ export default function UserProfile() {
             if (response.ok) {
                 const data = await response.json()
                 setUserData(data)
+            } else {
+                console.log("getsUserData failed")
             }
         }
         const requestEvents = async () => {
@@ -29,7 +32,9 @@ export default function UserProfile() {
             }
         }
         requestEvents()
+        
         getUserdata()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
 
     let currentUser = userData.id
@@ -42,8 +47,7 @@ export default function UserProfile() {
             }
         }
     }
-
-    let slicedlist = attendedEvents.slice(0, 3)
+    let slicedlist = attendedEvents.slice(0,3)
     return (
         <>
             <div className="container">
@@ -68,9 +72,23 @@ export default function UserProfile() {
                                             <p>{userData.city}, {userData.state}</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-sm">
-                                    <div className='mb-3 text-center'>
+                                    <div className="col">
+                                        <h4>Events I'm Attending</h4>
+                                        <table className="table">
+                                            <tbody>
+                                                {slicedlist.map(att => (
+                                                    <tr key={att.id}>
+                                                        <td>{att.name}</td>
+                                                        <td ><img className="tiny-card" src={att.picture_url} alt="" ></img></td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div className="col">
+                                {/* eslint-disable-next-line */}
+                                    {userId.id == id?(
+                                    <div className="align-right"><a className="btn btn-dark rounded-pill mb-3" href={`/profile/edit/${userId.id}`} role="button">Edit Profile</a></div>): ""}
                                         <h4>Favorite Activities</h4>
                                         <div className="accordion" id="accordionExample">
                                             <div className="accordion-item">

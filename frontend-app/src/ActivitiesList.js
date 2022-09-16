@@ -17,7 +17,6 @@ export default function FetchActivities() {
             if (response.ok) {
                 const data = await response.json()
                 setActivitiesData(data["Activities"])
-
             }
         }
         const getUserdata = async () => {
@@ -25,14 +24,18 @@ export default function FetchActivities() {
             const response = await fetch(url, { credentials: "include" })
             if (response.ok) {
                 const userData = await response.json()
-                setUserId(userData)
-                setActivityList(userData.favorite_activities)
+                setUserId(await userData)
+                setActivityList(await userData.favorite_activities)
+            } else {
+                console.log("getUserData failed")
             }
         }
         getUserdata()
         getActivityData()
 
     }, [])
+
+    console.log("users id: ", userData.id)
 
     function clickHandler(event, activity) {
         addActivities(userData.id, activity)
