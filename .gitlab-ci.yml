@@ -1,7 +1,8 @@
 stages:
   - test
   - build
-  - deploy
+  - deploy_web
+  - deploy_workers
 
 services:
   - postgres:14-bullseye
@@ -52,7 +53,7 @@ build-users-api-job:
 deploy-users-api-image-job:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  stage: deploy
+  stage: deploy_web
   image: docker:20.10.16
   needs:
     - build-users-api-job
@@ -66,7 +67,7 @@ deploy-users-api-image-job:
     - docker push registry.heroku.com/$HEROKU_ACCOUNT_USERS_API/web:latest
 
 release-users-api-job:
-  stage: deploy
+  stage: deploy_web
   image: node:10.17-alpine
   needs:
     - deploy-users-api-image-job
@@ -96,7 +97,7 @@ build-users-poller-job:
 deploy-users-poller-image-job:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  stage: deploy
+  stage: deploy_workers
   image: docker:20.10.16
   needs:
     - build-users-poller-job
@@ -110,7 +111,7 @@ deploy-users-poller-image-job:
     - docker push registry.heroku.com/$HEROKU_ACCOUNT_USERS_POLLER/worker:latest
 
 release-users-poller-job:
-  stage: deploy
+  stage: deploy_workers
   image: node:10.17-alpine
   needs:
     - deploy-users-poller-image-job
@@ -140,7 +141,7 @@ build-events-api-job:
 deploy-events-api-image-job:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  stage: deploy
+  stage: deploy_web
   image: docker:20.10.16
   needs:
     - build-events-api-job
@@ -154,7 +155,7 @@ deploy-events-api-image-job:
     - docker push registry.heroku.com/$HEROKU_ACCOUNT_EVENTS_API/web:latest
 
 release-events-api-job:
-  stage: deploy
+  stage: deploy_web
   image: node:10.17-alpine
   needs:
     - deploy-events-api-image-job
@@ -184,7 +185,7 @@ build-events-poller-job:
 deploy-events-poller-image-job:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  stage: deploy
+  stage: deploy_workers
   image: docker:20.10.16
   needs:
     - build-events-poller-job
@@ -198,7 +199,7 @@ deploy-events-poller-image-job:
     - docker push registry.heroku.com/$HEROKU_ACCOUNT_EVENTS_POLLER/worker:latest
 
 release-events-poller-job:
-  stage: deploy
+  stage: deploy_workers
   image: node:10.17-alpine
   needs:
     - deploy-events-poller-image-job
@@ -229,7 +230,7 @@ front-end-build-job:
       - frontend-app/build/
 
 pages:
-  stage: deploy
+  stage: deploy_web
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   dependencies:
