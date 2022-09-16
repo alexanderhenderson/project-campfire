@@ -1,38 +1,38 @@
 ## September 16, 2022
 
-
+Late last night or early this morning, depending on how you look at it, I was able to get the pollers up and running. The aha moment was realizing there is a switch under resources that has to be flipped on which is defaulted to on for web apps but off for worker apps. After figuring that out I finally was getting logs from heroku which I was able to use to correctly set up the file structure and variables to get the pollers working. For the rest of the day we just hunted and squashed bugs in our mvp before we submit tonight. 
 
 ## September 15, 2022
 
-
+Today we started by attempting to getUserData within a useContext. this ended up taking quite a bit of time and help to get working how we wanted as far as using it to create a dynamically rendering profile page based on who's profile you selected. Near the end of the day I noticed that added favorite activities were not being saved. We traced this issue to the pollers not working and there being no activityVO objects to save to the user model. Worked on attempting to get the pollers up but heroku login went down for everyone so had to stop trying. 
 
 ## September 14, 2022
 
-
+Today after getting deployed yesterday we found out that all of our fetch requests were getting blocked by CORS. I spent the day trying to figure out why the origin was getting blocked despite both adding it to allowed origins through an environment variable and hardcoding it. I believe it was Neil that helped me finally solve the issue by noticing that cors was not in the installed apps. I am still a little curious as to why CORS wasn't blocking anything on the local versions however. I also noticed that the links on our deployed were removing the /project-gamma/ part of the public url so i created a turnery that checks to see if there is a navlink environment variable and adds that to all of the navLinks if there is and set its value to /project-gamma/ on deployment.
 
 ## September 13, 2022
 
-
+Today I worked on deploying to heroku. I made build deployment and release jobs for users, users poller, events and events poller. When these jobs were deploying, they were all having trouble logging in to heroku. With Daniel and Andrews assistance we were able to get properly logged on and deployed. The aha moment of the day was figuring out that the login to heroku would fail if the heroku api key variable was protected. Andrew then informed me that a protected variable would only work on the main branch and not on the deployment branch I created to test deployment.
 
 ## September 12, 2022
 
-
+Today I updated the CI pipeline to include the events microservice unit tests that my partners have been building. I also did research on deploying to Heroku. I set up an account on Heroku and made apps for each of the services we will need to deploy as well as all of the variables i believe we will need for each of those apps.
 
 ## September 9, 2022
 
-
+Today I peer programmed with James as we worked on getting the event cards to correctly link to their event detail pages. The aha moment of the day was learning how useParams works and implementing that with useNavigate from react router dom to properly redirect to the correct event details page. 
 
 ## September 8, 2022
 
-
+Today I worked on getting the CI pipeline up and running with the tests I built yesterday and a linting job. I couldn't figure out how to use flake8 to lint the files so I manually linted the backend files. It was very satisfying getting all of the jobs to succeed. I also added the frontend build job and fixed all of the eslint warnings in react. 
 
 ## September 7, 2022
 
-
+Today I built the unit tests for the users microservice. Specifically I built the following tests: list_users, create_user, get_user_data, update_friends_and_activity_lists, list_ActivityVO. The aha moment of the day was attempting to set the m2m relationships in the setUp function. I was having to use add instead of just setting the M2Mfield = self.M2Mobject. I end up not using the add anyway as our sites functionality sets those M2M fields using a put request and I made a test to simulate that request. 
 
 ## September 6, 2022
 
-
+Today I was absent
 
 ## September 1, 2022
 
