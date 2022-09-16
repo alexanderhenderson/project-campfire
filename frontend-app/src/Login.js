@@ -31,19 +31,20 @@ export default function LogIn() {
 	}
 
 	return (
-		<div className="container px-4 py-4 text-center">
-			<div className="row gx-5">
-				<div className="col">
-					<div className="card shadow">
-						<div className="card body px-4 py-4">
+		<div className="d-flex px-4 py-4 text-center login-bg">
+		{/* <div className="container px-4 py-4 text-center login-bg"> */}
+			{/* <div className="row gx-5 login-card"> */}
+				{/* <div className="col login-card"> */}
+					{/* <div className="card shadow"> */}
+						<div className="card body px-4 py-4 shadow login-card kindle-top-level-card">
 							<form>
 								<h1> Log in </h1>
 								<div className="form-floating mb-2">
-									<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} id="username" className="form-control" />
+									<input type="text"  placeholder="test" value={username} onChange={(e) => setUsername(e.target.value)} id="username" className="form-control" />
 									<label htmlFor="username"> Username </label>
 								</div>
 								<div className="form-floating mb-2">
-									<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} id="password" className="form-control" />
+									<input type="password"  placeholder="test" value={password} onChange={(e) => setPassword(e.target.value)} id="password" className="form-control" />
 									<label htmlFor="password"> Password </label>
 								</div>
 								<p className="fs-5" hidden={loginResponse ? true : false}>
@@ -53,9 +54,9 @@ export default function LogIn() {
 									Log in
 								</button>
 							</form>
-						</div>
-					</div>
-				</div>
+						{/* </div> */}
+					{/* </div> */}
+				{/* </div> */}
 			</div>
 		</div>
 	);
