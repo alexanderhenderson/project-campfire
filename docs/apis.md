@@ -1,7 +1,8 @@
 # APIs
 
-## (USERS)
-## (Users)
+## (USERS Microservice)
+
+## Users
 
 ## Get User Detail
 
@@ -141,7 +142,7 @@ This request deletes user associated with the id input in the URL
 
 ## (ActivityVO's)
 
-## Get User Detail
+## List activityVO's
 
 * **Method**: `GET`
 * **Path**:/users/activities/
