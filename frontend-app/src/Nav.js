@@ -54,7 +54,7 @@ export function settingLinks() {
 }
 
 export default function NavBar() {
-  const [homeLink, introLink, , eventsLink, activitiesLink, kindlerLink, signupLink, loginLink, editProfileLink] = settingLinks()
+  const [homeLink, introLink, , eventsLink, activitiesLink, kindlerLink, signupLink, loginLink] = settingLinks()
   const [token, , logout] = useToken()
   const [ , setLogoutResponse] = useState()
   const [loggedIn, setLoggedIn]=useState(false)
