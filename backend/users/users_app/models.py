@@ -41,4 +41,4 @@ class Comment(models.Model):
     )
 
     def __str__(self):
-        return f"{self.commenter} to {self.user_profile}: {self.comment}"
+        return f"{self.id} - To: {self.user_profile} | From: {self.commenter} | Comment: {self.comment}"

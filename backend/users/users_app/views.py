@@ -469,7 +469,6 @@ def comment_detail(request, pk):
 def get_users_profile_comments(request, pk):
     user = User.objects.get(id=pk)
     users_comments = user.comment_location.all()
-    print(users_comments)
     return JsonResponse(
         {"comments": users_comments},
         encoder=CommentEncoder,

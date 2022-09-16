@@ -46,12 +46,12 @@ export default function UserProfile() {
     let slicedlist = attendedEvents.slice(0, 3)
     return (
         <>
-            <div class="container">
+            <div className="container">
                 <div className="card shadow">
                     <div className="container m-3">
                         <div className="container">
-                            <div class="row">
-                                <div class="col-sm">
+                            <div className="row">
+                                <div className="col-sm">
                                     <div className="body my-3 text-center">
                                         <h1>{userData.username}</h1>
                                     </div>
@@ -69,7 +69,7 @@ export default function UserProfile() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm">
+                                <div className="col-sm">
                                     <div className='mb-3 text-center'>
                                         <h4>Favorite Activities</h4>
                                         <div className="accordion" id="accordionExample">
@@ -137,13 +137,13 @@ export default function UserProfile() {
                                     </div>
                                 </div>
 
-                            <div class="col-sm text-center">
+                            <div className="col-sm text-center">
                                 <h4>My Events</h4>
                                 <table className="table">
                                     <tbody>
                                         {slicedlist.map(att => (
                                             <tr key={att.id}>
-                                                <td>{att.name}</td> <br />
+                                                <td>{att.name}</td>
                                                 <td ><img className="tiny-card" src={att.picture_url} alt="" ></img></td>
                                             </tr>
                                         ))}
@@ -153,7 +153,7 @@ export default function UserProfile() {
                                         </div>
 
 
-                            <div class="container">
+                            <div className="container">
                                 <div className="row">
                                     <Comments />
                                 </div>

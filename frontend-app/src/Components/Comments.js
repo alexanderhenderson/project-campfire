@@ -1,50 +1,77 @@
 import React, { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 export default function Comments() {
-  const [comments, setComments] = useState([])
-  const [userData, setUserData] = useState({})
-  const navigate = useNavigate()
-  // const { id } = useParams()
+  const [commentData, setCommentData] = useState({})
+  const { id } = useParams()
 
-  // console.log(id)
+
   useEffect(() => {
-    const getUserdata = async () => {
-      const url = `${process.env.REACT_APP_USERS}/users/comments`;
+    const getCommentData = async () => {
+      const url = `${process.env.REACT_APP_USERS}/users/profile/comments/${id}/`
       const response = await fetch(url, { credentials: "include" });
       if (response.ok) {
         const data = await response.json()
-        setUserData(data)
-        console.log(userData)
+        console.log(data)
+        setCommentData(await data.comments)
+        console.log(commentData)
       }
     }
-    getUserdata()
+    getCommentData()
     // eslint-disable-next-line react-hooks/exhaustive-deps 
-  }, [])
+  }, [id, setCommentData])
+
+  async function onSubmit(event) {
+    event.preventDefault()
+    const data = {
+      commentTextbox: event.target.commentTextbox.value,
+    }
+    console.log(data)
+
+    const url = `${process.env.REACT_APP_USERS}/users/comments/`
+    const fetchConfig = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }
+    const response = await fetch(url, fetchConfig)
+    if (response.ok) {
+      const newComment = await response.json()
+      console.log(newComment)
+      getCommentData()
+    }
+  }
 
   return (
     <>
       <h1>Comments</h1>
-      <form>
-        <div class="form-group">
-          <label for="commentTextbox">Write your comment here</label>
-          <textarea class="form-control" id="commentTextbox" rows="3"></textarea>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="commentTextbox">Leave a comment for me!</label>
+          <textarea className="form-control" id="commentTextbox" rows="3">Leave a comment for me</textarea>
         </div>
-        <button type="button" className="btn btn-primary" onClick={onSubmit}>Post</button>
+        <div className='m-3'>
+          <button type="button" className="btn btn-primary" onClick={onSubmit}>Post</button>
+        </div>
       </form>
-      <div className="container mt-3">
-        <table className="table">
-          <tbody>
-            {userData.map(comments => {
-              return (
-                <tr key={comments.id}>
-                  <td>{comments.first_name} {comments.last_name}</td>
-                </tr>
-              )
 
-            })}
-          </tbody>
-        </table>
+      <div className="container mt-3">
+        <h3>View Your Comments</h3>
+        {commentData.length > 0 ? (
+          <table className="table">
+            <tbody>
+              {commentData?.map(comments => {
+                return (
+                  <tr key={comments.id}>
+                    <td>{comments.comment} by {comments.commenter.first_name}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        ) : ('')}
       </div>
     </>
   )
