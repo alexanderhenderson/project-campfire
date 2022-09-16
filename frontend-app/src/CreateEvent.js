@@ -96,7 +96,7 @@ function CreateEvent() {
             }
         }
         getUserdata()
-    //eslint-disable-next-line react-hooks/exhaustive-deps
+        //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     /** @type React.MutableRefObject<HTMLInputElement> */
@@ -145,7 +145,7 @@ function CreateEvent() {
                 "Content-Type": "application/json",
             },
         })
-        
+
         if (response.ok) {
             navigate("/events/")
         }
@@ -275,7 +275,14 @@ function CreateEvent() {
             </div>
         )
     }
-    else { return <h1> LOADING </h1> }
+    else {
+        return (
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+            </div>
+        </div>
+        )
+    }
 }
 
 export default CreateEvent
