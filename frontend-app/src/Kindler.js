@@ -60,7 +60,7 @@ export default function Kindler() {
 							return (
 								<div className="col-sm-4" key={KindlerUser.id}>
 									<div className="kindle-top-level-card mb-3 shadow">
-										<img className="kindle-card-image" src={KindlerUser?.profile_photo || "https://cvhrma.org/wp-content/uploads/2015/07/default-profile-photo.jpg"} alt="" />
+										<img className="kindle-card-image" src={KindlerUser?.profile_photo || "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"} alt="" />
 										<div className="card-body ">
 											<h5 className="card-title">{KindlerUser.username}</h5>
 											{!KindlerUser?.friend ? (

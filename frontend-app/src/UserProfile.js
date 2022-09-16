@@ -64,7 +64,7 @@ export default function UserProfile() {
                                     </div>
                                     <div className="col">
                                         <div className='mb-3 text-center'>
-                                            <img src={userData?.profile_photo || "https://cvhrma.org/wp-content/uploads/2015/07/default-profile-photo.jpg" } height='200' alt="" />
+                                            <img src={userData?.profile_photo || "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" } height='200' alt="" />
                                         </div>
                                         <div className='m-1 text-center'>
                                             <h4>Name: </h4>
