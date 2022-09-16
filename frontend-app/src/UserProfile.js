@@ -11,7 +11,7 @@ export default function UserProfile() {
     const navigate = useNavigate()
     const { id } = useParams()
     const { userId } = useContext(UserContext)
-    const [ , , , , , , , , editProfileLink] = settingLinks()
+    const [ , , , , , , , , , editProfileLink] = settingLinks()
 
     useEffect(() => {
         const getUserdata = async () => {
