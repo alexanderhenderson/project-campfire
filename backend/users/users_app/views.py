@@ -116,7 +116,9 @@ def api_friend_kindler(request):
                 # exist we create one, or we add the user id to the
                 # existing value if the key does exist.
                 if number_common_activities in resultsV2:
-                    resultsV2[number_common_activities].append(compared_user.id)
+                    resultsV2[number_common_activities].append(
+                        compared_user.id
+                    )
                 else:
                     resultsV2[number_common_activities] = [compared_user.id]
 
@@ -157,7 +159,11 @@ def api_friend_kindler(request):
 
         # JSON Response
         if token_data:
-            return JsonResponse(user_list, encoder=UserDetailEncoder, safe=False)
+            return JsonResponse(
+                user_list,
+                encoder=UserDetailEncoder,
+                safe=False
+            )
 
     response = JsonResponse({"token": None})
     return response
@@ -240,7 +246,10 @@ def list_users(request):
             user = User.objects.create(**content)
             user.set_password(raw_password)
             user.save()
-            return JsonResponse({"user": user}, encoder=UserDetailEncoder)
+            return JsonResponse(
+                {"user": user},
+                encoder=UserDetailEncoder
+            )
         except User.DoesNotExist:
             response = JsonResponse({"message": "something went wrong"})
             response.status_code = 400
@@ -311,14 +320,20 @@ def user_detail(request, pk):
 def list_activities(request):
     if request.method == "GET":
         activityVO = ActivityVO.objects.all()
-        return JsonResponse({"ActivityVOs": activityVO}, encoder=ActivityVOEncoder)
+        return JsonResponse(
+            {"ActivityVOs": activityVO},
+            encoder=ActivityVOEncoder
+        )
     else:
         try:
             # print(request.body)
             content = json.loads(request.body)
             activityVO = ActivityVO.objects.create(**content)
             # print(activityVO)
-            return JsonResponse({"activityVO": activityVO}, encoder=ActivityVOEncoder)
+            return JsonResponse(
+                {"activityVO": activityVO},
+                encoder=ActivityVOEncoder
+            )
         except ActivityVO.DoesNotExist:
             response = JsonResponse({"message": "something went wrong"})
             response.status_code = 400
@@ -330,7 +345,11 @@ def activity_detail(request, pk):
     if request.method == "GET":
         try:
             activityVO = ActivityVO.objects.get(id=pk)
-            return JsonResponse(activityVO, encoder=ActivityVOEncoder, safe=False)
+            return JsonResponse(
+                activityVO,
+                encoder=ActivityVOEncoder,
+                safe=False
+            )
         except ActivityVO.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404

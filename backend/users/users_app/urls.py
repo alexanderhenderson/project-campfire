@@ -27,6 +27,10 @@ urlpatterns = [
     path('api/friend/', api_friend_detail, name='api_friend_detail'),
     path('comments/', list_comments, name='list_comments'),
     path('comments/<int:pk>/', comment_detail, name='comment_details'),
-    path('profile/comments/<int:pk>/', get_users_profile_comments, name='users_profile_comments'),
+    path(
+        'profile/comments/<int:pk>/',
+        get_users_profile_comments,
+        name='users_profile_comments'
+    ),
 
 ]
