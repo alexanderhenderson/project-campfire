@@ -20,7 +20,7 @@ USERS_API = os.environ["USERS_API"]
 
 def get_users():
 
-    # print("We are in the polling function")
+    print("We are in the polling get_users function")
     response = requests.get(f"{USERS_API}/users/")
     content = json.loads(response.content)
     # print("Polled and received content: ", content)
