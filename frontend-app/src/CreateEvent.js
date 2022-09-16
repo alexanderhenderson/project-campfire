@@ -92,7 +92,7 @@ function CreateEvent() {
             }
         }
         getUserdata()
-    //eslint-disable-next-line react-hooks/exhaustive-deps
+        //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     /** @type React.MutableRefObject<HTMLInputElement> */
@@ -141,7 +141,7 @@ function CreateEvent() {
                 "Content-Type": "application/json",
             },
         })
-        
+
         if (response.ok) {
             navigate("/events/")
         }
@@ -183,7 +183,7 @@ function CreateEvent() {
                                                 ref={markerRef} />
                                         </Autocomplete>
                                         <button
-                                            className="btn btn-outline-secondary"
+                                            className="btn btn-dark rounded-pill"
                                             type="button"
                                             id="searchAddress"
                                             onClick={Geocode}>
@@ -261,7 +261,7 @@ function CreateEvent() {
                                     <div className='m-3' align="center">
                                         <button
                                             type="submit"
-                                            className="btn btn-dark btn-block">
+                                            className="btn btn-dark rounded-pill">
                                             Submit
                                         </button>
                                     </div>
@@ -274,14 +274,17 @@ function CreateEvent() {
             </>
         )
     }
-    else { return (
-    <>
-        <div className="create-event-bg"></div>
-        <div className="kindle-top-level-card">
-        <h1> LOADING </h1>
-        </div>
-    </>
-    )}
+    else {
+        return (
+        <>
+            <div className="create-event-bg"></div>
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                </div>
+            </div>
+        </>
+        )
+    }
 }
 
 export default CreateEvent

@@ -92,7 +92,6 @@ export default function NavBar() {
     setLoggedIn(false)
   }
 
-  console.log("this should be userID", userId)
   return (
     <div className='mb-3'>
       <Navbar sticky="top" variant="dark" bg="dark" expand="lg">
@@ -113,11 +112,11 @@ export default function NavBar() {
             {/* replace href with {link variable} */}
             <Nav>
               <Nav.Link href={homeLink} className='mx-1'> Home </Nav.Link>
-              <Nav.Link href={introLink} className='mx-1'> New Here? </Nav.Link>
-              <Nav.Link onClick={() => { navigate(`/profile/${userId.id}`)}} className='mx-1'> Profile </Nav.Link>
-              <Nav.Link href={eventsLink} className='mx-1'> Events </Nav.Link>
-              <Nav.Link href={activitiesLink} className='mx-1'> Activities </Nav.Link>
-              <Nav.Link href={kindlerLink} className='mx-1'> Kindler </Nav.Link>
+              <Nav.Link href={introLink} className={"mx-1" + (loggedIn ? "":" d-none")}> New Here? </Nav.Link>
+              <Nav.Link onClick={() => { navigate(`/profile/${userId.id}`)}} className={"mx-1" + (loggedIn ? "":" d-none")}> Profile </Nav.Link>
+              <Nav.Link href={eventsLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Events </Nav.Link>
+              <Nav.Link href={activitiesLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Activities </Nav.Link>
+              <Nav.Link href={kindlerLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Kindler </Nav.Link>
               <Nav.Link href={signupLink} className={"mx-1" + (loggedIn ? " d-none":"")}> Sign Up </Nav.Link>
               <Nav.Link href={loginLink} className={"xy-1" + (loggedIn ? " d-none":"") }> Login </Nav.Link>
               <Nav.Link onClick={onLogout} className={"mx-1" + (loggedIn ? "":" d-none")}> Logout </Nav.Link>

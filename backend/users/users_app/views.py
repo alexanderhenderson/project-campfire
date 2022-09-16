@@ -238,7 +238,10 @@ def list_users(request):
             user = User.objects.create(**content)
             user.set_password(raw_password)
             user.save()
-            return JsonResponse({"user": user}, encoder=UserDetailEncoder)
+            return JsonResponse(
+                {"user": user},
+                encoder=UserDetailEncoder
+            )
         except User.DoesNotExist:
             response = JsonResponse({"message": "something went wrong"})
             response.status_code = 400
@@ -464,6 +467,17 @@ def comment_detail(request, pk):
             return JsonResponse({"Deleted": count == 0})
         except Comment.DoesNotExist:
             return JsonResponse({"Error": "Comment does not exist"})
+
+
+@require_http_methods(["GET"])
+def get_users_profile_comments(request, pk):
+    user = User.objects.get(id=pk)
+    users_comments = user.comment_location.all()
+    return JsonResponse(
+        {"comments": users_comments},
+        encoder=CommentEncoder,
+        safe=False,
+    )
 
 
 # stretch goal

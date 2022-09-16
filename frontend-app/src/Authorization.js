@@ -1,8 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import {UserContext} from "./UserContext"
 
-let internalToken = null;
+let internalToken = null
 
 function parseJwt(token) {
 	try {
@@ -18,7 +18,7 @@ export function getUserInfo() {
     "username": parsedToken.user.username,
     "id": parsedToken.user.id
   }
-};
+}
 export function getToken() {
   return internalToken
 }
@@ -82,7 +82,7 @@ export const AuthContext = createContext({
 
 
 export const AuthProvider = (props) => {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(null)
   
   return (
     <AuthContext.Provider value={{ token, setToken }}>
@@ -115,10 +115,11 @@ export function useToken() {
       const response = await fetch(url, { method: "delete", credentials: "include" })
       if (response.ok){
         internalToken = null
-        setToken(null)
-        navigate("/")
-        return(response)
-      }
+      setToken(null)
+      navigate("/")
+      window.location.reload()
+      return(response)
+      }      
     }
   }
 
