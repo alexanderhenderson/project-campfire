@@ -54,11 +54,11 @@ export default function NavBar() {
           <Navbar.Collapse id="navbar-dark-example">
             <Nav>
               <Nav.Link href="/" className='mx-1'> Home </Nav.Link>
-              <Nav.Link href="/intro/" className='mx-1'> New Here? </Nav.Link>
-              <Nav.Link onClick={() => { navigate(`/profile/${userId.id}`)}} className='mx-1'> Profile </Nav.Link>
-              <Nav.Link href="/events/" className='mx-1'> Events </Nav.Link>
-              <Nav.Link href="/activities/" className='mx-1'> Activities </Nav.Link>
-              <Nav.Link href="/kindler/" className='mx-1'> Kindler </Nav.Link>
+              <Nav.Link href="/intro/" className={"mx-1" + (loggedIn ? "":" d-none")}> New Here? </Nav.Link>
+              <Nav.Link onClick={() => { navigate(`/profile/${userId.id}`)}} className={"mx-1" + (loggedIn ? "":" d-none")}> Profile </Nav.Link>
+              <Nav.Link href="/events/" className={"mx-1" + (loggedIn ? "":" d-none")}> Events </Nav.Link>
+              <Nav.Link href="/activities/" className={"mx-1" + (loggedIn ? "":" d-none")}> Activities </Nav.Link>
+              <Nav.Link href="/kindler/" className={"mx-1" + (loggedIn ? "":" d-none")}> Kindler </Nav.Link>
               <Nav.Link href="/signup" className={"mx-1" + (loggedIn ? " d-none":"")}> Sign Up </Nav.Link>
               <Nav.Link href="/login" className={"xy-1" + (loggedIn ? " d-none":"") }> Login </Nav.Link>
               <Nav.Link onClick={onLogout} className={"mx-1" + (loggedIn ? "":" d-none")}> Logout </Nav.Link>

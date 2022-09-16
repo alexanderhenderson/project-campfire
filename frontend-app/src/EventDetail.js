@@ -81,7 +81,7 @@ console.log(dynamicId)
                                                 <p>
                                                    {container.indexOf(currentUser) === -1 ? <button onClick={() => {
                                                         clickHandler()
-                                                    }} type="button" className='btn btn-primary btn-lg rounded-pill'>RSVP</button> : null } 
+                                                    }} type="button" className='btn btn-dark btn-lg rounded-pill'>RSVP</button> : null } 
                                                 </p>
                                             </div>
                                         </div>

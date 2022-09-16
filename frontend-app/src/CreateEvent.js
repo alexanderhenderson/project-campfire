@@ -185,7 +185,7 @@ function CreateEvent() {
                                                 ref={markerRef} />
                                         </Autocomplete>
                                         <button
-                                            className="btn btn-outline-secondary"
+                                            className="btn btn-dark rounded-pill"
                                             type="button"
                                             id="searchAddress"
                                             onClick={Geocode}>
@@ -263,7 +263,7 @@ function CreateEvent() {
                                     <div className='m-3' align="center">
                                         <button
                                             type="submit"
-                                            className="btn btn-dark btn-block">
+                                            className="btn btn-dark rounded-pill">
                                             Submit
                                         </button>
                                     </div>

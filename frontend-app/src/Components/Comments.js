@@ -62,7 +62,7 @@ export default function Comments() {
           <textarea className="form-control" id="commentTextBox" rows="3" onChange={changeHandler} value={newComment}></textarea>
         </div>
         <div className='m-3'>
-          <button type="button" className="btn btn-primary" onClick={handleSubmit}>Post</button>
+          <button type="button" className="btn btn-dark btn-lg rounded-pill" onClick={handleSubmit}>Post</button>
         </div>
       </form>
 
@@ -74,7 +74,8 @@ export default function Comments() {
               {commentData?.map(comments => {
                 return (
                   <tr key={comments.id}>
-                    <td>{comments.comment} by {comments.commenter.first_name}</td>
+                    <td>{comments.comment}</td>
+                    <td>- {comments.commenter.username}</td>
                   </tr>
                 )
               })}
