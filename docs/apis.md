@@ -78,6 +78,7 @@ This request allows you update any current field that's in the user model
 based on the url input id. It returns the updated user and all of the current
 fields that user has.
 
+----------------------------------
 
 ## Create User
 
@@ -119,7 +120,7 @@ Output:
 This request creates a new user, and returns the user after creation
 with the id associated with the user, along with any mandatory fields,
 or added fields.
-
+----------------------------------
 
 ## Delete User
 
@@ -131,7 +132,7 @@ Input: `None`
 Output: `None`
 
 This request deletes user associated with the id input in the URL
-
+----------------------------------
 
 * We'll also be doing this same format for all the models along with
 the detail views, updating or deleting them but for the sake of time
