@@ -191,7 +191,7 @@ deploy-events-poller-image-job:
   image: docker:20.10.16
   needs:
     - build-events-poller-job
-    - deploy--events-api-image-job
+    - deploy-events-api-image-job
     - release-events-api-job
   services:
     - docker:20.10.16-dind
