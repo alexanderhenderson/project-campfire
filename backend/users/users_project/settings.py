@@ -55,15 +55,15 @@ AUTH_USER_MODEL = "users_app.User"  #  where user is the app name and User is th
 # Application definition
 
 INSTALLED_APPS = [
-    'users_app.apps.UsersAppConfig',
-    'corsheaders',
-    'djwto',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    "users_app.apps.UsersAppConfig",
+    "corsheaders",
+    "djwto",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
 ]
 
 DJWTO_MODE = "TWO-COOKIES"

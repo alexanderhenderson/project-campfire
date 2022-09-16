@@ -22,6 +22,7 @@ export function settingLinks() {
   let signup = ''
   let login = ''
   let logout = ''
+  let editProfile = ''
 
   if (NAVLINK !== undefined) {
     // add a link variable = NAVLINK + current href
@@ -34,6 +35,7 @@ export function settingLinks() {
     signup = NAVLINK + "/signup/"
     login = NAVLINK + "/login/"
     logout = NAVLINK + "/logout/"
+    editProfile = NAVLINK + "/profile/edit/"
   } else {
     // add a link variable = current href
     home = "/"
@@ -45,9 +47,10 @@ export function settingLinks() {
     signup = "/signup/"
     login = "/login/"
     logout = "/logout/"
+    editProfile = "/profile/edit/"
   }
   // add link variable to return array
-  return ([home, intro, profile, events, activities, kindler, signup, login, logout])
+  return ([home, intro, profile, events, activities, kindler, signup, login, logout, editProfile])
 }
 
 export default function NavBar() {
@@ -59,6 +62,18 @@ export default function NavBar() {
   const {userId} = useContext(UserContext)
 
 
+  useEffect( () => {
+    const checkUserID = () => {
+      if (userId.id){
+        setLoggedIn(true)
+      } else {
+        setLoggedIn(false)
+      }
+    };
+    checkUserID();
+  },[userId]);
+
+
   function checkLoggedIn(token){
     if (token){
         setLoggedIn(true)
@@ -68,12 +83,18 @@ export default function NavBar() {
 
 
   useEffect( ()=>{checkLoggedIn(token)},[token])
+  
   async function onLogout() {
     const result = await logout()
+    console.log("Logout result: ", result)
+    if (await result){
+      setLoggedIn(false)
+    }
     setLogoutResponse(result)
     console.log('LOGGED OUT SUCCESSFULLY')
+    setLoggedIn(false)
   }
-  console.log("this should be userID", userId)
+
   return (
     <div className='mb-3'>
       <Navbar sticky="top" variant="dark" bg="dark" expand="lg">
@@ -94,11 +115,11 @@ export default function NavBar() {
             {/* replace href with {link variable} */}
             <Nav>
               <Nav.Link href={homeLink} className='mx-1'> Home </Nav.Link>
-              <Nav.Link href={introLink} className='mx-1'> New Here? </Nav.Link>
-              <Nav.Link onClick={() => { navigate(`/profile/${userId.id}`)}} className='mx-1'> Profile </Nav.Link>
-              <Nav.Link href={eventsLink} className='mx-1'> Events </Nav.Link>
-              <Nav.Link href={activitiesLink} className='mx-1'> Activities </Nav.Link>
-              <Nav.Link href={kindlerLink} className='mx-1'> Kindler </Nav.Link>
+              <Nav.Link href={introLink} className={"mx-1" + (loggedIn ? "":" d-none")}> New Here? </Nav.Link>
+              <Nav.Link onClick={() => { navigate(`/profile/${userId.id}`)}} className={"mx-1" + (loggedIn ? "":" d-none")}> Profile </Nav.Link>
+              <Nav.Link href={eventsLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Events </Nav.Link>
+              <Nav.Link href={activitiesLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Activities </Nav.Link>
+              <Nav.Link href={kindlerLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Kindler </Nav.Link>
               <Nav.Link href={signupLink} className={"mx-1" + (loggedIn ? " d-none":"")}> Sign Up </Nav.Link>
               <Nav.Link href={loginLink} className={"xy-1" + (loggedIn ? " d-none":"") }> Login </Nav.Link>
               <Nav.Link onClick={onLogout} className={"mx-1" + (loggedIn ? "":" d-none")}> Logout </Nav.Link>

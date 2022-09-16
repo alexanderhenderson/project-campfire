@@ -3,5 +3,5 @@
 The application will need to get the following kinds of
 data from third-party sources:
 
-* Map data from Google Maps API for location
-* Messenger API for allow for chat functionality
+* Maps, places and geolocation data from Google Maps API for adding google maps to the event forms
+

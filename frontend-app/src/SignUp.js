@@ -192,7 +192,7 @@ export default function Signup() {
                                 <div className='m-4'>
                                     <button
                                         type="submit"
-                                        className="btn btn-primary btn-lg">Sign Up
+                                        className="btn btn-dark btn-lg  rounded-pill">Sign Up
                                     </button>
                                 </div>
                                 <p className="forgot-password text-right">

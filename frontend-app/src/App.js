@@ -35,7 +35,7 @@ export default function App() {
     getUserdata()
 
   }, [])
-  console.log("App.js userId for UserContext: ", userId)
+  console.log("userId ", userId)
   return (
   <UserContext.Provider value={{
     userId, setUserId

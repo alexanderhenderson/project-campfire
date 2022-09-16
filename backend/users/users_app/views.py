@@ -466,6 +466,17 @@ def comment_detail(request, pk):
             return JsonResponse({"Error": "Comment does not exist"})
 
 
+@require_http_methods(["GET"])
+def get_users_profile_comments(request, pk):
+    user = User.objects.get(id=pk)
+    users_comments = user.comment_location.all()
+    return JsonResponse(
+        {"comments": users_comments},
+        encoder=CommentEncoder,
+        safe=False,
+    )
+
+
 # stretch goal
 # @require_http_methods(["GET"])
 # def list_users_groups(request):

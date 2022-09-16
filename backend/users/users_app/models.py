@@ -14,7 +14,7 @@ class ActivityVO(models.Model):
 class User(AbstractUser):
     friends = models.ManyToManyField("self", blank=True)
     profile_description = models.TextField(null=True, blank=True)
-    profile_photo = models.URLField(null=True, blank=True)
+    profile_photo = models.URLField(null=True, blank=True, max_length=1000)
     city = models.CharField(max_length=150)
     state = models.CharField(max_length=2)
     favorite_activities = models.ManyToManyField(
@@ -33,12 +33,12 @@ class Comment(models.Model):
     time_posted = models.DateTimeField(auto_now_add=True)
     commenter = models.ForeignKey(
         User,
-        related_name="comments",
+        related_name="commenters",
         on_delete=models.PROTECT,
     )
     user_profile = models.ForeignKey(
-        User, related_name="user_profiles", on_delete=models.PROTECT
+        User, related_name="comment_location", on_delete=models.PROTECT
     )
 
     def __str__(self):
-        return f"{self.commenter} to {self.user_profile}: {self.comment}"
+        return f"{self.id} - {self.commenter} to {self.user_profile}"

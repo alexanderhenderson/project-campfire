@@ -54,8 +54,8 @@ export default function EditProfile() {
         if (response.ok) {
            await response.json();
            console.log("good response",response)
+           navigate(-1)
         }
-        navigate(-1)
     }
 
     return (
@@ -106,7 +106,7 @@ export default function EditProfile() {
                                         onChange={changeHandler}
                                         placeholder="Enter URL"
                                     />
-                                    <label htmlFor="floatingInputGrid">Profile Photo URL</label>
+                                    <label htmlFor="floatingInputGrid">Profile Photo URL (limit 1000 characters)</label>
                                 </div>
                                 <div className="form-floating mb-2">
                                     <textarea className="form-control"
@@ -162,7 +162,7 @@ export default function EditProfile() {
                                         // onClick={ () => handleSubmit()}
 
                                         type="submit"
-                                        className="btn btn-primary btn-lg">Edit Profile
+                                        className="btn btn-dark rounded-pill">Edit Profile
                                     </button>
                                 </div>
                                 
