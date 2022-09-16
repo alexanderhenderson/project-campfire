@@ -28,6 +28,7 @@ Output:
 ```
 This request gets the user/detail at the given id in the URL
 
+----------------------------------
 
 ## Get Users All (List)
 
@@ -45,6 +46,7 @@ Output:
 ```
 This request gets all of the users currently in the database
 
+----------------------------------
 
 ## Update User
 
@@ -120,6 +122,7 @@ Output:
 This request creates a new user, and returns the user after creation
 with the id associated with the user, along with any mandatory fields,
 or added fields.
+
 ----------------------------------
 
 ## Delete User
@@ -132,6 +135,7 @@ Input: `None`
 Output: `None`
 
 This request deletes user associated with the id input in the URL
+
 ----------------------------------
 
 * We'll also be doing this same format for all the models along with
