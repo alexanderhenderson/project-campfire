@@ -40,6 +40,7 @@ def get_users():
 
 def poll():
     while True:
+        print("polling")
         # print('User poller active - polling')
         try:
             get_users()

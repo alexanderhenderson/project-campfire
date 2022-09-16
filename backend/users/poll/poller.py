@@ -31,6 +31,7 @@ def get_activities():
 
 def poll():
     while True:
+        print("polling")
         try:
             get_activities()
         except Exception as e:
