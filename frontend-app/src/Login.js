@@ -32,10 +32,6 @@ export default function LogIn() {
 
 	return (
 		<div className="d-flex px-4 py-4 text-center login-bg">
-		{/* <div className="container px-4 py-4 text-center login-bg"> */}
-			{/* <div className="row gx-5 login-card"> */}
-				{/* <div className="col login-card"> */}
-					{/* <div className="card shadow"> */}
 						<div className="card body px-4 py-4 shadow login-card kindle-top-level-card">
 							<form>
 								<h1> Log in </h1>
@@ -50,13 +46,10 @@ export default function LogIn() {
 								<p className="fs-5" hidden={loginResponse ? true : false}>
 									Failed to log in - Check Username or Password
 								</p>
-								<button type="button" className="btn btn-primary" onClick={onSubmit}>
+								<button type="button" className="btn btn-dark rounded-pill" onClick={onSubmit}>
 									Log in
 								</button>
 							</form>
-						{/* </div> */}
-					{/* </div> */}
-				{/* </div> */}
 			</div>
 		</div>
 	);
