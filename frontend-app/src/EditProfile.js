@@ -54,8 +54,8 @@ export default function EditProfile() {
         if (response.ok) {
            await response.json();
            console.log("good response",response)
+           navigate(-1)
         }
-        navigate(-1)
     }
 
     return (
@@ -162,7 +162,7 @@ export default function EditProfile() {
                                         // onClick={ () => handleSubmit()}
 
                                         type="submit"
-                                        className="btn btn-primary btn-lg">Edit Profile
+                                        className="btn btn-dark rounded-pill">Edit Profile
                                     </button>
                                 </div>
                                 

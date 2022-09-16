@@ -14,7 +14,7 @@ class ActivityVO(models.Model):
 class User(AbstractUser):
     friends = models.ManyToManyField("self", blank=True)
     profile_description = models.TextField(null=True, blank=True)
-    profile_photo = models.URLField(null=True, blank=True)
+    profile_photo = models.URLField(null=True, blank=True, max_length=1000)
     city = models.CharField(max_length=150)
     state = models.CharField(max_length=2)
     favorite_activities = models.ManyToManyField(
