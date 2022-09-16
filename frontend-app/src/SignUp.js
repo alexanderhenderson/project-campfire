@@ -94,7 +94,7 @@ export default function Signup() {
                                 <h2 align="center">Sign Up</h2>
                             </div>
                             <form onSubmit={submitHandler}>
-                                <div classname='bt-3'>
+                                <div className='bt-3'>
                                     <SignupFailed />
                                     <div className="form-floating mb-2">
                                         <div className="row g-2">

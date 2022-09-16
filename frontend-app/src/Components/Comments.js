@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { UserContext } from "../UserContext"
 
 export default function Comments() {
+  const {userId} = useContext(UserContext)
   const [commentData, setCommentData] = useState({})
+  const [newComment, setNewComment] = useState('')
   const { id } = useParams()
 
 
@@ -19,45 +22,47 @@ export default function Comments() {
     }
     getCommentData()
     // eslint-disable-next-line react-hooks/exhaustive-deps 
-  }, [id, setCommentData])
+  }, [id, setCommentData, newComment])
 
   const changeHandler = e => {
-    setCommentData(e.target.value);
-  }
-  console.log(commentData)
+    setNewComment( e.target.value );
+}
 
-  async function onSubmit(event) {
-    event.preventDefault()
+  async function handleSubmit() {
+
     const data = {
-      commentTextbox: event.target.commentTextbox.value,
+      user_id: userId.id,
+      comment: newComment,
+      user_profile: id,
     }
-    console.log('data: ', data)
-
+    console.log(data)
     const url = `${process.env.REACT_APP_USERS}/users/comments/`
     const fetchConfig = {
       method: 'POST',
       body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      credentials: "include",
+      // headers: {
+      //   'Content-Type': 'application/json'
+      // },
     }
     const response = await fetch(url, fetchConfig)
     if (response.ok) {
-      const newComment = await response.json()
-      console.log(newComment)
+      const comment = await response.json()
+      console.log(comment)
+      setNewComment('')
     }
   }
-
+  console.log("newcomment: ", newComment)
   return (
     <>
       <h1>Comments</h1>
-      <form onSubmit={onSubmit}>
+      <form onSubmit=''>
         <div className="form-group">
-          {/* <label htmlFor="commentTextbox">Leave a comment for me!</label> */}
-          <textarea className="form-control" id="commentTextbox" rows="3"></textarea>
+          <label htmlFor="commentTextBox">Leave a comment for me!</label>
+          <textarea className="form-control" id="commentTextBox" rows="3" onChange={changeHandler} value={newComment}></textarea>
         </div>
         <div className='m-3'>
-          <button type="button" className="btn btn-primary" onClick={onSubmit}>Post</button>
+          <button type="button" className="btn btn-primary" onClick={handleSubmit}>Post</button>
         </div>
       </form>
 
