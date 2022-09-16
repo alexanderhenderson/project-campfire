@@ -43,7 +43,8 @@ export default function UserProfile() {
             }
         }
     }
-
+    console.log("state: ", userData.state)
+    console.log("userData: ", userData)
     let slicedlist = attendedEvents.slice(0,3)
     return (
         <>
