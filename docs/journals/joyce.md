@@ -1,4 +1,14 @@
-## Thursday, September 14, 2022
+## Thursday, September 15, 2022
+Deployment links were broken so we had to fix that.
+Also was able to build out the chat functionality. It
+wasn't as difficult as expected. Maybe for stretch goals
+I will work on doing the replies by adding a parent id
+to a comment. Also still want to do the groups and the
+messenger feature. Also did a ton of linting today. The
+plan is to create a bunch of dummy data for the deployed
+website tonight.
+
+## Wednesday, September 14, 2022
 Changed intro page into a carousel with steps on what
 to do to get the most out of the app. The team had token
 issues lately and we're spending a lot of time on that.

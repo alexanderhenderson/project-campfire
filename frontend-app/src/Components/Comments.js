@@ -21,12 +21,17 @@ export default function Comments() {
     // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [id, setCommentData])
 
+  const changeHandler = e => {
+    setCommentData(e.target.value);
+  }
+  console.log(commentData)
+
   async function onSubmit(event) {
     event.preventDefault()
     const data = {
       commentTextbox: event.target.commentTextbox.value,
     }
-    console.log(data)
+    console.log('data: ', data)
 
     const url = `${process.env.REACT_APP_USERS}/users/comments/`
     const fetchConfig = {
@@ -40,17 +45,16 @@ export default function Comments() {
     if (response.ok) {
       const newComment = await response.json()
       console.log(newComment)
-      getCommentData()
     }
   }
 
   return (
     <>
       <h1>Comments</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label htmlFor="commentTextbox">Leave a comment for me!</label>
-          <textarea className="form-control" id="commentTextbox" rows="3">Leave a comment for me</textarea>
+          {/* <label htmlFor="commentTextbox">Leave a comment for me!</label> */}
+          <textarea className="form-control" id="commentTextbox" rows="3"></textarea>
         </div>
         <div className='m-3'>
           <button type="button" className="btn btn-primary" onClick={onSubmit}>Post</button>
