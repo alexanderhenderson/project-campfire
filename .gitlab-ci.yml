@@ -87,7 +87,7 @@ build-users-poller-job:
   services:
     - docker:20.10.16-dind
   script:
-    - cd backend/users/poll
+    - cd backend/users
     - docker build -f Dockerfile.Poller -t ${CI_REGISTRY_IMAGE}/users_poller:latest .
     - docker tag ${CI_REGISTRY_IMAGE}/users_poller:latest ${CI_REGISTRY_IMAGE}/users_poller_backups:$CI_PIPELINE_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
