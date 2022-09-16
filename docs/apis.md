@@ -1,83 +1,137 @@
 # APIs
-
-## Get users
+========================================
+## (USERS)
+========================================
+## Get User Detail
 
 * **Method**: `GET`
-* **Path**: /api/users
+* **Path**: /api/users/:id
 
+Input: `None`
 
 Output:
 
 ```json
 {
-  "name": string,
-  "age": integer,
-  "email": email,
-  "picture_url": url,
-  "location": object
+	"id": int,
+	"username": string,
+	"first_name": string,
+	"last_name": string,
+	"email": string,
+	"profile_description": string,
+	"profile_photo": string,
+	"city": string,
+	"state": string,
+	"favorite_activities": array,
+	"friends": array,
 }
 ```
+This request gets the user/detail at the given id in the URL
+========================================
 
+## Get Users All (List)
 
-## Create user
+* **Method**: `GET`
+* **Path**: /api/users/
+
+Input: `None`
+
+Output:
+
+```json
+{
+	"users": array
+}
+```
+This request gets all of the users currently in the database
+========================================
+
+## Update User
+
+* **Method**: `PUT`
+* **Path**: /api/users/:id
+
+Input: `Which ever fields you want to update in user`
+
+```json
+{"any available field in user": data you chose to update}
+```
+
+Output: 
+
+```json
+{
+	"id": int,
+	"username": string,
+	"first_name": string,
+	"last_name": string,
+	"email": string,
+	"profile_description": string,
+	"profile_photo": string,
+	"city": string,
+	"state": string,
+	"favorite_activities": array,
+	"friends": array,
+}
+```
+This request allows you update any current field that's in the user model
+based on the url input id. It returns the updated user and all of the current
+fields that user has.
+========================================
+
+## Create User
 
 * **Method**: `POST`
-* **Path**: /api/users
+* **Path**: /api/user
 
 Input:
 
 ```json
 {
-  "name": string,
-  "age": integer,
-  "email": email,
-  "picture_url": url,
-  "location": object
+	"username": string,
+	"first_name": string,
+	"last_name": string,
+	"email": string,
+	"profile_description": string,
+	"profile_photo": string,
+	"city": string,
+	"state": string,
 }
 ```
-
-## Get groups
-
-* **Method**: `GET`
-* **Path**: /api/groups
-
 
 Output:
 
 ```json
 {
-  "name": string,
-  "activity": object,
-  "event": object
+ "id": int,
+	"username": string,
+	"first_name": string,
+	"last_name": string,
+	"email": string,
+	"profile_description": string,
+	"profile_photo": string,
+	"city": string,
+	"state": string,
+	"favorite_activities": array,
+	"friends": array,
 }
 ```
+This request creates a new user, and returns the user after creation
+with the id associated with the user, along with any mandatory fields,
+or added fields.
+========================================
 
+## Delete User
 
-## Create group
+* **Method**: `DEL`
+* **Path**: /api/user
 
-* **Method**: `POST`
-* **Path**: /api/groups
+Input: `None`
 
-Input:
+Output: `None`
 
-```json
-{
-  "name": string,
-  "activity": object,
-  "event": object
-}
-```
-
-
-Output:
-
-```json
-{
-  "name": string,
-  "activity": object,
-  "event": object
-}
-```
+This request deletes user associated with the id input in the URL
+========================================
 
 * We'll also be doing this same format for all the models along with
 the detail views, updating or deleting them but for the sake of time
