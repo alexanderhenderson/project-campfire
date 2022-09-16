@@ -5,7 +5,6 @@ import {UserContext} from "./UserContext"
 let internalToken = null;
 
 function parseJwt(token) {
-	// console.log("THIS IS THE TOKEN", token)
 	try {
 		return JSON.parse(atob(token.split(".")[1]));
 	} catch (e) {
@@ -25,7 +24,6 @@ export function getToken() {
 }
 export async function getTokenInternal() {
   const url = `${process.env.REACT_APP_USERS}/users/api/tokens/mine/`
-  //const url = `${process.env.REACT_APP_USERS}/api/accounts/me/token/`
   try {
     
     const response = await fetch(url, {
@@ -86,16 +84,6 @@ export const AuthContext = createContext({
 export const AuthProvider = (props) => {
   const [token, setToken] = useState(null);
   
-  // console.log("props: ", props)
-  
-  if (getTokenInternal()){
-    //   const validation = validateToken()
-    //   console.log(validation.json())
-    // console.log("--Logged In--")
-  } else {
-    // console.log("-- Logged Out --")
-  }
-
   return (
     <AuthContext.Provider value={{ token, setToken }}>
       {props.children}
@@ -107,7 +95,6 @@ export const useAuthContext = () => useContext(AuthContext)
 
 export function useToken() {
 
-  // const {userId, setUserId} = useContext(MainContext)
   const { token, setToken } = useAuthContext();
   const navigate = useNavigate();
   const {setUserId} = useContext(UserContext)
@@ -125,10 +112,13 @@ export function useToken() {
   async function logout() {
     if (token) {
       const url = `${process.env.REACT_APP_USERS}/api/token/refresh/logout/`
-      await fetch(url, { method: "delete", credentials: "include" })
-      internalToken = null
-      setToken(null)
-      navigate("/")
+      const response = await fetch(url, { method: "delete", credentials: "include" })
+      if (response.ok){
+        internalToken = null
+        setToken(null)
+        navigate("/")
+        return(response)
+      }
     }
   }
 
@@ -145,11 +135,10 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
-      console.log("Token from Auth: ", token)
+      // console.log("Token from Auth: ", token)
       let tokeninfo = await parseJwt(token)
       setUserId(tokeninfo.user)  
       navigate("/intro/");
-      // console.log("User ID info in auth", userId)
     }
     let error = await response.json()
     return handleErrorMessage(error)

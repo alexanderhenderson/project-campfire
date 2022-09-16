@@ -110,7 +110,7 @@ code {
   height: var(--bs-card-height);
   word-wrap: break-word;
   /* background-color: var(--bs-card-bg); */
-  background-color: rgba(252, 252, 252, 0.822);
+  background-color: rgba(252, 252, 252, 0.897);
   background-clip: border-box;
   border: var(--bs-card-border-width) solid var(--bs-card-border-color);
   border-radius: var(--bs-card-border-radius);
@@ -126,6 +126,22 @@ code {
 
 .kindle-bg {
   background-image: url("../public/KindlerBackground.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  /* width: 100vw; */
+  /* height: 100vh; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  /* filter: blur(1px); */
+}
+
+.create-event-bg {
+  background-image: url("../public/CreateEventBackground.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
