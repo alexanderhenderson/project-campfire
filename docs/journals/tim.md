@@ -1,3 +1,39 @@
+## September 16, 2022
+
+
+
+## September 15, 2022
+
+
+
+## September 14, 2022
+
+
+
+## September 13, 2022
+
+
+
+## September 12, 2022
+
+
+
+## September 9, 2022
+
+
+
+## September 8, 2022
+
+
+
+## September 7, 2022
+
+
+
+## September 6, 2022
+
+
+
 ## September 1, 2022
 
 Today I worked on the signup.js page The issues I ran into were figuring out how to convert the raw password into the cleaned password for the custom User model we built. This involved tracing the User model through the AbstractUserModel then to the BaseAbstractUser to see that our User model is inheriting a method set_password that converts the password into an encrypted string. I was then able to use this method in the view to sent the correct encrypted password to the database.

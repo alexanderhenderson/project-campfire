@@ -8,7 +8,7 @@ export default function UserProfile() {
     const navigate = useNavigate();
     const { id } = useParams()
 
-    console.log(id)
+    console.log("useParams id: ", id)
     useEffect(() => {
         const getUserdata = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/${id}`;
@@ -16,6 +16,8 @@ export default function UserProfile() {
             if (response.ok) {
                 const data = await response.json()
                 setUserData(data)
+            } else {
+                console.log("getsUserData failed")
             }
         }
         const requestEvents = async () => {
@@ -27,9 +29,8 @@ export default function UserProfile() {
                 setEvents(events.current)
             }
         }
-
         requestEvents()
-
+        
         getUserdata()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
@@ -44,7 +45,8 @@ export default function UserProfile() {
             }
         }
     }
-
+    console.log("state: ", userData.state)
+    console.log("userData: ", userData)
     let slicedlist = attendedEvents.slice(0,3)
     return (
         <>

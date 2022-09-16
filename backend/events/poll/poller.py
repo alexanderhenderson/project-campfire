@@ -15,11 +15,13 @@ django.setup()
 # the below import works once the program is running
 from events_app.models import UserVO
 
+USERS_API = os.environ["USERS_API"]
+
 
 def get_users():
 
-    # print("We are in the polling function")
-    response = requests.get("http://users:8000/users/")
+    print("We are in the polling get_users function")
+    response = requests.get(f"{USERS_API}/users/")
     content = json.loads(response.content)
     # print("Polled and received content: ", content)
 
@@ -38,6 +40,7 @@ def get_users():
 
 def poll():
     while True:
+        print("polling")
         # print('User poller active - polling')
         try:
             get_users()

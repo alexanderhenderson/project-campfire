@@ -174,7 +174,7 @@ export function useToken() {
     })
     if (response.ok) {
       await login(username, password)
-      navigate("/home")
+      navigate("/intro/")
     }
     return false
   }

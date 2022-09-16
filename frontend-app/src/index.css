@@ -110,7 +110,7 @@ code {
   height: var(--bs-card-height);
   word-wrap: break-word;
   /* background-color: var(--bs-card-bg); */
-  background-color: rgb(252, 252, 252);
+  background-color: rgba(252, 252, 252, 0.822);
   background-clip: border-box;
   border: var(--bs-card-border-width) solid var(--bs-card-border-color);
   border-radius: var(--bs-card-border-radius);
@@ -179,7 +179,6 @@ nav {
   display: flex;
   justify-content: right;
   align-items: right;
-
   border: 3px solid #ffc507e0;
 }
 
@@ -238,11 +237,12 @@ nav {
 
 .intro-bg {
   /* Sizing */
+  /* background-image: url( "" + env(process.env.PUBLIC_URL)+"/1081641.jpg"); */
   background-image: url("https://wallpaperaccess.com/full/1081641.jpg");
   width: 100vw;
   height: 100vh;
   background-position: top center;
-  /* background-size: 100% 100%; */
+  background-size: 100%;
   background-repeat: no-repeat;
   position: fixed;
   top: 0;
@@ -361,7 +361,7 @@ justify-content: right;
 }
 
 .box_bg{
-  background-color: #0561f4bd;
+  background-color: #000000bd;
   border-radius: 1.9ch;
 }
 
@@ -409,4 +409,45 @@ a:hover{
 
 .padding-top-med {
   padding-top: 3rem;
+}
+
+/* .wordbg{
+    text-shadow: 
+        -1px -1px 0px rgba(255, 255, 255, 0.512),
+         0px -1px 0px rgba(255, 255, 255, 0.539),
+         1px -1px 0px rgba(255, 255, 255, 0.533),
+        -1px  0px 0px rgba(255, 255, 255, 0.534),
+         1px  0px 0px rgba(255, 255, 255, 0.514),
+        -1px  1px 0px rgba(255, 255, 255, 0.525),
+         0px  1px 0px rgba(255, 255, 255, 0.528),
+         1px  1px 0px rgba(255, 255, 255, 0.532);
+
+} */
+
+.carousel-control-next-icon{
+  border-radius: .9ch;
+  background-color: rgba(0, 0, 0, 0.574);
+}
+.carousel-control-prev-icon{
+  border-radius: .9ch;
+  background-color: rgba(0, 0, 0, 0.672);
+}
+
+.accordion-button{
+  color: white;
+  background-color: rgba(0, 0, 0, 0.608); 
+}
+.accordion-button:not(.collapsed){
+color: white;
+background-color: rgba(0, 0, 0, 0.753);
+}
+.accordion-button::after{
+  color: white;
+  border-radius: 1.9ch;
+  background-color: rgba(255, 255, 255, 0.539);
+}
+
+.accordion-button:not(.collapsed)::after{
+  color: white;
+  background-color: rgba(255, 255, 255, 0.412);
 }

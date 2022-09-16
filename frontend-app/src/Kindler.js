@@ -3,21 +3,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 export default function Kindler() {
-	// eslint-disable-next-line no-unused-vars
-	const [username, setUsername] = useState("");
 	const [KindlerList, SetKindlerData] = useState([]);
 
 	useEffect(() => {
-		const UserInfoRequest = async () => {
-			const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
-			const response = await fetch(url, { credentials: "include" });
 
-			if (response.ok) {
-				const data = await response.json();
-				console.log("Logged in user data: ", data);
-				setUsername(data);
-			}
-		};
 
 		const KindlerData = async () => {
 			const url = `${process.env.REACT_APP_USERS}/users/api/kindler`;
@@ -32,12 +21,11 @@ export default function Kindler() {
 				for (let friend of data) {
 					friend.friend = false;
 				}
-
+				
 				SetKindlerData(data);
 			}
 		};
 
-		UserInfoRequest();
 		KindlerData();
 	}, []);
 
@@ -62,11 +50,9 @@ export default function Kindler() {
 	return (
 		<>
 			<div className="kindle-bg"></div>
-			{/* <img height='300' src="/favicon.ico" alt="Max-width 100%"></img> */}
 			<div className="container px-4 py-5 my-5 text-center">
 				<h1 className="kindle-text display-5 fw-bold">The Campfire Kindler</h1>
 				<h3 className="kindle-text">Kindle new friendships</h3>
-				{/* <h3>Gather around the campfire with new friends</h3> */}
 				<div className="col-lg-6 mx-auto">
 					<div className="lead mb-4"></div>
 				</div>
@@ -121,12 +107,13 @@ export default function Kindler() {
 						<br />
 						<br />
 						<br />
-						<h2 className="kindle-text card-text">Wow! You are already friends with everybody with similar interests!</h2>
-						<h3 className="kindle-text"> You can potentially match with more friends by adding new activities. </h3>
+						<div className="kindle-top-level-card">
+						<h2 className="card-text">Wow! You are already friends with everybody with similar interests!</h2>
+						<h3 > You can potentially match with more friends by adding new activities. </h3>
+						</div>
 					</div>
 				)}
 			</div>
-			{/* </div> */}
 		</>
 	);
 }

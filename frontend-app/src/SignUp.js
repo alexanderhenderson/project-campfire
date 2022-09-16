@@ -10,7 +10,7 @@ export default function Signup() {
         last_name: "",
         email: "",
         city: "",
-        state: ""
+        state: "",
     })
 
     const [signupTest, setSignupTest] = useState(true)
@@ -94,7 +94,7 @@ export default function Signup() {
                                 <h2 align="center">Sign Up</h2>
                             </div>
                             <form onSubmit={submitHandler}>
-                                <div classname='bt-3'>
+                                <div className='bt-3'>
                                     <SignupFailed />
                                     <div className="form-floating mb-2">
                                         <div className="row g-2">
@@ -177,7 +177,7 @@ export default function Signup() {
                                     </div>
                                     <div class="col-md">
                                         <div className="form-floating">
-                                            <select name="state" className="form-select">
+                                            <select name="state" className="form-select" onChange={changeHandler}>
                                                 <option value="">Select State</option>
                                                 {USStates.current.map(state => (
                                                     <option key={state.abb} value={state.abb}>
