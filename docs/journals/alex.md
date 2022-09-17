@@ -208,6 +208,15 @@ Wednesday 9/14
             test_delete_event_detail
         Test I am working on in the Users microservice:
             test_djwto
-        
+    
+FINAL JOURNAL 9/16:
+    Yesterday eneded fairly well, everything but deployment was working. After finishing unit
+    tests I just worked on CSS on the pages I made. 
 
+    Today was mostly the same. Fixed a bug with the logout link in the nav bar where it didn't
+    update after you logged out (so the log out link was still there).
+
+    Did some more CSS stuff, tidying up pages, added backgrounds to login. 
+
+    And now I am done. Woot.
 
