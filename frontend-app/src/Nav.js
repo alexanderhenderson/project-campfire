@@ -2,12 +2,11 @@ import "./index.css"
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-// import NavDropdown from 'react-bootstrap/NavDropdown'
 import React, { useContext } from 'react'
 import { useState, useEffect } from 'react'
 import { useToken } from './Authorization'
 import { useNavigate } from 'react-router-dom'
-import { UserContext } from "./UserContext";
+import { UserContext } from "./UserContext"
 
 export function settingLinks() {
   const NAVLINK = process.env.REACT_APP_NAVLINK
@@ -58,7 +57,7 @@ export default function NavBar() {
   const [token, , logout] = useToken()
   const [ , setLogoutResponse] = useState()
   const [loggedIn, setLoggedIn]=useState(false)
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const {userId} = useContext(UserContext)
 
 
@@ -69,9 +68,9 @@ export default function NavBar() {
       } else {
         setLoggedIn(false)
       }
-    };
-    checkUserID();
-  },[userId]);
+    }
+    checkUserID()
+  },[userId])
 
 
   function checkLoggedIn(token){

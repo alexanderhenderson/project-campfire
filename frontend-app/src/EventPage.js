@@ -2,9 +2,6 @@ import { useNavigate } from 'react-router-dom'
 import React, { useState, useEffect, useRef } from 'react'
 import { settingLinks } from "./Nav"
 
-
-
-
 export default function EventList(props) {
   const events = useRef([])
   const [filteredEvents, setFilteredEvents] = useState([])
