@@ -1,3 +1,10 @@
+## Friday, September 16, 2022
+Fixed navbar to show/hide appropriately. Also hid
+the sign up and login buttons on home page when user is
+logged in. Created a lot of dummy data to be used but
+ran into a hickup so had to do it over again. Turning
+in this last journal after deploying.
+
 ## Thursday, September 15, 2022
 Deployment links were broken so we had to fix that.
 Also was able to build out the chat functionality. It
