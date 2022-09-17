@@ -1,3 +1,6 @@
+## Fri, Sept 16, 2022
+Fixed the update profile page by changing the ChangeHandler to setState on the input data without being an array and it worked properly. Spent the rest of the day doing API documentation stuff and cleaning up some final css, as well as fixing a couple deployment bugs. Learned that the URLfield in django (for our profile photo url) has a limit of 200 characters initially, we added a new limit to our model that was much higher.
+
 ## Thurs, Sept 15, 2022
 Did a bunch of css front end work, and also made a whole new page that allows you to edit the user profile using a PUT request and an onsubmit, currently working through a weird bug where whenever we submit the pertinent information in the forms, it injects that same information into the URL ... weird
 
