@@ -124,8 +124,8 @@ export default function NavBar() {
               <Nav.Link href={kindlerLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Kindler </Nav.Link>
               <Nav.Link href={signupLink} className={"mx-1" + (loggedIn ? " d-none":"")}> Sign Up </Nav.Link>
               <Nav.Link href={loginLink} className={"xy-1" + (loggedIn ? " d-none":"") }> Login </Nav.Link>
-              <Nav.Link onClick={onLogout} className={"mx-1" + (loggedIn ? "":" d-none")}> Logout </Nav.Link>
               <Nav.Link href={searchLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Search </Nav.Link>
+              <Nav.Link onClick={onLogout} className={"mx-1" + (loggedIn ? "":" d-none")}> Logout </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
