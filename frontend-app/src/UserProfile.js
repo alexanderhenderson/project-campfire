@@ -192,10 +192,10 @@ export default function UserProfile() {
                                                                                     </td>
                                                                                     <td>
                                                                                         <div className="align-right">
-                                                                                            <button className="btn btn-dark rounded-pill mb-3" onClick={handleAccept(friendRequest.id)} role="button">
+                                                                                            <button className="btn btn-dark rounded-pill mb-3" onClick={handleAccept(friendRequest.id)} >
                                                                                                 Accept
                                                                                             </button>
-                                                                                            <button className="btn btn-dark rounded-pill mb-3" onClick={handleReject(friendRequest.id)} role="button">
+                                                                                            <button className="btn btn-dark rounded-pill mb-3" onClick={handleReject(friendRequest.id)} >
                                                                                                 Reject
                                                                                             </button>
                                                                                         </div>
