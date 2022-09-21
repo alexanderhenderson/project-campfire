@@ -198,7 +198,7 @@ class UserDetailEncoder(ModelEncoder):
     encoders = {
         "favorite_activities": ActivityVOEncoder(),
         "friends": FriendsEncoder(),
-        "friend_requests": FriendsEncoder(),
+        # "friend_requests": FriendsEncoder(),
     }
 
 
@@ -382,12 +382,11 @@ def api_friend_request_add(request, pk):
                 user_id = request.payload["user"]["id"]
                 friend_id = pk
 
-                # get user and friend instances
-                user = User.objects.get(id=user_id)
                 friend = User.objects.get(id=friend_id)
-
-                # add friend instance to user friends field
-                user.friend_requests.add(friend)
+                requests = friend.friend_requests
+                requests.append(user_id)
+                setattr(friend, "friend_requests", requests)
+                friend.save()
 
                 # return a response
                 response = JsonResponse({"message": "friend_request added"})
@@ -416,7 +415,10 @@ def api_friend_request_approve(request, pk):
 
                 # add friend instance to user friends field
                 user.friends.add(friend)
-                user.friend_requests.remove(friend)
+                requests = user.friend_requests
+                requests.remove(friend_id)
+                setattr(user, "friend_requests", requests)
+                user.save()
 
                 # return a response
                 response = JsonResponse({"message": "friend_request approved"})
@@ -443,10 +445,11 @@ def api_friend_request_reject(request, pk):
 
                 # get user and friend instances
                 user = User.objects.get(id=user_id)
-                friend = User.objects.get(id=friend_id)
 
-                # add friend instance to user friends field
-                user.friend_requests.remove(friend)
+                requests = user.friend_requests
+                requests.remove(friend_id)
+                setattr(user, "friend_requests", requests)
+                user.save()
 
                 # return a response
                 response = JsonResponse({"message": "friend_request rejected"})

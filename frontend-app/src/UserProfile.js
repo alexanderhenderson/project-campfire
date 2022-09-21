@@ -7,7 +7,10 @@ import { settingLinks } from "./Nav"
 
 export default function UserProfile() {
     const [userData, setUserData] = useState({})
+    const [usersData, setUsersData] = useState({})
     const [events, setEvents] = useState([])
+    const [friendRequestIds, setFriendRequestIds] = useState([])
+    const [requestHandled, setRequestHandled] = useState(false)
     const navigate = useNavigate()
     const { id } = useParams()
     const { userId } = useContext(UserContext)
@@ -16,10 +19,13 @@ export default function UserProfile() {
     useEffect(() => {
         const getUserdata = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/${id}`
+
             const response = await fetch(url, { credentials: "include" })
             if (response.ok) {
                 const data = await response.json()
-                setUserData(data)
+                setUserData(await data)
+                console.log("userData: ", data)
+                setFriendRequestIds(await data["friend_requests"])
             } else {
                 console.log("getsUserData failed")
             }
@@ -33,11 +39,21 @@ export default function UserProfile() {
                 setEvents(events.current)
             }
         }
-        requestEvents()
-
+        const requestUsers = async () => {
+            const url = `${process.env.REACT_APP_USERS}/users/`
+            const response = await fetch(url)
+            if (response.ok) {
+                const data = await response.json()
+                setUsersData(await data)
+            }
+        }
         getUserdata()
+        requestEvents()
+        requestUsers()
+
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id])
+    }, [id, requestHandled])
 
     let currentUser = userData.id
     let attendedEvents = []
@@ -51,6 +67,23 @@ export default function UserProfile() {
     }
     let slicedlist = attendedEvents.slice(0, 3)
 
+
+    let requests = []
+    console.log("friendRequestIds: ", friendRequestIds)
+    console.log("users: ", usersData["users"])
+    if (friendRequestIds.length !== 0 && usersData.length !== 0) {
+        console.log("test")
+        for (let requestId of friendRequestIds) {
+            console.log("requestId: ", requestId)
+            for (let user of usersData["users"]) {
+                if (requestId === user["id"]){
+                    requests.push(user)
+                }
+            }
+        }
+    }
+    console.log("requests: ", requests)
+                    
     async function handleAccept(pk) {
         const url = `${process.env.REACT_APP_USERS}/users/requests/approve/${pk}/`
         const response = await fetch(url, {
@@ -59,6 +92,7 @@ export default function UserProfile() {
         })
 
         if (response.ok) {
+            setRequestHandled(!requestHandled)
             console.log("request accepted")
         }
     }
@@ -71,6 +105,7 @@ export default function UserProfile() {
         })
 
         if (response.ok) {
+            setRequestHandled(!requestHandled)
             console.log("request rejected")
         }
     }
@@ -167,30 +202,37 @@ export default function UserProfile() {
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            
+                                            {userId.id == id ? (
                                             <div className='mt-5'>
                                                 <h4>Friend Requests</h4>
                                                 <div className="accordion" id="accordionExample">
                                                     <div className="accordion-item">
                                                         <h2 className="accordion-header" id="headingOne">
                                                             <button className="accordion-button" type="button"
-                                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                                                aria-expanded="true" aria-controls="collapseTwo">
+                                                                data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                                aria-expanded="true" aria-controls="collapseThree">
                                                                 Click to expand
                                                             </button>
                                                         </h2>
-                                                        <div id="collapseTwo" className="accordion-collapse collapse"
-                                                            aria-labelledby="headingTwo" >
+                                                        <div id="collapseThree" className="accordion-collapse collapse"
+                                                            aria-labelledby="headingThree" >
                                                             <div className="accordion-body">
                                                                 <div className="col">
                                                                     <table className="table">
                                                                         <tbody>
-                                                                            {userData?.friend_requests?.map(friendRequest => (
+                                                                            {requests.map(friendRequest => (
                                                                                 <tr key={friendRequest.id}>
                                                                                     <td>
                                                                                         {friendRequest.username} ({friendRequest.first_name} {friendRequest.last_name})
                                                                                     </td>
-                                                                                    <td>
+                                                                                    <td className="pointer" onClick={() => handleAccept(friendRequest.id)}> 
+                                                                                        Accept
+                                                                                    </td>
+                                                                                    <td className="pointer" onClick={() => handleReject(friendRequest.id)}>
+                                                                                        Reject
+                                                                                    </td>
+                                                                                    {/* <td>
                                                                                         <div className="align-right">
                                                                                             <button className="btn btn-dark rounded-pill mb-3" onClick={handleAccept(friendRequest.id)} >
                                                                                                 Accept
@@ -199,7 +241,7 @@ export default function UserProfile() {
                                                                                                 Reject
                                                                                             </button>
                                                                                         </div>
-                                                                                    </td>
+                                                                                    </td> */}
 
                                                                                 </tr>
                                                                             ))}
@@ -211,6 +253,7 @@ export default function UserProfile() {
                                                     </div>
                                                 </div>
                                             </div>
+                                            ) : ""}
                                         </div>
                                     </div>
                                 </div>
