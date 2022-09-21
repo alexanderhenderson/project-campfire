@@ -48,7 +48,7 @@ console.log(usersList.length)
 
     return (
         <main>
-            <a id="top" href=""> </a>
+            <span id="top"> </span>
             <div className='search-bg'></div>
             <div className="m-3">
                 <h1>Search All Users</h1>
