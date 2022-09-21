@@ -202,8 +202,8 @@ export default function UserProfile() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            
-                                            {userId.id === id ? (
+                                            {/* eslint-disable-next-line */}
+                                            {userId.id == id ? (
                                             <div className='mt-5'>
                                                 <h4>Friend Requests</h4>
                                                 <div className="accordion" id="accordionExample">
