@@ -22,7 +22,7 @@ export default function UserProfile() {
                 const data = await response.json()
                 setUserData(data)
 
-                if (userId != undefined){
+                if (userId !== undefined){
                     let friends = []
                     for (let friendKey in userId.friends){
                         console.log("User loops: ", userId.friends[friendKey].id)
@@ -51,15 +51,15 @@ export default function UserProfile() {
         }
 
         // work in progress
-        const requestFriends = async () => {
-            const url = `${process.env.REACT_APP_EVENTS}/events/`
-            const response = await fetch(url)
-            if (response.ok) {
-                const data = await response.json()
-                events.current = data.Events
-                setEvents(events.current)
-            }
-        }
+        // const requestFriends = async () => {
+        //     const url = `${process.env.REACT_APP_EVENTS}/events/`
+        //     const response = await fetch(url)
+        //     if (response.ok) {
+        //         const data = await response.json()
+        //         events.current = data.Events
+        //         setEvents(events.current)
+        //     }
+        // }
 
         requestEvents()
 
@@ -96,19 +96,19 @@ export default function UserProfile() {
 	}
 
     // this function is for deleting comments on your page
-    async function deleteComment() {
-		const url = `${process.env.REACT_APP_USERS}/users/api/friend/`;
-		const params = {
-			method: "put",
-			body: userData.id,
-			credentials: "include",
-		};
-		const response = await fetch(url, params);
-		if (response.status === 200) {
-            console.log("Friend added")
-            setFriend(true)
-		}
-	}
+    // async function deleteComment() {
+	// 	const url = `${process.env.REACT_APP_USERS}/users/api/friend/`;
+	// 	const params = {
+	// 		method: "put",
+	// 		body: userData.id,
+	// 		credentials: "include",
+	// 	};
+	// 	const response = await fetch(url, params);
+	// 	if (response.status === 200) {
+    //         console.log("Friend added")
+    //         setFriend(true)
+	// 	}
+	// }
 
 
     return (
@@ -124,7 +124,7 @@ export default function UserProfile() {
                                         {/* eslint-disable-next-line */}
                                         {userId.id == id ? (
                                             <div><a className="btn btn-dark rounded-pill mb-3" href={`${editProfileLink}${userId.id}`} role="button">Edit Profile</a></div>) 
-                                            : (friend == false ? (
+                                            : (friend === false ? (
                                                 <button
 													type="button"
 													className="btn btn-dark rounded-pill"
