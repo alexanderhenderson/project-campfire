@@ -50,6 +50,31 @@ export default function UserProfile() {
         }
     }
     let slicedlist = attendedEvents.slice(0, 3)
+
+    async function handleAccept(pk) {
+        const url = `${process.env.REACT_APP_USERS}/users/requests/approve/${pk}/`
+        const response = await fetch(url, {
+            method: "put",
+            credentials: "include",
+        })
+
+        if (response.ok) {
+            console.log("request accepted")
+        }
+    }
+
+    async function handleReject(pk) {
+        const url = `${process.env.REACT_APP_USERS}/users/requests/reject/${pk}/`
+        const response = await fetch(url, {
+            method: "put",
+            credentials: "include",
+        })
+
+        if (response.ok) {
+            console.log("request rejected")
+        }
+    }
+
     return (
         <>
             <div className="container">
@@ -132,6 +157,50 @@ export default function UserProfile() {
                                                                                             navigate(`/profile/${friend.id}/`)
                                                                                         }}>
                                                                                         {friend.username}</td>
+                                                                                </tr>
+                                                                            ))}
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className='mt-5'>
+                                                <h4>Friend Requests</h4>
+                                                <div className="accordion" id="accordionExample">
+                                                    <div className="accordion-item">
+                                                        <h2 className="accordion-header" id="headingOne">
+                                                            <button className="accordion-button" type="button"
+                                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                                aria-expanded="true" aria-controls="collapseTwo">
+                                                                Click to expand
+                                                            </button>
+                                                        </h2>
+                                                        <div id="collapseTwo" className="accordion-collapse collapse"
+                                                            aria-labelledby="headingTwo" >
+                                                            <div className="accordion-body">
+                                                                <div className="col">
+                                                                    <table className="table">
+                                                                        <tbody>
+                                                                            {userData?.friend_requests?.map(friendRequest => (
+                                                                                <tr key={friendRequest.id}>
+                                                                                    <td>
+                                                                                        {friendRequest.username} ({friendRequest.first_name} {friendRequest.last_name})
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div className="align-right">
+                                                                                            <button className="btn btn-dark rounded-pill mb-3" onClick={handleAccept(friendRequest.id)} role="button">
+                                                                                                Accept
+                                                                                            </button>
+                                                                                            <button className="btn btn-dark rounded-pill mb-3" onClick={handleReject(friendRequest.id)} role="button">
+                                                                                                Reject
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </td>
+
                                                                                 </tr>
                                                                             ))}
                                                                         </tbody>
