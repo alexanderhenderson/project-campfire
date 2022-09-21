@@ -59,7 +59,7 @@ console.log(usersList.length)
                     type="search"
                     id="search"
                     className="form-control"
-                    placeholder="Search for Activities"
+                    placeholder="Search All Users"
                     onChange={handleChange}
                     aria-label="Search"
                 />
