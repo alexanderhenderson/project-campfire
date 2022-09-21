@@ -217,6 +217,7 @@ class CommentEncoder(ModelEncoder):
         "comment",
         "commenter",
         "user_profile",
+        "time_posted",
     ]
     encoders = {
         "commenter": UserCommentEncoder(),
