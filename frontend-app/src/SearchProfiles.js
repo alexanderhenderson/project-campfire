@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export default function FetchUsers() {
 
@@ -7,7 +7,9 @@ export default function FetchUsers() {
     const [search, setSearch] = useState('')
     const [filteredUsers, setFilteredUsers] = useState([])
     const navigate = useNavigate()
-    const { id } = useParams()
+    const [addUser, setAddUser] = useState(0)
+    // const [click, setClick] = useState(true)
+    
 
     useEffect(() => {
 
@@ -21,7 +23,9 @@ export default function FetchUsers() {
         }
      getUsersList()
     }, [])
-
+console.log(usersList)
+console.log(addUser)
+console.log(usersList.length)
     // function clickHandler(event, activity) {
     //     addActivities(userData.id, activity)
     //     setActivityList([...activityList, activity])
@@ -44,7 +48,7 @@ export default function FetchUsers() {
 
     return (
         <main>
-            <div className='activities-bg'></div>
+            <div className='search-bg'></div>
             <div className="m-3">
                 <h1>Search All Users</h1>
                 <h4>Click Card to go to User Profile</h4>  
@@ -61,7 +65,7 @@ export default function FetchUsers() {
             </div>
             <div className="m-3">
                 <div className="row ">
-                    {userState.map(user => {
+                    {userState.slice(0,9 + addUser).map(user => {
                             return (
                                 <div className="col-sm-4 padding_bottom" key={user.id}>
                                     <div className="card mb-3 shadow h-100 pointer "
@@ -73,13 +77,21 @@ export default function FetchUsers() {
                                                 <h5 className="card-title center_card_text">Username: {user.username}</h5>
                                                 <h6 className="card-title center_card_text"> Name: {user.first_name} {user.last_name}</h6>
                                                 <h6 className="card-title center_card_text"> Location: {user.city || "Unknown"} {user.state || ""}</h6>
-                                            </div>
-                                        
+                                                
+                                            </div>  
                                     </div>
                                 </div>
                             )
                             
                         })}
+                </div>
+                <div className="div-center">
+                {addUser <= usersList.length - 8 ? <p  className="center-p paginate-button "
+                onClick={() => {
+                      setAddUser(addUser + 6);
+                  }}
+                > <i className=" arrow down outline "></i></p> : "" }
+                 
                 </div>
             </div>
         </main>
