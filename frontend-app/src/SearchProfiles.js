@@ -7,7 +7,7 @@ export default function FetchUsers() {
     const [search, setSearch] = useState('')
     const [filteredUsers, setFilteredUsers] = useState([])
     const navigate = useNavigate()
-    const { id } = useParams()
+    // const { id } = useParams()
 
     useEffect(() => {
 
