@@ -52,11 +52,11 @@ export function settingLinks() {
     searchProfile = "/search/"
   }
   // add link variable to return array
-  return ([home, intro, profile, events, activities, kindler, signup, login, logout, editProfile, searchProfile])
+  return ([home, intro, profile,  activities, events, kindler, signup, login, logout, editProfile, searchProfile])
 }
 
 export default function NavBar() {
-  const [homeLink, introLink, , eventsLink, activitiesLink, kindlerLink, signupLink, loginLink, , , searchLink] = settingLinks()
+  const [homeLink, introLink, , activitiesLink,eventsLink, kindlerLink, signupLink, loginLink, , , searchLink] = settingLinks()
   const [token, , logout] = useToken()
   const [ , setLogoutResponse] = useState()
   const [loggedIn, setLoggedIn]=useState(false)
@@ -119,8 +119,8 @@ export default function NavBar() {
               <Nav.Link href={homeLink} className='mx-1'> Home </Nav.Link>
               <Nav.Link href={introLink} className={"mx-1" + (loggedIn ? "":" d-none")}> New Here? </Nav.Link>
               <Nav.Link onClick={() => { navigate(`/profile/${userId.id}`)}} className={"mx-1" + (loggedIn ? "":" d-none")}> Profile </Nav.Link>
-              <Nav.Link href={eventsLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Events </Nav.Link>
               <Nav.Link href={activitiesLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Activities </Nav.Link>
+              <Nav.Link href={eventsLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Events </Nav.Link>
               <Nav.Link href={kindlerLink} className={"mx-1" + (loggedIn ? "":" d-none")}> Kindler </Nav.Link>
               <Nav.Link href={signupLink} className={"mx-1" + (loggedIn ? " d-none":"")}> Sign Up </Nav.Link>
               <Nav.Link href={loginLink} className={"xy-1" + (loggedIn ? " d-none":"") }> Login </Nav.Link>
