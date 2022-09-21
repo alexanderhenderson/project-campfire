@@ -194,11 +194,11 @@ class UserDetailEncoder(ModelEncoder):
         "favorite_activities",
         "friends",
         "friend_requests",
+        "sent_requests",
     ]
     encoders = {
         "favorite_activities": ActivityVOEncoder(),
         "friends": FriendsEncoder(),
-        # "friend_requests": FriendsEncoder(),
     }
 
 
@@ -388,6 +388,12 @@ def api_friend_request_add(request, pk):
                 setattr(friend, "friend_requests", requests)
                 friend.save()
 
+                user = User.objects.get(id=user_id)
+                sent = user.sent_requests
+                sent.append(friend_id)
+                setattr(user, "sent_requests", sent)
+                user.save()
+
                 # return a response
                 response = JsonResponse({"message": "friend_request added"})
                 response.status_code = 200
@@ -417,10 +423,16 @@ def api_friend_request_approve(request, pk):
 
                 # add friend instance to user friends field
                 user.friends.add(friend)
+
                 requests = user.friend_requests
                 requests.remove(friend_id)
                 setattr(user, "friend_requests", requests)
                 user.save()
+
+                sent = friend.sent_requests
+                sent.remove(user_id)
+                setattr(friend, "sent_requests", sent)
+                friend.save()
 
                 # return a response
                 response = JsonResponse({"message": "friend_request approved"})
@@ -447,11 +459,17 @@ def api_friend_request_reject(request, pk):
 
                 # get user and friend instances
                 user = User.objects.get(id=user_id)
+                friend = User.objects.get(id=friend_id)
 
                 requests = user.friend_requests
                 requests.remove(friend_id)
                 setattr(user, "friend_requests", requests)
                 user.save()
+
+                sent = friend.sent_requests
+                sent.remove(user_id)
+                setattr(friend, "sent_requests", sent)
+                friend.save()
 
                 # return a response
                 response = JsonResponse({"message": "friend_request rejected"})
