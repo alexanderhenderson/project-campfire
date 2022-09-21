@@ -75,6 +75,13 @@ export default function Comments() {
                   <tr key={comments.id}>
                     <td>{comments.comment}</td>
                     <td>- {comments.commenter.username}</td>
+                    <td>
+                    { true ?(
+                      <button className="btn btn-warning rounded-pill">
+                        delete comment
+                      </button>
+                    ) : " "}
+                    </td>
                   </tr>
                 )
               })}
