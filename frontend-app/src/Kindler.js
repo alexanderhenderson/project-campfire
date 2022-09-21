@@ -64,7 +64,7 @@ export default function Kindler() {
 								<div className="col-sm-4" key={KindlerUser.id}>
 									<div className="kindle-top-level-card mb-3 shadow">
 										<div className ="kindle-image-container"onClick={() => {navigate(`/profile/${KindlerUser.id}/`)}}>
-											<img className="kindle-card-image" src={KindlerUser?.profile_photo || "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"} alt="" />
+											<img className="kindle-card-image pointer" src={KindlerUser?.profile_photo || "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"} alt="" />
 										</div >
 											<div className="flex top-left">
 											{/* <div className="flex top-left kindler-overlay-text"> */}
