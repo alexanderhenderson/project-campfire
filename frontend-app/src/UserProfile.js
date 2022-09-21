@@ -224,10 +224,21 @@ export default function UserProfile() {
                                     <h4>RSVP'd Events</h4>
                                     <table className="table">
                                         <tbody>
-                                            {slicedlist.map(att => (
-                                                <tr key={att.id}>
-                                                    <td>{att.name}</td>
-                                                    <td ><img className="tiny-card" src={att.picture_url} alt="" ></img></td>
+                                            {slicedlist.map(evt => (
+                                                <tr key={evt.id}>
+                                                    <td className="pointer"
+                                                    onClick={() => {
+                                                        navigate(`/events/${evt.id}/`)
+                                                    }}>
+                                                    {evt.name}
+                                                    </td>
+                                                    <td className="pointer"
+                                                    onClick={() => {
+                                                        navigate(`/events/${evt.id}/`)
+                                                    }}>
+                                                        <img className="tiny-card" src={evt.picture_url} alt="" >
+                                                        </img>
+                                                    </td>
                                                 </tr>
                                             ))}
                                         </tbody>
