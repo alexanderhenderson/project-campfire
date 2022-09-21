@@ -48,6 +48,7 @@ console.log(usersList.length)
 
     return (
         <main>
+            <a id="top"></a>
             <div className='search-bg'></div>
             <div className="m-3">
                 <h1>Search All Users</h1>
@@ -89,9 +90,8 @@ console.log(usersList.length)
                 {addUser <= usersList.length - 8 ? <p  className="center-p paginate-button "
                 onClick={() => {
                       setAddUser(addUser + 6);
-                  }}
-                > <i className=" arrow down outline "></i></p> : "" }
-                 
+                  }}><i className=" arrow down outline "></i></p> : <a className="back-to-top-btn " href="#top">Back to top</a> }
+                
                 </div>
             </div>
         </main>

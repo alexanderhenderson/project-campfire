@@ -462,9 +462,10 @@ code {
 
 .paginate-button{
 
-  background-color: rgba(114, 114, 114, 0.914);
+  background-color: rgba(67, 67, 67, 0.914);
   border-radius: .9ch;
-  width: 30rem;
+  width: 10rem;
+  height: 5rem;
   transition:.3s ease;
   
 }
@@ -480,16 +481,16 @@ code {
 }
 
   .arrow {
-    border: solid rgba(0, 0, 0, 0.842);
-    border-width: 10px 0 0 10px;
+    border: solid rgba(230, 230, 230, 0.681);
+    border-width: 8px 0 0 8px;
     display: inline-table;
-    padding: 3.5rem;
+    padding: 1.5rem;
     border-bottom-right-radius: .8ch;
-    border-bottom-left-radius: .7ch;
-    border-top-right-radius: .7ch;
+    border-bottom-left-radius: .5ch;
+    border-top-right-radius: .5ch;
     box-shadow:
      0 0 0 0 hsla(0, 0%, 80%, 0.533),
-     -10px -10px 10px 0 hsla(0, 0%, 0%, 0.327);  
+     -10px -10px 10px 0 hsla(0, 0%, 56%, 0.228);  
   }
 
   .down {
@@ -518,13 +519,13 @@ code {
 .center-p{
   text-align: center; 
   padding-bottom: 3rem;  
-  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.367);
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.551);
 }
 
 .paginate-button:hover{
     cursor: pointer;
     transform:scale(1.1,1.1);
-    -webkit-transform:scale(1.05,1.05);
+    -webkit-transform:scale(1.1,1.1);
     -moz-transform:scale(1.1,1.1);
 }
 /* 
@@ -540,3 +541,30 @@ code {
          1px  1px 0px rgba(255, 255, 255, 0.532);
 
 }   */
+
+.event-pointer{
+  cursor: pointer;
+}
+
+.back-to-top-btn{
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  padding-top: 1.5rem;
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.551);
+  background-color: rgba(67, 67, 67, 0.914);
+  border-radius: .9ch;
+  width: 10rem;
+  height: 5rem;
+  transition:.3s ease;
+  font-weight: bold;
+}
+
+.back-to-top-btn:hover{
+  font-weight: bolder;
+  color: white;
+  cursor: pointer;
+  transform:scale(1.1,1.1);
+  -webkit-transform:scale(1.1,1.1);
+  -moz-transform:scale(1.1,1.1);
+}
