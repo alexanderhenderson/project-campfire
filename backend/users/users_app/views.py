@@ -393,7 +393,9 @@ def api_friend_request_add(request, pk):
                 response.status_code = 200
                 return response
         except User.DoesNotExist:
-            response = JsonResponse({"message": "failed to add friend_request"})
+            response = JsonResponse(
+                {"message": "failed to add friend_request"}
+            )
             response.status_code = 200
             return response
 
