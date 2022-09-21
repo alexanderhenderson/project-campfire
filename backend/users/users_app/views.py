@@ -24,8 +24,8 @@ def api_user_token(request):
 class UserListEncoder(ModelEncoder):
     model = User
     properties = [
-    "id", "username", "first_name", "last_name",
-    "email", "profile_photo", "city", "state"
+        "id", "username", "first_name", "last_name",
+        "email", "profile_photo", "city", "state"
     ]
 
 
