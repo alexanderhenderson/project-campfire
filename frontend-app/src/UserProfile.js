@@ -187,7 +187,6 @@ export default function UserProfile() {
                                 <div className="col-sm">
                                     <div className="body my-3 text-center">
                                         <h1>{userData.username}</h1>
-                                        {/* eslint-disable-next-line */}
                                         {userId.id == id ? (
                                             <div><a className="btn btn-dark rounded-pill mb-3" href={`${editProfileLink}${userId.id}`} role="button">Edit Profile</a></div>) 
                                             : (friend === false ? (
@@ -202,9 +201,6 @@ export default function UserProfile() {
 													Add to Friend's List{" "}
 												</button>
                                                 ) : ( friend === "sent" ? "Friend request sent" : "is your friend" ))}
-                                                {/* ) : "is your friend")} */}
-
-                                            {/* {friend == false ? ("Add friend button") : ("Already a friend")} */}
                                     </div>
                                     <div className="col">
                                         <div className='mb-3 text-center'>
