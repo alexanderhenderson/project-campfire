@@ -15,6 +15,7 @@ import CreateEvent from'./CreateEvent'
 import { UserContext } from "./UserContext"
 import { useState, useEffect } from "react"
 import EditProfile from "./EditProfile"
+import SearchProfiles from "./SearchProfiles"
 
 export default function App() {
   const domain = /https:\/\/[^/]+/
@@ -35,7 +36,7 @@ export default function App() {
     getUserdata()
 
   }, [])
-  console.log("userId ", userId)
+ 
   return (
   <UserContext.Provider value={{
     userId, setUserId
@@ -49,6 +50,7 @@ export default function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="intro" element={<IntroPage />} />
             <Route path="profile/:id" element={<UserProfile />} />
+            <Route path="search" element={<SearchProfiles />} />
             <Route path="profile/edit/:id" element={<EditProfile />} />
             <Route path="login" element={<LogIn />} />
             <Route path="logout" element={<LogOut />} />

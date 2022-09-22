@@ -23,7 +23,16 @@ def api_user_token(request):
 
 class UserListEncoder(ModelEncoder):
     model = User
-    properties = ["id", "username", "first_name", "last_name", "email"]
+    properties = [
+        "id",
+        "username",
+        "first_name",
+        "last_name",
+        "email",
+        "profile_photo",
+        "city",
+        "state"
+    ]
 
 
 # path: http://localhost:8080/users/api/tokens/user/
@@ -219,6 +228,7 @@ class CommentEncoder(ModelEncoder):
         "comment",
         "commenter",
         "user_profile",
+        "time_posted",
     ]
     encoders = {
         "commenter": UserCommentEncoder(),

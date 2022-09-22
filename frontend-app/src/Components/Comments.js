@@ -52,7 +52,7 @@ export default function Comments() {
   }
   return (
     <>
-      <div classname='mt-5'>
+      <div className='mt-5'>
         <h1>Comments</h1>
       </div>
       <form>
@@ -74,6 +74,7 @@ export default function Comments() {
                 return (
                   <tr key={comments.id}>
                     <td>{comments.comment}</td>
+                    <td>{new Date(comments.time_posted).toLocaleString()}</td>
                     <td>- {comments.commenter.username}</td>
                   </tr>
                 )
