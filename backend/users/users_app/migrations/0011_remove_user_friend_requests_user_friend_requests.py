@@ -19,7 +19,10 @@ class Migration(migrations.Migration):
             model_name="user",
             name="friend_requests",
             field=django.contrib.postgres.fields.ArrayField(
-                base_field=models.IntegerField(), blank=True, default=list, size=None
+                base_field=models.IntegerField(),
+                blank=True,
+                default=list,
+                size=None,
             ),
         ),
     ]

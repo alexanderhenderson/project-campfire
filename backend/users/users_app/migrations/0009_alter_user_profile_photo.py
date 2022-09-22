@@ -6,7 +6,10 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("users_app", "0008_alter_comment_commenter_alter_comment_user_profile"),
+        (
+            "users_app",
+            "0008_alter_comment_commenter_alter_comment_user_profile",
+        ),
     ]
 
     operations = [

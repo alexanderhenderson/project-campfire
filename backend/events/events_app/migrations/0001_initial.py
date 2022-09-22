@@ -31,7 +31,9 @@ class Migration(migrations.Migration):
             fields=[
                 (
                     "id",
-                    models.PositiveIntegerField(primary_key=True, serialize=False),
+                    models.PositiveIntegerField(
+                        primary_key=True, serialize=False
+                    ),
                 ),
                 ("username", models.CharField(max_length=150)),
                 ("first_name", models.CharField(blank=True, max_length=30)),
