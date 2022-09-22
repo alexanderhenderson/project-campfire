@@ -79,7 +79,7 @@ export default function NavBar() {
   function checkLoggedIn(token){
     if (token){
         setLoggedIn(true)
-        console.log('token exists')
+        // console.log('token exists')
     }
   }
 

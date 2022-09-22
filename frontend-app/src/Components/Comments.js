@@ -2,25 +2,33 @@ import React, { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
 import { UserContext } from "../UserContext"
 
-export default function Comments() {
+export default function Comments(props) {
   const [commentData, setCommentData] = useState({})
   const [newComment, setNewComment] = useState('')
   const { id } = useParams()
   const { userId } = useContext(UserContext)
+  // const [ deletedComment, setDeleted ] = useState(false)
+  const { propUserId } = props
+  const [ refresh, setRefresh ] = useState(false)
 
 
   useEffect(() => {
+    // console.log("Loop watcher")
     const getCommentData = async () => {
       const url = `${process.env.REACT_APP_USERS}/users/profile/comments/${id}/`
       const response = await fetch(url, { credentials: "include" });
       if (response.ok) {
         const data = await response.json()
         setCommentData(await data.comments)
+        // setDeleted(false)
+        setRefresh(false)
       }
     }
     getCommentData()
     // eslint-disable-next-line react-hooks/exhaustive-deps 
-  }, [id, setCommentData, newComment])
+  }, [id, setCommentData, userId, refresh])
+  // }, [id, setCommentData, deletedComment, userId, refresh])
+  // }, [id, setCommentData, newComment, deletedComment, userId])
 
   const changeHandler = e => {
     setNewComment(e.target.value);
@@ -33,7 +41,7 @@ export default function Comments() {
       comment: newComment,
       user_profile: id,
     }
-    console.log(data)
+    // console.log(data)
     const url = `${process.env.REACT_APP_USERS}/users/comments/`
     const fetchConfig = {
       method: 'POST',
@@ -45,11 +53,30 @@ export default function Comments() {
     }
     const response = await fetch(url, fetchConfig)
     if (response.ok) {
-      const comment = await response.json()
-      console.log(comment)
+      // const comment = await response.json()
+      // console.log(comment)
       setNewComment('')
+      setRefresh(true)
     }
+
+   
+    // const response = await fetch(url, params);
+    // if (response.status === 200) {
+    //   console.log("Friend added")
+    //   setFriend(true)
+    // }}
+
   }
+
+   // this function is for deleting comments on your page
+  async function deleteComment(commentID) {
+      const url = `${process.env.REACT_APP_USERS}/users/comments/${commentID}/`;
+      const response = await fetch(url, {method : "DELETE"})
+      if (response.ok){
+        setRefresh(true)
+      }
+  }
+
   return (
     <>
       <div className='mt-5'>
@@ -76,6 +103,13 @@ export default function Comments() {
                     <td>{comments.comment}</td>
                     <td>{new Date(comments.time_posted).toLocaleString()}</td>
                     <td>- {comments.commenter.username}</td>
+                    <td>
+                    { parseInt(propUserId) === parseInt(userId.id) ?(
+                      <button className="btn btn-warning rounded-pill" onClick = {()=>deleteComment(comments.id)}>
+                        delete comment
+                      </button>
+                    ) : ""}
+                    </td>
                   </tr>
                 )
               })}

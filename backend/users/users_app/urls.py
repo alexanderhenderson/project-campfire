@@ -26,17 +26,17 @@ urlpatterns = [
     path(
         "requests/add/<int:pk>/",
         api_friend_request_add,
-        name="friend_requests_add"
+        name="friend_requests_add",
     ),
     path(
         "requests/approve/<int:pk>/",
         api_friend_request_approve,
-        name="friend_requests_approve"
+        name="friend_requests_approve",
     ),
     path(
         "requests/reject/<int:pk>/",
         api_friend_request_reject,
-        name="friend_requests_reject"
+        name="friend_requests_reject",
     ),
     # other request endpoints
     path("", list_users, name="api_list_users"),

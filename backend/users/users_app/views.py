@@ -31,7 +31,7 @@ class UserListEncoder(ModelEncoder):
         "email",
         "profile_photo",
         "city",
-        "state"
+        "state",
     ]
 
 
@@ -81,6 +81,13 @@ def api_friend_kindler(request):
         user_id = token_data["user"]["id"]
         user = User.objects.get(id=user_id)
 
+        # creating set of sent requests so that kindler doesn't match with
+        # users the client has already sent requests to
+        sent_requests = []
+        for request in user.sent_requests:
+            sent_requests.append(User.objects.get(id=request))
+        sent_requests = set(sent_requests)
+
         # getting user's favorite activities and storing their
         # ids in a set for comparison later
         user_activities = user.favorite_activities.all()
@@ -93,9 +100,11 @@ def api_friend_kindler(request):
 
         # getting all of the users excluding the client
         # using the friend set, we will also exclude
-        # existing friends
+        # existing friends and anyone the client has
+        # already sent a friend request to
         users = User.objects.exclude(id=user_id)
         users = set(users).difference(set(friends))
+        users = users.difference(sent_requests)
 
         # setting initial empty dict
         resultsV2 = {}
@@ -445,7 +454,9 @@ def api_friend_request_approve(request, pk):
                 friend.save()
 
                 # return a response
-                response = JsonResponse({"message": "friend_request approved"})
+                response = JsonResponse(
+                    {"message": "friend_request approved"}
+                )
                 response.status_code = 200
                 return response
         except User.DoesNotExist:
@@ -482,7 +493,9 @@ def api_friend_request_reject(request, pk):
                 friend.save()
 
                 # return a response
-                response = JsonResponse({"message": "friend_request rejected"})
+                response = JsonResponse(
+                    {"message": "friend_request rejected"}
+                )
                 response.status_code = 200
                 return response
         except User.DoesNotExist:

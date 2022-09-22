@@ -6,13 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users_app', '0008_alter_comment_commenter_alter_comment_user_profile'),
+        (
+            "users_app",
+            "0008_alter_comment_commenter_alter_comment_user_profile",
+        ),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='user',
-            name='profile_photo',
+            model_name="user",
+            name="profile_photo",
             field=models.URLField(blank=True, max_length=1000, null=True),
         ),
     ]

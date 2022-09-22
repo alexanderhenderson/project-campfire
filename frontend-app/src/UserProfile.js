@@ -15,6 +15,7 @@ export default function UserProfile() {
     const { id } = useParams()
     const { userId } = useContext(UserContext)
     const [ , , , , , , , , , editProfileLink] = settingLinks()
+    const [friend, setFriend] = useState(false)
 
     useEffect(() => {
         const getUserdata = async () => {
@@ -23,8 +24,24 @@ export default function UserProfile() {
             const response = await fetch(url, { credentials: "include" })
             if (response.ok) {
                 const data = await response.json()
+                setUserData(data)
+
+                if (userId !== undefined){
+                    let friends = []
+                    for (let friendKey in userId.friends){
+                        friends.push(userId.friends[friendKey].id)
+                    }
+                   
+                    if (friends.includes(data.id)){
+                        setFriend(true)
+                    } else if (data.friend_requests.includes(userId.id)){
+                        setFriend("sent")
+                    } else {
+                        setFriend(false)
+                    }
+                }
+
                 setUserData(await data)
-                console.log("userData: ", data)
                 setFriendRequestIds(await data["friend_requests"])
             } else {
                 console.log("getsUserData failed")
@@ -39,6 +56,20 @@ export default function UserProfile() {
                 setEvents(events.current)
             }
         }
+
+        // work in progress
+        // const requestFriends = async () => {
+        //     const url = `${process.env.REACT_APP_EVENTS}/events/`
+        //     const response = await fetch(url)
+        //     if (response.ok) {
+        //         const data = await response.json()
+        //         events.current = data.Events
+        //         setEvents(events.current)
+        //     }
+        // }
+
+        requestEvents()
+
         const requestUsers = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/`
             const response = await fetch(url)
@@ -53,7 +84,7 @@ export default function UserProfile() {
 
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id, requestHandled])
+    }, [id,requestHandled, userId])
 
     let currentUser = userData.id
     let attendedEvents = []
@@ -68,13 +99,29 @@ export default function UserProfile() {
     let slicedlist = attendedEvents.slice(0, 3)
 
 
+    // this function is for the add friend button
+    async function onClick() {
+
+        const url = `${process.env.REACT_APP_USERS}/users/requests/add/${userData.id}/`;
+		const params = {
+			method: "put",
+			credentials: "include",
+		};
+		const response = await fetch(url, params);
+		if (response.status === 200) {
+            // console.log("Friend request sent")
+            setFriend("sent")
+		}
+	}
+
+
     let requests = []
-    console.log("friendRequestIds: ", friendRequestIds)
-    console.log("users: ", usersData["users"])
+    // console.log("friendRequestIds: ", friendRequestIds)
+    // console.log("users: ", usersData["users"])
     if (friendRequestIds.length !== 0 && usersData.length !== 0) {
-        console.log("test")
+        // console.log("test")
         for (let requestId of friendRequestIds) {
-            console.log("requestId: ", requestId)
+            // console.log("requestId: ", requestId)
             for (let user of usersData["users"]) {
                 if (requestId === user["id"]){
                     requests.push(user)
@@ -82,7 +129,7 @@ export default function UserProfile() {
             }
         }
     }
-    console.log("requests: ", requests)
+    // console.log("requests: ", requests)
                     
     async function handleAccept(pk) {
         const url = `${process.env.REACT_APP_USERS}/users/requests/approve/${pk}/`
@@ -93,7 +140,7 @@ export default function UserProfile() {
 
         if (response.ok) {
             setRequestHandled(!requestHandled)
-            console.log("request accepted")
+            // console.log("request accepted")
         }
     }
 
@@ -106,7 +153,7 @@ export default function UserProfile() {
 
         if (response.ok) {
             setRequestHandled(!requestHandled)
-            console.log("request rejected")
+            // console.log("request rejected")
         }
     }
 
@@ -120,9 +167,20 @@ export default function UserProfile() {
                                 <div className="col-sm">
                                     <div className="body my-3 text-center">
                                         <h1>{userData.username}</h1>
-                                        {/* eslint-disable-next-line */}
-                                        {userId.id == id ? (
-                                            <div><a className="btn btn-dark rounded-pill mb-3" href={`${editProfileLink}${userId.id}`} role="button">Edit Profile</a></div>) : ""}
+                                        {parseInt(userId.id) === parseInt(id) ? (
+                                            <div><a className="btn btn-dark rounded-pill mb-3" href={`${editProfileLink}${userId.id}`} role="button">Edit Profile</a></div>) 
+                                            : (friend === false ? (
+                                                <button
+													type="button"
+													className="btn btn-dark rounded-pill"
+													onClick={() => {
+														onClick();
+													}}
+												>
+													{" "}
+													Add to Friend's List{" "}
+												</button>
+                                                ) : ( friend === "sent" ? "Friend request sent" : "is your friend" ))}
                                     </div>
                                     <div className="col">
                                         <div className='mb-3 text-center'>
@@ -186,7 +244,7 @@ export default function UserProfile() {
                                                                     <table className="table">
                                                                         <tbody>
                                                                             {userData?.friends?.map(friend => (
-                                                                                <tr key={friend.id}>
+                                                                                <tr key={"Friend"+friend.id}>
                                                                                     <td className="pointer"
                                                                                         onClick={() => {
                                                                                             navigate(`/profile/${friend.id}/`)
@@ -287,7 +345,7 @@ export default function UserProfile() {
 
                             <div className="container">
                                 <div className="row">
-                                    <Comments />
+                                    <Comments propUserId={id}/>
                                 </div>
                             </div>
 

@@ -1,9 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from 'react-router-dom'
 
 export default function Kindler() {
 	const [KindlerList, SetKindlerData] = useState([]);
+	const navigate = useNavigate()
+
 
 	useEffect(() => {
 		const KindlerData = async () => {
@@ -12,7 +15,7 @@ export default function Kindler() {
 
 			if (response.ok) {
 				const data = await response.json();
-				console.log("kindler data: ", data);
+				// console.log("kindler data: ", data);
 
 				// adding additional key-value pair so that we can
 				// track who has been added to a clients friend list
@@ -28,7 +31,7 @@ export default function Kindler() {
 	}, []);
 
 	async function onClick(friendID, objectNum) {
-		console.log("clicked obejctnum: ", objectNum);
+		// console.log("clicked obejctnum: ", objectNum);
 
 		const url = `${process.env.REACT_APP_USERS}/users/requests/add/${friendID}/`;
 		const params = {
@@ -38,7 +41,7 @@ export default function Kindler() {
 		const response = await fetch(url, params);
 
 		if (response.status === 200) {
-			console.log(response)
+			// console.log(response)
 			let kindlerState = [...KindlerList];
 			kindlerState[objectNum].friend = true;
 			SetKindlerData(kindlerState);
@@ -60,7 +63,13 @@ export default function Kindler() {
 							return (
 								<div className="col-sm-4" key={KindlerUser.id}>
 									<div className="kindle-top-level-card mb-3 shadow">
-										<img className="kindle-card-image" src={KindlerUser?.profile_photo || "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"} alt="" />
+										<div className ="kindle-image-container"onClick={() => {navigate(`/profile/${KindlerUser.id}/`)}}>
+											<img className="kindle-card-image pointer" src={KindlerUser?.profile_photo || "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"} alt="" />
+										</div >
+											<div className="flex top-left">
+											{/* <div className="flex top-left kindler-overlay-text"> */}
+												<h1>Click to view {KindlerUser?.username}'s profile</h1>
+											</div>
 										<div className="card-body ">
 											<h5 className="card-title">{KindlerUser.username}</h5>
 											{!KindlerUser?.friend ? (
@@ -72,15 +81,12 @@ export default function Kindler() {
 													}}
 												>
 													{" "}
-													Add to Friend's List{" "}
+													Send Friend Request{" "}
 												</button>
 											) : (
 												<div>
-													<h6 className="card-text">
-														How to contact {KindlerUser?.username}: {KindlerUser?.email}
-													</h6>
 													<div style={{ padding: 5 }}>
-														<h5 className="card-subtitle text-muted"> {KindlerUser?.username} added to friends list! </h5>
+														<h5 className="card-subtitle text-muted"> Friend request sent </h5>
 													</div>
 												</div>
 											)}

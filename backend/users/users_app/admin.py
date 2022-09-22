@@ -11,7 +11,7 @@ class UserAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    readonly_fields = ('time_posted',)
+    readonly_fields = ("time_posted",)
 
 
 admin.site.register(ActivityVO, ActivityVOAdmin)
