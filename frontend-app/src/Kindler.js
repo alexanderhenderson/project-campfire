@@ -15,7 +15,7 @@ export default function Kindler() {
 
 			if (response.ok) {
 				const data = await response.json();
-				console.log("kindler data: ", data);
+				// console.log("kindler data: ", data);
 
 				// adding additional key-value pair so that we can
 				// track who has been added to a clients friend list
@@ -31,7 +31,7 @@ export default function Kindler() {
 	}, []);
 
 	async function onClick(friendID, objectNum) {
-		console.log("clicked obejctnum: ", objectNum);
+		// console.log("clicked obejctnum: ", objectNum);
 
 		const url = `${process.env.REACT_APP_USERS}/users/requests/add/${friendID}/`;
 		const params = {
@@ -41,7 +41,7 @@ export default function Kindler() {
 		const response = await fetch(url, params);
 
 		if (response.status === 200) {
-			console.log(response)
+			// console.log(response)
 			let kindlerState = [...KindlerList];
 			kindlerState[objectNum].friend = true;
 			SetKindlerData(kindlerState);

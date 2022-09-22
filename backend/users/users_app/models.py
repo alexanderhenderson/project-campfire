@@ -14,16 +14,8 @@ class ActivityVO(models.Model):
 
 class User(AbstractUser):
     friends = models.ManyToManyField("self", blank=True)
-    friend_requests = ArrayField(
-        models.IntegerField(),
-        blank=True,
-        default=list
-    )
-    sent_requests = ArrayField(
-        models.IntegerField(),
-        blank=True,
-        default=list
-    )
+    friend_requests = ArrayField(models.IntegerField(), blank=True, default=list)
+    sent_requests = ArrayField(models.IntegerField(), blank=True, default=list)
     profile_description = models.TextField(null=True, blank=True)
     profile_photo = models.URLField(null=True, blank=True, max_length=1000)
     city = models.CharField(max_length=150)

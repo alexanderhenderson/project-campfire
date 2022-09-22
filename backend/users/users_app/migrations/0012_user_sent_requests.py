@@ -7,13 +7,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users_app', '0011_remove_user_friend_requests_user_friend_requests'),
+        ("users_app", "0011_remove_user_friend_requests_user_friend_requests"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='sent_requests',
-            field=django.contrib.postgres.fields.ArrayField(base_field=models.IntegerField(), blank=True, default=list, size=None),
+            model_name="user",
+            name="sent_requests",
+            field=django.contrib.postgres.fields.ArrayField(
+                base_field=models.IntegerField(), blank=True, default=list, size=None
+            ),
         ),
     ]

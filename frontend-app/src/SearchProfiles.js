@@ -23,9 +23,9 @@ export default function FetchUsers() {
         }
     getUsersList()
     }, [])
-console.log(usersList)
-console.log(addUser)
-console.log(usersList.length)
+// console.log(usersList)
+// console.log(addUser)
+// console.log(usersList.length)
     // function clickHandler(event, activity) {
     //     addActivities(userData.id, activity)
     //     setActivityList([...activityList, activity])

@@ -26,12 +26,9 @@ export default function UserProfile() {
                 const data = await response.json()
                 setUserData(data)
 
-                console.log("User data friend requests array: ", data.friend_requests)
-
                 if (userId !== undefined){
                     let friends = []
                     for (let friendKey in userId.friends){
-                        console.log("User loops: ", userId.friends[friendKey].id)
                         friends.push(userId.friends[friendKey].id)
                     }
                    
@@ -39,15 +36,12 @@ export default function UserProfile() {
                         setFriend(true)
                     } else if (data.friend_requests.includes(userId.id)){
                         setFriend("sent")
-                        console.log("Friend request sent")
-                        console.log("Friend state: ", friend)
                     } else {
                         setFriend(false)
                     }
                 }
 
                 setUserData(await data)
-                console.log("userData: ", data)
                 setFriendRequestIds(await data["friend_requests"])
             } else {
                 console.log("getsUserData failed")
@@ -115,33 +109,19 @@ export default function UserProfile() {
 		};
 		const response = await fetch(url, params);
 		if (response.status === 200) {
-            console.log("Friend request sent")
+            // console.log("Friend request sent")
             setFriend("sent")
 		}
 	}
 
-    // this function is for deleting comments on your page
-    // async function deleteComment() {
-	// 	const url = `${process.env.REACT_APP_USERS}/users/api/friend/`;
-	// 	const params = {
-	// 		method: "put",
-	// 		body: userData.id,
-	// 		credentials: "include",
-	// 	};
-	// 	const response = await fetch(url, params);
-	// 	if (response.status === 200) {
-    //         console.log("Friend added")
-    //         setFriend(true)
-	// 	}
-	// }
 
     let requests = []
-    console.log("friendRequestIds: ", friendRequestIds)
-    console.log("users: ", usersData["users"])
+    // console.log("friendRequestIds: ", friendRequestIds)
+    // console.log("users: ", usersData["users"])
     if (friendRequestIds.length !== 0 && usersData.length !== 0) {
-        console.log("test")
+        // console.log("test")
         for (let requestId of friendRequestIds) {
-            console.log("requestId: ", requestId)
+            // console.log("requestId: ", requestId)
             for (let user of usersData["users"]) {
                 if (requestId === user["id"]){
                     requests.push(user)
@@ -149,7 +129,7 @@ export default function UserProfile() {
             }
         }
     }
-    console.log("requests: ", requests)
+    // console.log("requests: ", requests)
                     
     async function handleAccept(pk) {
         const url = `${process.env.REACT_APP_USERS}/users/requests/approve/${pk}/`
@@ -160,7 +140,7 @@ export default function UserProfile() {
 
         if (response.ok) {
             setRequestHandled(!requestHandled)
-            console.log("request accepted")
+            // console.log("request accepted")
         }
     }
 
@@ -173,7 +153,7 @@ export default function UserProfile() {
 
         if (response.ok) {
             setRequestHandled(!requestHandled)
-            console.log("request rejected")
+            // console.log("request rejected")
         }
     }
 
@@ -187,7 +167,7 @@ export default function UserProfile() {
                                 <div className="col-sm">
                                     <div className="body my-3 text-center">
                                         <h1>{userData.username}</h1>
-                                        {userId.id == id ? (
+                                        {parseInt(userId.id) === parseInt(id) ? (
                                             <div><a className="btn btn-dark rounded-pill mb-3" href={`${editProfileLink}${userId.id}`} role="button">Edit Profile</a></div>) 
                                             : (friend === false ? (
                                                 <button
@@ -264,7 +244,7 @@ export default function UserProfile() {
                                                                     <table className="table">
                                                                         <tbody>
                                                                             {userData?.friends?.map(friend => (
-                                                                                <tr key={friend.id}>
+                                                                                <tr key={"Friend"+friend.id}>
                                                                                     <td className="pointer"
                                                                                         onClick={() => {
                                                                                             navigate(`/profile/${friend.id}/`)
@@ -365,7 +345,7 @@ export default function UserProfile() {
 
                             <div className="container">
                                 <div className="row">
-                                    <Comments />
+                                    <Comments propUserId={id}/>
                                 </div>
                             </div>
 

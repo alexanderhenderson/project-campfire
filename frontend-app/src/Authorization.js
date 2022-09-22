@@ -36,7 +36,7 @@ export async function getTokenInternal() {
       internalToken = await data.token
       return internalToken
     }
-  } catch (e) { }
+  } catch (e) { console.log("test ")}
   return false
 }
 
