@@ -7,7 +7,7 @@ export default function EventList(props) {
   const [filteredEvents, setFilteredEvents] = useState([])
   const [search, setSearch] = useState('')
   const navigate = useNavigate()
-  const [, , , eventsLink] = settingLinks()
+  const [, , , , eventsLink] = settingLinks()
 
 
   useEffect(() => {
