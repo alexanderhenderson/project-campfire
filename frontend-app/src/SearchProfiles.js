@@ -73,7 +73,7 @@ console.log(usersList.length)
                                     onClick={() => {
                                         navigate(`/profile/${user.id}/`)
                                     }}>
-                                            <img src={user?.profile_photo || "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"} className="card-img-top crop-image" alt="" />
+                                            <img src={user?.profile_photo || "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"} className="card-img-top crop-image" alt="profile photo" />
                                             <div className="card-body">
                                                 <h5 className="card-title center_card_text">Username: {user.username}</h5>
                                                 <h6 className="card-title center_card_text"> Name: {user.first_name} {user.last_name}</h6>
@@ -87,10 +87,10 @@ console.log(usersList.length)
                         })}
                 </div>
                 <div className="div-center">
-                {addUser <= usersList.length - 8 ? <p  className="center-p paginate-button "
+                {addUser <= usersList.length - 8 ? <button  className="center-p paginate-button" aria-label="load more users"
                 onClick={() => {
                       setAddUser(addUser + 6);
-                  }}><i className=" arrow down outline "></i></p> : <a className="back-to-top-btn " href="#top">Back to top</a> }
+                  }}><i className=" arrow down outline "></i></button> : <a className="back-to-top-btn " href="#top">Back to top</a> }
                 
                 </div>
             </div>

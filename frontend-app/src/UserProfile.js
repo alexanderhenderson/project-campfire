@@ -61,7 +61,7 @@ export default function UserProfile() {
                                     <div className="body my-3 text-center">
                                         <h1>{userData.username}</h1>
                                         {/* eslint-disable-next-line */}
-                                        {userId.id == id ? (
+                                        {String(userId.id) === id ? (
                                             <div><a className="btn btn-dark rounded-pill mb-3" href={`${editProfileLink}${userId.id}`} role="button">Edit Profile</a></div>) : ""}
                                     </div>
                                     <div className="col">
