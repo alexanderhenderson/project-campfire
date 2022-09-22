@@ -56,7 +56,7 @@ export function settingLinks() {
 }
 
 export default function NavBar() {
-  const [homeLink, introLink, , activitiesLink,eventsLink, kindlerLink, signupLink, loginLink, , , searchLink] = settingLinks()
+  const [homeLink, introLink, , activitiesLink, eventsLink, kindlerLink, signupLink, loginLink, , , searchLink] = settingLinks()
   const [token, , logout] = useToken()
   const [ , setLogoutResponse] = useState()
   const [loggedIn, setLoggedIn]=useState(false)
@@ -79,7 +79,7 @@ export default function NavBar() {
   function checkLoggedIn(token){
     if (token){
         setLoggedIn(true)
-        console.log('token exists')
+        // console.log('token exists')
     }
   }
 

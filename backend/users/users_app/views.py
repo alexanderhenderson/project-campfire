@@ -24,8 +24,14 @@ def api_user_token(request):
 class UserListEncoder(ModelEncoder):
     model = User
     properties = [
-        "id", "username", "first_name", "last_name",
-        "email", "profile_photo", "city", "state"
+        "id",
+        "username",
+        "first_name",
+        "last_name",
+        "email",
+        "profile_photo",
+        "city",
+        "state",
     ]
 
 
@@ -75,6 +81,13 @@ def api_friend_kindler(request):
         user_id = token_data["user"]["id"]
         user = User.objects.get(id=user_id)
 
+        # creating set of sent requests so that kindler doesn't match with
+        # users the client has already sent requests to
+        sent_requests = []
+        for request in user.sent_requests:
+            sent_requests.append(User.objects.get(id=request))
+        sent_requests = set(sent_requests)
+
         # getting user's favorite activities and storing their
         # ids in a set for comparison later
         user_activities = user.favorite_activities.all()
@@ -87,9 +100,11 @@ def api_friend_kindler(request):
 
         # getting all of the users excluding the client
         # using the friend set, we will also exclude
-        # existing friends
+        # existing friends and anyone the client has
+        # already sent a friend request to
         users = User.objects.exclude(id=user_id)
         users = set(users).difference(set(friends))
+        users = users.difference(sent_requests)
 
         # setting initial empty dict
         resultsV2 = {}
@@ -196,6 +211,8 @@ class UserDetailEncoder(ModelEncoder):
         "state",
         "favorite_activities",
         "friends",
+        "friend_requests",
+        "sent_requests",
     ]
     encoders = {
         "favorite_activities": ActivityVOEncoder(),
@@ -220,6 +237,7 @@ class CommentEncoder(ModelEncoder):
         "comment",
         "commenter",
         "user_profile",
+        "time_posted",
     ]
     encoders = {
         "commenter": UserCommentEncoder(),
@@ -369,6 +387,122 @@ def activity_detail(request, pk):
         except ActivityVO.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
+            return response
+
+
+@auth.jwt_login_required
+@require_http_methods(["PUT"])
+def api_friend_request_add(request, pk):
+    if request.method == "PUT":
+        try:
+            if "jwt_access_token" in request.COOKIES:
+
+                # get user id and friend id
+                user_id = request.payload["user"]["id"]
+                friend_id = pk
+
+                friend = User.objects.get(id=friend_id)
+                requests = friend.friend_requests
+                requests.append(user_id)
+                setattr(friend, "friend_requests", requests)
+                friend.save()
+
+                user = User.objects.get(id=user_id)
+                sent = user.sent_requests
+                sent.append(friend_id)
+                setattr(user, "sent_requests", sent)
+                user.save()
+
+                # return a response
+                response = JsonResponse({"message": "friend_request added"})
+                response.status_code = 200
+                return response
+        except User.DoesNotExist:
+            response = JsonResponse(
+                {"message": "failed to add friend_request"}
+            )
+            response.status_code = 200
+            return response
+
+
+@auth.jwt_login_required
+@require_http_methods(["PUT"])
+def api_friend_request_approve(request, pk):
+    if request.method == "PUT":
+        try:
+            if "jwt_access_token" in request.COOKIES:
+
+                # get user id and friend id
+                user_id = request.payload["user"]["id"]
+                friend_id = pk
+
+                # get user and friend instances
+                user = User.objects.get(id=user_id)
+                friend = User.objects.get(id=friend_id)
+
+                # add friend instance to user friends field
+                user.friends.add(friend)
+
+                requests = user.friend_requests
+                requests.remove(friend_id)
+                setattr(user, "friend_requests", requests)
+                user.save()
+
+                sent = friend.sent_requests
+                sent.remove(user_id)
+                setattr(friend, "sent_requests", sent)
+                friend.save()
+
+                # return a response
+                response = JsonResponse(
+                    {"message": "friend_request approved"}
+                )
+                response.status_code = 200
+                return response
+        except User.DoesNotExist:
+            response = JsonResponse(
+                {"message": "failed to approve friend_request"}
+            )
+            response.status_code = 200
+            return response
+
+
+@auth.jwt_login_required
+@require_http_methods(["PUT"])
+def api_friend_request_reject(request, pk):
+    if request.method == "PUT":
+        try:
+            if "jwt_access_token" in request.COOKIES:
+
+                # get user id and friend id
+                user_id = request.payload["user"]["id"]
+                friend_id = pk
+
+                # get user and friend instances
+                user = User.objects.get(id=user_id)
+                friend = User.objects.get(id=friend_id)
+
+                requests = user.friend_requests
+                requests.remove(friend_id)
+                setattr(user, "friend_requests", requests)
+                user.save()
+
+                sent = friend.sent_requests
+                sent.remove(user_id)
+                setattr(friend, "sent_requests", sent)
+                friend.save()
+
+                # return a response
+                response = JsonResponse(
+                    {"message": "friend_request rejected"}
+                )
+                response.status_code = 200
+                return response
+        except User.DoesNotExist:
+            response = JsonResponse(
+                {"message": "failed to reject friend_request"}
+            )
+            response.status_code = 200
             return response
 
 

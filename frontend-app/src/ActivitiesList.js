@@ -35,7 +35,7 @@ export default function FetchActivities() {
 
     }, [])
 
-    console.log("users id: ", userData.id)
+    // console.log("users id: ", userData.id)
 
     function clickHandler(event, activity) {
         addActivities(userData.id, activity)
