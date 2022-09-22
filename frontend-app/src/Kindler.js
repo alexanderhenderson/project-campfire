@@ -33,15 +33,15 @@ export default function Kindler() {
 	async function onClick(friendID, objectNum) {
 		console.log("clicked obejctnum: ", objectNum);
 
-		const url = `${process.env.REACT_APP_USERS}/users/api/friend/`;
+		const url = `${process.env.REACT_APP_USERS}/users/requests/add/${friendID}/`;
 		const params = {
 			method: "put",
-			body: friendID,
 			credentials: "include",
 		};
 		const response = await fetch(url, params);
 
 		if (response.status === 200) {
+			console.log(response)
 			let kindlerState = [...KindlerList];
 			kindlerState[objectNum].friend = true;
 			SetKindlerData(kindlerState);

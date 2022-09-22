@@ -21,7 +21,7 @@ export default function FetchUsers() {
                 setUsersList(data.users)
             }
         }
-     getUsersList()
+    getUsersList()
     }, [])
 console.log(usersList)
 console.log(addUser)
@@ -59,7 +59,7 @@ console.log(usersList.length)
                     type="search"
                     id="search"
                     className="form-control"
-                    placeholder="Search All Users"
+                    placeholder="Search for users"
                     onChange={handleChange}
                     aria-label="Search"
                 />
