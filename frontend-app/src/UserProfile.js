@@ -26,6 +26,8 @@ export default function UserProfile() {
                 const data = await response.json()
                 setUserData(data)
 
+                console.log("User data friend requests array: ", data.friend_requests)
+
                 if (userId !== undefined){
                     let friends = []
                     for (let friendKey in userId.friends){
@@ -35,6 +37,10 @@ export default function UserProfile() {
                    
                     if (friends.includes(data.id)){
                         setFriend(true)
+                    } else if (data.friend_requests.includes(userId.id)){
+                        setFriend("sent")
+                        console.log("Friend request sent")
+                        console.log("Friend state: ", friend)
                     } else {
                         setFriend(false)
                     }
@@ -101,16 +107,16 @@ export default function UserProfile() {
 
     // this function is for the add friend button
     async function onClick() {
-		const url = `${process.env.REACT_APP_USERS}/users/api/friend/`;
+
+        const url = `${process.env.REACT_APP_USERS}/users/requests/add/${userData.id}/`;
 		const params = {
 			method: "put",
-			body: userData.id,
 			credentials: "include",
 		};
 		const response = await fetch(url, params);
 		if (response.status === 200) {
-            console.log("Friend added")
-            setFriend(true)
+            console.log("Friend request sent")
+            setFriend("sent")
 		}
 	}
 
@@ -195,7 +201,9 @@ export default function UserProfile() {
 													{" "}
 													Add to Friend's List{" "}
 												</button>
-                                                ) : "is your friend")}
+                                                ) : ( friend === "sent" ? "Friend request sent" : "is your friend" ))}
+                                                {/* ) : "is your friend")} */}
+
                                             {/* {friend == false ? ("Add friend button") : ("Already a friend")} */}
                                     </div>
                                     <div className="col">

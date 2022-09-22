@@ -81,15 +81,12 @@ export default function Kindler() {
 													}}
 												>
 													{" "}
-													Add to Friend's List{" "}
+													Send Friend Request{" "}
 												</button>
 											) : (
 												<div>
-													<h6 className="card-text">
-														How to contact {KindlerUser?.username}: {KindlerUser?.email}
-													</h6>
 													<div style={{ padding: 5 }}>
-														<h5 className="card-subtitle text-muted"> {KindlerUser?.username} added to friends list! </h5>
+														<h5 className="card-subtitle text-muted"> Friend request sent </h5>
 													</div>
 												</div>
 											)}
