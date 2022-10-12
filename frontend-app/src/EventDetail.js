@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { addAttendee } from "./Components/AddAttendee"
 
 function FetchEvent() {
@@ -8,6 +8,7 @@ function FetchEvent() {
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
     const { dynamicId } = useParams()
+    const navigate = useNavigate()
 
 console.log(dynamicId)
 
@@ -92,7 +93,10 @@ console.log(dynamicId)
                                                     {attendeesList.map(attendee => {
                                                         return (
                                                             <tr key={attendee.id}>
-                                                                <td>{attendee.first_name} {attendee.last_name}</td>
+                                                                <td className="pointer"
+                                                                    onClick={() => { navigate(`/profile/${attendee.id}/`)}}>
+                                                                    {attendee.first_name} {attendee.last_name}
+                                                                </td>
                                                             </tr>
                                                         )
 
