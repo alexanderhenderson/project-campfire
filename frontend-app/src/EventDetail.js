@@ -10,7 +10,7 @@ function FetchEvent() {
     const { dynamicId } = useParams()
     const navigate = useNavigate()
 
-console.log(dynamicId)
+    console.log(dynamicId)
 
     useEffect(() => {
         const getEventData = async () => {
@@ -40,10 +40,10 @@ console.log(dynamicId)
         }
         getEventData()
         getUserdata()
-    // eslint-disable-next-line react-hooks/exhaustive-deps    
+        // eslint-disable-next-line react-hooks/exhaustive-deps    
     }, [])
 
-    
+
     const currentUser = userData.id
 
     function clickHandler() {
@@ -52,10 +52,10 @@ console.log(dynamicId)
     }
 
     let container = []
-    for(let att of attendeesList){
+    for (let att of attendeesList) {
         container.push(att.id)
     }
-    
+
     return (
         <>
             <div className="container px-4 py-4">
@@ -80,9 +80,9 @@ console.log(dynamicId)
                                             </span>
                                             <div className='mt-5 text-center'>
                                                 <p>
-                                                   {container.indexOf(currentUser) === -1 ? <button onClick={() => {
+                                                    {container.indexOf(currentUser) === -1 ? <button onClick={() => {
                                                         clickHandler()
-                                                    }} type="button" className='btn btn-dark btn-lg rounded-pill'>RSVP</button> : null } 
+                                                    }} type="button" className='btn btn-dark btn-lg rounded-pill'>RSVP</button> : null}
                                                 </p>
                                             </div>
                                         </div>
@@ -94,7 +94,7 @@ console.log(dynamicId)
                                                         return (
                                                             <tr key={attendee.id}>
                                                                 <td className="pointer"
-                                                                    onClick={() => { navigate(`/profile/${attendee.id}/`)}}>
+                                                                    onClick={() => { navigate(`/profile/${attendee.id}/`) }}>
                                                                     {attendee.first_name} {attendee.last_name}
                                                                 </td>
                                                             </tr>
