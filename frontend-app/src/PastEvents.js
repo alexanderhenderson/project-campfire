@@ -65,8 +65,11 @@ export default function PastEvents(props) {
             <div className="col">
               <h1>Search Former Events</h1>
             </div>
-            <div className="col">
-            <div className="align-right"><a className="btn btn-dark rounded-pill mb-3" href={`${eventsLink}create/`} role="button">Add Event</a></div>
+            <div className="col align-right">
+            <div><a className="btn btn-dark rounded-pill mb-3" href={`${eventsLink}create/`} role="button">Add Event</a></div>
+            </div>
+            <div className="align-right">
+            <div><a className="btn btn-dark rounded-pill mb-3" href={`${eventsLink}/`} role="button">Search Current Events</a></div>
             </div>
           </div>
           </div>
