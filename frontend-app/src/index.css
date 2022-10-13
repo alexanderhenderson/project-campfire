@@ -421,6 +421,12 @@ width: 100%;
     display: flex;
     justify-content: right;
   }
+  .align-right-padded-top {
+    margin-right: auto;
+    display: flex;
+    justify-content: right;
+    padding-top: 10px ;
+  }
 
   .right {
     display: grid;

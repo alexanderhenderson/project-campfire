@@ -2,12 +2,14 @@ import { useNavigate } from 'react-router-dom'
 import React, { useState, useEffect, useRef } from 'react'
 import { settingLinks } from "./Nav"
 
-export default function EventList(props) {
+export default function PastEvents(props) {
   const events = useRef([])
   const [filteredEvents, setFilteredEvents] = useState([])
   const [search, setSearch] = useState('')
   const navigate = useNavigate()
   const [, , , , eventsLink] = settingLinks()
+  const [searchedEvents, setSearchedEvents] = useState([])
+
 
 
   useEffect(() => {
@@ -15,9 +17,21 @@ export default function EventList(props) {
       const url = `${process.env.REACT_APP_EVENTS}/events/`
       const response = await fetch(url)
       if (response.ok) {
+
         const data = await response.json()
         events.current = data.Events
-        setFilteredEvents(events.current)
+        const formerEvents= []
+        const eventGrp = events.current
+
+        for(let event of eventGrp){
+          const endDate= new Date(event.end)
+          const currentDate= new Date()
+          if(currentDate > endDate){
+            formerEvents.push(event)
+            console.log("array of former events", formerEvents)
+          }
+        }
+        setFilteredEvents(formerEvents)
 
       } else {
         console.log("Could not load the events, try again")
@@ -26,18 +40,21 @@ export default function EventList(props) {
     requestEvents()
   }, [])
 
+  
   function searchFilter() {
-    const searchedEvents = events.current.filter(event => event.name.toLowerCase().includes(search.toLowerCase()))
-    setFilteredEvents(searchedEvents)
+    const searchedEvents = filteredEvents.filter(event => event.name.toLowerCase().includes(search.toLowerCase()))
+    setSearchedEvents(searchedEvents)
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { searchFilter() }, [search])
 
   function handleChange(event) {
-    setSearch(event.target.value)
+    setSearch(event.target.value) 
   }
 
-
+  const eventsList = search.length < 1
+        ? filteredEvents
+        : searchedEvents;
 
   return (
     <>
@@ -46,14 +63,10 @@ export default function EventList(props) {
         <div className='container'>
           <div className="row">
             <div className="col">
-              <h1>Events</h1>
+              <h1>Search Former Events</h1>
             </div>
-            
             <div className="col">
             <div className="align-right"><a className="btn btn-dark rounded-pill mb-3" href={`${eventsLink}create/`} role="button">Add Event</a></div>
-            </div>
-            <div className="col">
-            <div className="align-right"><a className="btn btn-dark rounded-pill mb-3" href={`${eventsLink}create/`} role="button">Search Former Events</a></div>
             </div>
           </div>
           </div>
@@ -67,9 +80,8 @@ export default function EventList(props) {
             aria-label="Search"
           />
         </div>
-        
         <div className="row">
-          {filteredEvents.map(event => {
+          {eventsList.map(event => {
             return (
               <div className="col-sm-4 mt-3 mb-3" key={event.id}>
                 <div className="card mb-3 shadow h-100 event-pointer"
