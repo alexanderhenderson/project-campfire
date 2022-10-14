@@ -15,6 +15,7 @@ export default function Comments(props) {
   useEffect(() => {
     // console.log("Loop watcher")
     const getCommentData = async () => {
+      console.log("Comment loop watch")
       const url = `${process.env.REACT_APP_USERS}/users/profile/comments/${id}/`
       const response = await fetch(url, { credentials: "include" });
       if (response.ok) {

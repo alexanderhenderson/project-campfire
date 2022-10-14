@@ -11,6 +11,8 @@ export default function FetchActivities() {
 
     useEffect(() => {
 
+        console.log("Activities loop watch")
+
         const getActivityData = async () => {
             const url = `${process.env.REACT_APP_EVENTS}/events/activities/`
             const response = await fetch(url)

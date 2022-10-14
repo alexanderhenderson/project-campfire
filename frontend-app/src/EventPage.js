@@ -11,6 +11,9 @@ export default function EventList(props) {
 
 
   useEffect(() => {
+
+    console.log("Events loop watch")
+
     const requestEvents = async () => {
       const url = `${process.env.REACT_APP_EVENTS}/events/`
       const response = await fetch(url)

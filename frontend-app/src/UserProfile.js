@@ -18,6 +18,8 @@ export default function UserProfile() {
     const [friend, setFriend] = useState(false)
 
     useEffect(() => {
+        console.log("Loop watch")
+
         const getUserdata = async () => {
             const url = `${process.env.REACT_APP_USERS}/users/${id}`
 

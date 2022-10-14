@@ -10,6 +10,7 @@ export default function Kindler() {
 
 	useEffect(() => {
 		const KindlerData = async () => {
+			console.log("loop watch")
 			const url = `${process.env.REACT_APP_USERS}/users/api/kindler`;
 			const response = await fetch(url, { credentials: "include" });
 

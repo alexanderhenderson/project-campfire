@@ -24,6 +24,8 @@ export function getToken() {
 }
 export async function getTokenInternal() {
   const url = `${process.env.REACT_APP_USERS}/users/api/tokens/mine/`
+  console.log("loop watch gettokeninternal")
+
   try {
     
     const response = await fetch(url, {
@@ -41,6 +43,7 @@ export async function getTokenInternal() {
 }
 
 function handleErrorMessage(error) {
+  console.log("Error handle loop watch")
   if ("error" in error) {
     error = error.error
     try {

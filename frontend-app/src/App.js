@@ -26,6 +26,7 @@ export default function App() {
 
   useEffect(() => {
     const getUserdata = async () => {
+        console.log("loop watch context")
         const url = `${process.env.REACT_APP_USERS}/users/api/tokens/user/`;
         const response = await fetch(url, { credentials: "include" });
         if (response.ok) {

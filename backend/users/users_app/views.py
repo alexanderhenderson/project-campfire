@@ -81,8 +81,6 @@ def api_friend_kindler(request):
         user_id = token_data["user"]["id"]
         user = User.objects.get(id=user_id)
 
-        # creating set of sent requests so that kindler doesn't match with
-        # users the client has already sent requests to
         sent_requests = []
         for request in user.sent_requests:
             sent_requests.append(User.objects.get(id=request))
