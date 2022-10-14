@@ -28,7 +28,6 @@ export default function PastEvents(props) {
           const currentDate= new Date()
           if(currentDate < endDate){
             currentEvents.push(event)
-            console.log("array of former events", currentEvents)
           }
         }
         setFilteredEvents(currentEvents)

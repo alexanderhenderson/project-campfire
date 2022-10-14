@@ -96,8 +96,28 @@ export default function UserProfile() {
             }
         }
     }
-    let slicedlist = attendedEvents.slice(0, 3)
 
+    // filter present attended events by date
+    const currentEvents = []
+    for(let event of attendedEvents){
+        const endDate= new Date(event.end)
+        const currentDate= new Date()
+        if(currentDate < endDate){
+          currentEvents.push(event)
+        }
+      }
+
+    let slicedlist = currentEvents.slice(0, 3)
+
+    //filter past attended events by date
+    const usersEventsPassed = []
+    for(let event of attendedEvents){
+        const endDate= new Date(event.end)
+        const currentDate= new Date()
+        if(currentDate > endDate){
+          usersEventsPassed.push(event)
+        }
+      }
 
     // this function is for the add friend button
     async function onClick() {
@@ -316,11 +336,12 @@ export default function UserProfile() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm text-center">
-                                    <h4>RSVP'd Events</h4>
+                                <div className="col-sm text-center padding-top-med">
+                                    <h4>Current RSVP'd Events</h4>
                                     <table className="table">
                                         <tbody>
-                                            {slicedlist.map(evt => (
+                                            
+                                            {slicedlist.length > 0? slicedlist.map(evt => (
                                                 <tr key={evt.id}>
                                                     <td className="pointer"
                                                     onClick={() => {
@@ -336,7 +357,38 @@ export default function UserProfile() {
                                                         </img>
                                                     </td>
                                                 </tr>
-                                            ))}
+                                            )): <tr className="pointer"
+                                                    onClick={() => {
+                                                    navigate(`/events/`)}}>
+                                                    No Current Events!<b>CLICK</b>to jump to Events!
+                                                </tr>}
+
+                                        
+                                        </tbody>
+                                    </table>
+    
+                                    <h4 className="padding-top-med">Past Events I've Attended</h4>
+                                    <table className="table">
+                                        <tbody>
+                                            {usersEventsPassed.length > 0? usersEventsPassed.map(evt => (
+                                                <tr key={evt.id}>
+                                                    <td className="pointer"
+                                                    onClick={() => {
+                                                        navigate(`/events/${evt.id}/`)
+                                                    }}>
+                                                    {evt.name}
+                                                    </td>
+                                                    <td className="pointer"
+                                                    onClick={() => {
+                                                        navigate(`/events/${evt.id}/`)
+                                                    }}>
+                                                    </td>
+                                                </tr>
+                                            )): <tr className="pointer"
+                                                    onClick={() => {
+                                                    navigate(`/events/`)}}>
+                                                    No Past Events!<b>CLICK</b>to jump to Events!
+                                                </tr> }
                                         </tbody>
                                     </table>
                                 </div>
