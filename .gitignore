@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 .key.py
 
-djwto_key = c0c3ec33213a4ce5f0378c4350846fc35310b3ae3672a8b7f0ffae1a527d38cc
+
 
 # C extensions
 *.so
