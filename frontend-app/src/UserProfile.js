@@ -360,37 +360,55 @@ export default function UserProfile() {
                                             )): <tr className="pointer"
                                                     onClick={() => {
                                                     navigate(`/events/`)}}>
-                                                    No Current Events!<b>CLICK</b>to jump to Events!
+                                                    No Current Events! CLICK to jump to Events!
                                                 </tr>}
 
                                         
                                         </tbody>
                                     </table>
-    
                                     <h4 className="padding-top-med">Past Events I've Attended</h4>
-                                    <table className="table">
-                                        <tbody>
-                                            {usersEventsPassed.length > 0? usersEventsPassed.map(evt => (
-                                                <tr key={evt.id}>
-                                                    <td className="pointer"
-                                                    onClick={() => {
-                                                        navigate(`/events/${evt.id}/`)
-                                                    }}>
-                                                    {evt.name}
-                                                    </td>
-                                                    <td className="pointer"
-                                                    onClick={() => {
-                                                        navigate(`/events/${evt.id}/`)
-                                                    }}>
-                                                    </td>
-                                                </tr>
-                                            )): <tr className="pointer"
-                                                    onClick={() => {
-                                                    navigate(`/events/`)}}>
-                                                    No Past Events!<b>CLICK</b>to jump to Events!
-                                                </tr> }
-                                        </tbody>
-                                    </table>
+                                    <div className="accordion" id="accordionExample">
+                                            <div className="accordion-item">
+                                                <h2 className="accordion-header" id="headingFour">
+                                                    <button className="accordion-button" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                                        aria-expanded="true" aria-controls="collapseFour">
+                                                        Click to expand
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseFour" className="accordion-collapse collapse"
+                                                    aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                                    <div className="accordion-body">
+                                                        <div className="col">
+                                                            <table className="table">
+                                                                <tbody>
+                                                                
+                                                                    {usersEventsPassed.length > 0? usersEventsPassed.map(evt => (
+                                                                        <tr key={evt.id}>
+                                                                            <td className="pointer"
+                                                                            onClick={() => {
+                                                                                navigate(`/events/${evt.id}/`)
+                                                                            }}>
+                                                                            {evt.name}
+                                                                            </td>
+                                                                            <td className="pointer"
+                                                                            onClick={() => {
+                                                                                navigate(`/events/${evt.id}/`)
+                                                                            }}>
+                                                                            </td>
+                                                                        </tr>
+                                                                    )): <tr className="pointer"
+                                                                            onClick={() => {
+                                                                            navigate(`/events/`)}}>
+                                                                            No Past Events! CLICK to jump to Events!
+                                                                        </tr> }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
                                 </div>
                             </div>
 
