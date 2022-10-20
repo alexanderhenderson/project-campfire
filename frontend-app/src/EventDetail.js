@@ -24,7 +24,6 @@ export default function FetchEvent() {
             const response = await fetch(url)
             if (response.ok) {
                 const eventData = await response.json()
-                console.log(eventData)
                 setEventsData(eventData["Event"])
                 setAttendeesList(eventData.Event.attendees)
                 setCenter({ lat: +eventData.Event.latitude, lng: +eventData.Event.longitude })
