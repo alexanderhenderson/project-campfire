@@ -1,16 +1,23 @@
+import React, { useMemo } from 'react'
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { addAttendee } from "./Components/AddAttendee"
+import { useJsApiLoader, useLoadScript, GoogleMap, Marker } from '@react-google-maps/api'
+import googleAPI from './keys'
 
-function FetchEvent() {
+export default function FetchEvent() {
     const [Events, setEventsData] = useState([])
     const [error, setError] = useState("")
     const [userData, setUserId] = useState("")
     const [attendeesList, setAttendeesList] = useState([])
     const { dynamicId } = useParams()
     const navigate = useNavigate()
+    const { isLoaded } = useLoadScript({ googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY })
+    const containerStyle = { width: '400px', height: '300px' }
+    const [center, setCenter] = useState({lat: 0, lng: 0})
 
-    console.log(dynamicId)
+
+    // console.log(dynamicId)
 
     useEffect(() => {
         const getEventData = async () => {
@@ -18,10 +25,12 @@ function FetchEvent() {
             const response = await fetch(url)
             if (response.ok) {
                 const eventData = await response.json()
-
+                console.log(eventData)
                 setEventsData(eventData["Event"])
                 setAttendeesList(eventData.Event.attendees)
-
+                setCenter({lat: +eventData.Event.latitude, lng: +eventData.Event.longitude})
+                console.log(eventData.Event.latitude, eventData.Event.longitude)
+                console.log(center)
             } else {
                 setError("Could not load the events, try again")
                 console.log(error)
@@ -43,7 +52,6 @@ function FetchEvent() {
         // eslint-disable-next-line react-hooks/exhaustive-deps    
     }, [])
 
-
     const currentUser = userData.id
 
     function clickHandler() {
@@ -55,6 +63,9 @@ function FetchEvent() {
     for (let att of attendeesList) {
         container.push(att.id)
     }
+
+    
+    if (!isLoaded) return <div>Loading...</div>
 
     return (
         <>
@@ -86,6 +97,16 @@ function FetchEvent() {
                                                 </p>
                                             </div>
                                         </div>
+                                        <div className="col">
+                                            {/* <h3>Coordinates</h3>
+                                            <p className='lead'>{Events?.latitude || ''}, {Events?.longitude || ''}</p> */}
+                                            <GoogleMap
+                                                zoom={10} center={center} mapContainerStyle={containerStyle}>
+                                                <Marker position={center} />
+                                            </GoogleMap>
+
+
+                                        </div>
                                         <div className="container mt-3">
                                             <h3 className='display-6'>Attendees</h3>
                                             <table className="table">
@@ -114,5 +135,3 @@ function FetchEvent() {
         </>
     )
 }
-
-export default FetchEvent
