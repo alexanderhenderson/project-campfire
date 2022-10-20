@@ -1,9 +1,8 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { addAttendee } from "./Components/AddAttendee"
-import { useJsApiLoader, useLoadScript, GoogleMap, Marker } from '@react-google-maps/api'
-import googleAPI from './keys'
+import { useLoadScript, GoogleMap, Marker } from '@react-google-maps/api'
 
 export default function FetchEvent() {
     const [Events, setEventsData] = useState([])
@@ -14,7 +13,7 @@ export default function FetchEvent() {
     const navigate = useNavigate()
     const { isLoaded } = useLoadScript({ googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY })
     const containerStyle = { width: '400px', height: '300px' }
-    const [center, setCenter] = useState({lat: 0, lng: 0})
+    const [center, setCenter] = useState({ lat: 0, lng: 0 })
 
 
     // console.log(dynamicId)
@@ -28,7 +27,7 @@ export default function FetchEvent() {
                 console.log(eventData)
                 setEventsData(eventData["Event"])
                 setAttendeesList(eventData.Event.attendees)
-                setCenter({lat: +eventData.Event.latitude, lng: +eventData.Event.longitude})
+                setCenter({ lat: +eventData.Event.latitude, lng: +eventData.Event.longitude })
                 console.log(eventData.Event.latitude, eventData.Event.longitude)
                 console.log(center)
             } else {
@@ -64,7 +63,7 @@ export default function FetchEvent() {
         container.push(att.id)
     }
 
-    
+
     if (!isLoaded) return <div>Loading...</div>
 
     return (
