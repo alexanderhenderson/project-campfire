@@ -236,8 +236,15 @@ export default function UserProfile() {
                                                                 <tbody>
                                                                     {userData?.favorite_activities?.map(activity => (
                                                                         <tr key={activity.id}>
-                                                                            <td>{activity.name}</td>
+                                                                            <td>
+                                                                                {activity.name}
+                                                                                    <button className="btn btn-dark rounded-pill button-right">
+                                                                                        Accept
+                                                                                    </button>
+                                                                            </td>
+                                                                            
                                                                         </tr>
+                                                                            
                                                                     ))}
                                                                 </tbody>
                                                             </table>
