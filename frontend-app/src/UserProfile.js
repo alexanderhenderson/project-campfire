@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom"
 import Comments from "./Components/Comments"
 import { UserContext } from "./UserContext"
 import { settingLinks } from "./Nav"
-
+import { remove_activity } from "./Components/RemoveActivity"
+  
 export default function UserProfile() {
     const [userData, setUserData] = useState({})
     const [usersData, setUsersData] = useState({})
@@ -16,6 +17,7 @@ export default function UserProfile() {
     const { userId } = useContext(UserContext)
     const [ , , , , , , , , , editProfileLink] = settingLinks()
     const [friend, setFriend] = useState(false)
+    const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
         const getUserdata = async () => {
@@ -25,7 +27,6 @@ export default function UserProfile() {
             if (response.ok) {
                 const data = await response.json()
                 setUserData(data)
-
                 if (userId !== undefined){
                     let friends = []
                     for (let friendKey in userId.friends){
@@ -40,7 +41,7 @@ export default function UserProfile() {
                         setFriend(false)
                     }
                 }
-
+                // setFlag(true)
                 setUserData(await data)
                 setFriendRequestIds(await data["friend_requests"])
             } else {
@@ -81,10 +82,11 @@ export default function UserProfile() {
         getUserdata()
         requestEvents()
         requestUsers()
+        setRefresh()
 
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id,requestHandled, userId])
+    }, [id,requestHandled, userId, refresh])
 
     let currentUser = userData.id
     let attendedEvents = []
@@ -237,12 +239,16 @@ export default function UserProfile() {
                                                                     {userData?.favorite_activities?.map(activity => (
                                                                         <tr key={activity.id}>
                                                                             <td>
-                                                                                {activity.name}
-                                                                                    <button className="btn btn-dark rounded-pill button-right">
-                                                                                        Accept
-                                                                                    </button>
+                                                                                {activity.name}       
                                                                             </td>
-                                                                            
+                                                                            <div>
+                                                                            {parseInt(userId.id) === parseInt(id) ?                                                   
+                                                                                <button className="btn-dark  rounded-pill button-right" onClick={(e) => {remove_activity(userData.id, activity); setRefresh(true)}}>
+                                                                                        delete 
+                                                                                </button>
+                                                                                
+                                                                            : null }
+                                                                            </div>
                                                                         </tr>
                                                                             
                                                                     ))}

@@ -642,4 +642,5 @@ width: 100%;
 .button-right{
   display:inline;
   justify-content: right;
+  font-size: 12px;
 }
