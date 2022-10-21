@@ -644,3 +644,26 @@ width: 100%;
   justify-content: right;
   font-size: 12px;
 }
+
+.table{
+display:table
+}
+.tbody{
+  display: table-row-group
+}
+
+.tr{
+  display: table-row;
+}
+.td{
+  display: table-cell;
+  border-color: rgb(222, 220, 220);
+  border-style: solid;
+  border-width: 0;
+}
+
+.button-table-right{
+  display:flex;
+  justify-content: right;
+  font-size: 12px;
+}

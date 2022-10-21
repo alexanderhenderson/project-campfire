@@ -234,14 +234,14 @@ export default function UserProfile() {
                                                     aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                     <div className="accordion-body">
                                                         <div className="col">
-                                                            <table className="table ">
-                                                                <tbody>
+                                                            <div className="table ">
+                                                                <div className="tbody">
                                                                     {userData?.favorite_activities?.map(activity => (
-                                                                        <tr key={activity.id}>
-                                                                            <td>
+                                                                        <div className="tr" key={activity.id}>
+                                                                            <div className="td">
                                                                                 {activity.name}       
-                                                                            </td>
-                                                                            <div>
+                                                                            </div>
+                                                                            <div className="button-table-right">
                                                                             {parseInt(userId.id) === parseInt(id) ?                                                   
                                                                                 <button className="btn-dark  rounded-pill button-right" onClick={(e) => {remove_activity(userData.id, activity); setRefresh(true)}}>
                                                                                         delete 
@@ -249,11 +249,10 @@ export default function UserProfile() {
                                                                                 
                                                                             : null }
                                                                             </div>
-                                                                        </tr>
-                                                                            
+                                                                        </div>   
                                                                     ))}
-                                                                </tbody>
-                                                            </table>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
