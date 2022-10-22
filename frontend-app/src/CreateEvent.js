@@ -74,7 +74,7 @@ function CreateEvent() {
             try {
                 const response = await fetch(API_URL)
                 const data = await response.json()
-                console.log(data)
+                
                 setActivitys(Object.values(data))
             } catch (err) {
                 console.log(err.stack)
@@ -87,7 +87,6 @@ function CreateEvent() {
             const response = await fetch(url, { credentials: "include" })
             if (response.ok) {
                 const userData = await response.json()
-                console.log(userData)
                 setUserId(userData)
             }
         }
@@ -107,7 +106,6 @@ function CreateEvent() {
         if (markerRef.current.value === '') {
             return
         }
-        console.log(markerRef.current.value)
         const address = markerRef.current.value
         const results = await getGeocode({ address })
         const { lat, lng } = getLatLng(results[0])
@@ -127,13 +125,13 @@ function CreateEvent() {
             "end": end + 'T' + endTime + ':00+00:00',
             "description": description,
             "owner": userData.id,
-            "activity": Number(Array.from(activity)[0]),
+            "activity": Number(activity),
             "picture_url": picture_url
         }
-        console.log(data)
+        
         const url = `${process.env.REACT_APP_EVENTS}/events/`
         const content = JSON.stringify(data)
-        console.log(content)
+      
         const response = await fetch(url, {
             method: "post",
             body: content,
@@ -147,7 +145,7 @@ function CreateEvent() {
         }
     }
 
-    console.log(selected)
+   
 
     if (activitys.length !== 0) {
         return (
@@ -211,10 +209,10 @@ function CreateEvent() {
                                                 onChange={e => setActivity(e.target.value)}>
                                                 <option value="">Choose Your Activity</option>
                                                 {
-                                                    activitys[0].map((activity) => { return (<option onSelect={e => setActivity(activity.id)} value={activity.id} key={(activity.id)}>{activity.name}</option>) })
+                                                    activitys[0].map((activity) => { return ( <option onSelect={e => setActivity(activity.id)} value={activity.id} key={(activity.id)}>{activity.name}</option>) })
                                                 }
                                             </select>
-                                            <label for="floatingSelectGrid">Activity</label>
+                                            <label htmlFor="floatingSelectGrid">Activity</label>
                                         </div>
 
                                         <BootstrapInput
@@ -289,8 +287,8 @@ function CreateEvent() {
         return (
             <>
                 <div className="create-event-bg"></div>
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-border" role="status">
                     </div>
                 </div>
             </>
