@@ -27,6 +27,7 @@ export default function UserProfile() {
             if (response.ok) {
                 const data = await response.json()
                 setUserData(data)
+                console.log("User data array: ", data)
 
                 if (userId !== undefined){
                     let friends = []
@@ -168,21 +169,24 @@ export default function UserProfile() {
                             <div className="row">
                                 <div className="col-sm">
                                     <div className="body my-3 text-center">
-                                        <h1>{userData.username}</h1>
+                                        <div className="inline_layout">
+                                            <h1 className="inline_layout"> {userData.username}</h1>
+                                            <h5 className="inline_layout"  align="center"> Admin </h5>
+                                        </div>
+                                        <div>
                                         {parseInt(userId.id) === parseInt(id) ? (
-                                            <div><a className="btn btn-dark rounded-pill mb-3" href={`${editProfileLink}${userId.id}`} role="button">Edit Profile</a></div>) 
-                                            : (friend === false ? (
+                                            <div><a className="btn btn-dark rounded-pill mb-3" href={`${editProfileLink}${userId.id}`} role="button">Edit Profile</a></div>
+                                            ) : (friend === false ? (
                                                 <button
 													type="button"
 													className="btn btn-dark rounded-pill"
 													onClick={() => {
 														onClick();
 													}}
-												>
-													{" "}
-													Add to Friend's List{" "}
+												> {" "}Add to Friend's List{" "}
 												</button>
                                                 ) : ( friend === "sent" ? "Friend request sent" : "is your friend" ))}
+                                        </div>
                                     </div>
                                     <div className="col">
                                         <div className='mb-3 text-center'>

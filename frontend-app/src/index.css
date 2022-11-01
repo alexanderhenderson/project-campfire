@@ -262,6 +262,11 @@ width: 100%;
     border: 3px solid #ffc507e0;
   }
 
+  .inline_layout {
+    display: inline;
+    vertical-align: middle;
+  }
+
   .special_nav {
     flex-direction: row-reverse
   }

@@ -211,6 +211,7 @@ class UserDetailEncoder(ModelEncoder):
         "friends",
         "friend_requests",
         "sent_requests",
+        "is_staff"
     ]
     encoders = {
         "favorite_activities": ActivityVOEncoder(),
