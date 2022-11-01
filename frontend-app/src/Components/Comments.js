@@ -21,6 +21,7 @@ export default function Comments(props) {
       if (response.ok) {
         const data = await response.json()
         setCommentData(await data.comments)
+        
         // setDeleted(false)
         setRefresh(false)
       }
@@ -105,11 +106,17 @@ export default function Comments(props) {
                     <td>{new Date(comments.time_posted).toLocaleString()}</td>
                     <td>- {comments.commenter.username}</td>
                     <td>
-                    { parseInt(propUserId) === parseInt(userId.id) ?(
+                    {/* The below ternary allows for a user to delete any comment from their own profile page, any comment that they have made on other pages,  */}
+                    {/* and for admins to delete any comment on any user page.  */}
+                    { parseInt(propUserId) === parseInt(userId.id) || parseInt(comments.commenter.id) === parseInt(userId.id) ? (
                       <button className="btn btn-warning rounded-pill" onClick = {()=>deleteComment(comments.id)}>
                         delete comment
                       </button>
-                    ) : ""}
+                    ) : ( userId.is_staff === true ? (
+                      <button className="btn btn-danger rounded-pill" onClick = {()=>deleteComment(comments.id)}>
+                      admin delete
+                      </button>
+                    ) : "" ) }
                     </td>
                   </tr>
                 )

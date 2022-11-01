@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { addAttendee } from "./Components/AddAttendee"
 import { useLoadScript, GoogleMap, Marker } from '@react-google-maps/api'
+import { remove_event } from './Components/RemoveEvent'
 
 export default function FetchEvent() {
     const [Events, setEventsData] = useState([])
@@ -14,9 +15,8 @@ export default function FetchEvent() {
     const { isLoaded } = useLoadScript({ googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY })
     const containerStyle = { width: '400px', height: '300px' }
     const [center, setCenter] = useState({ lat: 0, lng: 0 })
+    const NAVLINK = process.env.REACT_APP_NAVLINK
 
-
-    // console.log(dynamicId)
 
     useEffect(() => {
         const getEventData = async () => {
@@ -62,6 +62,18 @@ export default function FetchEvent() {
         container.push(att.id)
     }
 
+    async function deleteEvent() {
+
+        const test = remove_event(Events.id)
+        if (await test === true) {
+            if (NAVLINK !== undefined) {
+                navigate(NAVLINK + "/")
+            } else {
+                navigate("/")
+            }
+        }
+    }
+
 
     if (!isLoaded) return <div>Loading...</div>
 
@@ -77,6 +89,11 @@ export default function FetchEvent() {
                                     <div className="row">
                                         <div className="col">
                                             {<img src={Events?.picture_url} className='img-fluid max-width: 100%' alt="" />}
+                                            { userData.is_staff === true ? (
+                                            <button className='btn btn-danger rounded-pill' onClick={deleteEvent}>
+                                                    Admin delete event
+                                            </button>
+                                            ) : "" }
                                         </div>
                                         <div className="col">
                                             <span className='mt-3'>
@@ -92,7 +109,9 @@ export default function FetchEvent() {
                                                     {container.indexOf(currentUser) === -1 ? <button onClick={() => {
                                                         clickHandler()
                                                     }} type="button" className='btn btn-dark btn-lg rounded-pill'>RSVP</button> : null}
+                                                    
                                                 </p>
+                                               
                                             </div>
                                         </div>
                                         <div className="col">

@@ -29,11 +29,8 @@ export default function UserProfile() {
             if (response.ok) {
                 const data = await response.json()
                 setUserData(data)
-<<<<<<< HEAD
                 console.log("User data array: ", data)
 
-=======
->>>>>>> main
                 if (userId !== undefined){
                     let friends = []
                     for (let friendKey in userId.friends){
@@ -437,6 +434,7 @@ export default function UserProfile() {
 
                             <div className="container">
                                 <div className="row">
+                                    <p> The "id" is currently: {id} </p>
                                     <Comments propUserId={id}/>
                                 </div>
                             </div>

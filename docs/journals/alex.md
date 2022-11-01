@@ -220,3 +220,29 @@ FINAL JOURNAL 9/16:
 
     And now I am done. Woot.
 
+POST BOOTCAMP NOTES:
+
+    11/1:
+        This was my first day working on this project in a while
+
+        Added features:
+            I've made it so that admins can delete comments from any profile page, and so that users
+            can delete any comment from their own profile page. 
+
+            Users with Admin privileges can delete an event from the event detail page.
+        
+        Working Features:
+            Anywhere a username is, it will link to their profile
+
+            Page with complete user list. 
+
+            Allow admin to delete pieces of a users profile - picture, about me, etc. 
+
+            Only allow friends to leave comments on a user profile page
+
+            I also want to redo the jason web token system, but that is also a large project. 
+        
+        Bugs:
+            I noticed that friend requests can be made multiple times. I believe this comes from the
+            kindler that will reload matches even if you have already sent a friend request, this
+            ideally needs to be fixed. 
