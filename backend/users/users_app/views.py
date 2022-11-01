@@ -295,6 +295,11 @@ def user_detail(request, pk):
                 for id in activity_id_list:
                     activity = ActivityVO.objects.get(id=id)
                     user.favorite_activities.add(activity)
+            if "remove_activities" in content:
+                activity_id_list = content["remove_activities"]
+                for id in activity_id_list:
+                    activity = ActivityVO.objects.get(id=id)
+                    user.favorite_activities.remove(activity)
             if "friends" in content:
                 friends_id_list = content["friends"]
                 for id in friends_id_list:

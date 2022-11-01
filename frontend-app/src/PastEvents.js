@@ -13,9 +13,6 @@ export default function PastEvents(props) {
 
 
   useEffect(() => {
-
-    console.log("Events loop watch")
-
     const requestEvents = async () => {
       const url = `${process.env.REACT_APP_EVENTS}/events/`
       const response = await fetch(url)
@@ -23,17 +20,17 @@ export default function PastEvents(props) {
 
         const data = await response.json()
         events.current = data.Events
-        const currentEvents= []
+        const formerEvents= []
         const eventGrp = events.current
 
         for(let event of eventGrp){
           const endDate= new Date(event.end)
           const currentDate= new Date()
-          if(currentDate < endDate){
-            currentEvents.push(event)
+          if(currentDate > endDate){
+            formerEvents.push(event)
           }
         }
-        setFilteredEvents(currentEvents)
+        setFilteredEvents(formerEvents)
 
       } else {
         console.log("Could not load the events, try again")
@@ -65,13 +62,13 @@ export default function PastEvents(props) {
         <div className='container'>
           <div className="row">
             <div className="col">
-              <h1>Search Current Events</h1>
+              <h1>Search Former Events</h1>
             </div>
             <div className="col align-right">
             <div><a className="btn btn-dark rounded-pill mb-3" href={`${eventsLink}create/`} role="button">Add Event</a></div>
             </div>
             <div className="align-right">
-            <div><a className="btn btn-dark rounded-pill mb-3" href={`${eventsLink}past/`} role="button">Search Former Events</a></div>
+            <div><a className="btn btn-dark rounded-pill mb-3" href={`${eventsLink}/`} role="button">Search Current Events</a></div>
             </div>
           </div>
           </div>

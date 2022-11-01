@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom"
 import Comments from "./Components/Comments"
 import { UserContext } from "./UserContext"
 import { settingLinks } from "./Nav"
-
+import { remove_activity } from "./Components/RemoveActivity"
+  
 export default function UserProfile() {
     const [userData, setUserData] = useState({})
     const [usersData, setUsersData] = useState({})
@@ -16,6 +17,7 @@ export default function UserProfile() {
     const { userId } = useContext(UserContext)
     const [ , , , , , , , , , editProfileLink] = settingLinks()
     const [friend, setFriend] = useState(false)
+    const [refresh, setRefresh] = useState(false)
 
     useEffect(() => {
         console.log("Loop watch")
@@ -27,8 +29,11 @@ export default function UserProfile() {
             if (response.ok) {
                 const data = await response.json()
                 setUserData(data)
+<<<<<<< HEAD
                 console.log("User data array: ", data)
 
+=======
+>>>>>>> main
                 if (userId !== undefined){
                     let friends = []
                     for (let friendKey in userId.friends){
@@ -43,7 +48,7 @@ export default function UserProfile() {
                         setFriend(false)
                     }
                 }
-
+                // setFlag(true)
                 setUserData(await data)
                 setFriendRequestIds(await data["friend_requests"])
             } else {
@@ -84,10 +89,11 @@ export default function UserProfile() {
         getUserdata()
         requestEvents()
         requestUsers()
+        setRefresh()
 
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id,requestHandled, userId])
+    }, [id,requestHandled, userId, refresh])
 
     let currentUser = userData.id
     let attendedEvents = []
@@ -99,8 +105,28 @@ export default function UserProfile() {
             }
         }
     }
-    let slicedlist = attendedEvents.slice(0, 3)
 
+    // filter present attended events by date
+    const currentEvents = []
+    for(let event of attendedEvents){
+        const endDate= new Date(event.end)
+        const currentDate= new Date()
+        if(currentDate < endDate){
+          currentEvents.push(event)
+        }
+      }
+
+    let slicedlist = currentEvents.slice(0, 3)
+
+    //filter past attended events by date
+    const usersEventsPassed = []
+    for(let event of attendedEvents){
+        const endDate= new Date(event.end)
+        const currentDate= new Date()
+        if(currentDate > endDate){
+          usersEventsPassed.push(event)
+        }
+      }
 
     // this function is for the add friend button
     async function onClick() {
@@ -218,15 +244,25 @@ export default function UserProfile() {
                                                     aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                     <div className="accordion-body">
                                                         <div className="col">
-                                                            <table className="table ">
-                                                                <tbody>
+                                                            <div className="table ">
+                                                                <div className="tbody">
                                                                     {userData?.favorite_activities?.map(activity => (
-                                                                        <tr key={activity.id}>
-                                                                            <td>{activity.name}</td>
-                                                                        </tr>
+                                                                        <div className="tr" key={activity.id}>
+                                                                            <div className="td">
+                                                                                {activity.name}       
+                                                                            </div>
+                                                                            <div className="button-table-right">
+                                                                            {parseInt(userId.id) === parseInt(id) ?                                                   
+                                                                                <button className="btn-dark  rounded-pill button-right" onClick={(e) => {remove_activity(userData.id, activity); setRefresh(true)}}>
+                                                                                        delete 
+                                                                                </button>
+                                                                                
+                                                                            : null }
+                                                                            </div>
+                                                                        </div>   
                                                                     ))}
-                                                                </tbody>
-                                                            </table>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -322,11 +358,12 @@ export default function UserProfile() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm text-center">
-                                    <h4>RSVP'd Events</h4>
+                                <div className="col-sm text-center padding-top-med">
+                                    <h4>Current RSVP'd Events</h4>
                                     <table className="table">
                                         <tbody>
-                                            {slicedlist.map(evt => (
+                                            
+                                            {slicedlist.length > 0? slicedlist.map(evt => (
                                                 <tr key={evt.id}>
                                                     <td className="pointer"
                                                     onClick={() => {
@@ -342,9 +379,58 @@ export default function UserProfile() {
                                                         </img>
                                                     </td>
                                                 </tr>
-                                            ))}
+                                            )): <tr className="pointer"
+                                                    onClick={() => {
+                                                    navigate(`/events/`)}}>
+                                                    No Current Events! CLICK to jump to Events!
+                                                </tr>}
+
+                                        
                                         </tbody>
                                     </table>
+                                    <h4 className="padding-top-med">Past Events I've Attended</h4>
+                                    <div className="accordion" id="accordionExample">
+                                            <div className="accordion-item">
+                                                <h2 className="accordion-header" id="headingFour">
+                                                    <button className="accordion-button" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                                        aria-expanded="true" aria-controls="collapseFour">
+                                                        Click to expand
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseFour" className="accordion-collapse collapse"
+                                                    aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                                    <div className="accordion-body">
+                                                        <div className="col">
+                                                            <table className="table">
+                                                                <tbody>
+                                                                
+                                                                    {usersEventsPassed.length > 0? usersEventsPassed.map(evt => (
+                                                                        <tr key={evt.id}>
+                                                                            <td className="pointer"
+                                                                            onClick={() => {
+                                                                                navigate(`/events/${evt.id}/`)
+                                                                            }}>
+                                                                            {evt.name}
+                                                                            </td>
+                                                                            <td className="pointer"
+                                                                            onClick={() => {
+                                                                                navigate(`/events/${evt.id}/`)
+                                                                            }}>
+                                                                            </td>
+                                                                        </tr>
+                                                                    )): <tr className="pointer"
+                                                                            onClick={() => {
+                                                                            navigate(`/events/`)}}>
+                                                                            No Past Events! CLICK to jump to Events!
+                                                                        </tr> }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
                                 </div>
                             </div>
 

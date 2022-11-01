@@ -16,6 +16,7 @@ import { UserContext } from "./UserContext"
 import { useState, useEffect } from "react"
 import EditProfile from "./EditProfile"
 import SearchProfiles from "./SearchProfiles"
+import PastEvents from "./PastEvents"
 
 export default function App() {
   const domain = /https:\/\/[^/]+/
@@ -57,6 +58,7 @@ export default function App() {
             <Route path="logout" element={<LogOut />} />
             <Route path="signup" element={<Signup />} />
             <Route path="events" element={<EventList />} />
+            <Route path="events/past" element={<PastEvents />} />
             <Route path="activities" element={<ActivitiesList />} />
             <Route path="kindler" element={<Kindler />} />
             <Route path="events">

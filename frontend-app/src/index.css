@@ -426,6 +426,12 @@ width: 100%;
     display: flex;
     justify-content: right;
   }
+  .align-right-padded-top {
+    margin-right: auto;
+    display: flex;
+    justify-content: right;
+    padding-top: 10px ;
+  }
 
   .right {
     display: grid;
@@ -495,7 +501,7 @@ width: 100%;
   }
 
   .padding-top-med {
-    padding-top: 3rem;
+    padding-top: 1.5rem;
   }
 
   .carousel-control-next-icon {
@@ -636,4 +642,33 @@ width: 100%;
   transform:scale(1.1,1.1);
   -webkit-transform:scale(1.1,1.1);
   -moz-transform:scale(1.1,1.1);
+}
+
+.button-right{
+  display:inline;
+  justify-content: right;
+  font-size: 12px;
+}
+
+.table{
+display:table
+}
+.tbody{
+  display: table-row-group
+}
+
+.tr{
+  display: table-row;
+}
+.td{
+  display: table-cell;
+  border-color: rgb(222, 220, 220);
+  border-style: solid;
+  border-width: 0;
+}
+
+.button-table-right{
+  display:flex;
+  justify-content: right;
+  font-size: 12px;
 }
