@@ -245,4 +245,7 @@ POST BOOTCAMP NOTES:
         Bugs:
             I noticed that friend requests can be made multiple times. I believe this comes from the
             kindler that will reload matches even if you have already sent a friend request, this
-            ideally needs to be fixed. 
+            ideally needs to be fixed.  
+
+Fork test:
+    Testing if fork updates
